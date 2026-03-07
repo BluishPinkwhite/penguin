@@ -41,7 +41,7 @@ public partial class PlanetCamera : Camera2D
         if (Input.IsActionPressed("ui_down"))
             Radius -= dt * 0.4f;
 
-        Radius = Mathf.Clamp(Radius, 0.1f, 1.2f);
+        Radius = Mathf.Clamp(Radius, 0f, 1.2f);
         Angle = Mathf.PosMod(Angle, Mathf.Tau);
 
         float planetRadius = Game.I._data.TileSize * 100f;

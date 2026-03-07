@@ -1,15 +1,18 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
-using Incremental.scripts.pawn.rendering;
 using Incremental.scripts.planet;
 using Incremental.scripts.planet.data;
+using Pawn = Incremental.scripts.pawn.Pawn;
 
 public partial class PlanetRenderer : Node2D
 {
-    [Export] public int LayersPerChunk = 4;
     [Export] public Texture2D AtlasTexture;
     [Export] public int AtlasColumns = 4;
+
+    private static int _layersPerChunk = 4;
+    private static HashSet<int> _chunksToRebuild = new();
 
     private PlanetData _data;
     private FastNoiseLite _noise;
@@ -20,8 +23,6 @@ public partial class PlanetRenderer : Node2D
     public override void _Ready()
     {
         Initialize(Game.I._data);
-        
-        AddChild(new Pawn());
     }
 
 
@@ -43,7 +44,7 @@ public partial class PlanetRenderer : Node2D
 
         _data._chunks.Clear();
         
-        int chunkCount = Mathf.CeilToInt((float)_data.Layers.Count / LayersPerChunk);
+        int chunkCount = Mathf.CeilToInt((float)_data.Layers.Count / _layersPerChunk);
 
         for (int i = 0; i < chunkCount; i++)
         {
@@ -55,8 +56,8 @@ public partial class PlanetRenderer : Node2D
 
     private PlanetChunk BuildChunk(int chunkIndex)
     {
-        int layerStart = chunkIndex * LayersPerChunk;
-        int layerEnd = Mathf.Min(layerStart + LayersPerChunk, _data.Layers.Count);
+        int layerStart = chunkIndex * _layersPerChunk;
+        int layerEnd = Mathf.Min(layerStart + _layersPerChunk, _data.Layers.Count);
 
         PlanetChunk chunk = new PlanetChunk
         {
@@ -247,7 +248,8 @@ public partial class PlanetRenderer : Node2D
         uv2 = baseUV + new Vector2(0, size);
         uv3 = baseUV + new Vector2(size, size);
     }
-    
+
+    public static Vector2 target;
     
     public override void _Input(InputEvent e)
     {
@@ -259,7 +261,13 @@ public partial class PlanetRenderer : Node2D
 
             if (_data.LocalPositionToPolarCoords(local, out int layer, out int tile))
             {
+                target = new Vector2(tile + 0.5f, layer + 0.5f);
                 ModifyTile(layer, tile);
+            }
+            else
+            {
+                _data.LocalPositionToPolarCoordsUnbounded(local, out layer, out tile);
+                target = new Vector2(tile + 0.5f, layer + 0.5f);
             }
         }
     }
@@ -267,11 +275,11 @@ public partial class PlanetRenderer : Node2D
     private void ModifyTile(int layer, int tile)
     {
         PlanetTile t = _data.Layers[layer][tile];
-        t.Material = TileMaterial.Rock; // example
-        t.Integrity = 0.5f;
+        t.Destroyed = true;
+        t.Integrity = 0.0f;
         _data.Layers[layer][tile] = t;
 
-        int chunkIndex = layer / LayersPerChunk;
+        int chunkIndex = layer / _layersPerChunk;
         RebuildChunk(chunkIndex);
     }
 
@@ -288,11 +296,21 @@ public partial class PlanetRenderer : Node2D
     }
 
 
+    public static void SetChunkDirty(int layer)
+    {
+        _chunksToRebuild.Add(layer / _layersPerChunk);
+    }
 
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        foreach (int chunk in _chunksToRebuild)
+        {
+            RebuildChunk(chunk);
+        }
+        _chunksToRebuild.Clear();
         
         // Rotate((float)delta * 0.002f);
 

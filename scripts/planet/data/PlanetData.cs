@@ -71,15 +71,27 @@ public class PlanetData
         tile = Mathf.FloorToInt(angle / step);
         return tile >= 0 && tile < tileCount;
     }
+    
+    public void LocalPositionToPolarCoordsUnbounded(Vector2 localPos, out int layer, out int tile)
+    {
+        float r = localPos.Length() + _innerGrowth;
+        float angle = Mathf.Atan2(localPos.Y, localPos.X);
+        angle = Mathf.PosMod(angle, Mathf.Tau);
 
-    public PlanetTile GetTileAtPolarCoords(int layer, int tile)
+        layer = Mathf.FloorToInt(r / TileSize);
+
+        int tileCount = layer >= Layers.Count ? Layers[^1].Length : Layers[layer].Length;
+        float step = Mathf.Tau / tileCount;
+
+        tile = Mathf.FloorToInt(angle / step);
+    }
+
+    public PlanetTile GetTileAtPolarCoords(int tile, int layer)
     {
         if (layer >= Layers.Count || layer < 0)
             return null;
-        
-        if (tile >= Layers[layer].Length || tile < 0)
-            return null;
-        
+
+        tile = Mathf.PosMod(tile, Layers[layer].Length);
         return Layers[layer][tile];
     }
     

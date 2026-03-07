@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c7rxwkjnow620" path="res://scripts/planet/rendering/PlanetRenderer.cs" id="1_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/atlas/tile_atlas.png" id="2_4wyf3"]
 [ext_resource type="Script" uid="uid://xufscukk4foy" path="res://scripts/planet/input/PlanetCamera.cs" id="3_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://ckqfedxpks5ps" path="res://scripts/pawn/rendering/Pawn.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/pawn/Pawn.tscn" id="4_k0juu"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -17,8 +17,7 @@ MaxZoom = 4.0
 [node name="World" type="Node2D" parent="."]
 process_mode = 3
 script = ExtResource("1_rwgxs")
-LayersPerChunk = 1
 AtlasTexture = ExtResource("2_4wyf3")
 
 [node name="Pawn" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(-14, -411)
+position = Vector2(-134.711, -357.669)
