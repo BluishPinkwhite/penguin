@@ -4,7 +4,6 @@ using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.planet;
 using Incremental.scripts.planet.data;
-using Pawn = Incremental.scripts.pawn.Pawn;
 
 public partial class PlanetRenderer : Node2D
 {
@@ -248,8 +247,6 @@ public partial class PlanetRenderer : Node2D
         uv2 = baseUV + new Vector2(0, size);
         uv3 = baseUV + new Vector2(size, size);
     }
-
-    public static Vector2 target;
     
     public override void _Input(InputEvent e)
     {
@@ -261,13 +258,7 @@ public partial class PlanetRenderer : Node2D
 
             if (_data.LocalPositionToPolarCoords(local, out int layer, out int tile))
             {
-                target = new Vector2(tile + 0.5f, layer + 0.5f);
                 ModifyTile(layer, tile);
-            }
-            else
-            {
-                _data.LocalPositionToPolarCoordsUnbounded(local, out layer, out tile);
-                target = new Vector2(tile + 0.5f, layer + 0.5f);
             }
         }
     }

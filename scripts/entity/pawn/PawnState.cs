@@ -5,5 +5,7 @@ public enum PawnState
     Idle,
     Move,
     Mine,
-    Return
+    ReturnH,
+    ReturnV,
+    DropOff
 }

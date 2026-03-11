@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7l2qohn2woy8"]
+
+[ext_resource type="Script" uid="uid://8nsugwj2s6xb" path="res://scripts/entity/station/ResourceStation.cs" id="1_y13y2"]
+[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/atlas/tile_atlas.png" id="2_288sv"]
+
+[node name="ResourceStation" type="Node2D"]
+script = ExtResource("1_y13y2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 100
+texture = ExtResource("2_288sv")
