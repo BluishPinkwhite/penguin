@@ -22,4 +22,34 @@ AtlasTexture = ExtResource("2_4wyf3")
 
 [node name="Pawn" parent="." instance=ExtResource("4_k0juu")]
 
+[node name="Pawn2" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn3" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn4" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn5" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn6" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn7" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn8" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn9" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn10" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn11" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn12" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn13" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn14" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn15" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Pawn16" parent="." instance=ExtResource("4_k0juu")]
+
 [node name="ResourceStation" parent="." instance=ExtResource("5_71j4m")]

@@ -10,6 +10,8 @@ public class PlanetData
     public readonly List<PlanetTile[]> Layers = new();
     public readonly List<PlanetChunk> _chunks = new();
 
+    private Vector2I _lastMiningTarget;
+
 
     public float _innerGrowth; // [0 ; TileSize]
     private const float GrowthSpeed = 20f;
@@ -30,6 +32,8 @@ public class PlanetData
         GrowthFactor = growthFactor;
         
         _innerGrowth = TileSize * 0.3f;
+        _lastMiningTarget = new Vector2I(0, layerCount - 1);
+        
 
         int subdivision = 1; // power-of-two multiplier
 
@@ -113,5 +117,47 @@ public class PlanetData
     {
         layer = Math.Clamp(layer, 0, Layers.Count - 1);
         return Layers[layer].Length;
+    }
+
+    public bool NextMiningTarget(int pawnID, out Vector2 target)
+    {
+        int startX = _lastMiningTarget.X;
+        int startY = _lastMiningTarget.Y;
+
+        for (int y = startY; y >= 0; y--)
+        {
+            PlanetTile[] layerData = Game.I._data.Layers[y];
+
+            int xStart = (y == startY) ? startX : 0;
+
+            for (int x = xStart; x < layerData.Length; x++)
+            {
+                PlanetTile tile = layerData[x];
+
+                if (tile.OwnerID == -1 &&
+                    !tile.Destroyed &&
+                    tile.Material != TileMaterial.Unknown)
+                {
+                    tile.OwnerID = pawnID;
+
+                    target = new Vector2(x, y);
+
+                    int nextX = x + 1;
+                    int nextY = y;
+
+                    if (nextX >= layerData.Length)
+                    {
+                        nextX = 0;
+                        nextY = y - 1;
+                    }
+
+                    _lastMiningTarget = new Vector2I(nextX, Mathf.Max(nextY, 0));
+                    return true;
+                }
+            }
+        }
+
+        target = Vector2.Zero;
+        return false;
     }
 }

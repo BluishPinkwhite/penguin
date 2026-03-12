@@ -248,21 +248,6 @@ public partial class PlanetRenderer : Node2D
         uv3 = baseUV + new Vector2(size, size);
     }
     
-    public override void _Input(InputEvent e)
-    {
-        if (e is InputEventMouseButton mb &&
-            mb.Pressed &&
-            mb.ButtonIndex == MouseButton.Left)
-        {
-            Vector2 local = ToLocal(GetGlobalMousePosition());
-
-            if (_data.LocalPositionToPolarCoords(local, out int layer, out int tile))
-            {
-                ModifyTile(layer, tile);
-            }
-        }
-    }
-    
     private void ModifyTile(int layer, int tile)
     {
         PlanetTile t = _data.Layers[layer][tile];
@@ -296,6 +281,16 @@ public partial class PlanetRenderer : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        if (Input.IsActionPressed("press"))
+        {
+            Vector2 local = ToLocal(GetGlobalMousePosition());
+
+            if (_data.LocalPositionToPolarCoords(local, out int layer, out int tile))
+            {
+                ModifyTile(layer, tile);
+            }
+        }
 
         foreach (int chunk in _chunksToRebuild)
         {

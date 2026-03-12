@@ -11,6 +11,7 @@ public partial class Pawn : SurfaceEntity
 {
     protected PawnState _state = PawnState.Idle;
     protected float _cooldown = 0;
+    protected int _ID;
 
     [Export] protected Label _debugText;
     
@@ -18,12 +19,18 @@ public partial class Pawn : SurfaceEntity
     const float PawnAngularWidth = 0.9f;
     const float PawnHeight = PawnAngularWidth;
 
+    private static int _nextID = 0;
+
     
     public override void _Ready()
     {
-        base._Ready();
+        _ID = _nextID++;
         
-        _polar_pos = new Vector2(0, 120);
+        _polar_pos = new Vector2(
+            Game.RandomTo(Game.I._data.GetLayerSize(Game.I._data.Layers.Count)), 
+            Game.I._data.Layers.Count + 2);
+        
+        base._Ready();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -97,18 +104,18 @@ public partial class Pawn : SurfaceEntity
                 if (_state == PawnState.Move)
                 {
                     _state = PawnState.Mine;
-                    _cooldown = 1f;
+                    SetCooldown(1);
                 }
                 else if (_state == PawnState.ReturnH)
                 {
                     _state = PawnState.ReturnV;
                     _target = ResourceStation.I.PolarPos;
-                    _cooldown = 0.35f;
+                    SetCooldown(0.35f);
                 }
                 else if (_state == PawnState.ReturnV)
                 {
                     _state = PawnState.DropOff;
-                    _cooldown = 2.5f;
+                    SetCooldown(2.5f);
                 }
             }
         }
@@ -136,9 +143,15 @@ public partial class Pawn : SurfaceEntity
                         below.Material = TileMaterial.Unknown;
                         PlanetRenderer.SetChunkDirty(Mathf.FloorToInt(gravityY));
 
+                        // shift "below station" down
+                        if (Mathf.FloorToInt(_polar_pos.X) == Mathf.FloorToInt(ResourceStation.I.Below.X))
+                        {
+                            ResourceStation.I.Below = new Vector2(ResourceStation.I.Below.X, ResourceStation.I.Below.Y - 1);
+                        }
+
                         _state = PawnState.ReturnH;
-                        _target = new Vector2(ResourceStation.I.PolarPos.X, ResourceStation.I.PolarPos.Y - 10);
-                        _cooldown = 1f;
+                        _target = new Vector2(ResourceStation.I.Below.X, ResourceStation.I.Below.Y);
+                        SetCooldown(1);
                     }
                 }
             }
@@ -146,31 +159,17 @@ public partial class Pawn : SurfaceEntity
         else if (_state == PawnState.DropOff)
         {
             _state = PawnState.Idle;
-            _cooldown = 1f;
+            SetCooldown(1);
         }
     }
 
     private void GetNewMiningTarget()
     {
-        bool found = false;
-        for (int i = Game.I._data.Layers.Count - 1; i >= 0; i--)
+        if (Game.I._data.NextMiningTarget(_ID, out Vector2 target))
         {
-            if (found)
-                break;
-
-            PlanetTile[] layerData = Game.I._data.Layers[i];
-            for (int j = 0; j < layerData.Length; j++)
-            {
-                PlanetTile tileData = layerData[j];
-                if (!tileData.Destroyed && tileData.Material != TileMaterial.Unknown)
-                {
-                    _target = new Vector2(j + 0.5f, i + 1.5f);
-                    _state = PawnState.Move;
-                    _cooldown = 1f;
-                    found = true;
-                    break;
-                }
-            }
+            _target = new Vector2(target.X + 0.5f, target.Y + 1.5f);
+            _state = PawnState.Move;
+            SetCooldown(1);
         }
     }
     
@@ -201,5 +200,10 @@ public partial class Pawn : SurfaceEntity
         if (IsSolid(rightTop, layerTop)) return true;
 
         return false;
+    }
+
+    protected void SetCooldown(float value)
+    {
+        _cooldown = Game.RandomAround(value, value * 0.25f);
     }
 }

@@ -11,9 +11,8 @@ public partial class SurfaceEntity : OrbitEntity
 
     public override void _Ready()
     {
-        base._Ready();
-        
         _prevLayer = (int)_polar_pos.Y;
+        base._Ready();
     }
 
     public override void _PhysicsProcess(double delta)

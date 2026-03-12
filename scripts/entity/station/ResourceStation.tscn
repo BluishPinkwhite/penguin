@@ -1,7 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7l2qohn2woy8"]
+[gd_scene load_steps=6 format=3 uid="uid://c7l2qohn2woy8"]
 
 [ext_resource type="Script" uid="uid://8nsugwj2s6xb" path="res://scripts/entity/station/ResourceStation.cs" id="1_y13y2"]
-[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/atlas/tile_atlas.png" id="2_288sv"]
+[ext_resource type="Texture2D" uid="uid://csc61mw5vsl1b" path="res://sprites/atlas/resource_station.png" id="2_288sv"]
+
+[sub_resource type="Animation" id="Animation_288sv"]
+resource_name = "wobble"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.01, 2.04, 2.98, 3.99, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0669532, 0.0240367, 0.00165063, -0.0183234, -0.0435964]
+}
+
+[sub_resource type="Animation" id="Animation_cg0n2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20r3k"]
+_data = {
+&"RESET": SubResource("Animation_cg0n2"),
+&"wobble": SubResource("Animation_288sv")
+}
 
 [node name="ResourceStation" type="Node2D"]
 script = ExtResource("1_y13y2")
@@ -9,3 +47,9 @@ script = ExtResource("1_y13y2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 100
 texture = ExtResource("2_288sv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_20r3k")
+}
+autoplay = "wobble"
