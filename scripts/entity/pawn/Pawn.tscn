@@ -1,7 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1c6jdhlshvfr"]
+[gd_scene load_steps=8 format=3 uid="uid://b1c6jdhlshvfr"]
 
 [ext_resource type="Script" uid="uid://b5pn8gvwce3lt" path="res://scripts/entity/pawn/Pawn.cs" id="1_os6aw"]
 [ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/atlas/penguin.png" id="2_os6aw"]
+[ext_resource type="Texture2D" uid="uid://0t6ux7g1gihw" path="res://sprites/atlas/icons.png" id="3_gah8n"]
+
+[sub_resource type="Animation" id="Animation_gah8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.125, 0.125)]
+}
 
 [sub_resource type="Animation" id="Animation_os6aw"]
 resource_name = "breathe"
@@ -20,44 +36,32 @@ tracks/0/keys = {
 "values": [Vector2(0.125, 0.125), Vector2(0.125, 0.123), Vector2(0.125, 0.125), Vector2(0.125, 0.126)]
 }
 
-[sub_resource type="Animation" id="Animation_gah8n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.125, 0.125)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gah8n"]
 _data = {
 &"RESET": SubResource("Animation_gah8n"),
 &"breathe": SubResource("Animation_os6aw")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8fm7"]
+atlas = ExtResource("3_gah8n")
+
 [node name="Pawn" type="Node2D" node_paths=PackedStringArray("_debugText")]
 z_index = 1000
 script = ExtResource("1_os6aw")
-_debugText = NodePath("Label")
+_debugText = NodePath("DebugText")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BodySprite" type="Sprite2D" parent="."]
 position = Vector2(0, 4)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_os6aw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BodySprite"]
 libraries = {
 &"": SubResource("AnimationLibrary_gah8n")
 }
 autoplay = "breathe"
 
-[node name="Label" type="Label" parent="."]
+[node name="DebugText" type="Label" parent="."]
 z_index = 1100
 offset_left = -7.0
 offset_top = -15.0
@@ -68,3 +72,10 @@ theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
 vertical_alignment = 2
 justification_flags = 128
+
+[node name="Profession" type="Sprite2D" parent="."]
+position = Vector2(-1, 8)
+scale = Vector2(0.3, 0.3)
+texture = SubResource("AtlasTexture_h8fm7")
+region_enabled = true
+region_rect = Rect2(32, 64, 32, 32)

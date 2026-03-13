@@ -4,10 +4,27 @@ namespace Incremental.scripts.director;
 
 public class Inventory
 {
-    private static Dictionary<Item, int> _inventory = new();
+    public static readonly Dictionary<Item, int> Items = new();
+    public static Dictionary<Role, int> Roles = new();
 
-    public static int GetCount(Item id)
+    public static int GetItemCount(Item id)
     {
-        return _inventory.GetValueOrDefault(id, 0);
+        return Items.GetValueOrDefault(id, 0);
+    }
+    
+    public static int GetRoleCount(Role id)
+    {
+        return Roles.GetValueOrDefault(id, 0);
+    }
+    
+    public static int GetTotalPawnCount()
+    {
+        int count = 0;
+        foreach (KeyValuePair<Role, int> pair in Roles)
+        {
+            count += pair.Value;
+        }
+
+        return count;
     }
 }
