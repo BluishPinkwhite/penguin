@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.entity.pawn.roles;
 
 namespace Incremental.scripts.entity.pawn;
 
 public partial class PawnManager : Node2D
 {
-    [Export] private PackedScene _pawnScene;
-    
     public override void _Ready()
     {
         foreach (Role role in Enum.GetValues(typeof(Role)))
@@ -20,7 +19,7 @@ public partial class PawnManager : Node2D
         {
             for (int i = 0; i < pair.Value; i++)
             {
-                Pawn p = _pawnScene.Instantiate<Pawn>();
+                Pawn p = Game.I.PawnScene.Instantiate<Pawn>();
                 p.SetRole(pair.Key);
                 AddChild(p);
             }

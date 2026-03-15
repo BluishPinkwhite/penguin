@@ -90,6 +90,11 @@ public class PlanetData
         tile = Mathf.FloorToInt(angle / step);
     }
 
+    public PlanetTile GetTileAtPolarCoords(float tile, float layer)
+    {
+        return GetTileAtPolarCoords(Mathf.FloorToInt(tile), Mathf.FloorToInt(layer));
+    }
+    
     public PlanetTile GetTileAtPolarCoords(int tile, int layer)
     {
         if (layer >= Layers.Count || layer < 0)

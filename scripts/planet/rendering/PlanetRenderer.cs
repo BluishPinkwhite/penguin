@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.entity.item;
 using Incremental.scripts.planet;
 using Incremental.scripts.planet.data;
 
@@ -288,7 +289,24 @@ public partial class PlanetRenderer : Node2D
 
             if (_data.LocalPositionToPolarCoords(local, out int layer, out int tile))
             {
-                ModifyTile(layer, tile);
+                PlanetTile t = _data.Layers[layer][tile];
+                if (!t.Destroyed)
+                {
+
+                    ModifyTile(layer, tile);
+
+                    Item item = t.Material switch
+                    {
+                        TileMaterial.Grass or TileMaterial.Dirt => Item.Dirt,
+                        TileMaterial.Stone => Item.Slate,
+                        TileMaterial.Rock => Item.Granite,
+                        TileMaterial.Magma => Item.Basalt,
+                        _ => Item.None
+                    };
+
+                    if (item != Item.None)
+                        Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), item);
+                }
             }
         }
 

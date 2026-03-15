@@ -45,10 +45,11 @@ _data = {
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8fm7"]
 atlas = ExtResource("3_gah8n")
 
-[node name="Pawn" type="Node2D" node_paths=PackedStringArray("_debugText")]
+[node name="Pawn" type="Node2D" node_paths=PackedStringArray("DebugText")]
 z_index = 1000
+scale = Vector2(1.00411, 1)
 script = ExtResource("1_os6aw")
-_debugText = NodePath("DebugText")
+DebugText = NodePath("DebugText")
 
 [node name="BodySprite" type="Sprite2D" parent="."]
 position = Vector2(0, 4)

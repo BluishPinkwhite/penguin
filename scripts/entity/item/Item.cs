@@ -2,6 +2,8 @@
 
 public enum Item
 {
+    None = -1,
+    
     Dirt = 0,       // [0,0]
     Slate = 1,      // [1,0]
     Granite = 2,    // [2,0]

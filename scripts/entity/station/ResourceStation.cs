@@ -16,7 +16,7 @@ public partial class ResourceStation: OrbitEntity
     {
         base._Ready();
 
-        _polar_pos = new Vector2(10.5f, Game.I._data.Layers.Count + 10.5f);
-        Below = new Vector2(_polar_pos.X, _polar_pos.Y - 10.25f);
+        PolarPos = new Vector2(10.5f, Game.I._data.Layers.Count + 10.5f);
+        Below = new Vector2(PolarPos.X, PolarPos.Y - 10.25f);
     }
 }

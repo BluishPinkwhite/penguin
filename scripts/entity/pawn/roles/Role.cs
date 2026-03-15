@@ -1,4 +1,4 @@
-﻿namespace Incremental.scripts.director;
+﻿namespace Incremental.scripts.entity.pawn.roles;
 
 public enum Role
 {
