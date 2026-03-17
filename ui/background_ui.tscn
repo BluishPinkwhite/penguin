@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://nl8p58xqichp"]
+
+[ext_resource type="Shader" uid="uid://d3n0gh4kyxrc1" path="res://shaders/space_sky.tres" id="1_v5qxn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3lvfr"]
+shader = ExtResource("1_v5qxn")
+shader_parameter/StarScale = 250.0
+shader_parameter/StarsPower = 30.0
+shader_parameter/NebulaChunksScale = 7.765
+shader_parameter/NebulasScale = 2.0
+
+[node name="Background" type="Control" unique_id=1980085168]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1198815131]
+z_index = -100
+z_as_relative = false
+material = SubResource("ShaderMaterial_3lvfr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5pa0ti7nnsm0"]
+[gd_scene format=3 uid="uid://b5pa0ti7nnsm0"]
 
 [ext_resource type="Script" uid="uid://bexh7jq0ql643" path="res://scripts/director/Game.cs" id="1_i7141"]
 [ext_resource type="Script" uid="uid://c7rxwkjnow620" path="res://scripts/planet/rendering/PlanetRenderer.cs" id="1_rwgxs"]
@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/Pawn.tscn" id="4_k0juu"]
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scripts/entity/station/ResourceStation.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
 
-[node name="Root" type="Node2D" node_paths=PackedStringArray("Pawns", "Stations", "Pickups")]
+[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups")]
 script = ExtResource("1_i7141")
 Pawns = NodePath("Pawns")
 Stations = NodePath("Stations")
@@ -17,23 +18,28 @@ Pickups = NodePath("Pickups")
 PawnScene = ExtResource("4_k0juu")
 PickupScene = ExtResource("3_4mrxx")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("world")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=77520530 node_paths=PackedStringArray("world")]
 ignore_rotation = false
 script = ExtResource("3_4wyf3")
 world = NodePath("../World")
 MinZoom = 0.1
 MaxZoom = 4.0
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=555531882]
 process_mode = 3
 script = ExtResource("1_rwgxs")
 AtlasTexture = ExtResource("2_4wyf3")
 
-[node name="Pawns" type="Node2D" parent="."]
+[node name="Pawns" type="Node2D" parent="." unique_id=1446453432]
 script = ExtResource("4_qfnet")
 
-[node name="Stations" type="Node2D" parent="."]
+[node name="Stations" type="Node2D" parent="." unique_id=1058458184]
 
-[node name="ResourceStation" parent="Stations" instance=ExtResource("5_71j4m")]
+[node name="ResourceStation" parent="Stations" unique_id=1931811540 instance=ExtResource("5_71j4m")]
 
-[node name="Pickups" type="Node2D" parent="."]
+[node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
+
+[node name="Background_UI" type="CanvasLayer" parent="." unique_id=85413882]
+layer = -100
+
+[node name="background_ui" parent="Background_UI" unique_id=1980085168 instance=ExtResource("9_7r4gi")]
