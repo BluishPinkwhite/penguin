@@ -23,6 +23,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Incremental"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/noiselib/addons/shadernoiselib/plugin.cfg")
+
 [input]
 
 ui_left={
