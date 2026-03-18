@@ -1,7 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7l2qohn2woy8"]
+[gd_scene format=3 uid="uid://c7l2qohn2woy8"]
 
 [ext_resource type="Script" uid="uid://8nsugwj2s6xb" path="res://scripts/entity/station/ResourceStation.cs" id="1_y13y2"]
-[ext_resource type="Texture2D" uid="uid://csc61mw5vsl1b" path="res://sprites/atlas/resource_station.png" id="2_288sv"]
+[ext_resource type="Texture2D" uid="uid://dpm3ter6uhj1j" path="res://sprites/buildings/hub.png" id="2_ktijt"]
+[ext_resource type="Shader" uid="uid://dkx8ecji2mk26" path="res://shaders/resource_station.tres" id="2_xswn1"]
+[ext_resource type="SpriteFrames" uid="uid://ds0fhuqvkgk4i" path="res://vfx/fire/fire_big.tres" id="3_xswn1"]
+[ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="4_3pkcb"]
+[ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="5_e57vn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pkcb"]
+shader = ExtResource("2_xswn1")
 
 [sub_resource type="Animation" id="Animation_cg0n2"]
 length = 0.001
@@ -17,22 +24,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_288sv"]
 resource_name = "wobble"
-length = 5.0
+length = 10.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.01, 2.04, 2.98, 3.99, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0669532, 0.0240367, 0.00165063, -0.0183234, -0.0435964]
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.3666666, 6.8333335, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.00698131700797692, 0.00174532925199472, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_20r3k"]
@@ -41,15 +72,59 @@ _data = {
 &"wobble": SubResource("Animation_288sv")
 }
 
-[node name="ResourceStation" type="Node2D"]
+[node name="ResourceStation" type="Node2D" unique_id=2113379846]
 script = ExtResource("1_y13y2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2027982587]
 z_index = 100
-texture = ExtResource("2_288sv")
+material = SubResource("ShaderMaterial_3pkcb")
+texture = ExtResource("2_ktijt")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_20r3k")
-}
-autoplay = "wobble"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=2113345947]
+libraries/ = SubResource("AnimationLibrary_20r3k")
+autoplay = &"wobble"
+
+[node name="BigMiddleFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=1454868362]
+z_index = -1
+position = Vector2(-4.851668, 87.15555)
+rotation = -3.1202724
+scale = Vector2(1.3619399, 1.2877268)
+sprite_frames = ExtResource("3_xswn1")
+autoplay = "default"
+frame_progress = 0.63240105
+
+[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=132758891]
+z_index = -1
+position = Vector2(-66.24817, 80.91109)
+rotation = -3.0077937
+scale = Vector2(0.9620002, 0.9620002)
+sprite_frames = ExtResource("4_3pkcb")
+autoplay = "default"
+frame_progress = 0.09808198
+
+[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=1323752956]
+z_index = -1
+position = Vector2(61.754295, 80.3032)
+rotation = 3.0137565
+scale = Vector2(0.9620001, 0.9620001)
+sprite_frames = ExtResource("4_3pkcb")
+autoplay = "default"
+frame_progress = 0.9428698
+
+[node name="SmallLeftFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=2016949915]
+z_index = -1
+position = Vector2(-112.90846, 77.10464)
+rotation = -2.7951531
+scale = Vector2(0.93700004, 0.93700004)
+sprite_frames = ExtResource("5_e57vn")
+autoplay = "default"
+frame_progress = 0.12617896
+
+[node name="SmallRightFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=680518271]
+z_index = -1
+position = Vector2(109.09358, 76.78471)
+rotation = 2.8008263
+scale = Vector2(0.93700004, 0.93700004)
+sprite_frames = ExtResource("5_e57vn")
+autoplay = "default"
+frame_progress = 0.8978124

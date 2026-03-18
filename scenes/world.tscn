@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scripts/entity/station/ResourceStation.tscn" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
 
 [node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups")]
 script = ExtResource("1_i7141")
@@ -43,3 +44,5 @@ script = ExtResource("4_qfnet")
 layer = -100
 
 [node name="background_ui" parent="Background_UI" unique_id=1980085168 instance=ExtResource("9_7r4gi")]
+
+[node name="Post-Processing" parent="." unique_id=292370211 instance=ExtResource("10_w7kh3")]

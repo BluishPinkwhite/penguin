@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bttyyv7bg42bp"]
+
+[ext_resource type="Texture2D" uid="uid://dpm3ter6uhj1j" path="res://sprites/buildings/hub.png" id="1_fbduc"]
+[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/atlas/tile_atlas.png" id="1_fcoqi"]
+[ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/atlas/penguin.png" id="2_s5iad"]
+
+[sub_resource type="Environment" id="Environment_tahwy"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.06
+glow_hdr_threshold = 0.4
+glow_hdr_luminance_cap = 11.45
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.05
+adjustment_saturation = 0.96
+
+[node name="Post-Processing" type="Node2D" unique_id=292370211]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=764194258]
+environment = SubResource("Environment_tahwy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=866970020]
+visible = false
+position = Vector2(591, 325)
+texture = ExtResource("1_fcoqi")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1381975826]
+visible = false
+position = Vector2(420, 327)
+texture = ExtResource("2_s5iad")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=655856485]
+visible = false
+position = Vector2(350, 168)
+texture = ExtResource("1_fbduc")

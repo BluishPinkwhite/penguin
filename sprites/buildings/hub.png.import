@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csc61mw5vsl1b"
-path="res://.godot/imported/resource_station.png-6bebc7e926699c6fb8a2d4cc03494ddb.ctex"
+uid="uid://dpm3ter6uhj1j"
+path="res://.godot/imported/hub.png-1b4c52416aa260198909cc3102e065cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/atlas/resource_station.png"
-dest_files=["res://.godot/imported/resource_station.png-6bebc7e926699c6fb8a2d4cc03494ddb.ctex"]
+source_file="res://sprites/buildings/hub.png"
+dest_files=["res://.godot/imported/hub.png-1b4c52416aa260198909cc3102e065cd.ctex"]
 
 [params]
 
