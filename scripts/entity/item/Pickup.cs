@@ -15,7 +15,7 @@ public partial class Pickup : SurfaceEntity
         pickup.PolarPos = PolarPos;
         pickup.Item = item;
 
-        pickup.Sprite.RegionRect = new Rect2(32 * ((int)pickup.Item % 8), 32 * (int)((int)pickup.Item / 8), 32, 32);
+        pickup.Sprite.RegionRect = new Rect2(32 * ((int)pickup.Item % 8), 32 * (int)((int)pickup.Item / 4), 32, 32);
         
         Game.I.Pickups.AddChild(pickup);
         

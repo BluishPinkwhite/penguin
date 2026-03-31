@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0t6ux7g1gihw"
-path="res://.godot/imported/icons.png-6d1bb4c3efc658cdfad034da31443ba9.ctex"
+uid="uid://d4k8654vqpdvj"
+path="res://.godot/imported/penguin_miner_walk.png-23c559983fdac60a477e19f0403d39fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/atlas/icons.png"
-dest_files=["res://.godot/imported/icons.png-6d1bb4c3efc658cdfad034da31443ba9.ctex"]
+source_file="res://sprites/penguins/miner/penguin_miner_walk.png"
+dest_files=["res://.godot/imported/penguin_miner_walk.png-23c559983fdac60a477e19f0403d39fb.ctex"]
 
 [params]
 

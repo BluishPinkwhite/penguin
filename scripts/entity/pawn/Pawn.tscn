@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1c6jdhlshvfr"]
+[gd_scene format=3 uid="uid://b1c6jdhlshvfr"]
 
 [ext_resource type="Script" uid="uid://b5pn8gvwce3lt" path="res://scripts/entity/pawn/Pawn.cs" id="1_os6aw"]
-[ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/atlas/penguin.png" id="2_os6aw"]
-[ext_resource type="Texture2D" uid="uid://0t6ux7g1gihw" path="res://sprites/atlas/icons.png" id="3_gah8n"]
+[ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/world/penguin.png" id="2_os6aw"]
+[ext_resource type="Texture2D" uid="uid://0t6ux7g1gihw" path="res://sprites/world/icons.png" id="3_gah8n"]
 
 [sub_resource type="Animation" id="Animation_gah8n"]
 length = 0.001

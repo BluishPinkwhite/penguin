@@ -66,8 +66,8 @@ public static class PawnMiner
                         Item item = below.Material switch
                         {
                             TileMaterial.Grass or TileMaterial.Dirt => Item.Dirt,
-                            TileMaterial.Stone => Item.Slate,
-                            TileMaterial.Rock => Item.Granite,
+                            TileMaterial.Stone => Item.Stone,
+                            TileMaterial.Basalt => Item.Magma,
                             TileMaterial.Magma => Item.Basalt,
                             _ => Item.None
                         };

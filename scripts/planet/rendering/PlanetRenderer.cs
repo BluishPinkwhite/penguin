@@ -298,9 +298,9 @@ public partial class PlanetRenderer : Node2D
 					Item item = t.Material switch
 					{
 						TileMaterial.Grass or TileMaterial.Dirt => Item.Dirt,
-						TileMaterial.Stone => Item.Slate,
-						TileMaterial.Rock => Item.Granite,
-						TileMaterial.Magma => Item.Basalt,
+						TileMaterial.Stone => Item.Stone,
+						TileMaterial.Basalt => Item.Basalt,
+						TileMaterial.Magma => Item.Magma,
 						_ => Item.None
 					};
 

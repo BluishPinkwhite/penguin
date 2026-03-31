@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bexh7jq0ql643" path="res://scripts/director/Game.cs" id="1_i7141"]
 [ext_resource type="Script" uid="uid://c7rxwkjnow620" path="res://scripts/planet/rendering/PlanetRenderer.cs" id="1_rwgxs"]
-[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/atlas/tile_atlas.png" id="2_4wyf3"]
+[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/world/tile_atlas.png" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://exc2cb10mo6g" path="res://scripts/entity/item/Pickup.tscn" id="3_4mrxx"]
 [ext_resource type="Script" uid="uid://xufscukk4foy" path="res://scripts/planet/input/PlanetCamera.cs" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/Pawn.tscn" id="4_k0juu"]
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
-[ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scripts/entity/station/ResourceStation.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scenes/buildings/ResourceStation.tscn" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/control_panel.tscn" id="9_q5onr"]
 [ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
@@ -65,6 +65,7 @@ offset_bottom = 586.0
 layer = 10
 
 [node name="main_ui" parent="Front_UI" unique_id=976099585 instance=ExtResource("11_e3hyu")]
+offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 mouse_behavior_recursive = 2

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn23jeff458uj"
-path="res://.godot/imported/icon_map.png-d84c60600016a217045a264093835496.ctex"
+uid="uid://bbv5hieo0u7ww"
+path="res://.godot/imported/penguin_miner_fly.png-5fb163cb6345241969034e0543bffe26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/sprites/icons/icon_map.png"
-dest_files=["res://.godot/imported/icon_map.png-d84c60600016a217045a264093835496.ctex"]
+source_file="res://sprites/penguins/miner/penguin_miner_fly.png"
+dest_files=["res://.godot/imported/penguin_miner_fly.png-5fb163cb6345241969034e0543bffe26.ctex"]
 
 [params]
 

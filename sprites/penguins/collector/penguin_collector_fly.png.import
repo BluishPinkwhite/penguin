@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cku3dagkeb0g"
-path="res://.godot/imported/penguin.png-6db916dcddc608ef1d8e0f0ee2228442.ctex"
+uid="uid://l6jd8m8k8ajd"
+path="res://.godot/imported/penguin_collector_fly.png-62c77578a6969fecc38297d68486d3e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/atlas/penguin.png"
-dest_files=["res://.godot/imported/penguin.png-6db916dcddc608ef1d8e0f0ee2228442.ctex"]
+source_file="res://sprites/penguins/collector/penguin_collector_fly.png"
+dest_files=["res://.godot/imported/penguin_collector_fly.png-62c77578a6969fecc38297d68486d3e6.ctex"]
 
 [params]
 

@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://exc2cb10mo6g"]
+[gd_scene format=3 uid="uid://exc2cb10mo6g"]
 
 [ext_resource type="Script" uid="uid://blglx68ksyj26" path="res://scripts/entity/item/Pickup.cs" id="1_g4a0p"]
-[ext_resource type="Texture2D" uid="uid://0t6ux7g1gihw" path="res://sprites/atlas/icons.png" id="1_notus"]
+[ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="2_g4a0p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g4a0p"]
-atlas = ExtResource("1_notus")
+atlas = ExtResource("2_g4a0p")
 
-[node name="Pickup" type="Node2D" node_paths=PackedStringArray("Sprite")]
+[node name="Pickup" type="Node2D" unique_id=2139847097 node_paths=PackedStringArray("Sprite")]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_g4a0p")
 Sprite = NodePath("Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=588337510]
 position = Vector2(0, 33.3333)
 texture = SubResource("AtlasTexture_g4a0p")
 region_enabled = true

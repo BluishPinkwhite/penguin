@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bttyyv7bg42bp"]
 
 [ext_resource type="Texture2D" uid="uid://dpm3ter6uhj1j" path="res://sprites/buildings/hub.png" id="1_fbduc"]
-[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/atlas/tile_atlas.png" id="1_fcoqi"]
-[ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/atlas/penguin.png" id="2_s5iad"]
+[ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/world/tile_atlas.png" id="1_fcoqi"]
+[ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/world/penguin.png" id="2_s5iad"]
 
 [sub_resource type="Environment" id="Environment_tahwy"]
 background_mode = 3
