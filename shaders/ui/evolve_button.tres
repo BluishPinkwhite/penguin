@@ -1,0 +1,51 @@
+[gd_resource type="VisualShader" format=3 uid="uid://cmkhs574rlf6c"]
+
+[ext_resource type="Script" uid="uid://rkxy4jtu81mj" path="res://addons/shaderV/rgba/noise/simplex2d.gd" id="1_1qnht"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1qnht"]
+default_input_values = [0, 0.0, 1, 10000.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_o0r6a"]
+output_port_for_preview = 0
+default_input_values = [1, Vector3(0, 0, 0), 2, 0.33]
+initialized = true
+script = ExtResource("1_1qnht")
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_ujd6r"]
+output_port_for_preview = 0
+function = 31
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1qnht"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_o0r6a"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ujd6r"]
+default_input_values = [0, 0.0, 1, 0.1]
+operator = 2
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_k7vms"]
+output_port_for_preview = 0
+default_input_values = [1, 0.0, 2, 1.0, 3, 0.8, 4, 1.0]
+
+[resource]
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(620, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_o0r6a")
+nodes/fragment/2/position = Vector2(-660, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatFunc_ujd6r")
+nodes/fragment/3/position = Vector2(-400, 140)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_1qnht")
+nodes/fragment/5/position = Vector2(-1520, 160)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_o0r6a")
+nodes/fragment/7/position = Vector2(-1420, 300)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_ujd6r")
+nodes/fragment/8/position = Vector2(-940, 260)
+nodes/fragment/9/node = SubResource("VisualShaderNodeRemap_k7vms")
+nodes/fragment/9/position = Vector2(-160, 100)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_1qnht")
+nodes/fragment/10/position = Vector2(189.37495, 283.97906)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 7, 0, 8, 0, 5, 0, 2, 0, 8, 0, 2, 1, 3, 0, 9, 0, 9, 0, 10, 0, 10, 0, 0, 0)

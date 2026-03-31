@@ -2,19 +2,35 @@
 
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="1_3lvfr"]
 [ext_resource type="Texture2D" uid="uid://csj1oyke3jsiq" path="res://icon.svg" id="2_hlo7n"]
-[ext_resource type="Texture2D" uid="uid://dsrr6qc3nxa85" path="res://ui/sprites/control_panel.png" id="3_hlo7n"]
+[ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/Clickable.cs" id="3_x3h8h"]
+[ext_resource type="Texture2D" uid="uid://bt4fxjwd4wllq" path="res://ui/sprites/icons/pause.tres" id="4_186kx"]
+[ext_resource type="Texture2D" uid="uid://csr2bix2lojic" path="res://ui/sprites/icons/play.tres" id="5_ti1yg"]
+[ext_resource type="Texture2D" uid="uid://bruro3e5k25db" path="res://ui/sprites/icons/fast_forward.tres" id="6_fa42e"]
+[ext_resource type="Shader" uid="uid://cmkhs574rlf6c" path="res://shaders/ui/evolve_button.tres" id="7_fa42e"]
+[ext_resource type="FontFile" uid="uid://btawcf8lna83j" path="res://ui/fonts/TinyFontCraftpixPixel.otf" id="8_ck7gc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x3h8h"]
 font = ExtResource("1_3lvfr")
-font_size = 29
+font_size = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fa42e"]
+shader = ExtResource("7_fa42e")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ti1yg"]
+font = ExtResource("1_3lvfr")
+font_size = 45
 
 [node name="MainUI" type="Control" unique_id=976099585]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -3.0
+offset_right = 768.0
+offset_bottom = 429.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=532782400]
 layout_mode = 1
@@ -23,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -30,13 +47,18 @@ theme_override_constants/margin_bottom = 20
 
 [node name="Screen" type="HBoxContainer" parent="MarginContainer" unique_id=1390780620]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 38
 
 [node name="LeftPanel" type="VBoxContainer" parent="MarginContainer/Screen" unique_id=337088868]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+mouse_filter = 2
 
 [node name="Resources" type="BoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=700070652]
 layout_mode = 2
+mouse_filter = 0
 vertical = true
 
 [node name="Resource" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1640567247]
@@ -44,7 +66,8 @@ layout_mode = 2
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource" unique_id=2062921153]
 layout_mode = 2
-text = "190283"
+mouse_filter = 1
+text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
 
@@ -57,51 +80,54 @@ expand_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
+mouse_filter = 2
 
 [node name="Stations" type="BoxContainer" parent="MarginContainer/Screen/LeftPanel/HBoxContainer" unique_id=845019872]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 2
 vertical = true
 
 [node name="Station1" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=873652895]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("2_hlo7n")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_x3h8h")
+
+[node name="Station2" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=996430377]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Station2" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=233971862]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station3" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=1159632162]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Station3" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=49594406]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station4" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=2026062923]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Station4" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=639314434]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station5" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=1501175608]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Station5" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=175162708]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture_normal = ExtResource("2_hlo7n")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Station6" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=844070047]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station6" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations" unique_id=154160543]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
@@ -111,25 +137,33 @@ stretch_mode = 0
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 2
 vertical = true
 
-[node name="Station1" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=1557980585]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station1" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=2039425900]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Station2" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=1573039313]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station2" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=876269189]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Station3" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=843804230]
-custom_minimum_size = Vector2(40, 40)
+[node name="Station3" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=719044236]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("2_hlo7n")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Station4" type="TextureButton" parent="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations2" unique_id=1441122824]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_hlo7n")
 ignore_texture_size = true
@@ -138,30 +172,22 @@ stretch_mode = 0
 [node name="Center" type="VBoxContainer" parent="MarginContainer/Screen" unique_id=457043294]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Top" type="HBoxContainer" parent="MarginContainer/Screen/Center" unique_id=1530933110]
 layout_mode = 2
 alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/Screen/Center/Top" unique_id=1166647470]
-layout_mode = 2
-text = "Top space"
-label_settings = SubResource("LabelSettings_x3h8h")
-vertical_alignment = 1
 
 [node name="Bottom" type="HBoxContainer" parent="MarginContainer/Screen/Center" unique_id=1486804377]
 layout_mode = 2
 size_flags_vertical = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/Screen/Center/Bottom" unique_id=429656109]
-layout_mode = 2
-text = "Bottom space"
-label_settings = SubResource("LabelSettings_x3h8h")
-vertical_alignment = 1
-
 [node name="RightPanel" type="VBoxContainer" parent="MarginContainer/Screen" unique_id=778479501]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+mouse_filter = 2
 
 [node name="Controls" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1777677593]
 layout_mode = 2
@@ -169,92 +195,121 @@ vertical = true
 
 [node name="Control" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=1345845499]
 layout_mode = 2
+mouse_filter = 0
 alignment = 2
 
 [node name="Button1" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1924142986]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("2_hlo7n")
+mouse_filter = 1
+texture_normal = ExtResource("4_186kx")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Button2" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1671549234]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("2_hlo7n")
+mouse_filter = 1
+texture_normal = ExtResource("5_ti1yg")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Button3" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1823455807]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("2_hlo7n")
+mouse_filter = 1
+texture_normal = ExtResource("6_fa42e")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Control2" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=1576507190]
 layout_mode = 2
+mouse_filter = 0
 alignment = 2
 
-[node name="Button" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control2" unique_id=731430660]
-custom_minimum_size = Vector2(99, 30)
+[node name="Button2" type="Button" parent="MarginContainer/Screen/RightPanel/Controls/Control2" unique_id=1385584207]
+material = SubResource("ShaderMaterial_fa42e")
 layout_mode = 2
-texture_normal = ExtResource("3_hlo7n")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_fonts/font = ExtResource("8_ck7gc")
+theme_override_font_sizes/font_size = 40
+text = "EVOLVE"
+flat = true
+
+[node name="TalentPoints" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=2038926091]
+layout_mode = 2
+alignment = 2
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/RightPanel/Controls/TalentPoints" unique_id=829074581]
+layout_mode = 2
+mouse_filter = 1
+text = "8"
+label_settings = SubResource("LabelSettings_ti1yg")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Controls/TalentPoints" unique_id=1928944845]
+layout_mode = 2
+texture = ExtResource("2_hlo7n")
+expand_mode = 3
 
 [node name="Progressbars" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1965011789]
 layout_mode = 2
 size_flags_vertical = 10
+mouse_filter = 0
 vertical = true
 
-[node name="ProgressBar" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=130159264]
+[node name="ProgressBar" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1042924003]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar" unique_id=2035975383]
-custom_minimum_size = Vector2(15, 15)
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar" unique_id=663307465]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_hlo7n")
 expand_mode = 2
 
-[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar" unique_id=1240231184]
-custom_minimum_size = Vector2(0, 10.555)
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar" unique_id=1181083474]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 value = 70.0
 show_percentage = false
 
-[node name="ProgressBar2" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1042924003]
+[node name="ProgressBar2" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=724249383]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar2" unique_id=663307465]
-custom_minimum_size = Vector2(15, 15)
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar2" unique_id=1903947550]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_hlo7n")
 expand_mode = 2
 
-[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar2" unique_id=1181083474]
-custom_minimum_size = Vector2(0, 10.555)
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar2" unique_id=1335250230]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 value = 55.0
 show_percentage = false
 
-[node name="ProgressBar3" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1099327777]
+[node name="ProgressBar3" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1737147658]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar3" unique_id=70519743]
-custom_minimum_size = Vector2(15, 15)
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar3" unique_id=1881964877]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_hlo7n")
 expand_mode = 2
 
-[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar3" unique_id=446704560]
-custom_minimum_size = Vector2(0, 10.555)
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar3" unique_id=59906565]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 30.0
+mouse_filter = 1
+value = 20.0
 show_percentage = false
+
+[connection signal="mouse_entered" from="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" to="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" to="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" method="OnMouseExit"]
