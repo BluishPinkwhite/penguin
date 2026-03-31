@@ -43,10 +43,7 @@ public partial class Pawn : SurfaceEntity
 
     public override void _PhysicsProcess(double delta)
     {
-        base._PhysicsProcess(delta);
-
         float d = (float)delta;
-
 
         // debug
         DebugText.Text = Cooldown > 0 ? $"<{Cooldown:F1}>" : $"[{State}]";
@@ -69,8 +66,14 @@ public partial class Pawn : SurfaceEntity
                 case Role.Hauler:
                     this.DoBehaviourHauler(d);
                     break;
+                default:
+                    QueueFree();
+                    break;
             }
         }
+        
+        DoLayerChecks();
+        ApplyPolarTransform();
     }
 
     public float GetHalfWidthTiles(int layer)

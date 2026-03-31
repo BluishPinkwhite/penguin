@@ -12,7 +12,7 @@ script = ExtResource("1_g4a0p")
 Sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=588337510]
-position = Vector2(0, 33.3333)
+position = Vector2(0, 33.333)
 texture = SubResource("AtlasTexture_g4a0p")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)

@@ -1,13 +1,18 @@
 [gd_scene format=3 uid="uid://bfar2tc8s1dv6"]
 
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="1_3lvfr"]
+[ext_resource type="Script" uid="uid://dp5a3g1xu0njr" path="res://ui/Resources.cs" id="1_sls23"]
 [ext_resource type="Texture2D" uid="uid://cpemlltcetml2" path="res://ui/sprites/icons/dirt_icon.tres" id="2_ck7gc"]
 [ext_resource type="Texture2D" uid="uid://csj1oyke3jsiq" path="res://icon.svg" id="2_hlo7n"]
+[ext_resource type="Texture2D" uid="uid://di6y2cf7rb2o3" path="res://ui/sprites/icons/stone_icon.tres" id="3_bu6un"]
 [ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/Clickable.cs" id="3_x3h8h"]
 [ext_resource type="Texture2D" uid="uid://bt4fxjwd4wllq" path="res://ui/sprites/icons/pause.tres" id="4_186kx"]
+[ext_resource type="Texture2D" uid="uid://ch7uij787vov1" path="res://ui/sprites/icons/basalt_icon.tres" id="4_sls23"]
+[ext_resource type="Texture2D" uid="uid://he7tprrq58xn" path="res://ui/sprites/icons/magma_icon.tres" id="5_nq4ua"]
 [ext_resource type="Texture2D" uid="uid://csr2bix2lojic" path="res://ui/sprites/icons/play.tres" id="5_ti1yg"]
 [ext_resource type="Texture2D" uid="uid://b7f2avyutw0gh" path="res://ui/sprites/icons/penguin_icon.tres" id="6_enix5"]
 [ext_resource type="Texture2D" uid="uid://bruro3e5k25db" path="res://ui/sprites/icons/fast_forward.tres" id="6_fa42e"]
+[ext_resource type="Texture2D" uid="uid://6vrcyfk7ey8" path="res://ui/sprites/icons/pentastone_icon.tres" id="6_wknjk"]
 [ext_resource type="Shader" uid="uid://cmkhs574rlf6c" path="res://shaders/ui/evolve_button.tres" id="7_fa42e"]
 [ext_resource type="FontFile" uid="uid://btawcf8lna83j" path="res://ui/fonts/TinyFontCraftpixPixel.otf" id="8_ck7gc"]
 [ext_resource type="Texture2D" uid="uid://cd66rbvyyljvm" path="res://ui/sprites/icons/penguin_miner_icon.tres" id="12_ov8o7"]
@@ -67,6 +72,7 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 0
 vertical = true
+script = ExtResource("1_sls23")
 
 [node name="Resource" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1640567247]
 layout_mode = 2
@@ -81,6 +87,66 @@ vertical_alignment = 1
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource" unique_id=1592210552]
 layout_mode = 2
 texture = ExtResource("2_ck7gc")
+expand_mode = 3
+
+[node name="Resource2" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=665437718]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource2" unique_id=1518395488]
+layout_mode = 2
+mouse_filter = 1
+text = "123456789"
+label_settings = SubResource("LabelSettings_x3h8h")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource2" unique_id=846470103]
+layout_mode = 2
+texture = ExtResource("3_bu6un")
+expand_mode = 3
+
+[node name="Resource3" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1322838277]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource3" unique_id=983312223]
+layout_mode = 2
+mouse_filter = 1
+text = "123456789"
+label_settings = SubResource("LabelSettings_x3h8h")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource3" unique_id=357961187]
+layout_mode = 2
+texture = ExtResource("4_sls23")
+expand_mode = 3
+
+[node name="Resource4" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=625754657]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource4" unique_id=674152111]
+layout_mode = 2
+mouse_filter = 1
+text = "123456789"
+label_settings = SubResource("LabelSettings_x3h8h")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource4" unique_id=561841831]
+layout_mode = 2
+texture = ExtResource("5_nq4ua")
+expand_mode = 3
+
+[node name="Resource5" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1054443705]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=1581822585]
+layout_mode = 2
+mouse_filter = 1
+text = "123456789"
+label_settings = SubResource("LabelSettings_x3h8h")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=412278767]
+layout_mode = 2
+texture = ExtResource("6_wknjk")
 expand_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=945986638]

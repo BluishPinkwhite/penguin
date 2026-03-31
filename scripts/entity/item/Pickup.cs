@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using Incremental.scripts.director;
 
 namespace Incremental.scripts.entity.item;
@@ -17,6 +18,7 @@ public partial class Pickup : SurfaceEntity
 
         pickup.Sprite.RegionRect = new Rect2(32 * ((int)pickup.Item % 8), 32 * (int)((int)pickup.Item / 4), 32, 32);
         
+        pickup.Sprite.Rotation = Game.RandomAround(0, Mathf.Pi * 0.3f);
         Game.I.Pickups.AddChild(pickup);
         
         return pickup;
@@ -24,8 +26,8 @@ public partial class Pickup : SurfaceEntity
 
     public override void _PhysicsProcess(double delta)
     {
-        base._PhysicsProcess(delta);
-
         ApplyGravity((float)delta);
+        DoLayerChecks();
+        ApplyPolarTransform();
     }
 }

@@ -106,7 +106,7 @@ public class PlanetData
     
     public Vector2 PolarToWorld(float tile, float layer)
     {
-        int l = Mathf.RoundToInt(layer);
+        int l = Mathf.FloorToInt(layer);
         float angleStep = Mathf.Tau / GetLayerSize(l);
         float angle = tile * angleStep;
 

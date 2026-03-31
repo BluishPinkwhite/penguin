@@ -81,19 +81,13 @@ public static class PawnHauler
             if (pawn.InventoryID != Item.None)
             {
                 if (!Inventory.Items.TryAdd(pawn.InventoryID, pawn.InventoryCount))
+                {
                     Inventory.Items[pawn.InventoryID] += pawn.InventoryCount;
+                }
+                Resources.I.UpdateVisuals();
 
                 pawn.InventoryID = Item.None;
                 pawn.InventoryCount = 0;
-                
-                // todo remove
-                string s = "Inventory: ";
-                foreach (KeyValuePair<Item, int> pair in Inventory.Items)
-                {
-                    s += $"{pair.Key}={pair.Value}, ";
-                }
-
-                GD.Print(s);
             }
             
             pawn.State = PawnState.Idle;
