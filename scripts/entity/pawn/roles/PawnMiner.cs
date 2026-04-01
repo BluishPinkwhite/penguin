@@ -47,11 +47,12 @@ public static class PawnMiner
         }
         else if (pawn.State == PawnState.Action)
         {
-            // find new tile when this tile was broken by someone else
+            // find a new tile when this tile was broken by someone else
             if (Mathf.FloorToInt(pawn.Target.X) != Mathf.FloorToInt(pawn.PolarPos.X) ||
                 Mathf.FloorToInt(pawn.Target.Y) != Mathf.FloorToInt(pawn.PolarPos.Y))
             {
                 pawn.State = PawnState.Idle;
+                Game.I._data.Layers[Mathf.FloorToInt(pawn.Target.Y - 1.25f)][Mathf.FloorToInt(pawn.Target.X)].OwnerID = -1;
             }
             else
             {
@@ -59,7 +60,8 @@ public static class PawnMiner
 
                 if (below != null && !below.Destroyed)
                 {
-                    below.Integrity -= d * 0.1f;
+                    below.OwnerID = pawn.ID;
+                    below.Integrity -= d * 0.25f;
 
                     if (below.Integrity < 0)
                     {
@@ -82,7 +84,7 @@ public static class PawnMiner
                             ResourceStation.I.Below =
                                 new Vector2(ResourceStation.I.Below.X, ResourceStation.I.Below.Y - 1);
                         }
-                        
+
                         pawn.Counter++;
 
                         if (pawn.Counter >= 5)
@@ -110,9 +112,9 @@ public static class PawnMiner
 
     private static void GetNewMiningTarget(Pawn pawn)
     {
-        if (Game.I._data.NextMiningTarget(pawn.ID, out Vector2 target))
+        if (Game.I._data.NextMiningTarget(pawn.ID, ResourceStation.I.Surface, out Vector2 target))
         {
-            pawn.Target = new Vector2(target.X + 0.5f, target.Y + 1.5f);
+            pawn.Target = new Vector2(target.X + 0.5f, target.Y + 1.25f);
             pawn.State = PawnState.Move;
             pawn.SetCooldown(1);
         }

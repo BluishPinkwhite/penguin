@@ -68,11 +68,12 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 mouse_filter = 2
 
-[node name="Resources" type="BoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=700070652]
+[node name="Resources" type="BoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=700070652 node_paths=PackedStringArray("_penguinContainer")]
 layout_mode = 2
 mouse_filter = 0
 vertical = true
 script = ExtResource("1_sls23")
+_penguinContainer = NodePath("../../Center/Top/PenguinContainer")
 
 [node name="Resource" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1640567247]
 layout_mode = 2
@@ -251,17 +252,18 @@ mouse_filter = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Resource2" type="HBoxContainer" parent="MarginContainer/Screen/Center/Top" unique_id=818428979]
+[node name="PenguinContainer" type="HBoxContainer" parent="MarginContainer/Screen/Center/Top" unique_id=818428979]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Count" type="Label" parent="MarginContainer/Screen/Center/Top/Resource2" unique_id=1899853566]
+[node name="Count" type="Label" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1899853566]
 layout_mode = 2
 mouse_filter = 1
 text = "21"
 label_settings = SubResource("LabelSettings_bu6un")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/Center/Top/Resource2" unique_id=1398037898]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1398037898]
 layout_mode = 2
 texture = ExtResource("6_enix5")
 expand_mode = 3

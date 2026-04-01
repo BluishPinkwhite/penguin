@@ -9,15 +9,17 @@
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scenes/buildings/ResourceStation.tscn" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
+[ext_resource type="Script" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
 [ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/control_panel.tscn" id="9_q5onr"]
 [ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://bfar2tc8s1dv6" path="res://ui/main_ui.tscn" id="11_e3hyu"]
 
-[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups")]
+[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "Debug")]
 script = ExtResource("1_i7141")
 Pawns = NodePath("Pawns")
 Stations = NodePath("Stations")
 Pickups = NodePath("Pickups")
+Debug = NodePath("Debug")
 PawnScene = ExtResource("4_k0juu")
 PickupScene = ExtResource("3_4mrxx")
 
@@ -41,6 +43,9 @@ script = ExtResource("4_qfnet")
 [node name="ResourceStation" parent="Stations" unique_id=1931811540 instance=ExtResource("5_71j4m")]
 
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
+
+[node name="Debug" type="Node2D" parent="." unique_id=183909691]
+script = ExtResource("9_jhx03")
 
 [node name="Background_UI" type="CanvasLayer" parent="." unique_id=85413882]
 layer = -100

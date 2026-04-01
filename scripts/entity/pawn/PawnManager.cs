@@ -10,10 +10,6 @@ public partial class PawnManager : Node2D
 {
     public override void _Ready()
     {
-        // foreach (Role role in Enum.GetValues(typeof(Role)))
-        // {
-            // Inventory.Roles[role] = (int)(Game.RandomTo(2) + 2);
-        // }
         Inventory.Roles[Role.Miner] = 8;
         Inventory.Roles[Role.Hauler] = 5;
 

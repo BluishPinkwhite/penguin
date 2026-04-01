@@ -1,6 +1,6 @@
-using Godot;
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using Godot;
 using Incremental.scripts.director;
 
 public partial class Resources : BoxContainer
@@ -9,6 +9,9 @@ public partial class Resources : BoxContainer
     
     private List<BoxContainer> _containers = new();
     private List<Label> _labels = new();
+    
+    [Export] private BoxContainer _penguinContainer;
+    private Label _penguinLabel;
 
     public Resources()
     {
@@ -28,6 +31,8 @@ public partial class Resources : BoxContainer
                 container.Visible = false;
             }
         }
+
+        _penguinLabel = _penguinContainer.GetNode<Label>("Count");
 
         UpdateVisuals();
     }
@@ -49,5 +54,7 @@ public partial class Resources : BoxContainer
                 }
             }
         }
+
+        _penguinLabel.Text = Inventory.Roles.Values.Sum().ToString();
     }
 }

@@ -1,15 +1,48 @@
 ﻿using Godot;
+using Incremental.scripts.debug;
 using Incremental.scripts.director;
 using Incremental.scripts.entity.pawn.roles;
-using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.entity.pawn;
 
 public partial class Pawn : SurfaceEntity
 {
-    public PawnState State = PawnState.Idle;
-    public Role Role = Role.Unemployed;
-    public bool Flying = false;
+    private PawnState _state = PawnState.Idle;
+
+    public PawnState State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            UpdateAnimationState(_role, _state, _flying);
+        }
+    }
+
+    private bool _flying = false;
+
+    public bool Flying
+    {
+        get => _flying;
+        set
+        {
+            _flying = value;
+            UpdateAnimationState(_role, _state, _flying);
+        }
+    }
+
+    private Role _role = Role.Unemployed;
+
+    public Role Role
+    {
+        get => _role;
+        set
+        {
+            _role = value;
+            UpdateAnimationState(_role, _state, _flying);
+        }
+    }
+
 
     public float Cooldown = 0;
     public int Counter = 0;
@@ -34,7 +67,7 @@ public partial class Pawn : SurfaceEntity
         ID = _nextID++;
 
         PolarPos = new Vector2(
-            Game.RandomTo(Game.I._data.GetLayerSize(Game.I._data.Layers.Count)) / 8,
+            (int)(Game.RandomTo(Game.I._data.GetLayerSize(Game.I._data.Layers.Count)) / 8),
             Game.I._data.Layers.Count + 2);
         Target = PolarPos;
 
@@ -51,11 +84,12 @@ public partial class Pawn : SurfaceEntity
 
         if ((int)State > 0)
             ApplyGravity(d);
-        
+
 
         // behaviour
         if (Cooldown > 0)
             Cooldown -= d;
+        // Cooldown = 0;
         else
         {
             switch (Role)
@@ -71,7 +105,10 @@ public partial class Pawn : SurfaceEntity
                     break;
             }
         }
-        
+
+        Game.I.Debug.SetLine(ID, Position, Game.I._data.PolarToWorld(Target), 
+            DebugDraw.GetColor((int)Role));
+
         DoLayerChecks();
         ApplyPolarTransform();
     }
@@ -106,11 +143,11 @@ public partial class Pawn : SurfaceEntity
         targetX = Mathf.PosMod(targetX, _currSize);
 
         float dx = CircularDelta(PolarPos.X, targetX, _currSize);
-            
+
         float stepX = Mathf.Clamp(dx, -1f, 1f) * d * WalkSpeed;
         float newX = PolarPos.X + stepX;
 
-            
+
         bool reachedTarget = false;
         if (!Flying)
         {
@@ -133,16 +170,16 @@ public partial class Pawn : SurfaceEntity
 
             if (!CheckCollision(PolarPos.X, newY))
                 PolarPos.Y = newY;
-                
+
             if (!CheckCollision(newX, PolarPos.Y))
             {
                 PolarPos.X = newX;
                 Flying = false;
             }
         }
-            
+
         PolarPos.X = Mathf.PosMod(PolarPos.X, _currSize);
-        
+
         return reachedTarget;
     }
 
@@ -160,7 +197,13 @@ public partial class Pawn : SurfaceEntity
 
             return false;
         }
-        
+
         return true;
+    }
+
+    public void UpdateAnimationState(Role role, PawnState state, bool flying)
+    {
+        // TODO
+        // script.animation = ...
     }
 }

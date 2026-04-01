@@ -10,12 +10,14 @@ public partial class ResourceStation: OrbitEntity
 
 
     public Vector2 Below;
+    public Vector2 Surface;
     
     
     public override void _Ready()
     {
         PolarPos = new Vector2(10.5f, Game.I._data.Layers.Count + 10.5f);
-        Below = new Vector2(PolarPos.X, PolarPos.Y - 10.25f);
+        Surface = new Vector2(PolarPos.X, PolarPos.Y - 10.25f);
+        Below = new Vector2(Surface.X, Surface.Y);
         
         base._Ready();
     }

@@ -9,9 +9,8 @@ public class PlanetData
 {
     public readonly List<PlanetTile[]> Layers = new();
     public readonly List<PlanetChunk> _chunks = new();
-
-    private Vector2I _lastMiningTarget;
-
+    
+    private int _searchRadiusHint = 0;
 
     public float _innerGrowth; // [0 ; TileSize]
     private const float GrowthSpeed = 20f;
@@ -30,10 +29,9 @@ public class PlanetData
         TileSize = tileSize;
         BaseTileCount = baseTileCount;
         GrowthFactor = growthFactor;
-        
+
         _innerGrowth = TileSize * 0.3f;
-        _lastMiningTarget = new Vector2I(0, layerCount - 1);
-        
+
 
         int subdivision = 1; // power-of-two multiplier
 
@@ -54,8 +52,8 @@ public class PlanetData
             Layers.Add(tiles);
         }
     }
-    
-    
+
+
     public bool LocalPositionToPolarCoords(Vector2 localPos, out int layer, out int tile)
     {
         float r = localPos.Length() + _innerGrowth;
@@ -75,7 +73,7 @@ public class PlanetData
         tile = Mathf.FloorToInt(angle / step);
         return tile >= 0 && tile < tileCount;
     }
-    
+
     public void LocalPositionToPolarCoordsUnbounded(Vector2 localPos, out int layer, out int tile)
     {
         float r = localPos.Length() + _innerGrowth;
@@ -94,7 +92,7 @@ public class PlanetData
     {
         return GetTileAtPolarCoords(Mathf.FloorToInt(tile), Mathf.FloorToInt(layer));
     }
-    
+
     public PlanetTile GetTileAtPolarCoords(int tile, int layer)
     {
         if (layer >= Layers.Count || layer < 0)
@@ -103,7 +101,7 @@ public class PlanetData
         tile = Mathf.PosMod(tile, Layers[layer].Length);
         return Layers[layer][tile];
     }
-    
+
     public Vector2 PolarToWorld(float tile, float layer)
     {
         int l = Mathf.FloorToInt(layer);
@@ -118,49 +116,99 @@ public class PlanetData
         ) * radius;
     }
 
+    public Vector2 PolarToWorld(Vector2 polar)
+    {
+        int l = Mathf.FloorToInt(polar.Y);
+        float angleStep = Mathf.Tau / GetLayerSize(l);
+        float angle = polar.X * angleStep;
+
+        float radius = polar.Y * Game.I._data.TileSize;
+
+        return new Vector2(
+            Mathf.Cos(angle),
+            Mathf.Sin(angle)
+        ) * radius;
+    }
+
     public int GetLayerSize(int layer)
     {
         layer = Math.Clamp(layer, 0, Layers.Count - 1);
         return Layers[layer].Length;
     }
 
-    public bool NextMiningTarget(int pawnID, out Vector2 target)
+    private int WrapX(int x, int size)
     {
-        int startX = _lastMiningTarget.X;
-        int startY = _lastMiningTarget.Y;
+        return (x % size + size) % size;
+    }
 
-        for (int y = startY; y >= 0; y--)
+    public bool NextMiningTarget(int pawnID, Vector2 fromPolar, out Vector2 target)
+    {
+        int centerX = Mathf.FloorToInt(fromPolar.X);
+        int centerY = Mathf.FloorToInt(fromPolar.Y);
+
+        int maxRadius = Game.I._data.Layers.Count;
+
+        PlanetTile bestTile = null;
+        int bestX = 0;
+        int bestY = 0;
+
+        for (int radius = _searchRadiusHint; radius < maxRadius; radius++)
         {
-            PlanetTile[] layerData = Game.I._data.Layers[y];
+            bool foundAny = false;
+            int r2 = radius * radius;
 
-            int xStart = (y == startY) ? startX : 0;
-
-            for (int x = xStart; x < layerData.Length; x++)
+            for (int dy = -radius; dy <= radius; dy++)
             {
-                PlanetTile tile = layerData[x];
+                int y = centerY + dy;
+                if (y < 0 || y >= Game.I._data.Layers.Count)
+                    continue;
 
-                if (tile.OwnerID == -1 &&
-                    !tile.Destroyed &&
-                    tile.Material != TileMaterial.Unknown)
+                PlanetTile[] layer = Game.I._data.Layers[y];
+                int layerSize = layer.Length;
+
+                for (int dx = -radius; dx <= radius; dx++)
                 {
-                    tile.OwnerID = pawnID;
+                    if (dx * dx + dy * dy * 10 > r2)
+                        continue;
 
-                    target = new Vector2(x, y);
+                    int x = WrapX(centerX + dx, layerSize);
 
-                    int nextX = x + 1;
-                    int nextY = y;
+                    PlanetTile tile = layer[x];
 
-                    if (nextX >= layerData.Length)
-                    {
-                        nextX = 0;
-                        nextY = y - 1;
-                    }
+                    // tile is available
+                    if (tile.OwnerID != -1 ||
+                        tile.Destroyed ||
+                        tile.Material == TileMaterial.Unknown)
+                        continue;
+                    
+                    // tile is reachable from above
+                    PlanetTile above = Game.I._data.GetTileAtPolarCoords(x, y + 1);
+                    if (above != null && !above.Destroyed)
+                        continue;
 
-                    _lastMiningTarget = new Vector2I(nextX, Mathf.Max(nextY, 0));
-                    return true;
+                    bestTile = tile;
+                    bestX = x;
+                    bestY = y;
+
+                    foundAny = true;
+                    break;
                 }
+
+                if (foundAny)
+                    break;
+            }
+
+            if (foundAny)
+            {
+                target = new Vector2(bestX, bestY);
+                bestTile.OwnerID = pawnID;
+
+                _searchRadiusHint = Mathf.Max(0, radius - 1);
+                return true;
             }
         }
+
+        _searchRadiusHint = Mathf.Min(_searchRadiusHint + 2, maxRadius);
 
         target = Vector2.Zero;
         return false;
