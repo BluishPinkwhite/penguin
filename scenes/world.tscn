@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scenes/buildings/ResourceStation.tscn" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
-[ext_resource type="Script" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
+[ext_resource type="Script" uid="uid://dijt32b8nu8bu" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
 [ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/control_panel.tscn" id="9_q5onr"]
 [ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://bfar2tc8s1dv6" path="res://ui/main_ui.tscn" id="11_e3hyu"]
@@ -42,6 +42,13 @@ script = ExtResource("4_qfnet")
 
 [node name="ResourceStation" parent="Stations" unique_id=1931811540 instance=ExtResource("5_71j4m")]
 
+[node name="ControlPanel" parent="Stations/ResourceStation" unique_id=895867581 instance=ExtResource("9_q5onr")]
+offset_left = -168.0
+offset_top = -237.0
+offset_right = 297.0
+offset_bottom = -112.0
+scale = Vector2(0.765, 0.765)
+
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
 
 [node name="Debug" type="Node2D" parent="." unique_id=183909691]
@@ -59,12 +66,6 @@ metadata/_edit_use_anchors_ = true
 [node name="ControlPanel_UI" type="CanvasLayer" parent="." unique_id=1675354087]
 layer = 5
 follow_viewport_enabled = true
-
-[node name="ControlPanel" parent="ControlPanel_UI" unique_id=895867581 instance=ExtResource("9_q5onr")]
-offset_left = 745.0
-offset_top = 475.0
-offset_right = 1210.0
-offset_bottom = 586.0
 
 [node name="Front_UI" type="CanvasLayer" parent="." unique_id=90452917]
 layer = 10

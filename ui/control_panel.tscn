@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bk5e3v4c0dkwo" path="res://ui/fonts/PixelifySans-SemiBold.ttf" id="2_3b57c"]
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="3_wheia"]
 [ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/Clickable.cs" id="3_wqfgl"]
-[ext_resource type="Texture2D" uid="uid://csj1oyke3jsiq" path="res://icon.svg" id="4_wqfgl"]
+[ext_resource type="Texture2D" uid="uid://cpemlltcetml2" path="res://ui/sprites/icons/dirt_icon.tres" id="5_wheia"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_veslf"]
 texture = ExtResource("1_t8mf3")
@@ -31,17 +31,20 @@ font_size = 24
 offset_left = -232.5
 offset_top = -111.0
 offset_right = 232.5
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_veslf")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=702368352]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = -5
 theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = -5
-theme_override_constants/margin_bottom = -10
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1030022138]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 2
 
 [node name="StationName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=942840282]
@@ -65,7 +68,7 @@ script = ExtResource("3_wqfgl")
 
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable" unique_id=58081571]
 layout_mode = 2
-text = "Upgrade"
+text = "Miner"
 label_settings = SubResource("LabelSettings_0vl20")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -82,15 +85,53 @@ theme_override_constants/separation = 1
 
 [node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable/HBoxContainer/ResourceCost" unique_id=1043982758]
 layout_mode = 2
-text = "180"
+text = "10"
 label_settings = SubResource("LabelSettings_0vl20")
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable/HBoxContainer/ResourceCost" unique_id=910188610]
 layout_mode = 2
-texture = ExtResource("4_wqfgl")
+texture = ExtResource("5_wheia")
+expand_mode = 2
+
+[node name="Purchasable2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=640646472]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_wqfgl")
+_type = 1
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable2" unique_id=1266405974]
+layout_mode = 2
+text = "Collector"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable2" unique_id=889936023]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable2/HBoxContainer" unique_id=1668531885]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable2/HBoxContainer/ResourceCost" unique_id=1884988050]
+layout_mode = 2
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable2/HBoxContainer/ResourceCost" unique_id=304824332]
+layout_mode = 2
+texture = ExtResource("5_wheia")
 expand_mode = 2
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseExit"]
