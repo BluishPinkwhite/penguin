@@ -18,7 +18,7 @@ public partial class PawnManager : Node2D
             for (int i = 0; i < pair.Value; i++)
             {
                 Pawn p = Game.I.PawnScene.Instantiate<Pawn>();
-                p.SetRole(pair.Key);
+                p.Role = pair.Key;
                 AddChild(p);
             }
         }

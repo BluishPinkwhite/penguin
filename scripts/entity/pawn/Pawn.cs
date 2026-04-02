@@ -9,13 +9,17 @@ public partial class Pawn : SurfaceEntity
 {
     private PawnState _state = PawnState.Idle;
 
+    [Export] private SpriteFrames _spriteFramesMiner;
+    [Export] private SpriteFrames _spriteFramesHauler;
+    [Export] private AnimatedSprite2D visual;
+
     public PawnState State
     {
         get => _state;
         set
         {
             _state = value;
-            UpdateAnimationState(_role, _state, _flying);
+            UpdateAnimationState(_role, _state, _flying, _isOnCooldown);
         }
     }
 
@@ -27,7 +31,7 @@ public partial class Pawn : SurfaceEntity
         set
         {
             _flying = value;
-            UpdateAnimationState(_role, _state, _flying);
+            UpdateAnimationState(_role, _state, _flying, _isOnCooldown);
         }
     }
 
@@ -39,9 +43,11 @@ public partial class Pawn : SurfaceEntity
         set
         {
             _role = value;
-            UpdateAnimationState(_role, _state, _flying);
+            UpdateAnimationState(_role, _state, _flying, _isOnCooldown);
         }
     }
+
+    private bool _isOnCooldown = false;
 
 
     public float Cooldown = 0;
@@ -88,10 +94,24 @@ public partial class Pawn : SurfaceEntity
 
         // behaviour
         if (Cooldown > 0)
+        {
             Cooldown -= d;
-        // Cooldown = 0;
+            // Cooldown = 0;
+
+            if (!_isOnCooldown)
+            {
+                _isOnCooldown = true;
+                UpdateAnimationState(Role, State, Flying, true);
+            }
+        }
         else
         {
+            if (_isOnCooldown)
+            {
+                _isOnCooldown = false;
+                UpdateAnimationState(Role, State, Flying, false);
+            }
+
             switch (Role)
             {
                 case Role.Miner:
@@ -106,7 +126,7 @@ public partial class Pawn : SurfaceEntity
             }
         }
 
-        Game.I.Debug.SetLine(ID, Position, Game.I._data.PolarToWorld(Target), 
+        Game.I.Debug.SetLine(ID, Position, Game.I._data.PolarToWorld(Target),
             DebugDraw.GetColor((int)Role));
 
         DoLayerChecks();
@@ -123,16 +143,6 @@ public partial class Pawn : SurfaceEntity
     public void SetCooldown(float value)
     {
         Cooldown = Game.RandomAround(value, value * 0.25f);
-    }
-
-    public void SetRole(Role role)
-    {
-        if (Role == role)
-            return;
-
-        Role = role;
-        GetNode<Sprite2D>("Profession").SetRegionRect(
-            new Rect2(32 * ((int)role % 8), 32 * (int)((int)role / 8), 32, 32));
     }
 
     public bool WalkToTarget(float d)
@@ -201,9 +211,71 @@ public partial class Pawn : SurfaceEntity
         return true;
     }
 
-    public void UpdateAnimationState(Role role, PawnState state, bool flying)
+    public void UpdateAnimationState(Role role, PawnState state, bool flying, bool onCooldown)
     {
-        // TODO
-        // script.animation = ...
+        float dir = Target.X - PolarPos.X;
+
+        if (dir > 0)
+        {
+            visual.FlipH = false;
+        }
+        else if (dir < 0)
+        {
+            visual.FlipH = true;
+        }
+        
+        if (role == Role.Miner)
+        {
+            visual.SetSpriteFrames(_spriteFramesMiner);
+
+            if (onCooldown || state == PawnState.Idle)
+            {
+                visual.Animation = "idle";
+            }
+            else if (state == PawnState.Move || state == PawnState.ReturnH)
+            {
+                if (flying)
+                {
+                    visual.Animation = "fly";
+                }
+                else
+                {
+                    visual.Animation = "walk";
+                }
+            }
+            else if (state == PawnState.ReturnV)
+            {
+                visual.Animation = "fly";
+            }
+            else if (state == PawnState.Action)
+            {
+                visual.Animation = "mine";
+            }
+        }
+        else if (role == Role.Hauler)
+        {
+            visual.SetSpriteFrames(_spriteFramesHauler);
+            if (onCooldown || state == PawnState.Idle)
+            {
+                visual.Animation = "idle";
+            }
+            else if (state == PawnState.Move || state == PawnState.ReturnH)
+            {
+                if (flying)
+                {
+                    visual.Animation = "fly";
+                }
+                else
+                {
+                    visual.Animation = "walk";
+                }
+            }
+            else if (state == PawnState.ReturnV)
+            {
+                visual.Animation = "fly";
+            }
+        }
+
+        visual.Play();
     }
 }
