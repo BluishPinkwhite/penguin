@@ -55,6 +55,6 @@ public partial class Resources : BoxContainer
             }
         }
 
-        _penguinLabel.Text = Inventory.Roles.Values.Sum().ToString();
+        _penguinLabel.Text = Inventory.Roles.Values.Select(v => v.BoughtAmount).Sum().ToString();
     }
 }

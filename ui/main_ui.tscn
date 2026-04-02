@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cpemlltcetml2" path="res://ui/sprites/icons/dirt_icon.tres" id="2_ck7gc"]
 [ext_resource type="Texture2D" uid="uid://csj1oyke3jsiq" path="res://icon.svg" id="2_hlo7n"]
 [ext_resource type="Texture2D" uid="uid://di6y2cf7rb2o3" path="res://ui/sprites/icons/stone_icon.tres" id="3_bu6un"]
-[ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/Clickable.cs" id="3_x3h8h"]
+[ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/clickable/Clickable.cs" id="3_x3h8h"]
 [ext_resource type="Texture2D" uid="uid://bt4fxjwd4wllq" path="res://ui/sprites/icons/pause.tres" id="4_186kx"]
 [ext_resource type="Texture2D" uid="uid://ch7uij787vov1" path="res://ui/sprites/icons/basalt_icon.tres" id="4_sls23"]
 [ext_resource type="Texture2D" uid="uid://he7tprrq58xn" path="res://ui/sprites/icons/magma_icon.tres" id="5_nq4ua"]

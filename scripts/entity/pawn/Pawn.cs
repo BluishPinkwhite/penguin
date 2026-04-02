@@ -133,7 +133,7 @@ public partial class Pawn : SurfaceEntity
         ApplyPolarTransform();
     }
 
-    public float GetHalfWidthTiles(int layer)
+    public new float GetHalfWidthTiles(int layer)
     {
         int size = Game.I._data.GetLayerSize(layer);
         return PawnAngularWidth / size;

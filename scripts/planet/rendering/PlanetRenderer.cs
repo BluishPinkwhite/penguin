@@ -292,7 +292,6 @@ public partial class PlanetRenderer : Node2D
 				PlanetTile t = _data.Layers[layer][tile];
 				if (!t.Destroyed)
 				{
-
 					ModifyTile(layer, tile);
 
 					Item item = t.Material switch
