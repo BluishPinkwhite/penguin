@@ -52,6 +52,7 @@ scale = Vector2(0.765, 0.765)
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
 
 [node name="Debug" type="Node2D" parent="." unique_id=183909691]
+visible = false
 script = ExtResource("9_jhx03")
 
 [node name="Background_UI" type="CanvasLayer" parent="." unique_id=85413882]

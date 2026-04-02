@@ -1,6 +1,7 @@
 ﻿using System;
 using Godot;
 using Incremental.scripts.debug;
+using Incremental.scripts.entity.pawn;
 using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.director;
@@ -11,7 +12,7 @@ public partial class Game : Node2D
     public readonly PlanetData _data = new(100, 16);
     private static Random _r = new();
     
-    [Export] public Node2D Pawns;
+    [Export] public PawnManager Pawns;
     [Export] public Node2D Stations;
     [Export] public Node2D Pickups;
     [Export] public DebugDraw Debug;

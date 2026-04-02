@@ -281,6 +281,7 @@ mouse_filter = 2
 
 [node name="Controls" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1777677593]
 layout_mode = 2
+mouse_filter = 2
 vertical = true
 
 [node name="Control" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=1345845499]
@@ -340,6 +341,31 @@ vertical_alignment = 1
 layout_mode = 2
 texture = ExtResource("2_hlo7n")
 expand_mode = 3
+
+[node name="Debug" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=625098854]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Station2" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Debug" unique_id=153544767]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("6_wknjk")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_x3h8h")
+Type = 4
+Param = 21
+
+[node name="Station3" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Debug" unique_id=1356895264]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("5_nq4ua")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_x3h8h")
+Type = 4
+Param = 20
 
 [node name="Progressbars" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1965011789]
 layout_mode = 2
@@ -403,3 +429,7 @@ show_percentage = false
 
 [connection signal="mouse_entered" from="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" to="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" to="MarginContainer/Screen/LeftPanel/HBoxContainer/Stations/Station1" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station2" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station2" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station2" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station2" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" method="OnMouseExit"]

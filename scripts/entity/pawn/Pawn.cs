@@ -213,7 +213,7 @@ public partial class Pawn : SurfaceEntity
 
     public void UpdateAnimationState(Role role, PawnState state, bool flying, bool onCooldown)
     {
-        float dir = Target.X - PolarPos.X;
+        float dir = CircularDelta(PolarPos.X, Target.X, _currSize);
 
         if (dir > 0)
         {

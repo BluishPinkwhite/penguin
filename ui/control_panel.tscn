@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dsrr6qc3nxa85" path="res://ui/sprites/control_panel.png" id="1_t8mf3"]
 [ext_resource type="FontFile" uid="uid://bk5e3v4c0dkwo" path="res://ui/fonts/PixelifySans-SemiBold.ttf" id="2_3b57c"]
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="3_wheia"]
-[ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/clickable/Clickable.cs" id="3_wqfgl"]
+[ext_resource type="Script" uid="uid://bm5ggg7cogtxa" path="res://scripts/ui/clickable/Purchasable.cs" id="3_wqfgl"]
 [ext_resource type="Texture2D" uid="uid://cpemlltcetml2" path="res://ui/sprites/icons/dirt_icon.tres" id="5_wheia"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_veslf"]
@@ -60,11 +60,15 @@ layout_mode = 2
 theme_override_constants/separation = 1
 theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
 
-[node name="Purchasable" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=159668708]
+[node name="Purchasable" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=159668708 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
 script = ExtResource("3_wqfgl")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+Param = 17
 
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable" unique_id=58081571]
 layout_mode = 2
@@ -95,16 +99,19 @@ layout_mode = 2
 texture = ExtResource("5_wheia")
 expand_mode = 2
 
-[node name="Purchasable2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=640646472]
+[node name="Purchasable2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=640646472 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
 script = ExtResource("3_wqfgl")
-_type = 1
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+Param = 19
 
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable2" unique_id=1266405974]
 layout_mode = 2
-text = "Collector"
+text = "Hauler"
 label_settings = SubResource("LabelSettings_0vl20")
 horizontal_alignment = 1
 vertical_alignment = 2

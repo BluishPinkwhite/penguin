@@ -1,32 +1,33 @@
+using System.Collections.Generic;
 using Godot;
-using System;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.entity.pawn;
 using Incremental.scripts.entity.pawn.roles;
-using Incremental.scripts.ui.clickable;
+
+namespace Incremental.scripts.ui.clickable;
 
 public partial class Clickable : Node
 {
-    private bool _isFocused;
+    protected bool IsFocused;
 
-    [Export] private ClickType _type;
-    [Export] private ClickParam _param;
+    [Export] protected ClickType Type;
+    [Export] protected ClickParam Param;
 
 
     public void OnMouseEnter()
     {
-        _isFocused = true;
+        IsFocused = true;
     }
 
     public void OnMouseExit()
     {
-        _isFocused = false;
+        IsFocused = false;
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (!_isFocused) return;
+        if (!IsFocused) return;
 
         base._Input(@event);
         if (@event.IsActionPressed("press"))
@@ -36,22 +37,22 @@ public partial class Clickable : Node
     }
 
 
-    public void OnClick()
+    public virtual void OnClick()
     {
-        if (_type == ClickType.BuyRole)
+        if (Type == ClickType.BuyRole)
         {
-            RoleData roleData = Inventory.Roles[(Role)_param];
-
-            if (Inventory.Items[roleData.CostMaterial] >= roleData.NewCost)
+            if (Inventory.Roles.TryGetValue((Role)Param, out RoleData roleData) && 
+                Inventory.Items.GetValueOrDefault(roleData.CostMaterial, 0) >= roleData.NewCost)
             {
                 roleData.BoughtAmount++;
                 Inventory.Items[roleData.CostMaterial] -= (int)roleData.NewCost;
                 roleData.NewCost *= 1.2;
+                Game.I.Pawns.UpdatePawnCounts();
             }
         }
-        else if (_type == ClickType.ChangeDebug)
+        else if (Type == ClickType.ChangeDebug)
         {
-            if (_param == ClickParam.Debug_ShowState)
+            if (Param == ClickParam.Debug_ShowState)
             {
                 foreach (Node child in Game.I.Pawns.GetChildren())
                 {
@@ -59,14 +60,14 @@ public partial class Clickable : Node
                         pawn.DebugText.Visible = !pawn.DebugText.Visible;
                 }
             }
-            else if (_param == ClickParam.Debug_ShowTargets)
+            else if (Param == ClickParam.Debug_ShowTargets)
             {
                 Game.I.Debug.Visible = !Game.I.Debug.Visible;
             }
         }
         else
         {
-            GD.Print($"Clickable not implemented - {_type} : {_param}");
+            GD.Print($"Clickable not implemented - {Type} : {Param}");
         }
 
         Resources.I.UpdateVisuals();
