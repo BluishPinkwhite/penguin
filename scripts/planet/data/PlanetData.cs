@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.planet.data;
 
@@ -13,7 +14,7 @@ public class PlanetData
     private int _searchRadiusHint = 0;
 
     public float _innerGrowth; // [0 ; TileSize]
-    private const float GrowthSpeed = 20f;
+    public const float GrowthSpeed = 1f;
 
 
     public readonly int BaseTileCount;

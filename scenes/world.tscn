@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/Pawn.tscn" id="4_k0juu"]
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scenes/buildings/ResourceStation.tscn" id="5_71j4m"]
+[ext_resource type="Shader" uid="uid://cxqkpexcwluut" path="res://shaders/planet/planet_rendering.gdshader" id="6_o8fc1"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
 [ext_resource type="Script" uid="uid://dijt32b8nu8bu" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
 [ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/control_panel.tscn" id="9_q5onr"]
@@ -34,6 +35,7 @@ MaxZoom = 4.0
 process_mode = 3
 script = ExtResource("1_rwgxs")
 AtlasTexture = ExtResource("2_4wyf3")
+PlanetShader = ExtResource("6_o8fc1")
 
 [node name="Pawns" type="Node2D" parent="." unique_id=1446453432]
 script = ExtResource("4_qfnet")

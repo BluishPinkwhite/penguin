@@ -1,341 +1,164 @@
 using System;
-using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
-using Incremental.scripts.entity.item;
-using Incremental.scripts.planet;
 using Incremental.scripts.planet.data;
+
+namespace Incremental.scripts.planet.rendering;
 
 public partial class PlanetRenderer : Node2D
 {
-	[Export] public Texture2D AtlasTexture;
-	[Export] public int AtlasColumns = 4;
-
-	private static int _layersPerChunk = 4;
-	private static HashSet<int> _chunksToRebuild = new();
-
-	private PlanetData _data;
-	private FastNoiseLite _noise;
-
-	private Random r = new Random(100);
-	private int _vertex_count = 0;
-
-	public override void _Ready()
-	{
-		Initialize(Game.I._data);
-	}
-
-
-	public void Initialize(PlanetData data)
-	{
-		_data = data;
-
-		_noise = new FastNoiseLite();
-		_noise.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
-		_noise.Frequency = 0.05f;
-
-		BuildAllChunks();
-	}
-
-	private void BuildAllChunks()
-	{
-		foreach (Node child in GetChildren())
-			child.QueueFree();
-
-		_data._chunks.Clear();
-		
-		int chunkCount = Mathf.CeilToInt((float)_data.Layers.Count / _layersPerChunk);
-
-		for (int i = 0; i < chunkCount; i++)
-		{
-			PlanetChunk chunk = BuildChunk(i);
-			_data._chunks.Add(chunk);
-			AddChild(chunk.Instance);
-		}
-	}
-
-	private PlanetChunk BuildChunk(int chunkIndex)
-	{
-		int layerStart = chunkIndex * _layersPerChunk;
-		int layerEnd = Mathf.Min(layerStart + _layersPerChunk, _data.Layers.Count);
-
-		PlanetChunk chunk = new PlanetChunk
-		{
-			LayerStart = layerStart,
-			LayerCount = layerEnd - layerStart
-		};
-
-		var st = new SurfaceTool();
-		st.Begin(Mesh.PrimitiveType.Triangles);
-
-		for (int layer = layerStart; layer < layerEnd; layer++)
-		{
-			BuildLayer(st, chunk, layer);
-		}
-
-		chunk.Mesh = st.Commit();
-		chunk.Instance = new MeshInstance2D
-		{
-			Mesh = chunk.Mesh,
-			Texture = AtlasTexture
-		};
-
-		return chunk;
-	}
-	
-	private void BuildLayer(SurfaceTool st, PlanetChunk chunk, int layer)
-	{
-		PlanetTile[] tiles = _data.Layers[layer];
-		int tileCount = tiles.Length;
-
-		float innerR = (layer == 0) ? 0f : layer * _data.TileSize - (_data.TileSize - _data._innerGrowth);
-		float outerR = (layer == 0) ? _data._innerGrowth : (layer + 1) * _data.TileSize - (_data.TileSize - _data._innerGrowth);
-
-		// Only needed if current layer has more tiles than previous
-		int prevTileCount = (layer == 0) ? _data.Layers[0].Length : _data.Layers[layer - 1].Length;
-		bool isSplitLayer = tileCount > prevTileCount;
-
-		float angleStepPrev = Mathf.Tau / prevTileCount;
-
-		// Precompute parent top vertices if splitting
-		Vector2[] parentTopLeft = null;
-		Vector2[] parentTopRight = null;
-
-		if (isSplitLayer)
-		{
-			parentTopLeft = new Vector2[prevTileCount];
-			parentTopRight = new Vector2[prevTileCount];
-
-			for (int p = 0; p < prevTileCount; p++)
-			{
-				float a0 = p * angleStepPrev;
-				float a1 = (p + 1) * angleStepPrev;
-
-				Vector2 tl = Polar(outerR - _data.TileSize, a0); // top-left
-				Vector2 tr = Polar(outerR - _data.TileSize, a1); // top-right
-
-				ApplyNoise(ref tl);
-				ApplyNoise(ref tr);
-
-				parentTopLeft[p] = tl;
-				parentTopRight[p] = tr;
-			}
-		}
-
-
-		float angleStepCurrent = Mathf.Tau / tileCount;
-
-		for (int i = 0; i < tileCount; i++)
-		{
-			PlanetTile tile = tiles[i];
-			if (tile.Destroyed)
-				continue;
-
-			float a0 = i * angleStepCurrent;
-			float a1 = (i + 1) * angleStepCurrent;
-
-			Vector2 snapBottomRight = Vector2.Zero;
-			Vector2 snapBottomLeft = Vector2.Zero;
-
-			if (isSplitLayer)
-			{
-				int parentIndex = i * prevTileCount / tileCount;
-
-				Vector2 parentMid = (parentTopLeft[parentIndex] + parentTopRight[parentIndex]) / 2f;
-
-				int tilesPerParent = tileCount / prevTileCount;
-				int indexInParent = i % tilesPerParent;
-
-				if (indexInParent == 0)
-					snapBottomLeft = Vector2.Zero; // left child
-				else
-					snapBottomLeft = parentMid; // right child
-
-				if (indexInParent == 0)
-					snapBottomRight = parentMid; // left child
-				else
-					snapBottomRight = Vector2.Zero; // right child
-			}
-
-			int vertexStart = _vertex_count;
-			chunk.Tiles[(layer, i)] = new TileInfo
-			{
-				VertexStart = vertexStart,
-				Layer = layer,
-				Tile = i
-			};
-
-			AddTile(st, tile, innerR, outerR, a0, a1, snapBottomLeft, snapBottomRight);
-		}
-	}
-
-	private void AddTile(
-		SurfaceTool st,
-		PlanetTile tile,
-		float innerR,
-		float outerR,
-		float a0,
-		float a1,
-		Vector2 snapBottomLeft,
-		Vector2 snapBottomRight)
-	{
-		Vector2 p00 = (snapBottomLeft != Vector2.Zero) ? snapBottomLeft : Polar(innerR, a0);
-		Vector2 p01 = (snapBottomRight != Vector2.Zero) ? snapBottomRight : Polar(innerR, a1);
-
-		Vector2 p10 = Polar(outerR, a0);
-		Vector2 p11 = Polar(outerR, a1);
-
-		if ((snapBottomLeft == Vector2.Zero))
-			ApplyNoise(ref p00);
-		if ((snapBottomRight == Vector2.Zero))
-			ApplyNoise(ref p01);
-		ApplyNoise(ref p10);
-		ApplyNoise(ref p11);
-
-		Vector2 uv0, uv1, uv2, uv3;
-		GetAtlasUV(tile.Material, out uv0, out uv1, out uv2, out uv3);
-
-		// Triangle 1
-		st.SetUV(uv0);
-		st.AddVertex(new Vector3(p00.X, p00.Y, 0));
-		st.SetUV(uv2);
-		st.AddVertex(new Vector3(p10.X, p10.Y, 0));
-		st.SetUV(uv3);
-		st.AddVertex(new Vector3(p11.X, p11.Y, 0));
-
-		// Triangle 2
-		st.SetUV(uv0);
-		st.AddVertex(new Vector3(p00.X, p00.Y, 0));
-		st.SetUV(uv3);
-		st.AddVertex(new Vector3(p11.X, p11.Y, 0));
-		st.SetUV(uv1);
-		st.AddVertex(new Vector3(p01.X, p01.Y, 0));
-	}
-
-
-	private Vector2 Polar(float baseRadius, float angle)
-	{
-		Vector2 dir = new(Mathf.Cos(angle), Mathf.Sin(angle));
-
-		return dir * baseRadius;
-	}
-
-
-	private void ApplyNoise(ref Vector2 p)
-	{
-		float n = _noise.GetNoise2D(p.X, p.Y);
-		p += p.Normalized() * n * 2.0f;
-	}
-
-
-	private void GetAtlasUV(
-		TileMaterial material,
-		out Vector2 uv0,
-		out Vector2 uv1,
-		out Vector2 uv2,
-		out Vector2 uv3)
-	{
-		int index = (int)material;
-		float size = 1f / AtlasColumns;
-
-		int x = index % AtlasColumns;
-		int y = index / AtlasColumns;
-
-		Vector2 baseUV = new Vector2(x * size, y * size);
-
-		uv0 = baseUV + new Vector2(size, size);
-		uv1 = baseUV + new Vector2(0, size);
-		uv2 = baseUV + new Vector2(size, 0);
-		uv3 = baseUV;
-	}
-	
-	private void ModifyTile(int layer, int tile)
-	{
-		PlanetTile t = _data.Layers[layer][tile];
-		t.Destroyed = true;
-		t.Integrity = 0.0f;
-		_data.Layers[layer][tile] = t;
-
-		int chunkIndex = layer / _layersPerChunk;
-		RebuildChunk(chunkIndex);
-	}
-
-	private void RebuildChunk(int chunkIndex)
-	{
-		PlanetChunk oldChunk = _data._chunks[chunkIndex];
-		oldChunk.Instance.QueueFree();
-
-		PlanetChunk newChunk = BuildChunk(chunkIndex);
-		_data._chunks[chunkIndex] = newChunk;
-
-		AddChild(newChunk.Instance);
-		MoveChild(newChunk.Instance, chunkIndex);
-	}
-
-
-	public static void SetChunkDirty(int layer)
-	{
-		_chunksToRebuild.Add(layer / _layersPerChunk);
-	}
-
-
-	public override void _Process(double delta)
-	{
-		base._Process(delta);
-
-		if (Input.IsActionPressed("press"))
-		{
-			Vector2 local = ToLocal(GetGlobalMousePosition());
-
-			if (_data.LocalPositionToPolarCoords(local, out int layer, out int tile))
-			{
-				PlanetTile t = _data.Layers[layer][tile];
-				if (!t.Destroyed)
-				{
-					ModifyTile(layer, tile);
-
-					Item item = t.Material switch
-					{
-						TileMaterial.Grass or TileMaterial.Dirt => Item.Dirt,
-						TileMaterial.Stone => Item.Stone,
-						TileMaterial.Basalt => Item.Basalt,
-						TileMaterial.Magma => Item.Magma,
-						_ => Item.None
-					};
-
-					if (item != Item.None)
-						Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), item);
-				}
-			}
-		}
-
-		foreach (int chunk in _chunksToRebuild)
-		{
-			RebuildChunk(chunk);
-		}
-		_chunksToRebuild.Clear();
-		
-		// Rotate((float)delta * 0.002f);
-
-		// if (true)
-		// {
-		//     _innerGrowth += GrowthSpeed * (float)delta; // delta = frame time
-		//
-		//     // If inner layer fully grown
-		//     if (_innerGrowth >= TileSize)
-		//     {
-		//         _innerGrowth = TileSize;
-		//
-		//         // Insert a new growing layer at index 0
-		//         PlanetTile[] newLayer = _data.GenerateLayerTiles(_data.BaseTileCount);
-		//         _data.Layers.Insert(0, newLayer);
-		//
-		//         // Reset inner growth
-		//         _innerGrowth = 0f;
-		//     }
-		//
-		//     // Rebuild the mesh
-		//     BuildAllChunks();
-		// }
-	}
+    [Export] public Texture2D AtlasTexture;
+    [Export] public int AtlasColumns = 4;
+    [Export] public Shader PlanetShader;
+
+    private PlanetData _data;
+    private Image _dataImage;
+    private ImageTexture _dataTexture;
+    private ShaderMaterial _mat;
+
+    public override void _Ready() => Initialize(Game.I._data);
+
+    public void Initialize(PlanetData data)
+    {
+        _data = data;
+
+        int maxTiles = 0;
+        foreach (var layer in _data.Layers)
+            maxTiles = Math.Max(maxTiles, layer.Length);
+
+        _dataImage = Image.CreateEmpty(maxTiles, _data.Layers.Count, false, Image.Format.Rgb8);
+        _dataTexture = ImageTexture.CreateFromImage(_dataImage);
+
+        _mat = new ShaderMaterial { Shader = PlanetShader };
+        _mat.SetShaderParameter("data_texture", _dataTexture);
+        _mat.SetShaderParameter("atlas_texture", AtlasTexture);
+        _mat.SetShaderParameter("atlas_columns", AtlasColumns);
+        _mat.SetShaderParameter("total_layers", _data.Layers.Count);
+
+        BuildFullMesh(maxTiles);
+        RefreshDataTexture();
+    }
+
+    private void BuildFullMesh(int maxTiles)
+    {
+        var st = new SurfaceTool();
+        st.Begin(Mesh.PrimitiveType.Triangles);
+
+        for (int layer = 0; layer < _data.Layers.Count; layer++)
+        {
+            PlanetTile[] tiles = _data.Layers[layer];
+            int tileCount = tiles.Length;
+            int prevTileCount = (layer == 0) ? tileCount : _data.Layers[layer - 1].Length;
+            bool isSplitLayer = tileCount > prevTileCount;
+
+            float innerR = layer * _data.TileSize;
+            float outerR = (layer + 1) * _data.TileSize;
+            float angleStep = Mathf.Tau / tileCount;
+
+            Vector2[] parentTops = null;
+            if (isSplitLayer)
+            {
+                parentTops = new Vector2[prevTileCount + 1];
+                float pStep = Mathf.Tau / prevTileCount;
+                for (int p = 0; p <= prevTileCount; p++) parentTops[p] = Polar(innerR, p * pStep);
+            }
+
+            for (int i = 0; i < tileCount; i++)
+            {
+                float a0 = i * angleStep;
+                float a1 = (i + 1) * angleStep;
+
+                Vector2 p00, p01;
+                if (layer == 0)
+                {
+                    p00 = Vector2.Zero;
+                    p01 = Vector2.Zero;
+                }
+                else
+                {
+                    p00 = Polar(innerR, a0);
+                    p01 = Polar(innerR, a1);
+
+                    if (isSplitLayer)
+                    {
+                        int parentIdx = i / (tileCount / prevTileCount);
+                        Vector2 pMid = (parentTops[parentIdx] + parentTops[parentIdx + 1]) * 0.5f;
+                        if (i % 2 == 1) p00 = pMid;
+                        else p01 = pMid;
+                    }
+                }
+
+                Vector2 p10 = Polar(outerR, a0);
+                Vector2 p11 = Polar(outerR, a1);
+
+                if (isSplitLayer)
+                {
+                    int parentIdx = i / (tileCount / prevTileCount);
+                    Vector2 pMid = (parentTops[parentIdx] + parentTops[parentIdx + 1]) * 0.5f;
+                    if (i % 2 == 1) p00 = pMid;
+                    else p01 = pMid;
+                }
+
+                Vector2 dataUV = new Vector2((i + 0.5f) / maxTiles, (layer + 0.5f) / _data.Layers.Count);
+                AddTileToSurface(st, p00, p01, p10, p11, dataUV);
+            }
+        }
+
+        var meshInstance = new MeshInstance2D
+        {
+            Mesh = st.Commit(),
+            Material = _mat,
+            Texture = AtlasTexture,
+            TextureFilter = TextureFilterEnum.Nearest,
+            TextureRepeat = TextureRepeatEnum.Disabled
+        };
+        AddChild(meshInstance);
+    }
+
+    private void AddTileToSurface(SurfaceTool st, Vector2 p00, Vector2 p01, Vector2 p10, Vector2 p11, Vector2 dataUV)
+    {
+        void V(Vector2 pos, int type)
+        {
+            st.SetColor(new Color(type / 255f, 0, 0));
+            st.SetUV(dataUV);
+            st.SetUV2(new Vector2(0, dataUV.Y));
+            st.AddVertex(new Vector3(pos.X, pos.Y, 0));
+        }
+
+        // 0:BL, 1:BR, 2:TL, 3:TR
+        V(p00, 0);
+        V(p10, 2);
+        V(p11, 3);
+        V(p00, 0);
+        V(p11, 3);
+        V(p01, 1);
+    }
+
+    private Vector2 Polar(float r, float angle) => new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * r;
+
+    private void RefreshDataTexture()
+    {
+        for (int l = 0; l < _data.Layers.Count; l++)
+        {
+            for (int t = 0; t < _data.Layers[l].Length; t++)
+            {
+                var tile = _data.Layers[l][t];
+                _dataImage.SetPixel(t, l, new Color((int)tile.Material / 255f, tile.Destroyed ? 0 : 1f, 0));
+            }
+        }
+
+        _dataTexture.Update(_dataImage);
+    }
+
+    public override void _Process(double delta)
+    {
+        _data._innerGrowth += PlanetData.GrowthSpeed * (float)delta;
+        if (_data._innerGrowth >= _data.TileSize)
+        {
+            _data._innerGrowth = 0;
+            RefreshDataTexture();
+        }
+
+        _mat.SetShaderParameter("inner_growth", _data._innerGrowth);
+    }
 }

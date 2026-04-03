@@ -2,6 +2,7 @@
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.planet.data;
+using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.entity;
 
@@ -102,7 +103,8 @@ public partial class SurfaceEntity : OrbitEntity
         tile.Integrity = 0;
         tile.Destroyed = true;
         tile.Material = TileMaterial.Unknown;
-        PlanetRenderer.SetChunkDirty(layer);
+     
+        // PlanetRenderer.SetChunkDirty(layer);
     }
     
     protected float GetHalfWidthTiles(int layer)

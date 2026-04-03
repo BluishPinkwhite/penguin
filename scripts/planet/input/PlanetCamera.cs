@@ -1,5 +1,6 @@
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.planet.input;
 
@@ -8,7 +9,7 @@ public partial class PlanetCamera : Camera2D
     public float Radius; // 0-1 of planet size
     public float Angle; // radians
 
-    [Export] private PlanetRenderer world;
+    [Export] private rendering.PlanetRenderer world;
     
     [Export] public float MoveSpeed = 400f;
     [Export] public float ZoomLevel = 1.0f;

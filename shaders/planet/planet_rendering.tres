@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c80oyjnrs8cvf"]
+
+[sub_resource type="Shader" id="Shader_yygss"]
+code = "shader_type canvas_item;
+"
+
+[resource]
+shader = SubResource("Shader_yygss")
