@@ -1,8 +1,6 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.planet.data;
-using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.entity;
 
@@ -96,15 +94,6 @@ public partial class SurfaceEntity : OrbitEntity
     public PlanetTile GetTileBelow(float gravityY)
     {
         return Game.I._data.GetTileAtPolarCoords(Mathf.FloorToInt(PolarPos.X), Mathf.FloorToInt(gravityY));
-    }
-
-    public void DestroyTile(PlanetTile tile, int layer)
-    {
-        tile.Integrity = 0;
-        tile.Destroyed = true;
-        tile.Material = TileMaterial.Unknown;
-     
-        // PlanetRenderer.SetChunkDirty(layer);
     }
     
     protected float GetHalfWidthTiles(int layer)

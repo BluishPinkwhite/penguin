@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
+using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.debug;
 
@@ -19,7 +20,13 @@ public partial class DebugDraw : Node2D
     {
         foreach (var line in _lines.Values)
         {
-            DrawLine(line.start, line.end, line.color, 1.0f);
+            Vector2 start = line.start;
+            Vector2 end = line.end;
+            
+            start.Y += PlanetRenderer.LayerRenderOffset;
+            end.Y += PlanetRenderer.LayerRenderOffset;
+
+            DrawLine(start, end, line.color, 1.0f);
         }
     }
 

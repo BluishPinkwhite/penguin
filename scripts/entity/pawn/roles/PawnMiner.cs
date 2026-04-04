@@ -65,16 +65,8 @@ public static class PawnMiner
 
                     if (below.Integrity < 0)
                     {
-                        Item item = below.Material switch
-                        {
-                            TileMaterial.Grass or TileMaterial.Dirt => Item.Dirt,
-                            TileMaterial.Stone => Item.Stone,
-                            TileMaterial.Basalt => Item.Magma,
-                            TileMaterial.Magma => Item.Basalt,
-                            _ => Item.None
-                        };
-
-                        pawn.DestroyTile(below, Mathf.FloorToInt(gravityY));
+                        Item item = below.Destroy();
+                        
                         if (item != Item.None)
                             Pickup.Instantiate(pawn.PolarPos, item);
 

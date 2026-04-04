@@ -57,7 +57,7 @@ public class PlanetData
 
     public bool LocalPositionToPolarCoords(Vector2 localPos, out int layer, out int tile)
     {
-        float r = localPos.Length() + _innerGrowth;
+        float r = localPos.Length();
         float angle = Mathf.Atan2(localPos.Y, localPos.X);
         angle = Mathf.PosMod(angle, Mathf.Tau);
 
@@ -77,7 +77,7 @@ public class PlanetData
 
     public void LocalPositionToPolarCoordsUnbounded(Vector2 localPos, out int layer, out int tile)
     {
-        float r = localPos.Length() + _innerGrowth;
+        float r = localPos.Length();
         float angle = Mathf.Atan2(localPos.Y, localPos.X);
         angle = Mathf.PosMod(angle, Mathf.Tau);
 
@@ -213,5 +213,24 @@ public class PlanetData
 
         target = Vector2.Zero;
         return false;
+    }
+
+    public void RegrowLayer()
+    {
+        for (int layer = Layers.Count - 1; layer > 0; layer--)
+        {
+            for (int tile = 0; tile < Layers[layer].Length; tile++)
+            {
+                PlanetTile tileData = Layers[layer][tile];
+                
+                if (tileData.Destroyed || tileData.Material == TileMaterial.Unknown)
+                {
+                    if (Layers[layer].Length == Layers[layer - 1].Length)
+                        Layers[layer][tile].CopyOver(Layers[layer - 1][tile]);
+                    else 
+                        Layers[layer][tile].CopyOver(Layers[layer - 1][tile / 2]);
+                }
+            }
+        }
     }
 }

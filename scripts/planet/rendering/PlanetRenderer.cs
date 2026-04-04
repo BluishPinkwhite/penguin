@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.entity.item;
 using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.planet.rendering;
@@ -11,12 +12,19 @@ public partial class PlanetRenderer : Node2D
     [Export] public int AtlasColumns = 4;
     [Export] public Shader PlanetShader;
 
+    public static bool isDirty = false;
+
     private PlanetData _data;
     private Image _dataImage;
     private ImageTexture _dataTexture;
     private ShaderMaterial _mat;
 
-    public override void _Ready() => Initialize(Game.I._data);
+    public static float LayerRenderOffset => 0.75f + Game.I._data._innerGrowth / Game.I._data.TileSize;
+
+    public override void _Ready()
+    {
+        Initialize(Game.I._data);
+    }
 
     public void Initialize(PlanetData data)
     {
@@ -60,7 +68,9 @@ public partial class PlanetRenderer : Node2D
             {
                 parentTops = new Vector2[prevTileCount + 1];
                 float pStep = Mathf.Tau / prevTileCount;
-                for (int p = 0; p <= prevTileCount; p++) parentTops[p] = Polar(innerR, p * pStep);
+
+                for (int p = 0; p <= prevTileCount; p++)
+                    parentTops[p] = Polar(innerR, p * pStep);
             }
 
             for (int i = 0; i < tileCount; i++)
@@ -83,8 +93,10 @@ public partial class PlanetRenderer : Node2D
                     {
                         int parentIdx = i / (tileCount / prevTileCount);
                         Vector2 pMid = (parentTops[parentIdx] + parentTops[parentIdx + 1]) * 0.5f;
-                        if (i % 2 == 1) p00 = pMid;
-                        else p01 = pMid;
+                        if (i % 2 == 1)
+                            p00 = pMid;
+                        else
+                            p01 = pMid;
                     }
                 }
 
@@ -134,16 +146,24 @@ public partial class PlanetRenderer : Node2D
         V(p01, 1);
     }
 
-    private Vector2 Polar(float r, float angle) => new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * r;
+    private Vector2 Polar(float r, float angle)
+    {
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * r;
+    }
 
     private void RefreshDataTexture()
     {
-        for (int l = 0; l < _data.Layers.Count; l++)
+        for (int layer = 0; layer < _data.Layers.Count; layer++)
         {
-            for (int t = 0; t < _data.Layers[l].Length; t++)
+            for (int tile = 0; tile < _data.Layers[layer].Length; tile++)
             {
-                var tile = _data.Layers[l][t];
-                _dataImage.SetPixel(t, l, new Color((int)tile.Material / 255f, tile.Destroyed ? 0 : 1f, 0));
+                PlanetTile tileData = _data.Layers[layer][tile];
+                _dataImage.SetPixel(tile, layer,
+                    new Color(
+                        (int)tileData.Material / 255f,
+                        tileData.Destroyed ? 0 : 1f,
+                        0
+                    ));
             }
         }
 
@@ -152,11 +172,35 @@ public partial class PlanetRenderer : Node2D
 
     public override void _Process(double delta)
     {
+        if (Input.IsActionPressed("press"))
+        {
+            Vector2 local = ToLocal(GetGlobalMousePosition());
+            float dist = local.Length() - _data._innerGrowth;
+            Vector2 virtualPos = local.Normalized() * dist;
+
+            if (_data.LocalPositionToPolarCoords(virtualPos, out int layer, out int tile))
+            {
+                PlanetTile t = _data.Layers[layer][tile];
+
+                Item item = t.Destroy();
+                if (item != Item.None)
+                    Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), item);
+            }
+        }
+
+
         _data._innerGrowth += PlanetData.GrowthSpeed * (float)delta;
         if (_data._innerGrowth >= _data.TileSize)
         {
             _data._innerGrowth = 0;
+            _data.RegrowLayer();
+            isDirty = true;
+        }
+
+        if (isDirty)
+        {
             RefreshDataTexture();
+            isDirty = false;
         }
 
         _mat.SetShaderParameter("inner_growth", _data._innerGrowth);
