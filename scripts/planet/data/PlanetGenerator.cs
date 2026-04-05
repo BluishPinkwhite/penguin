@@ -18,7 +18,8 @@ public class PlanetGenerator
             {
                 Material = LayerMaterial(layerPercent, 3f / layerCount),
                 Destroyed = false,
-                Integrity = 1f
+                Integrity = 1f,
+                Light = layer < layerCount - PlanetTile.LightReach ? 0 : 1 - (layerCount - layer) / (float)PlanetTile.LightReach
             };
         }
 

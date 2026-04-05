@@ -66,16 +66,11 @@ public static class PawnMiner
                     if (below.Integrity < 0)
                     {
                         Item item = below.Destroy();
+                        Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY), 
+                            Mathf.FloorToInt(pawn.PolarPos.X), 1);
                         
                         if (item != Item.None)
                             Pickup.Instantiate(pawn.PolarPos, item);
-
-                        // shift "below station" down
-                        if (Mathf.FloorToInt(pawn.PolarPos.X) == Mathf.FloorToInt(ResourceStation.I.Below.X))
-                        {
-                            ResourceStation.I.Below =
-                                new Vector2(ResourceStation.I.Below.X, ResourceStation.I.Below.Y - 1);
-                        }
 
                         pawn.Counter++;
 

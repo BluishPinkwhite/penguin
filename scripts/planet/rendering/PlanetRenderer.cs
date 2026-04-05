@@ -2,6 +2,7 @@ using System;
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.entity.item;
+using Incremental.scripts.entity.pawn;
 using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.planet.rendering;
@@ -13,6 +14,7 @@ public partial class PlanetRenderer : Node2D
     [Export] public Shader PlanetShader;
 
     public static bool isDirty = false;
+    public static bool isLightDirty = false;
 
     private PlanetData _data;
     private Image _dataImage;
@@ -161,8 +163,8 @@ public partial class PlanetRenderer : Node2D
                 _dataImage.SetPixel(tile, layer,
                     new Color(
                         (int)tileData.Material / 255f,
-                        tileData.Destroyed ? 0 : 1f,
-                        0
+                        tileData.Destroyed ? 0 : Math.Max(0, tileData.Integrity),
+                        tileData.Light
                     ));
             }
         }
@@ -185,6 +187,8 @@ public partial class PlanetRenderer : Node2D
                 Item item = t.Destroy();
                 if (item != Item.None)
                     Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), item);
+
+                _data.PropagateLight(layer, tile, 1);
             }
         }
 
@@ -195,6 +199,32 @@ public partial class PlanetRenderer : Node2D
             _data._innerGrowth = 0;
             _data.RegrowLayer();
             isDirty = true;
+
+            foreach (Node node in Game.I.Pawns.GetChildren())
+            {
+                if (node is Pawn pawn)
+                {
+                    PlanetTile tile = _data.GetTileAtPolarCoords(pawn.PolarPos.X, pawn.PolarPos.Y);
+                    if (tile != null && !tile.IsEmpty())
+                        pawn.PolarPos.Y += 1;
+                }
+            }
+
+            foreach (Node node in Game.I.Pickups.GetChildren())
+            {
+                if (node is Pickup pickup)
+                {
+                    PlanetTile tile = _data.GetTileAtPolarCoords(pickup.PolarPos.X, pickup.PolarPos.Y);
+                    if (tile != null && !tile.IsEmpty())
+                        pickup.PolarPos.Y += 1;
+                }
+            }
+        }
+
+        if (isLightDirty)
+        {
+            _data.RecalculateGlobalLight();
+            isLightDirty = false;
         }
 
         if (isDirty)

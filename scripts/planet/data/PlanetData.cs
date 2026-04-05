@@ -10,8 +10,6 @@ public class PlanetData
 {
     public readonly List<PlanetTile[]> Layers = new();
     public readonly List<PlanetChunk> _chunks = new();
-    
-    private int _searchRadiusHint = 0;
 
     public float _innerGrowth; // [0 ; TileSize]
     public const float GrowthSpeed = 1f;
@@ -153,7 +151,7 @@ public class PlanetData
         int bestX = 0;
         int bestY = 0;
 
-        for (int radius = _searchRadiusHint; radius < maxRadius; radius++)
+        for (int radius = 0; radius < maxRadius; radius++)
         {
             bool foundAny = false;
             int r2 = radius * radius;
@@ -176,12 +174,11 @@ public class PlanetData
 
                     PlanetTile tile = layer[x];
 
-                    // tile is available
+                    // tile is not available -> skip
                     if (tile.OwnerID != -1 ||
-                        tile.Destroyed ||
-                        tile.Material == TileMaterial.Unknown)
+                        tile.IsEmpty())
                         continue;
-                    
+
                     // tile is reachable from above
                     PlanetTile above = Game.I._data.GetTileAtPolarCoords(x, y + 1);
                     if (above != null && !above.Destroyed)
@@ -203,13 +200,9 @@ public class PlanetData
             {
                 target = new Vector2(bestX, bestY);
                 bestTile.OwnerID = pawnID;
-
-                _searchRadiusHint = Mathf.Max(0, radius - 1);
                 return true;
             }
         }
-
-        _searchRadiusHint = Mathf.Min(_searchRadiusHint + 2, maxRadius);
 
         target = Vector2.Zero;
         return false;
@@ -217,20 +210,32 @@ public class PlanetData
 
     public void RegrowLayer()
     {
+        // reset center layer
+        for (int tile = 0; tile < Layers[0].Length; tile++)
+        {
+            PlanetTile tileData = Layers[0][tile];
+            
+            tileData.Integrity = 1f;
+            tileData.Material = TileMaterial.Core;
+            tileData.Destroyed = false;
+        }
+        
+        // copy over from bottom layer
         for (int layer = Layers.Count - 1; layer > 0; layer--)
         {
             for (int tile = 0; tile < Layers[layer].Length; tile++)
             {
                 PlanetTile tileData = Layers[layer][tile];
-                
+
                 if (tileData.Destroyed || tileData.Material == TileMaterial.Unknown)
                 {
-                    if (Layers[layer].Length == Layers[layer - 1].Length)
-                        Layers[layer][tile].CopyOver(Layers[layer - 1][tile]);
-                    else 
-                        Layers[layer][tile].CopyOver(Layers[layer - 1][tile / 2]);
+                    Layers[layer][tile].CopyOver(Layers[layer].Length == Layers[layer - 1].Length
+                        ? Layers[layer - 1][tile]
+                        : Layers[layer - 1][tile / 2]);
                 }
             }
         }
+
+        PlanetRenderer.isLightDirty = true;
     }
 }

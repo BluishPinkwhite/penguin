@@ -1,20 +1,29 @@
-﻿using Incremental.scripts.director;
+﻿using System;
+using Incremental.scripts.director;
 using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.planet.data;
 
 public class PlanetTile
 {
+    public const int LightReach = 8;
+    
+    
     public float Integrity = 1.0f;   // 1 = intact, 0 = destroyed
     public TileMaterial Material;
     public bool Destroyed;
     public int OwnerID = -1;    // -1 = no owner, >=0 owned by pawn with that ID
-    public float Light = Game.RandomAround(0.75f, 0.25f);
-    
+
+    private float _light = 0;
+    public float Light
+    {
+        get => _light;
+        set => _light = Math.Clamp(value, 0, 1f + 1f / LightReach);
+    }
 
     public Item Destroy()
     {
-        if (Destroyed)
+        if (IsEmpty())
             return Item.None;
 
         PlanetRenderer.isDirty = true;
@@ -44,4 +53,6 @@ public class PlanetTile
         OwnerID = other.OwnerID;
         Light = other.Light;
     }
+    
+    public bool IsEmpty() => Destroyed || Material == TileMaterial.Unknown;
 }

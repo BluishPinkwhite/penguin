@@ -6,12 +6,14 @@ uniform int atlas_columns = 4;
 uniform float inner_growth = 0.0;
 
 varying float v_integrity;
+varying float v_light;
 varying flat int v_mat_index;
 varying vec2 v_local_uv;
 
 void vertex() {
 	vec4 data = texture(data_texture, UV);
 	v_integrity = data.g;
+	v_light = data.b;
 	v_mat_index = int(data.r * 255.0);
 
 	vec2 dir = normalize(VERTEX);
@@ -31,6 +33,6 @@ void fragment() {
 		float(v_mat_index % atlas_columns) * s,
 		float(v_mat_index / atlas_columns) * s
 	);
-
-	COLOR = texture(atlas_texture, atlas_offset + (v_local_uv * s));
+	
+	COLOR = texture(atlas_texture, atlas_offset + (v_local_uv * s)) * vec4(vec3(v_light), 1);
 }
