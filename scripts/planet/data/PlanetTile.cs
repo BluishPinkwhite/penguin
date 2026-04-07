@@ -50,8 +50,9 @@ public class PlanetTile
         Integrity = other.Integrity;
         Material = other.Material;
         Destroyed = other.Destroyed;
-        OwnerID = other.OwnerID;
         Light = other.Light;
+        
+        OwnerID = -1;
     }
     
     public bool IsEmpty() => Destroyed || Material == TileMaterial.Unknown;
