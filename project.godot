@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Incremental"
-run/main_scene="uid://b5pa0ti7nnsm0"
+run/main_scene="uid://dkvbucjcow6t0"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,296 @@
+[gd_scene format=3 uid="uid://dkvbucjcow6t0"]
+
+[ext_resource type="Shader" uid="uid://d3n0gh4kyxrc1" path="res://shaders/space_sky.tres" id="1_0dkrt"]
+[ext_resource type="FontFile" uid="uid://btawcf8lna83j" path="res://ui/fonts/TinyFontCraftpixPixel.otf" id="1_t7e0r"]
+[ext_resource type="Script" uid="uid://qvvt0hpp2q01" path="res://scripts/ui/MainMenu.cs" id="1_ubpvv"]
+[ext_resource type="PackedScene" uid="uid://b5pa0ti7nnsm0" path="res://scenes/world.tscn" id="2_jiymt"]
+[ext_resource type="Shader" uid="uid://dkx8ecji2mk26" path="res://shaders/buildings/resource_station.tres" id="3_p8ri8"]
+[ext_resource type="Texture2D" uid="uid://dpm3ter6uhj1j" path="res://sprites/buildings/hub.png" id="4_ubpvv"]
+[ext_resource type="SpriteFrames" uid="uid://ds0fhuqvkgk4i" path="res://vfx/fire/fire_big.tres" id="5_arv2f"]
+[ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="6_5klac"]
+[ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="7_lsdqh"]
+[ext_resource type="Texture2D" uid="uid://dsrr6qc3nxa85" path="res://ui/sprites/control_panel.png" id="9_arv2f"]
+[ext_resource type="FontFile" uid="uid://brg4x0tukwqfy" path="res://ui/fonts/PixelifySans-Bold.ttf" id="10_5klac"]
+[ext_resource type="Texture2D" uid="uid://caiaorypo8c0a" path="res://ui/sprites/icons/close.tres" id="11_lsdqh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wk0pr"]
+shader = ExtResource("1_0dkrt")
+shader_parameter/Y_travel = 64.45
+shader_parameter/StarScale = 250.0
+shader_parameter/StarsPower = 30.0
+shader_parameter/NebulaChunksScale = 7.7
+shader_parameter/NebulasScale = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0dkrt"]
+font = ExtResource("1_t7e0r")
+font_size = 87
+
+[sub_resource type="LabelSettings" id="LabelSettings_wk0pr"]
+font = ExtResource("1_t7e0r")
+font_size = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pkcb"]
+shader = ExtResource("3_p8ri8")
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmr83"]
+font = ExtResource("1_t7e0r")
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_8uxxo"]
+font = ExtResource("1_t7e0r")
+font_size = 35
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5klac"]
+content_margin_top = 38.0
+texture = ExtResource("9_arv2f")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5klac"]
+color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+grow_begin = -80.0
+grow_end = -80.0
+thickness = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_5klac"]
+font = ExtResource("10_5klac")
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_lsdqh"]
+font = ExtResource("10_5klac")
+font_size = 17
+
+[sub_resource type="LabelSettings" id="LabelSettings_jiymt"]
+font = ExtResource("10_5klac")
+
+[node name="MainMenu_UI" type="Control" unique_id=2130477982 node_paths=PackedStringArray("CreditsUI")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ubpvv")
+CreditsUI = NodePath("Credits")
+PlayScene = ExtResource("2_jiymt")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1009710066]
+material = SubResource("ShaderMaterial_wk0pr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1950599339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 127
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer" unique_id=719358615]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="MarginContainer/BoxContainer" unique_id=1470749945]
+layout_mode = 2
+text = "Penguin Inc."
+label_settings = SubResource("LabelSettings_0dkrt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=951940946]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 324
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer" unique_id=1711127492]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 9
+alignment = 1
+
+[node name="Play" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=217157422]
+layout_mode = 2
+mouse_filter = 0
+text = "Play"
+label_settings = SubResource("LabelSettings_wk0pr")
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play" unique_id=1219923099]
+z_index = 1
+material = SubResource("ShaderMaterial_3pkcb")
+position = Vector2(75, -185)
+texture = ExtResource("4_ubpvv")
+
+[node name="BigMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=702573556]
+z_index = -1
+position = Vector2(-4.851668, 87.15555)
+rotation = -3.1202724
+scale = Vector2(1.3619399, 1.2877268)
+sprite_frames = ExtResource("5_arv2f")
+autoplay = "default"
+frame_progress = 0.63240105
+
+[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=814487248]
+z_index = -1
+position = Vector2(-66.24817, 80.91109)
+rotation = -3.0077937
+scale = Vector2(0.9620002, 0.9620002)
+sprite_frames = ExtResource("6_5klac")
+autoplay = "default"
+frame_progress = 0.09808198
+
+[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=1980728487]
+z_index = -1
+position = Vector2(61.754295, 80.3032)
+rotation = 3.0137565
+scale = Vector2(0.9620001, 0.9620001)
+sprite_frames = ExtResource("6_5klac")
+autoplay = "default"
+frame_progress = 0.9428698
+
+[node name="SmallLeftFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=148346303]
+z_index = -1
+position = Vector2(-112.90846, 77.10464)
+rotation = -2.7951531
+scale = Vector2(0.93700004, 0.93700004)
+sprite_frames = ExtResource("7_lsdqh")
+autoplay = "default"
+frame_progress = 0.12617896
+
+[node name="SmallRightFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=865768785]
+z_index = -1
+position = Vector2(109.09358, 76.78471)
+rotation = 2.8008263
+scale = Vector2(0.93700004, 0.93700004)
+sprite_frames = ExtResource("7_lsdqh")
+autoplay = "default"
+frame_progress = 0.8978124
+
+[node name="AboutUs" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1112922023]
+layout_mode = 2
+mouse_filter = 0
+text = "About us"
+label_settings = SubResource("LabelSettings_rmr83")
+horizontal_alignment = 1
+
+[node name="Quit" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1575158165]
+layout_mode = 2
+mouse_filter = 0
+text = "Quit"
+label_settings = SubResource("LabelSettings_8uxxo")
+horizontal_alignment = 1
+
+[node name="Credits" type="Control" parent="." unique_id=218278676]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -98.0
+offset_right = 236.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits" unique_id=903673525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5klac")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer" unique_id=710220511]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits/PanelContainer/VBoxContainer" unique_id=1539741886]
+clip_contents = false
+custom_minimum_size = Vector2(0, 83.135)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("10_5klac")
+theme_override_font_sizes/normal_font_size = 33
+text = "A game about penguins
+made by"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Credits/PanelContainer/VBoxContainer" unique_id=1288752038]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_5klac")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer" unique_id=913845258]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer" unique_id=924272312]
+layout_mode = 2
+text = "Michal Kulhanek"
+label_settings = SubResource("LabelSettings_5klac")
+
+[node name="Label3" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer" unique_id=577186281]
+layout_mode = 2
+text = "&"
+label_settings = SubResource("LabelSettings_lsdqh")
+
+[node name="Label2" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer" unique_id=605219882]
+layout_mode = 2
+text = "Tammie Hladilova"
+label_settings = SubResource("LabelSettings_5klac")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer" unique_id=1125277102]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 88
+alignment = 1
+
+[node name="Label" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2074870586]
+layout_mode = 2
+text = "With love on FAV."
+label_settings = SubResource("LabelSettings_jiymt")
+
+[node name="TextureButton" type="TextureButton" parent="Credits" unique_id=1391777263]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture_normal = ExtResource("11_lsdqh")
+stretch_mode = 0
+
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="OnPlayHover"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="OnPlayUnhover"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/AboutUs" to="." method="OnCreditsHover"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/AboutUs" to="." method="OnCreditsUnhover"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="OnQuitHover"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="OnQuitUnhover"]
+[connection signal="pressed" from="Credits/TextureButton" to="." method="CloseCredits"]
