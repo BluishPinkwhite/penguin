@@ -1,4 +1,6 @@
-﻿namespace Incremental.scripts.planet.data;
+﻿using System;
+
+namespace Incremental.scripts.planet.data;
 
 public enum TileMaterial
 {
@@ -9,6 +11,13 @@ public enum TileMaterial
     Magma = 4,
     Lava = 5,
     Core = 6,
-    Growth = 7,
     Unknown = 15,
+}
+
+public static class TileMaterialExtensions
+{
+    public static float BreakTime(this TileMaterial m)
+    {
+        return (float)Math.Pow(Math.Max(1, (int)m), 2.5f);
+    }
 }

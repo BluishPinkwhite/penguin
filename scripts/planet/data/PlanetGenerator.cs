@@ -7,17 +7,19 @@ public class PlanetGenerator
     private static Random r = new();
     private static readonly float[] percentages = [1f, 0.99f, 0.86f, 0.54f, 0.24f, 0.12f, 0.03f, 0];
 
+    public static float LayerSpan(int layerCount) => 3f / layerCount;
+
     public static PlanetTile[] GenerateLayerTiles(int tileCount, int layer, int layerCount)
     {
         PlanetTile[] tiles = new PlanetTile[tileCount];
         float layerPercent = (float)layer / layerCount;
+        float layerSpan = LayerSpan(layerCount);
 
         for (int i = 0; i < tileCount; i++)
         {
             tiles[i] = new PlanetTile
             {
-                Material = LayerMaterial(layerPercent, 3f / layerCount),
-                Destroyed = false,
+                Material = LayerMaterial(layerPercent, layerSpan),
                 Integrity = 1f,
                 Light = layer < layerCount - PlanetTile.LightReach ? 0 : 1 - (layerCount - layer) / (float)PlanetTile.LightReach
             };
@@ -31,7 +33,7 @@ public class PlanetGenerator
         return (TileMaterial)(r.Next(0, 8));
     }
 
-    private static TileMaterial LayerMaterial(float layerPercent, float layerSpan)
+    public static TileMaterial LayerMaterial(float layerPercent, float layerSpan)
     {
         float value = r.NextSingle();
 

@@ -21,8 +21,6 @@ public partial class PlanetRenderer : Node2D
     private ImageTexture _dataTexture;
     private ShaderMaterial _mat;
 
-    public static float LayerRenderOffset => 0.75f + Game.I._data._innerGrowth / Game.I._data.TileSize;
-
     public override void _Ready()
     {
         Initialize(Game.I._data);
@@ -163,13 +161,25 @@ public partial class PlanetRenderer : Node2D
                 _dataImage.SetPixel(tile, layer,
                     new Color(
                         (int)tileData.Material / 255f,
-                        tileData.Destroyed ? 0 : Math.Max(0, tileData.Integrity),
+                        tileData.Regrowing ? 1f : Math.Max(0, tileData.Integrity / 2f),
                         tileData.Light
                     ));
             }
         }
 
         _dataTexture.Update(_dataImage);
+    }
+
+    private double _lastUpdate = 0;
+    public override void _PhysicsProcess(double delta)
+    {
+        _lastUpdate += delta;
+
+        if (_lastUpdate > 0.1f)
+        {
+            _lastUpdate = 0;
+            isDirty = true;
+        }
     }
 
     public override void _Process(double delta)
@@ -193,12 +203,32 @@ public partial class PlanetRenderer : Node2D
         }
 
 
-        _data._innerGrowth += PlanetData.GrowthSpeed * (float)delta;
-        if (_data._innerGrowth >= _data.TileSize)
+        float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
+        
+        if (_data._innerGrowth < 0 && newGrowth >= 0)
         {
-            _data._innerGrowth = 0;
-            _data.RegrowLayer();
+            _data.RegrowLayers();
             isDirty = true;
+        }
+
+        _data._innerGrowth = newGrowth;
+        
+        // growth finished, regrow a layer
+        if (_data._innerGrowth >= 1)
+        {
+            _data._innerGrowth = -Game.RandomAround(8, 2);
+            isLightDirty = true;
+            isDirty = true;
+            
+            // reset Growing state on tiles
+            foreach (PlanetTile[] layerData in _data.Layers)
+            {
+                for (int tile = 0; tile < layerData.Length; tile++)
+                {
+                    PlanetTile tileData = layerData[tile];
+                    tileData.Regrowing = false;
+                }
+            }
 
             foreach (Node node in Game.I.Pawns.GetChildren())
             {
@@ -229,10 +259,12 @@ public partial class PlanetRenderer : Node2D
 
         if (isDirty)
         {
+            _lastUpdate = 0;
             RefreshDataTexture();
             isDirty = false;
         }
 
-        _mat.SetShaderParameter("inner_growth", _data._innerGrowth);
+        float renderGrowth = Mathf.Clamp(_data._innerGrowth, 0, 1);
+        _mat.SetShaderParameter("inner_growth", renderGrowth);
     }
 }

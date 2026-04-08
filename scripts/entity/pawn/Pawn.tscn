@@ -14,6 +14,7 @@ visual = NodePath("AnimatedSprite2D")
 DebugText = NodePath("DebugText")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=93492618]
+position = Vector2(0, -12)
 sprite_frames = ExtResource("2_34q5g")
 animation = &"fly"
 

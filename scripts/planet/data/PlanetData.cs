@@ -11,8 +11,8 @@ public class PlanetData
     public readonly List<PlanetTile[]> Layers = new();
     public readonly List<PlanetChunk> _chunks = new();
 
-    public float _innerGrowth; // [0 ; TileSize]
-    public const float GrowthSpeed = 1f;
+    public float _innerGrowth; // [0 ; 1]
+    public const float GrowthSpeed = 1;
 
 
     public readonly int BaseTileCount;
@@ -181,7 +181,7 @@ public class PlanetData
 
                     // tile is reachable from above
                     PlanetTile above = Game.I._data.GetTileAtPolarCoords(x, y + 1);
-                    if (above != null && !above.Destroyed)
+                    if (above != null && !above.IsEmpty())
                         continue;
 
                     bestTile = tile;
@@ -208,7 +208,7 @@ public class PlanetData
         return false;
     }
 
-    public void RegrowLayer()
+    public void RegrowLayers()
     {
         // reset center layer
         for (int tile = 0; tile < Layers[0].Length; tile++)
@@ -217,21 +217,33 @@ public class PlanetData
             
             tileData.Integrity = 1f;
             tileData.Material = TileMaterial.Core;
-            tileData.Destroyed = false;
         }
         
-        // copy over from bottom layer
+        // renew blocks
+        float layerSpan = PlanetGenerator.LayerSpan(Layers.Count);
         for (int layer = Layers.Count - 1; layer > 0; layer--)
         {
-            for (int tile = 0; tile < Layers[layer].Length; tile++)
+            int belowLayer = layer - 1;
+            int layerSize = Layers[layer].Length;
+            bool splitLayer = Layers[layer].Length == Layers[belowLayer].Length;
+            float layerPercent = (float)layer / Layers.Count;
+            
+            for (int tile = 0; tile < layerSize; tile++)
             {
+                if (Game.RandomTo(Layers.Count + 5) < layer)
+                    continue;
+                
                 PlanetTile tileData = Layers[layer][tile];
+                PlanetTile below = splitLayer 
+                    ? Layers[belowLayer][tile]
+                    : Layers[belowLayer][tile / 2];
 
-                if (tileData.Destroyed || tileData.Material == TileMaterial.Unknown)
+                if (tileData.IsEmpty() && !below.IsEmpty())
                 {
-                    Layers[layer][tile].CopyOver(Layers[layer].Length == Layers[layer - 1].Length
-                        ? Layers[layer - 1][tile]
-                        : Layers[layer - 1][tile / 2]);
+                    tileData.Renew(PlanetGenerator.LayerMaterial(layerPercent, layerSpan));
+                    tileData.Integrity = below.Integrity;
+                    tileData.Regrowing = true;
+                    below.Integrity = 1f;
                 }
             }
         }

@@ -46,16 +46,14 @@ public partial class SurfaceEntity : OrbitEntity
 
         PlanetTile t = Game.I._data.GetTileAtPolarCoords(tile, layer);
 
-        return t == null || t.Destroyed || t.Material == TileMaterial.Unknown;
+        return t == null || t.IsEmpty();
     }
 
     public bool IsSolid(int tile, int layer)
     {
         PlanetTile t = Game.I._data.GetTileAtPolarCoords(tile, layer);
 
-        return t != null &&
-               !t.Destroyed &&
-               t.Material != TileMaterial.Unknown;
+        return t != null && !t.IsEmpty();
     }
 
 

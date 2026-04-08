@@ -20,13 +20,7 @@ public partial class DebugDraw : Node2D
     {
         foreach (var line in _lines.Values)
         {
-            Vector2 start = line.start;
-            Vector2 end = line.end;
-            
-            start.Y += PlanetRenderer.LayerRenderOffset;
-            end.Y += PlanetRenderer.LayerRenderOffset;
-
-            DrawLine(start, end, line.color, 1.0f);
+            DrawLine(line.start, line.end, line.color, 1.0f);
         }
     }
 

@@ -17,7 +17,7 @@ public static class PawnHauler
         if (pawn.State == PawnState.Idle)
         {
             PlanetTile below = Game.I._data.GetTileAtPolarCoords(pawn.PolarPos.X, gravityY);
-            if (below != null && !below.Destroyed)
+            if (below != null && !below.IsEmpty())
             {
                 GetNewPickupTarget(pawn);
                 pawn.State = PawnState.Move;

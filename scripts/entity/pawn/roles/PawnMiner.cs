@@ -3,6 +3,7 @@ using Incremental.scripts.director;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
+using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.entity.pawn.roles;
 
@@ -15,7 +16,7 @@ public static class PawnMiner
         if (pawn.State == PawnState.Idle)
         {
             PlanetTile below = Game.I._data.GetTileAtPolarCoords(pawn.PolarPos.X, gravityY);
-            if (below != null && !below.Destroyed)
+            if (below != null && !below.IsEmpty())
             {
                 GetNewMiningTarget(pawn);
             }
@@ -58,16 +59,19 @@ public static class PawnMiner
             {
                 PlanetTile below = pawn.GetTileBelow(gravityY);
 
-                if (below != null && !below.Destroyed)
+                if (below != null && !below.IsEmpty())
                 {
                     below.OwnerID = pawn.ID;
-                    below.Integrity -= d * 0.25f;
+                    below.Integrity -= d * 0.25f / below.Material.BreakTime();
 
                     if (below.Integrity < 0)
                     {
                         Item item = below.Destroy();
-                        Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY), 
-                            Mathf.FloorToInt(pawn.PolarPos.X), 1);
+
+                        PlanetRenderer.isLightDirty = true;
+                        // TODO fix :')
+                        // Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY), 
+                            // Mathf.FloorToInt(pawn.PolarPos.X), 1);
                         
                         if (item != Item.None)
                             Pickup.Instantiate(pawn.PolarPos, item);

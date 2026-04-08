@@ -11,7 +11,7 @@ public class PlanetTile
     
     public float Integrity = 1.0f;   // 1 = intact, 0 = destroyed
     public TileMaterial Material;
-    public bool Destroyed;
+    public bool Regrowing = false;
     public int OwnerID = -1;    // -1 = no owner, >=0 owned by pawn with that ID
 
     private float _light = 0;
@@ -23,9 +23,6 @@ public class PlanetTile
 
     public Item Destroy()
     {
-        if (IsEmpty())
-            return Item.None;
-
         PlanetRenderer.isDirty = true;
 
         Item item = Material switch
@@ -38,22 +35,20 @@ public class PlanetTile
         };
         
         Integrity = 0;
-        Destroyed = true;
         Material = TileMaterial.Unknown;
-        Light = 1;
+        Light = 0;
 
         return item;
     }
     
-    public void CopyOver(PlanetTile other)
+    public void Renew(TileMaterial material)
     {
-        Integrity = other.Integrity;
-        Material = other.Material;
-        Destroyed = other.Destroyed;
-        Light = other.Light;
-        
+        Material = material;
+        Light = 0;
+        Regrowing = true;
+        Integrity = 1;
         OwnerID = -1;
     }
     
-    public bool IsEmpty() => Destroyed || Material == TileMaterial.Unknown;
+    public bool IsEmpty() => Integrity <= 0f || Regrowing;
 }
