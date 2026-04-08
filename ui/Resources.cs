@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.entity.pawn.roles;
 
 public partial class Resources : BoxContainer
 {
@@ -55,6 +56,6 @@ public partial class Resources : BoxContainer
             }
         }
 
-        _penguinLabel.Text = Inventory.Roles.Values.Select(v => v.BoughtAmount).Sum().ToString();
+        _penguinLabel.Text = Inventory.Roles[Role.Unemployed].BoughtAmount.ToString();
     }
 }

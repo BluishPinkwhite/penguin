@@ -1,0 +1,321 @@
+[gd_scene format=3 uid="uid://cxb8oxcjcff"]
+
+[ext_resource type="Shader" uid="uid://bmpbmvv55kjre" path="res://vfx/shaders/silhouette.tres" id="1_3n6w4"]
+[ext_resource type="Texture2D" uid="uid://dygl1xq1ta1gt" path="res://sprites/buildings/mines/mines_windows_bg.png" id="1_s6h78"]
+[ext_resource type="Texture2D" uid="uid://bbv5hieo0u7ww" path="res://sprites/penguins/miner/penguin_miner_fly.png" id="3_04qfw"]
+[ext_resource type="Texture2D" uid="uid://1qgfl1i0hadm" path="res://sprites/buildings/mines/mines.png" id="3_04r1m"]
+[ext_resource type="Texture2D" uid="uid://d4k8654vqpdvj" path="res://sprites/penguins/miner/penguin_miner_walk.png" id="4_gh1eq"]
+[ext_resource type="Texture2D" uid="uid://b5k4g5gntd41w" path="res://sprites/penguins/miner/penguin_miner_mine.png" id="5_q1gne"]
+[ext_resource type="Texture2D" uid="uid://l6jd8m8k8ajd" path="res://sprites/penguins/collector/penguin_collector_fly.png" id="6_uh5uj"]
+[ext_resource type="Texture2D" uid="uid://b85y467mv33ke" path="res://sprites/penguins/collector/penguin_collector_walk.png" id="7_pide2"]
+[ext_resource type="SpriteFrames" uid="uid://ds0fhuqvkgk4i" path="res://vfx/fire/fire_big.tres" id="7_q1gne"]
+[ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="8_8exy0"]
+[ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="9_uh5uj"]
+[ext_resource type="Script" uid="uid://dbtsjecr2ocm7" path="res://scripts/ui/ShowOnHover.cs" id="12_r02yb"]
+[ext_resource type="PackedScene" uid="uid://cosjgh12ks5fj" path="res://ui/mines_panel.tscn" id="13_4xn3r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s6h78"]
+shader = ExtResource("1_3n6w4")
+shader_parameter/SilhouetteColor = Color(0.41215247, 0.41215247, 0.41215247, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_443l2"]
+atlas = ExtResource("6_uh5uj")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qte32"]
+atlas = ExtResource("6_uh5uj")
+region = Rect2(30, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5h8j"]
+atlas = ExtResource("6_uh5uj")
+region = Rect2(60, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfl4h"]
+atlas = ExtResource("7_pide2")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vkat"]
+atlas = ExtResource("7_pide2")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq8q1"]
+atlas = ExtResource("7_pide2")
+region = Rect2(30, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhja6"]
+atlas = ExtResource("7_pide2")
+region = Rect2(60, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lp30"]
+atlas = ExtResource("7_pide2")
+region = Rect2(90, 0, 30, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r02yb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_443l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qte32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5h8j")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfl4h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vkat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq8q1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhja6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lp30")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_valhp"]
+atlas = ExtResource("3_04qfw")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbog5"]
+atlas = ExtResource("3_04qfw")
+region = Rect2(30, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwco0"]
+atlas = ExtResource("3_04qfw")
+region = Rect2(60, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb2fq"]
+atlas = ExtResource("4_gh1eq")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a1vi"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fnam"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(30, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u538x"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(60, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaf4s"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(90, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_augqd"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(120, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijamg"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(150, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d67h"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(180, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vowc"]
+atlas = ExtResource("5_q1gne")
+region = Rect2(210, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn265"]
+atlas = ExtResource("4_gh1eq")
+region = Rect2(0, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqkip"]
+atlas = ExtResource("4_gh1eq")
+region = Rect2(30, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vceud"]
+atlas = ExtResource("4_gh1eq")
+region = Rect2(60, 0, 30, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbu2h"]
+atlas = ExtResource("4_gh1eq")
+region = Rect2(90, 0, 30, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8exy0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_valhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbog5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwco0")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb2fq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a1vi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fnam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u538x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaf4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_augqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijamg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d67h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vowc")
+}],
+"loop": true,
+"name": &"mine",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn265")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqkip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vceud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbu2h")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[node name="MinerStation" type="Node2D" unique_id=1421984110]
+
+[node name="WindowsBG" type="Sprite2D" parent="." unique_id=1270814919]
+texture = ExtResource("1_s6h78")
+
+[node name="Collector" type="AnimatedSprite2D" parent="." unique_id=705424275]
+material = SubResource("ShaderMaterial_s6h78")
+position = Vector2(6, -6)
+rotation = 3.1415927
+scale = Vector2(0.99013346, -1.2700728)
+sprite_frames = SubResource("SpriteFrames_r02yb")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="Miner" type="AnimatedSprite2D" parent="." unique_id=1976390937]
+material = SubResource("ShaderMaterial_s6h78")
+position = Vector2(-34, 11.999999)
+scale = Vector2(1.2238685, 1.3438675)
+sprite_frames = SubResource("SpriteFrames_8exy0")
+animation = &"mine"
+autoplay = "mine"
+
+[node name="MainSprite" type="Sprite2D" parent="." unique_id=902423842]
+texture = ExtResource("3_04r1m")
+
+[node name="BigMiddleFire" type="AnimatedSprite2D" parent="." unique_id=944163472]
+z_index = -1
+position = Vector2(-3, 69)
+rotation = -3.0848324
+scale = Vector2(0.7436903, 0.70316607)
+sprite_frames = ExtResource("7_q1gne")
+autoplay = "default"
+frame_progress = 0.63240105
+
+[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="." unique_id=1422513412]
+z_index = -1
+position = Vector2(-50.999992, 71.00001)
+rotation = -3.0077937
+scale = Vector2(0.75914913, 0.7179046)
+sprite_frames = ExtResource("8_8exy0")
+autoplay = "default"
+frame_progress = 0.09808198
+
+[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="." unique_id=957004589]
+z_index = -1
+position = Vector2(46, 71)
+rotation = 3.0137565
+scale = Vector2(0.712416, 0.712416)
+sprite_frames = ExtResource("8_8exy0")
+autoplay = "default"
+frame_progress = 0.9428698
+
+[node name="SmallLeftFire" type="AnimatedSprite2D" parent="." unique_id=474877720]
+z_index = -1
+position = Vector2(-86, 71)
+rotation = -2.7951531
+scale = Vector2(0.8041431, 0.8041431)
+sprite_frames = ExtResource("9_uh5uj")
+autoplay = "default"
+frame_progress = 0.12617896
+
+[node name="SmallRightFire" type="AnimatedSprite2D" parent="." unique_id=648727063]
+z_index = -1
+position = Vector2(82, 68.99999)
+rotation = 2.8008263
+scale = Vector2(0.7143937, 0.7143937)
+sprite_frames = ExtResource("9_uh5uj")
+autoplay = "default"
+frame_progress = 0.8978124
+
+[node name="PanelHoverHitbox" type="Control" parent="." unique_id=1821348728 node_paths=PackedStringArray("_objectToShow")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.5
+offset_top = -224.0
+offset_right = 178.5
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_r02yb")
+_objectToShow = NodePath("../MinesPanel")
+
+[node name="MinesPanel" parent="." unique_id=895867581 instance=ExtResource("13_4xn3r")]
+offset_left = -175.0
+offset_top = -208.0
+offset_right = 290.0
+offset_bottom = -83.0
+scale = Vector2(0.75, 0.75)

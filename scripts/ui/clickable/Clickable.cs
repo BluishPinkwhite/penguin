@@ -41,12 +41,24 @@ public partial class Clickable : Node
     {
         if (Type == ClickType.BuyRole)
         {
-            if (Inventory.Roles.TryGetValue((Role)Param, out RoleData roleData) && 
-                Inventory.Items.GetValueOrDefault(roleData.CostMaterial, 0) >= roleData.NewCost)
+            if (Inventory.Roles.TryGetValue((Role)Param, out RoleData roleData))
             {
-                roleData.BoughtAmount++;
-                Inventory.Items[roleData.CostMaterial] -= (int)roleData.NewCost;
-                roleData.NewCost *= 1.2;
+                if (roleData.CostMaterial.IsSpawnable() &&
+                    Inventory.Items.GetValueOrDefault(roleData.CostMaterial, 0) >= roleData.NewCost)
+                {
+                    roleData.BoughtAmount++;
+                    Inventory.Items[roleData.CostMaterial] -= (int)roleData.NewCost;
+                    roleData.NewCost *= 1.2;
+                }
+                else
+                {
+                    if (roleData.NewCost <= Inventory.Roles[roleData.RoleCost].BoughtAmount)
+                    {
+                        Inventory.Roles[roleData.RoleCost].BoughtAmount -= (int)roleData.NewCost;
+                        roleData.BoughtAmount++;
+                    }
+                }
+
                 Game.I.Pawns.UpdatePawnCounts();
             }
         }

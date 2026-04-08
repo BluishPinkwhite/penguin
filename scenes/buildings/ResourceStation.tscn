@@ -6,6 +6,8 @@
 [ext_resource type="SpriteFrames" uid="uid://ds0fhuqvkgk4i" path="res://vfx/fire/fire_big.tres" id="3_xswn1"]
 [ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="4_3pkcb"]
 [ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="5_e57vn"]
+[ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/control_panel.tscn" id="7_s6ffd"]
+[ext_resource type="Script" uid="uid://dbtsjecr2ocm7" path="res://scripts/ui/ShowOnHover.cs" id="7_vvxl7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3pkcb"]
 shader = ExtResource("2_xswn1")
@@ -128,3 +130,27 @@ scale = Vector2(0.93700004, 0.93700004)
 sprite_frames = ExtResource("5_e57vn")
 autoplay = "default"
 frame_progress = 0.8978124
+
+[node name="ControlPanel" parent="." unique_id=895867581 instance=ExtResource("7_s6ffd")]
+offset_left = -173.0
+offset_top = -210.0
+offset_right = 292.0
+offset_bottom = -99.0
+scale = Vector2(0.75, 0.75)
+
+[node name="PanelHoverHitbox" type="Control" parent="." unique_id=2062287156 node_paths=PackedStringArray("_objectToShow")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.5
+offset_top = -224.0
+offset_right = 178.5
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_vvxl7")
+_objectToShow = NodePath("../ControlPanel")

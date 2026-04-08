@@ -12,8 +12,9 @@ public partial class PawnManager : Node2D
     
     public override void _Ready()
     {
-        Inventory.Roles[Role.Miner] = new RoleData(8, 10, Item.Dirt);
-        Inventory.Roles[Role.Hauler] = new RoleData(5, 7, Item.Dirt);
+        Inventory.Roles[Role.Unemployed] = new RoleData(0, 2, Item.Dirt);
+        Inventory.Roles[Role.Miner] = new RoleData(8, 1, Role.Unemployed);
+        Inventory.Roles[Role.Hauler] = new RoleData(5, 1, Role.Unemployed);
         
         UpdatePawnCounts();
     }

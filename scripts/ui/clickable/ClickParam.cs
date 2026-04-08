@@ -4,6 +4,7 @@ namespace Incremental.scripts.ui.clickable;
 
 public enum ClickParam
 {
+    BuyRole_Penguin = Role.Unemployed,
     BuyRole_Miner = Role.Miner,
     BuyRole_Hauler = Role.Hauler,
     

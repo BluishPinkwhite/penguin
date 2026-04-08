@@ -30,8 +30,11 @@ public partial class Purchasable : Clickable
     {
         if (Inventory.Roles.TryGetValue((Role)Param, out RoleData roleData))
         {
-            // TODO set icon
-            
+            int index = roleData.CostMaterial.IsSpawnable() ? Math.Abs((int)roleData.CostMaterial) : Math.Abs((int)roleData.RoleCost);
+            ((AtlasTexture)_costIcon.Texture).Region = ((AtlasTexture)_costIcon.Texture).Region with
+            {
+                Position = new Vector2(32 * (index % 8), 32 * (int)(index / 4))
+            };
             _costLabel.Text = ((int)Math.Ceiling(roleData.NewCost)).ToString();
             _purchasableNameLabel.Text = Param.ToString().Split("_")[^1];
         }
