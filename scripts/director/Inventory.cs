@@ -7,7 +7,7 @@ namespace Incremental.scripts.director;
 public static class Inventory
 {
     public static readonly Dictionary<Item, int> Items = new();
-    public static Dictionary<Role, RoleData> Roles = new();
+    public static readonly Dictionary<Role, RoleData> Roles = new();
 
     public static int GetItemCount(Item id)
     {

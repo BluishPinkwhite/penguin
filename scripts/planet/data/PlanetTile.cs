@@ -7,6 +7,7 @@ namespace Incremental.scripts.planet.data;
 public class PlanetTile
 {
     public const int LightReach = 8;
+    public const float LightMax = 1f + 1f/LightReach;
     
     
     public float Integrity = 1.0f;   // 1 = intact, 0 = destroyed
@@ -18,7 +19,7 @@ public class PlanetTile
     public float Light
     {
         get => _light;
-        set => _light = Math.Clamp(value, 0, 1f + 1f / LightReach);
+        set => _light = Math.Clamp(value, 0, LightMax);
     }
 
     public Item Destroy()

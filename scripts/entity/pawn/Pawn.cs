@@ -13,14 +13,12 @@ public partial class Pawn : SurfaceEntity
     [Export] private SpriteFrames _spriteFramesHauler;
     [Export] private AnimatedSprite2D visual;
 
+    private bool _animationDirty = false;
+    
     public PawnState State
     {
         get => _state;
-        set
-        {
-            _state = value;
-            UpdateAnimationState(_role, _state, _flying, _isOnCooldown);
-        }
+        set { _state = value; _animationDirty = true; }
     }
 
     private bool _flying = false;
@@ -28,11 +26,7 @@ public partial class Pawn : SurfaceEntity
     public bool Flying
     {
         get => _flying;
-        set
-        {
-            _flying = value;
-            UpdateAnimationState(_role, _state, _flying, _isOnCooldown);
-        }
+        set { _flying = value; _animationDirty = true; }
     }
 
     private Role _role = Role.Unemployed;
@@ -40,11 +34,7 @@ public partial class Pawn : SurfaceEntity
     public Role Role
     {
         get => _role;
-        set
-        {
-            _role = value;
-            UpdateAnimationState(_role, _state, _flying, _isOnCooldown);
-        }
+        set { _role = value; _animationDirty = true; }
     }
 
     private bool _isOnCooldown = false;
@@ -96,12 +86,11 @@ public partial class Pawn : SurfaceEntity
         if (Cooldown > 0)
         {
             Cooldown -= d;
-            // Cooldown = 0;
 
             if (!_isOnCooldown)
             {
                 _isOnCooldown = true;
-                UpdateAnimationState(Role, State, Flying, true);
+                _animationDirty = true;
             }
         }
         else
@@ -109,7 +98,7 @@ public partial class Pawn : SurfaceEntity
             if (_isOnCooldown)
             {
                 _isOnCooldown = false;
-                UpdateAnimationState(Role, State, Flying, false);
+                _animationDirty = true;
             }
 
             switch (Role)
@@ -131,6 +120,12 @@ public partial class Pawn : SurfaceEntity
 
         DoLayerChecks();
         ApplyPolarTransform();
+
+        if (_animationDirty)
+        {
+            _animationDirty = false;
+            UpdateAnimationState(Role, State, Flying, _isOnCooldown);
+        }
     }
 
     public new float GetHalfWidthTiles(int layer)
@@ -216,13 +211,9 @@ public partial class Pawn : SurfaceEntity
         float dir = CircularDelta(PolarPos.X, Target.X, _currSize);
 
         if (dir > 0)
-        {
             visual.FlipH = false;
-        }
         else if (dir < 0)
-        {
             visual.FlipH = true;
-        }
         
         if (role == Role.Miner)
         {

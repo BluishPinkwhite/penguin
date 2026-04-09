@@ -52,7 +52,7 @@ public partial class Clickable : Node
                 }
                 else
                 {
-                    if (roleData.NewCost <= Inventory.Roles[roleData.RoleCost].BoughtAmount)
+                    if (roleData.NewCost <= Inventory.GetRoleCount(roleData.RoleCost))
                     {
                         Inventory.Roles[roleData.RoleCost].BoughtAmount -= (int)roleData.NewCost;
                         roleData.BoughtAmount++;

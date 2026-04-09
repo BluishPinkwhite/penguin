@@ -68,10 +68,8 @@ public static class PawnMiner
                     {
                         Item item = below.Destroy();
 
-                        PlanetRenderer.isLightDirty = true;
-                        // TODO fix :')
-                        // Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY), 
-                            // Mathf.FloorToInt(pawn.PolarPos.X), 1);
+                        Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY), 
+                            Mathf.FloorToInt(pawn.PolarPos.X), PlanetTile.LightMax);
                         
                         if (item != Item.None)
                             Pickup.Instantiate(pawn.PolarPos, item);
@@ -82,7 +80,7 @@ public static class PawnMiner
                         {
                             pawn.Counter = 0;
                             pawn.State = PawnState.ReturnH;
-                            pawn.Target = new Vector2(ResourceStation.I.Below.X, ResourceStation.I.Below.Y);
+                            pawn.Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
                             pawn.SetCooldown(1);
                         }
                         else

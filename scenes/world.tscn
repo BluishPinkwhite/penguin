@@ -43,10 +43,11 @@ script = ExtResource("4_qfnet")
 [node name="Stations" type="Node2D" parent="." unique_id=1058458184]
 
 [node name="ResourceStation" parent="Stations" unique_id=1931811540 instance=ExtResource("5_71j4m")]
+position = Vector2(-47, -209)
+PolarPos = Vector2(8, -11)
 
-[node name="MinerStation" parent="Stations/ResourceStation" unique_id=1421984110 instance=ExtResource("11_xo05s")]
-position = Vector2(367.99997, 25.999996)
-rotation = 0.15920247
+[node name="MinerStation" parent="Stations" unique_id=1421984110 instance=ExtResource("11_xo05s")]
+position = Vector2(366, -198)
 
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
 

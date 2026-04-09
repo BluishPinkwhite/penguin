@@ -63,7 +63,7 @@ public static class PlanetDataLight
 
                 if (tile.IsEmpty())
                 {
-                    tile.Light = 1.0f + lossPerStep;
+                    tile.Light = PlanetTile.LightMax;
                     queue.Enqueue((l, t));
                 }
                 else

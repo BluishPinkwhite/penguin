@@ -6,12 +6,17 @@ namespace Incremental.scripts.entity;
 
 public partial class OrbitEntity : Node2D
 {
-    public Vector2 PolarPos; // X = tile, Y = layer
+    [Export] public Vector2 PolarPos; // X = tile, Y = layer
     public Vector2 PrevPolarPos;
     public Vector2 Target;
 
     public override void _Ready()
     {
+        if (PolarPos.Y < 0)
+        {
+            PolarPos.Y = -PolarPos.Y + Game.I._data.Layers.Count; 
+        }
+        
         ApplyPolarTransform();
     }
 

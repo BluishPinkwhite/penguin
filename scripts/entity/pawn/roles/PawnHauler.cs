@@ -62,7 +62,7 @@ public static class PawnHauler
                 pickup.QueueFree();
                 
                 pawn.State = PawnState.ReturnH;
-                pawn.Target = new Vector2(ResourceStation.I.Below.X, ResourceStation.I.Below.Y);
+                pawn.Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
             }
             else if (pickup != null)
             {

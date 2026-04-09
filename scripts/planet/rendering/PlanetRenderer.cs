@@ -198,7 +198,7 @@ public partial class PlanetRenderer : Node2D
                 if (item != Item.None)
                     Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), item);
 
-                _data.PropagateLight(layer, tile, 1);
+                _data.PropagateLight(layer, tile, PlanetTile.LightMax);
             }
         }
 
