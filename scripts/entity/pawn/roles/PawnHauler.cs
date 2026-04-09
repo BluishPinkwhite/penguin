@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.entity.item;
@@ -8,94 +7,95 @@ using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.entity.pawn.roles;
 
-public static class PawnHauler
+public partial class PawnHauler : Pawn
 {
-    public static void DoBehaviourHauler(this Pawn pawn, float d)
+    protected override void DoBehaviour(float d)
     {
-        float gravityY = pawn.PolarPos.Y - d * SurfaceEntity.Gravity;
+        float gravityY = PolarPos.Y - d * Gravity;
 
-        if (pawn.State == PawnState.Idle)
+        if (State == PawnState.Idle)
         {
-            PlanetTile below = Game.I._data.GetTileAtPolarCoords(pawn.PolarPos.X, gravityY);
+            // wait till the pawn is on ground
+            PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
             if (below != null && !below.IsEmpty())
             {
-                GetNewPickupTarget(pawn);
-                pawn.State = PawnState.Move;
+                GetNewPickupTarget();
+                State = PawnState.Move;
             }
             else
             {
-                pawn.SetCooldown(2);
+                SetCooldown(2);
             }
         }
-        else if (pawn.State is PawnState.Move or PawnState.ReturnH)
+        else if (State is PawnState.Move or PawnState.ReturnH)
         {
-            if (pawn.WalkToTarget(d))
+            if (WalkToTarget(d))
             {
-                if (pawn.State == PawnState.Move)
+                if (State == PawnState.Move)
                 {
-                    pawn.State = PawnState.Action;
-                    pawn.SetCooldown(1);
+                    State = PawnState.Action;
+                    SetCooldown(1);
                 }
-                else if (pawn.State == PawnState.ReturnH)
+                else if (State == PawnState.ReturnH)
                 {
-                    pawn.State = PawnState.ReturnV;
-                    pawn.Target = ResourceStation.I.PolarPos;
-                    pawn.SetCooldown(0.35f);
+                    State = PawnState.ReturnV;
+                    Target = ResourceStation.I.PolarPos;
+                    SetCooldown(0.35f);
                 }
             }
         }
-        else if (pawn.State == PawnState.ReturnV)
+        else if (State == PawnState.ReturnV)
         {
-            if (pawn.FlyToTarget(d))
+            if (FlyToTarget(d))
             {
-                pawn.State = PawnState.DropOff;
-                pawn.SetCooldown(2.5f);
+                State = PawnState.DropOff;
+                SetCooldown(2.5f);
             }
         }
-        else if (pawn.State == PawnState.Action)
+        else if (State == PawnState.Action)
         {
-            Pickup pickup = GetNewPickupTarget(pawn);
-            if (pickup != null && pickup.PolarPos.DistanceSquaredTo(pawn.PolarPos) < 0.2f)
+            Pickup pickup = GetNewPickupTarget();
+            if (pickup != null && pickup.PolarPos.DistanceSquaredTo(PolarPos) < 0.2f)
             {
-                pawn.InventoryID = pickup.Item;
-                pawn.InventoryCount += 1;
+                InventoryID = pickup.Item;
+                InventoryCount += 1;
                 pickup.QueueFree();
                 
-                pawn.State = PawnState.ReturnH;
-                pawn.Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
+                State = PawnState.ReturnH;
+                Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
             }
             else if (pickup != null)
             {
-                pawn.Target = pickup.PolarPos;
-                pawn.State = PawnState.Move;
+                Target = pickup.PolarPos;
+                State = PawnState.Move;
             }
             else
             {
-                pawn.State = PawnState.Idle;
+                State = PawnState.Idle;
             }
 
-            pawn.SetCooldown(1);
+            SetCooldown(1);
         }
-        else if (pawn.State == PawnState.DropOff)
+        else if (State == PawnState.DropOff)
         {
-            if (pawn.InventoryID != Item.None)
+            if (InventoryID != Item.None)
             {
-                if (!Inventory.Items.TryAdd(pawn.InventoryID, pawn.InventoryCount))
+                if (!Inventory.Items.TryAdd(InventoryID, InventoryCount))
                 {
-                    Inventory.Items[pawn.InventoryID] += pawn.InventoryCount;
+                    Inventory.Items[InventoryID] += InventoryCount;
                 }
                 Resources.I.UpdateVisuals();
 
-                pawn.InventoryID = Item.None;
-                pawn.InventoryCount = 0;
+                InventoryID = Item.None;
+                InventoryCount = 0;
             }
             
-            pawn.State = PawnState.Idle;
-            pawn.SetCooldown(1);
+            State = PawnState.Idle;
+            SetCooldown(1);
         }
     }
 
-    private static Pickup GetNewPickupTarget(Pawn pawn)
+    private Pickup GetNewPickupTarget()
     {
         Pickup closest = null;
         float minDist = Single.PositiveInfinity;
@@ -104,7 +104,7 @@ public static class PawnHauler
         {
             Pickup child = (Pickup)node;
 
-            float dist = child.PolarPos.DistanceSquaredTo(pawn.PolarPos);
+            float dist = child.PolarPos.DistanceSquaredTo(PolarPos);
             if (dist < minDist)
             {
                 minDist = dist;
@@ -113,7 +113,23 @@ public static class PawnHauler
         }
 
         if (closest != null)
-            pawn.Target = closest.PolarPos;
+            Target = closest.PolarPos;
         return closest;
+    }
+
+    protected override void UpdateAnimationState()
+    {
+        if (_isOnCooldown || State == PawnState.Idle)
+        {
+            visual.Animation = "idle";
+        }
+        else if (State is PawnState.Move or PawnState.ReturnH)
+        {
+            visual.Animation = Flying ? "fly" : "walk";
+        }
+        else if (State == PawnState.ReturnV)
+        {
+            visual.Animation = "fly";
+        }
     }
 }

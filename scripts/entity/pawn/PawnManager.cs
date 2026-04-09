@@ -10,6 +10,9 @@ public partial class PawnManager : Node2D
 {
     private Dictionary<Role, int> _spawnedRoles = new();
     
+    [Export] PackedScene[] PawnScenes = new PackedScene[2];
+    
+    
     public override void _Ready()
     {
         Inventory.Roles[Role.Unemployed] = new RoleData(0, 2, Item.Dirt);
@@ -33,7 +36,14 @@ public partial class PawnManager : Node2D
             {
                 for (; i < pair.Value.BoughtAmount; i++)
                 {
-                    Pawn p = Game.I.PawnScene.Instantiate<Pawn>();
+                    int index = -1;
+                    if (pair.Key == Role.Miner) index = 0;
+                    else if (pair.Key == Role.Hauler) index = 1;
+
+                    if (index == -1)
+                        break;
+                    
+                    Pawn p = PawnScenes[index].Instantiate<Pawn>();
                     p.Role = pair.Key;
                     AddChild(p);
                 }

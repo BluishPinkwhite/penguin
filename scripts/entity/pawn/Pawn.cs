@@ -5,57 +5,64 @@ using Incremental.scripts.entity.pawn.roles;
 
 namespace Incremental.scripts.entity.pawn;
 
-public partial class Pawn : SurfaceEntity
+public abstract partial class Pawn : SurfaceEntity
 {
     private PawnState _state = PawnState.Idle;
 
-    [Export] private SpriteFrames _spriteFramesMiner;
-    [Export] private SpriteFrames _spriteFramesHauler;
-    [Export] private AnimatedSprite2D visual;
-
-    private bool _animationDirty = false;
-    
-    public PawnState State
-    {
-        get => _state;
-        set { _state = value; _animationDirty = true; }
-    }
+    [Export] protected AnimatedSprite2D visual;
+    [Export] public Label DebugText;
 
     private bool _flying = false;
-
-    public bool Flying
-    {
-        get => _flying;
-        set { _flying = value; _animationDirty = true; }
-    }
-
+    private bool _animationDirty = false;
     private Role _role = Role.Unemployed;
-
-    public Role Role
-    {
-        get => _role;
-        set { _role = value; _animationDirty = true; }
-    }
-
-    private bool _isOnCooldown = false;
-
-
-    public float Cooldown = 0;
-    public int Counter = 0;
+    protected bool _isOnCooldown = false;
+    
+    protected float Cooldown = 0;
+    protected int Counter = 0;
 
     public Item InventoryID = Item.None;
     public int InventoryCount = 0;
 
-    [Export] public Label DebugText;
+    protected const float PawnAngularWidth = 1.45f;
+    protected const float WalkSpeed = 6.5f;
+    protected const float FlySpeed = Gravity * 1.2f;
 
+    private static int _nextID = 0;
 
-    public const float PawnAngularWidth = 1.45f;
-    public const float PawnHeight = PawnAngularWidth;
-    public const float WalkSpeed = 6.5f;
-    public const float FlySpeed = Gravity * 1.2f;
 
     public int ID { private set; get; }
-    private static int _nextID = 0;
+
+    public Role Role
+    {
+        get => _role;
+        set
+        {
+            _role = value;
+            _animationDirty = true;
+        }
+    }
+
+    public PawnState State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            _animationDirty = true;
+        }
+    }
+
+    public bool Flying
+    {
+        get => _flying;
+        set
+        {
+            _flying = value;
+            _animationDirty = true;
+        }
+    }
+
+    /////////////////////////
 
 
     public override void _Ready()
@@ -77,10 +84,8 @@ public partial class Pawn : SurfaceEntity
         // debug
         DebugText.Text = Cooldown > 0 ? $"<{Cooldown:F1}>" : $"[{State}]";
 
-
         if ((int)State > 0)
             ApplyGravity(d);
-
 
         // behaviour
         if (Cooldown > 0)
@@ -100,19 +105,8 @@ public partial class Pawn : SurfaceEntity
                 _isOnCooldown = false;
                 _animationDirty = true;
             }
-
-            switch (Role)
-            {
-                case Role.Miner:
-                    this.DoBehaviourMiner(d);
-                    break;
-                case Role.Hauler:
-                    this.DoBehaviourHauler(d);
-                    break;
-                default:
-                    QueueFree();
-                    break;
-            }
+            
+            DoBehaviour(d);
         }
 
         Game.I.Debug.SetLine(ID, Position, Game.I._data.PolarToWorld(Target),
@@ -124,11 +118,11 @@ public partial class Pawn : SurfaceEntity
         if (_animationDirty)
         {
             _animationDirty = false;
-            UpdateAnimationState(Role, State, Flying, _isOnCooldown);
+            LoadAnimationState();
         }
     }
 
-    public new float GetHalfWidthTiles(int layer)
+    private new float GetHalfWidthTiles(int layer)
     {
         int size = Game.I._data.GetLayerSize(layer);
         return PawnAngularWidth / size;
@@ -140,7 +134,7 @@ public partial class Pawn : SurfaceEntity
         Cooldown = Game.RandomAround(value, value * 0.25f);
     }
 
-    public bool WalkToTarget(float d)
+    protected bool WalkToTarget(float d)
     {
         int targetLayer = Mathf.FloorToInt(Target.Y);
         int targetSize = Game.I._data.GetLayerSize(targetLayer);
@@ -188,10 +182,10 @@ public partial class Pawn : SurfaceEntity
         return reachedTarget;
     }
 
-    public bool FlyToTarget(float d)
+    protected bool FlyToTarget(float d)
     {
         float dy = Target.Y - PolarPos.Y;
-        if (dy * dy > 0.1f || Mathf.FloorToInt(Target.Y) != Mathf.FloorToInt(PolarPos.Y))
+        if (dy * dy > 0.05f)
         {
             // vertical movement
             float stepY = Mathf.Clamp(dy * 5, -1f, 1f) * d * FlySpeed;
@@ -206,7 +200,7 @@ public partial class Pawn : SurfaceEntity
         return true;
     }
 
-    public void UpdateAnimationState(Role role, PawnState state, bool flying, bool onCooldown)
+    public void LoadAnimationState()
     {
         float dir = CircularDelta(PolarPos.X, Target.X, _currSize);
 
@@ -215,58 +209,11 @@ public partial class Pawn : SurfaceEntity
         else if (dir < 0)
             visual.FlipH = true;
         
-        if (role == Role.Miner)
-        {
-            visual.SetSpriteFrames(_spriteFramesMiner);
-
-            if (onCooldown || state == PawnState.Idle)
-            {
-                visual.Animation = "idle";
-            }
-            else if (state == PawnState.Move || state == PawnState.ReturnH)
-            {
-                if (flying)
-                {
-                    visual.Animation = "fly";
-                }
-                else
-                {
-                    visual.Animation = "walk";
-                }
-            }
-            else if (state == PawnState.ReturnV)
-            {
-                visual.Animation = "fly";
-            }
-            else if (state == PawnState.Action)
-            {
-                visual.Animation = "mine";
-            }
-        }
-        else if (role == Role.Hauler)
-        {
-            visual.SetSpriteFrames(_spriteFramesHauler);
-            if (onCooldown || state == PawnState.Idle)
-            {
-                visual.Animation = "idle";
-            }
-            else if (state == PawnState.Move || state == PawnState.ReturnH)
-            {
-                if (flying)
-                {
-                    visual.Animation = "fly";
-                }
-                else
-                {
-                    visual.Animation = "walk";
-                }
-            }
-            else if (state == PawnState.ReturnV)
-            {
-                visual.Animation = "fly";
-            }
-        }
+        UpdateAnimationState();
 
         visual.Play();
     }
+
+    protected abstract void DoBehaviour(float d);
+    protected abstract void UpdateAnimationState();
 }

@@ -140,14 +140,14 @@ public class PlanetData
         return (x % size + size) % size;
     }
 
-    public bool NextMiningTarget(int pawnID, Vector2 fromPolar, out Vector2 target)
+    public bool NextMiningTarget(int pawnID, Vector2 fromPolar, out Vector2 target, out PlanetTile bestTile)
     {
         int centerX = Mathf.FloorToInt(fromPolar.X);
         int centerY = Mathf.FloorToInt(fromPolar.Y);
 
         int maxRadius = Game.I._data.Layers.Count;
 
-        PlanetTile bestTile = null;
+        bestTile = null;
         int bestX = 0;
         int bestY = 0;
 
@@ -199,12 +199,12 @@ public class PlanetData
             if (foundAny)
             {
                 target = new Vector2(bestX, bestY);
-                bestTile.OwnerID = pawnID;
                 return true;
             }
         }
 
         target = Vector2.Zero;
+        bestTile = null;
         return false;
     }
 

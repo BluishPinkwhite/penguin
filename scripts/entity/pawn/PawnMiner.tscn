@@ -1,15 +1,13 @@
 [gd_scene format=3 uid="uid://b1c6jdhlshvfr"]
 
-[ext_resource type="Script" uid="uid://b5pn8gvwce3lt" path="res://scripts/entity/pawn/Pawn.cs" id="1_os6aw"]
+[ext_resource type="Script" uid="uid://dcpnodrsh8xmn" path="res://scripts/entity/pawn/roles/PawnMiner.cs" id="1_tg51s"]
 [ext_resource type="SpriteFrames" uid="uid://bn7c1uhy56u7v" path="res://sprites/penguins/miner/penguin_miner.tres" id="2_34q5g"]
-[ext_resource type="SpriteFrames" uid="uid://cdaooprmg7vmm" path="res://sprites/penguins/collector/penguin_collector.tres" id="3_6yw2w"]
 
-[node name="Pawn" type="Node2D" unique_id=1689460540 node_paths=PackedStringArray("visual", "DebugText")]
+[node name="PawnMiner" type="Node2D" unique_id=1689460540 node_paths=PackedStringArray("visual", "DebugText")]
 z_index = 1000
 scale = Vector2(1.00411, 1)
-script = ExtResource("1_os6aw")
-_spriteFramesMiner = ExtResource("2_34q5g")
-_spriteFramesHauler = ExtResource("3_6yw2w")
+script = ExtResource("1_tg51s")
+_spriteFrames = ExtResource("2_34q5g")
 visual = NodePath("AnimatedSprite2D")
 DebugText = NodePath("DebugText")
 
@@ -21,10 +19,10 @@ animation = &"fly"
 [node name="DebugText" type="Label" parent="." unique_id=740748936]
 visible = false
 z_index = 1100
-offset_left = -7.0
-offset_top = -15.0
-offset_right = 65.0
-offset_bottom = 19.0
+offset_left = -6.971348
+offset_top = -27.0
+offset_right = 65.028656
+offset_bottom = 7.0
 scale = Vector2(0.2, 0.2)
 theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1

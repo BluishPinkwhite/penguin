@@ -17,7 +17,6 @@ public partial class Game : Node2D
     [Export] public Node2D Pickups;
     [Export] public DebugDraw Debug;
 
-    [Export] public PackedScene PawnScene;
     [Export] public PackedScene PickupScene;
 
     public Game()

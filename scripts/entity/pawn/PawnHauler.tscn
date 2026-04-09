@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://tjqf5g3prke0"]
+
+[ext_resource type="SpriteFrames" uid="uid://cdaooprmg7vmm" path="res://sprites/penguins/collector/penguin_collector.tres" id="1_l7i84"]
+[ext_resource type="Script" uid="uid://bcdptxltbwmil" path="res://scripts/entity/pawn/roles/PawnHauler.cs" id="1_y7r3o"]
+
+[node name="PawnHauler" type="Node2D" unique_id=2130400945 node_paths=PackedStringArray("visual", "DebugText")]
+z_index = 1000
+script = ExtResource("1_y7r3o")
+visual = NodePath("AnimatedSprite2D")
+DebugText = NodePath("DebugText")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=704517480]
+position = Vector2(0, -12)
+sprite_frames = ExtResource("1_l7i84")
+animation = &"idle"
+
+[node name="DebugText" type="Label" parent="." unique_id=955237142]
+visible = false
+z_index = 1100
+offset_left = -7.0
+offset_top = -27.0
+offset_right = 65.0
+offset_bottom = 7.0
+scale = Vector2(0.2, 0.2)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 2
+justification_flags = 128

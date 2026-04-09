@@ -7,105 +7,135 @@ using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.entity.pawn.roles;
 
-public static class PawnMiner
+public partial class PawnMiner : Pawn
 {
-    public static void DoBehaviourMiner(this Pawn pawn, float d)
+    private PlanetTile _targetTile;
+    private Vector2I _targetCoords;
+
+    protected override void DoBehaviour(float d)
     {
-        float gravityY = pawn.PolarPos.Y - d * SurfaceEntity.Gravity;
-        
-        if (pawn.State == PawnState.Idle)
+        float gravityY = PolarPos.Y - d * Gravity;
+
+        if (State == PawnState.Idle)
         {
-            PlanetTile below = Game.I._data.GetTileAtPolarCoords(pawn.PolarPos.X, gravityY);
-            if (below != null && !below.IsEmpty())
+            // wait till the pawn is on ground
+            PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
+            if (below != null && !below.IsEmpty() && GetNewMiningTarget())
             {
-                GetNewMiningTarget(pawn);
+                Target = new Vector2(_targetCoords.X + 0.5f, _targetCoords.Y + 1.25f);
+                State = PawnState.Move;
+                SetCooldown(1);
             }
         }
-        else if (pawn.State is PawnState.Move or PawnState.ReturnH)
+        else if (State is PawnState.Move or PawnState.ReturnH)
         {
-            if (pawn.WalkToTarget(d))
+            if (WalkToTarget(d))
             {
-                if (pawn.State == PawnState.Move)
+                if (State == PawnState.Move)
                 {
-                    pawn.State = PawnState.Action;
-                    pawn.SetCooldown(1);
+                    State = PawnState.Action;
+                    SetCooldown(1);
                 }
-                else if (pawn.State == PawnState.ReturnH)
+                else if (State == PawnState.ReturnH)
                 {
-                    pawn.State = PawnState.ReturnV;
-                    pawn.Target = ResourceStation.I.PolarPos;
-                    pawn.SetCooldown(0.35f);
+                    State = PawnState.ReturnV;
+                    Target = ResourceStation.I.PolarPos;
+                    SetCooldown(0.35f);
                 }
             }
         }
-        else if (pawn.State == PawnState.ReturnV)
+        else if (State == PawnState.ReturnV)
         {
-            if (pawn.FlyToTarget(d))
+            if (FlyToTarget(d))
             {
-                pawn.State = PawnState.DropOff;
-                pawn.SetCooldown(2.5f);
+                State = PawnState.DropOff;
+                SetCooldown(2.5f);
             }
         }
-        else if (pawn.State == PawnState.Action)
+        else if (State == PawnState.Action)
         {
             // find a new tile when this tile was broken by someone else
-            if (Mathf.FloorToInt(pawn.Target.X) != Mathf.FloorToInt(pawn.PolarPos.X) ||
-                Mathf.FloorToInt(pawn.Target.Y) != Mathf.FloorToInt(pawn.PolarPos.Y))
+            if (Mathf.FloorToInt(Target.X) != Mathf.FloorToInt(PolarPos.X) ||
+                Mathf.FloorToInt(Target.Y) != Mathf.FloorToInt(PolarPos.Y))
             {
-                pawn.State = PawnState.Idle;
-                Game.I._data.Layers[Mathf.FloorToInt(pawn.Target.Y - 1.25f)][Mathf.FloorToInt(pawn.Target.X)].OwnerID = -1;
+                State = PawnState.Idle;
+
+                if (_targetTile.OwnerID == ID)
+                    _targetTile.OwnerID = -1;
             }
             else
             {
-                PlanetTile below = pawn.GetTileBelow(gravityY);
-
-                if (below != null && !below.IsEmpty())
+                if (_targetTile != null && !_targetTile.IsEmpty())
                 {
-                    below.OwnerID = pawn.ID;
-                    below.Integrity -= d * 0.25f / below.Material.BreakTime();
+                    _targetTile.Integrity -= d * 0.25f / _targetTile.Material.BreakTime();
 
-                    if (below.Integrity < 0)
+                    if (_targetTile.Integrity < 0)
                     {
-                        Item item = below.Destroy();
+                        Item item = _targetTile.Destroy();
 
-                        Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY), 
-                            Mathf.FloorToInt(pawn.PolarPos.X), PlanetTile.LightMax);
-                        
+                        // TODO fix :(
+                        PlanetRenderer.isLightDirty = true;
+                        // Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY),
+                            // Mathf.FloorToInt(PolarPos.X), PlanetTile.LightMax);
+
                         if (item != Item.None)
-                            Pickup.Instantiate(pawn.PolarPos, item);
+                            Pickup.Instantiate(PolarPos, item);
 
-                        pawn.Counter++;
+                        Counter++;
 
-                        if (pawn.Counter >= 5)
+                        if (Counter >= 5)
                         {
-                            pawn.Counter = 0;
-                            pawn.State = PawnState.ReturnH;
-                            pawn.Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
-                            pawn.SetCooldown(1);
+                            Counter = 0;
+                            State = PawnState.ReturnH;
+                            Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
+                            SetCooldown(1);
                         }
                         else
                         {
-                            pawn.State = PawnState.Idle;
-                            pawn.SetCooldown(2.5f);
+                            State = PawnState.Idle;
+                            SetCooldown(2.5f);
                         }
                     }
                 }
             }
         }
-        else if (pawn.State == PawnState.DropOff)
+        else if (State == PawnState.DropOff)
         {
-            pawn.State = PawnState.Idle;
-            pawn.SetCooldown(1);
+            State = PawnState.Idle;
+            SetCooldown(1);
         }
     }
 
-    private static void GetNewMiningTarget(Pawn pawn)
+    private bool GetNewMiningTarget()
     {
-        if (Game.I._data.NextMiningTarget(pawn.ID, ResourceStation.I.Surface, out Vector2 target))
+        if (Game.I._data.NextMiningTarget(ID, ResourceStation.I.Surface, out Vector2 target, out PlanetTile tile))
         {
-            pawn.Target = new Vector2(target.X + 0.5f, target.Y + 1.25f);
-            pawn.State = PawnState.Move;
-            pawn.SetCooldown(1);
+            _targetCoords = new Vector2I(Mathf.FloorToInt(target.X), Mathf.FloorToInt(target.Y));
+            _targetTile = tile;
+            _targetTile.OwnerID = ID;
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void UpdateAnimationState()
+    {
+        if (_isOnCooldown || State == PawnState.Idle)
+        {
+            visual.Animation = "idle";
+        }
+        else if (State is PawnState.Move or PawnState.ReturnH)
+        {
+            visual.Animation = Flying ? "fly" : "walk";
+        }
+        else if (State == PawnState.ReturnV)
+        {
+            visual.Animation = "fly";
+        }
+        else if (State == PawnState.Action)
+        {
+            visual.Animation = "mine";
         }
     }
 }
