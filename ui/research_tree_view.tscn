@@ -1,0 +1,1426 @@
+[gd_scene format=3 uid="uid://b5wl5b8aqpryf"]
+
+[ext_resource type="Script" uid="uid://bby38ot2e3557" path="res://ui/TreeViewControl.cs" id="1_wgwaf"]
+[ext_resource type="Texture2D" uid="uid://beej2cmat504o" path="res://ui/sprites/icons/abilities/Ability_icons10_17.png" id="2_a1o16"]
+[ext_resource type="Script" uid="uid://gtkfc7syka1a" path="res://ui/ResearchNode.cs" id="2_m7s40"]
+[ext_resource type="Shader" uid="uid://fdf1v6vmnhqr" path="res://vfx/shaders/grayscale.tres" id="2_ys5lt"]
+[ext_resource type="Texture2D" uid="uid://cviplanx0kksd" path="res://ui/sprites/icons/abilities/Ability_icons10_59.png" id="3_4fr0h"]
+[ext_resource type="Texture2D" uid="uid://0qubwa4v07t1" path="res://ui/sprites/icons/abilities/Ability_icons10_79.png" id="3_a78bd"]
+[ext_resource type="FontFile" uid="uid://bk5e3v4c0dkwo" path="res://ui/fonts/PixelifySans-SemiBold.ttf" id="4_t51r8"]
+[ext_resource type="Texture2D" uid="uid://dv8alwbkqu734" path="res://ui/sprites/icons/abilities/Ability_icons10_14.png" id="5_xshwi"]
+[ext_resource type="Texture2D" uid="uid://b7p3j05xlvigy" path="res://ui/sprites/icons/abilities/Ability_icons10_31.png" id="6_cx2lp"]
+[ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="6_xs7tc"]
+[ext_resource type="Texture2D" uid="uid://c146acfe5yptj" path="res://ui/sprites/icons/abilities/Ability_icons10_12.png" id="7_cx2lp"]
+[ext_resource type="Texture2D" uid="uid://co3wfla8taddc" path="res://ui/sprites/icons/abilities/Ability_icons10_73.png" id="7_j3bqm"]
+[ext_resource type="Texture2D" uid="uid://1fvr35ri5isr" path="res://ui/sprites/icons/abilities/Ability_icons10_71.png" id="8_b74hl"]
+[ext_resource type="Texture2D" uid="uid://bjilosymfdoxm" path="res://ui/sprites/icons/abilities/Ability_icons10_38.png" id="9_ys5lt"]
+[ext_resource type="Texture2D" uid="uid://btovnvu2ea4hi" path="res://ui/sprites/icons/abilities/Ability_icons10_98.png" id="10_m7s40"]
+[ext_resource type="Texture2D" uid="uid://l2nwr8lnd554" path="res://ui/sprites/icons/abilities/Ability_icons10_53.png" id="12_6uy61"]
+[ext_resource type="Texture2D" uid="uid://bj0skna3div1l" path="res://ui/sprites/icons/abilities/Ability_icons10_41.png" id="13_b74hl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pdd12"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7s40"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v381h"]
+load_path = "res://.godot/imported/Ability_icons10_04.png-176d14828b973724a2d2db007cd4a605.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ks66b"]
+load_path = "res://.godot/imported/control_panel.png-e9503879577c1cfbdcb9359bc72a5193.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ibn25"]
+texture = SubResource("CompressedTexture2D_ks66b")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(1, 1, 1, 0.96862745)
+
+[sub_resource type="LabelSettings" id="LabelSettings_17rn7"]
+font = ExtResource("4_t51r8")
+font_size = 29
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1517j"]
+color = Color(0.74978, 0.74978, 0.7497799, 0.827451)
+grow_begin = -120.0
+grow_end = -120.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a1o16"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys5lt"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_81uvb"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uy61"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4fr0h"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edv2f"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cx2lp"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rhdrg"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t51r8"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xshwi"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wn7la"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6urkx"]
+load_path = "res://.godot/imported/Ability_icons10_52.png-f8b5326d15f6f220c75affb65fe028c3.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j3bqm"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xs7tc"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b74hl"]
+load_path = "res://.godot/imported/Ability_icons10_56.png-e0c2e2161030c0987a1e05caa2d0f594.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ys5lt"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4eh2"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6uy61"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ks66b"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibn25"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17rn7"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_raiuh"]
+load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1517j"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drvih"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k27qg"]
+shader = ExtResource("2_ys5lt")
+shader_parameter/EffectOn = true
+
+[node name="TreeView" type="Control" unique_id=69398314]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BG" type="ColorRect" parent="." unique_id=1068848868]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1569.9999
+offset_top = -671.00006
+offset_right = -1569.9999
+offset_bottom = -671.00006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.2540834, 2.2244232)
+mouse_filter = 2
+color = Color(0.11699999, 0.1287, 0.13, 1)
+
+[node name="Control" type="Control" parent="." unique_id=2137176674 node_paths=PackedStringArray("_movedObject", "_scaledObject")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_wgwaf")
+_movedObject = NodePath("Move")
+_scaledObject = NodePath("Move/Scale")
+
+[node name="Move" type="Control" parent="Control" unique_id=1075329655]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Scale" type="Control" parent="Control/Move" unique_id=384011948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Connections" type="Control" parent="Control/Move/Scale" unique_id=1779813069]
+anchors_preset = 0
+offset_left = -52.0
+offset_top = -7.0
+offset_right = -12.0
+offset_bottom = 33.0
+
+[node name="Connection" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=945255965]
+layout_mode = 0
+offset_left = 1148.0
+offset_top = 525.0
+offset_right = 1158.0
+offset_bottom = 527.0
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection11" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=479003216]
+layout_mode = 0
+offset_left = 891.0001
+offset_top = 525.0
+offset_right = 901.0001
+offset_bottom = 527.0
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection13" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=2097298793]
+layout_mode = 0
+offset_left = 1020.0
+offset_top = 400.00006
+offset_right = 1030.0
+offset_bottom = 402.00006
+rotation = -1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection5" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=776395995]
+layout_mode = 0
+offset_left = 1283.0
+offset_top = 407.00006
+offset_right = 1293.0
+offset_bottom = 409.00006
+rotation = 1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection4" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=334777934]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 524.0
+offset_right = 1417.0
+offset_bottom = 526.0
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection2" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=16681358]
+layout_mode = 0
+offset_left = 1283.0
+offset_top = 648.00006
+offset_right = 1293.0
+offset_bottom = 650.00006
+rotation = 1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection6" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1349938870]
+layout_mode = 0
+offset_left = 1558.9999
+offset_top = 283.99997
+offset_right = 1568.9999
+offset_bottom = 285.99997
+rotation = 3.1415927
+scale = Vector2(50.731403, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection14" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=352409639]
+layout_mode = 0
+offset_left = 888.99994
+offset_top = 284.0
+offset_right = 898.99994
+offset_bottom = 286.0
+rotation = -3.1415927
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection15" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=44768413]
+layout_mode = 0
+offset_left = 760.9999
+offset_top = 159.0
+offset_right = 770.9999
+offset_bottom = 161.0
+rotation = -1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection20" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1115957532]
+layout_mode = 0
+offset_left = 760.9999
+offset_top = -68.999985
+offset_right = 770.9999
+offset_bottom = -66.999985
+rotation = -1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection19" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1347501430]
+layout_mode = 0
+offset_left = 1002.0001
+offset_top = -158.0
+offset_right = 1012.0001
+offset_bottom = -156.0
+scale = Vector2(48.85141, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection21" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=804523499]
+layout_mode = 0
+offset_left = 1602.0
+offset_top = -158.0
+offset_right = 1612.0
+offset_bottom = -156.0
+scale = Vector2(48.851, 10)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection16" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1060417638]
+layout_mode = 0
+offset_left = 1022.0
+offset_top = 159.0
+offset_right = 1032.0
+offset_bottom = 161.0
+rotation = -1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection17" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1507765276]
+layout_mode = 0
+offset_left = 1182.0
+offset_top = 43.0
+offset_right = 1192.0
+offset_bottom = 45.0
+scale = Vector2(26.6514, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection18" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=560967551]
+layout_mode = 0
+offset_left = 1313.0001
+offset_top = -38.999992
+offset_right = 1323.0001
+offset_bottom = -36.999992
+rotation = -1.5707964
+scale = Vector2(17.0514, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection12" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1415238212]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 643.0
+offset_right = 770.0
+offset_bottom = 645.0
+rotation = 1.5707964
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection3" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=716997911]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 768.0
+offset_right = 1417.0
+offset_bottom = 770.0
+scale = Vector2(18.291399, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection7" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=249133573]
+layout_mode = 0
+offset_left = 1714.9998
+offset_top = 769.0
+offset_right = 1724.9998
+offset_bottom = 771.0
+scale = Vector2(29.5714, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection8" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1509984648]
+layout_mode = 0
+offset_left = 1860.0
+offset_top = 559.0
+offset_right = 1870.0
+offset_bottom = 561.0
+rotation = 1.5707964
+scale = Vector2(42.571404, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection22" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=81167865]
+layout_mode = 0
+offset_left = 1860.0
+offset_top = 42.0
+offset_right = 1870.0
+offset_bottom = 44.0
+rotation = 1.5707964
+scale = Vector2(44.047, 10)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection9" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=969542960]
+layout_mode = 0
+offset_left = 1689.0
+offset_top = 524.0
+offset_right = 1699.0
+offset_bottom = 526.0
+scale = Vector2(26.49139, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="Connection10" type="ColorRect" parent="Control/Move/Scale/Connections" unique_id=1196343410]
+layout_mode = 0
+offset_left = 1819.0
+offset_top = 449.0
+offset_right = 1829.0
+offset_bottom = 451.0
+rotation = 1.5707964
+scale = Vector2(15.451388, 2.985)
+pivot_offset = Vector2(5, 1)
+
+[node name="FirstResearch" type="TextureRect" parent="Control/Move/Scale" unique_id=484596959 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+z_index = 1
+layout_mode = 0
+offset_left = 922.0
+offset_top = 466.0
+offset_right = 1026.0
+offset_bottom = 570.0
+texture = SubResource("CompressedTexture2D_pdd12")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection"), NodePath("../Connections/Connection11"), NodePath("../Connections/Connection13")]
+requiredNodes = []
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/FirstResearch" unique_id=1576375979]
+material = SubResource("ShaderMaterial_m7s40")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = SubResource("CompressedTexture2D_v381h")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/FirstResearch" unique_id=1947830919]
+visible = false
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/FirstResearch/Hint" unique_id=1937932927]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/FirstResearch/Hint/MarginContainer" unique_id=1526399368]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/FirstResearch/Hint/MarginContainer/VBoxContainer" unique_id=785429141]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "First Research"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/FirstResearch/Hint/MarginContainer/VBoxContainer" unique_id=1567894489]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/FirstResearch/Hint/MarginContainer/VBoxContainer" unique_id=483918332]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Start your Reasearcher journey here!"
+fit_content = true
+scroll_active = false
+
+[node name="CheaperPickaxes" type="TextureRect" parent="Control/Move/Scale" unique_id=1597208366 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 466.0
+offset_right = 1288.0
+offset_bottom = 570.0
+texture = SubResource("CompressedTexture2D_a1o16")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection5"), NodePath("../Connections/Connection4"), NodePath("../Connections/Connection2")]
+requiredNodes = [NodePath("../FirstResearch")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/CheaperPickaxes" unique_id=410881480]
+material = SubResource("ShaderMaterial_ys5lt")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+scale = Vector2(-1, 1)
+pivot_offset = Vector2(38, 38)
+texture = ExtResource("2_a1o16")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/CheaperPickaxes" unique_id=1223170658]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/CheaperPickaxes/Hint" unique_id=144334283]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer" unique_id=997651200]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer/VBoxContainer" unique_id=552208368]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Cheaper Pickaxes"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer/VBoxContainer" unique_id=954030565]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer/VBoxContainer" unique_id=1372624331]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "You found a way to make more pickaxes out of less material. "
+fit_content = true
+scroll_active = false
+
+[node name="EnergyDrinks" type="TextureRect" parent="Control/Move/Scale" unique_id=1309888425 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 226.0
+offset_right = 1288.0
+offset_bottom = 330.0
+texture = SubResource("CompressedTexture2D_81uvb")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection6")]
+requiredNodes = [NodePath("../CheaperPickaxes")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/EnergyDrinks" unique_id=1193241533]
+material = SubResource("ShaderMaterial_6uy61")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("3_4fr0h")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/EnergyDrinks" unique_id=1583594145]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/EnergyDrinks/Hint" unique_id=1256196283]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/EnergyDrinks/Hint/MarginContainer" unique_id=1173221922]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/EnergyDrinks/Hint/MarginContainer/VBoxContainer" unique_id=579971287]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Energy Drinks"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/EnergyDrinks/Hint/MarginContainer/VBoxContainer" unique_id=2041444102]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/EnergyDrinks/Hint/MarginContainer/VBoxContainer" unique_id=1113990493]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Miners found a way to kill themselves faster, but they have a bigger stamina, so it's all worth it right?"
+fit_content = true
+scroll_active = false
+
+[node name="BasaltUpgrade" type="TextureRect" parent="Control/Move/Scale" unique_id=1089523064 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 709.0
+offset_right = 1288.0
+offset_bottom = 813.0
+texture = SubResource("CompressedTexture2D_4fr0h")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection3")]
+requiredNodes = [NodePath("../CheaperPickaxes")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/BasaltUpgrade" unique_id=2091839644]
+material = SubResource("ShaderMaterial_edv2f")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("3_a78bd")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/BasaltUpgrade" unique_id=1103946290]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/BasaltUpgrade/Hint" unique_id=2124295649]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/BasaltUpgrade/Hint/MarginContainer" unique_id=752892531]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/BasaltUpgrade/Hint/MarginContainer/VBoxContainer" unique_id=2078470999]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Basalt Upgrade"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/BasaltUpgrade/Hint/MarginContainer/VBoxContainer" unique_id=2107634259]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/BasaltUpgrade/Hint/MarginContainer/VBoxContainer" unique_id=1106338022]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "What a sharp material, how about we started to make pickaxes with it!"
+fit_content = true
+scroll_active = false
+
+[node name="ErgonomicHandles" type="TextureRect" parent="Control/Move/Scale" unique_id=1751757301 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1440.0
+offset_top = 466.0
+offset_right = 1544.0
+offset_bottom = 570.0
+texture = SubResource("CompressedTexture2D_cx2lp")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection9"), NodePath("../Connections/Connection10")]
+requiredNodes = [NodePath("../CheaperPickaxes")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/ErgonomicHandles" unique_id=153419810]
+material = SubResource("ShaderMaterial_rhdrg")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("5_xshwi")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/ErgonomicHandles" unique_id=463292328]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/ErgonomicHandles/Hint" unique_id=295241920]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/ErgonomicHandles/Hint/MarginContainer" unique_id=1016970506]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/ErgonomicHandles/Hint/MarginContainer/VBoxContainer" unique_id=1975506482]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Ergonomic Handles"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/ErgonomicHandles/Hint/MarginContainer/VBoxContainer" unique_id=1277555872]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/ErgonomicHandles/Hint/MarginContainer/VBoxContainer" unique_id=1878938242]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "A way to have a backpain in your thirties instead of twenties. Penguins live longer!"
+fit_content = true
+scroll_active = false
+
+[node name="MagmaReinforcement" type="TextureRect" parent="Control/Move/Scale" unique_id=1863851975 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1440.0
+offset_top = 709.0
+offset_right = 1544.0
+offset_bottom = 813.0
+texture = SubResource("CompressedTexture2D_cx2lp")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection7"), NodePath("../Connections/Connection8")]
+requiredNodes = [NodePath("../BasaltUpgrade")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/MagmaReinforcement" unique_id=965462957]
+material = SubResource("ShaderMaterial_t51r8")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("6_cx2lp")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/MagmaReinforcement" unique_id=1499734447]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/MagmaReinforcement/Hint" unique_id=1090276424]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/MagmaReinforcement/Hint/MarginContainer" unique_id=204465881]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/MagmaReinforcement/Hint/MarginContainer/VBoxContainer" unique_id=587222415]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Magma Reinforcement"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/MagmaReinforcement/Hint/MarginContainer/VBoxContainer" unique_id=415879133]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/MagmaReinforcement/Hint/MarginContainer/VBoxContainer" unique_id=1658131038]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "So hot! But also useful, the pickaxes now mine anything instantly."
+fit_content = true
+scroll_active = false
+
+[node name="BiggerZoomLens" type="TextureRect" parent="Control/Move/Scale" unique_id=1803853125 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 661.0
+offset_top = 466.0
+offset_right = 765.0
+offset_bottom = 570.0
+texture = SubResource("CompressedTexture2D_xshwi")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection12")]
+requiredNodes = [NodePath("../FirstResearch")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/BiggerZoomLens" unique_id=993839470]
+material = SubResource("ShaderMaterial_wn7la")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = SubResource("CompressedTexture2D_6urkx")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/BiggerZoomLens" unique_id=1869239087]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -303.0
+offset_top = -260.0
+offset_right = 201.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/BiggerZoomLens/Hint" unique_id=1690786912]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/BiggerZoomLens/Hint/MarginContainer" unique_id=265491467]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/BiggerZoomLens/Hint/MarginContainer/VBoxContainer" unique_id=1221364905]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Bigger Zoom Lens"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/BiggerZoomLens/Hint/MarginContainer/VBoxContainer" unique_id=1230708494]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/BiggerZoomLens/Hint/MarginContainer/VBoxContainer" unique_id=85849004]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "The more you see, the more you research right? "
+fit_content = true
+scroll_active = false
+
+[node name="FinerBrushes" type="TextureRect" parent="Control/Move/Scale" unique_id=729989387 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 661.0
+offset_top = 709.0
+offset_right = 765.0
+offset_bottom = 813.0
+texture = SubResource("CompressedTexture2D_j3bqm")
+script = ExtResource("2_m7s40")
+connectors = []
+requiredNodes = [NodePath("../BiggerZoomLens")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/FinerBrushes" unique_id=323799934]
+material = SubResource("ShaderMaterial_xs7tc")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = SubResource("CompressedTexture2D_b74hl")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/FinerBrushes" unique_id=1231896900]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/FinerBrushes/Hint" unique_id=542004858]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/FinerBrushes/Hint/MarginContainer" unique_id=916423597]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/FinerBrushes/Hint/MarginContainer/VBoxContainer" unique_id=2086038387]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Finer Brushes"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/FinerBrushes/Hint/MarginContainer/VBoxContainer" unique_id=2073943600]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/FinerBrushes/Hint/MarginContainer/VBoxContainer" unique_id=1931318186]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Brushes now tickle. (and they also uncover more research parts)"
+fit_content = true
+scroll_active = false
+
+[node name="RunningShoes" type="TextureRect" parent="Control/Move/Scale" unique_id=1651165724 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 922.0
+offset_top = 226.0
+offset_right = 1026.0
+offset_bottom = 330.0
+texture = SubResource("CompressedTexture2D_ys5lt")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection16"), NodePath("../Connections/Connection14")]
+requiredNodes = [NodePath("../FirstResearch")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/RunningShoes" unique_id=1870042492]
+material = SubResource("ShaderMaterial_r4eh2")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("7_j3bqm")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/RunningShoes" unique_id=251163395]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/RunningShoes/Hint" unique_id=1695576861]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/RunningShoes/Hint/MarginContainer" unique_id=450263772]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/RunningShoes/Hint/MarginContainer/VBoxContainer" unique_id=614909105]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Running"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/RunningShoes/Hint/MarginContainer/VBoxContainer" unique_id=2080084620]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/RunningShoes/Hint/MarginContainer/VBoxContainer" unique_id=1530886284]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "You can do what with your legs?!"
+fit_content = true
+scroll_active = false
+
+[node name="JetpackShoes" type="TextureRect" parent="Control/Move/Scale" unique_id=1375907302 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 661.0
+offset_top = 226.0
+offset_right = 765.0
+offset_bottom = 330.0
+texture = SubResource("CompressedTexture2D_6uy61")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection15")]
+requiredNodes = [NodePath("../RunningShoes")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/JetpackShoes" unique_id=1536761978]
+material = SubResource("ShaderMaterial_ks66b")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("8_b74hl")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/JetpackShoes" unique_id=2155061]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/JetpackShoes/Hint" unique_id=1482326938]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/JetpackShoes/Hint/MarginContainer" unique_id=1476812592]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/JetpackShoes/Hint/MarginContainer/VBoxContainer" unique_id=154813689]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Jetpack Shoes"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/JetpackShoes/Hint/MarginContainer/VBoxContainer" unique_id=899857424]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/JetpackShoes/Hint/MarginContainer/VBoxContainer" unique_id=121293466]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "The collectors have jetpacks, why can't shoes have them as well?"
+fit_content = true
+scroll_active = false
+
+[node name="BiggerBaskets" type="TextureRect" parent="Control/Move/Scale" unique_id=2108539479 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 922.0
+offset_top = -16.0
+offset_right = 1026.0
+offset_bottom = 88.0
+texture = SubResource("CompressedTexture2D_6uy61")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection17"), NodePath("../Connections/Connection18")]
+requiredNodes = [NodePath("../RunningShoes")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/BiggerBaskets" unique_id=782071513]
+material = SubResource("ShaderMaterial_ibn25")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("9_ys5lt")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/BiggerBaskets" unique_id=628112725]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/BiggerBaskets/Hint" unique_id=962235253]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/BiggerBaskets/Hint/MarginContainer" unique_id=1449680686]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/BiggerBaskets/Hint/MarginContainer/VBoxContainer" unique_id=886674593]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Bigger Baskets"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/BiggerBaskets/Hint/MarginContainer/VBoxContainer" unique_id=414284089]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/BiggerBaskets/Hint/MarginContainer/VBoxContainer" unique_id=8304474]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "How did we not think of this sooner?! Collectors now carry 2x more."
+fit_content = true
+scroll_active = false
+
+[node name="FasterJetpackAscent" type="TextureRect" parent="Control/Move/Scale" unique_id=724885866 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 661.0
+offset_top = -16.0
+offset_right = 765.0
+offset_bottom = 88.0
+texture = SubResource("CompressedTexture2D_6uy61")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection20"), NodePath("../Connections/Connection19")]
+requiredNodes = [NodePath("../JetpackShoes")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/FasterJetpackAscent" unique_id=1940614693]
+material = SubResource("ShaderMaterial_17rn7")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("10_m7s40")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/FasterJetpackAscent" unique_id=1322541]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/FasterJetpackAscent/Hint" unique_id=290665173]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/FasterJetpackAscent/Hint/MarginContainer" unique_id=562959000]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/FasterJetpackAscent/Hint/MarginContainer/VBoxContainer" unique_id=709482312]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Faster Jetpack Ascent"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/FasterJetpackAscent/Hint/MarginContainer/VBoxContainer" unique_id=1644549400]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/FasterJetpackAscent/Hint/MarginContainer/VBoxContainer" unique_id=1791857554]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Jetpacks now have more power."
+fit_content = true
+scroll_active = false
+
+[node name="AncientMiningTechnology" type="TextureRect" parent="Control/Move/Scale" unique_id=781556198 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1732.0
+offset_top = 226.0
+offset_right = 1836.0
+offset_bottom = 330.0
+scale = Vector2(1.5282165, 1.5282165)
+texture = SubResource("CompressedTexture2D_raiuh")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection22")]
+requiredNodes = [NodePath("../EnergyDrinks"), NodePath("../ErgonomicHandles"), NodePath("../MagmaReinforcement")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/AncientMiningTechnology" unique_id=891214863]
+material = SubResource("ShaderMaterial_1517j")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("7_cx2lp")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/AncientMiningTechnology" unique_id=777869461]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/AncientMiningTechnology/Hint" unique_id=1932019295]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/AncientMiningTechnology/Hint/MarginContainer" unique_id=848586743]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/AncientMiningTechnology/Hint/MarginContainer/VBoxContainer" unique_id=1132117513]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Ancient Mining Technology"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/AncientMiningTechnology/Hint/MarginContainer/VBoxContainer" unique_id=1155991720]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/AncientMiningTechnology/Hint/MarginContainer/VBoxContainer" unique_id=316621009]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever."
+fit_content = true
+scroll_active = false
+
+[node name="AncientCollectorKnowhow" type="TextureRect" parent="Control/Move/Scale" unique_id=1314854320 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = -243.0
+offset_right = 1288.0
+offset_bottom = -139.0
+scale = Vector2(1.5282165, 1.5282165)
+texture = SubResource("CompressedTexture2D_raiuh")
+script = ExtResource("2_m7s40")
+connectors = [NodePath("../Connections/Connection21")]
+requiredNodes = [NodePath("../BiggerBaskets"), NodePath("../FasterJetpackAscent")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/AncientCollectorKnowhow" unique_id=828853208]
+material = SubResource("ShaderMaterial_drvih")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("12_6uy61")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/AncientCollectorKnowhow" unique_id=2075850660]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/AncientCollectorKnowhow/Hint" unique_id=1238229466]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/AncientCollectorKnowhow/Hint/MarginContainer" unique_id=348250894]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/AncientCollectorKnowhow/Hint/MarginContainer/VBoxContainer" unique_id=515390979]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Ancient Collector Knowledge"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/AncientCollectorKnowhow/Hint/MarginContainer/VBoxContainer" unique_id=774270091]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/AncientCollectorKnowhow/Hint/MarginContainer/VBoxContainer" unique_id=358039358]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time. You now hold the secrets. "
+fit_content = true
+scroll_active = false
+
+[node name="OrbitalCoreExtractor" type="TextureRect" parent="Control/Move/Scale" unique_id=396135517 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+layout_mode = 0
+offset_left = 1693.9999
+offset_top = -280.0
+offset_right = 1797.9999
+offset_bottom = -176.0
+scale = Vector2(2.2341301, 2.2341301)
+texture = SubResource("CompressedTexture2D_raiuh")
+script = ExtResource("2_m7s40")
+connectors = []
+requiredNodes = [NodePath("../AncientMiningTechnology"), NodePath("../AncientCollectorKnowhow")]
+icon = NodePath("Icon")
+hint = NodePath("Hint")
+
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/OrbitalCoreExtractor" unique_id=1900537460]
+material = SubResource("ShaderMaterial_k27qg")
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 90.0
+texture = ExtResource("13_b74hl")
+
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/OrbitalCoreExtractor" unique_id=1012977666]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -301.0
+offset_top = -260.0
+offset_right = 203.0
+offset_bottom = -114.0
+scale = Vector2(1.4174368, 1.4174368)
+theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/OrbitalCoreExtractor/Hint" unique_id=1680560157]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/OrbitalCoreExtractor/Hint/MarginContainer" unique_id=1202199765]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StationName" type="Label" parent="Control/Move/Scale/OrbitalCoreExtractor/Hint/MarginContainer/VBoxContainer" unique_id=1795607163]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Orbital Core Extractor"
+label_settings = SubResource("LabelSettings_17rn7")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/OrbitalCoreExtractor/Hint/MarginContainer/VBoxContainer" unique_id=1711520599]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/OrbitalCoreExtractor/Hint/MarginContainer/VBoxContainer" unique_id=264203089]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_xs7tc")
+theme_override_font_sizes/normal_font_size = 19
+text = "Finally... We can have the core. So shiny. So beatiful. Time to destroy the planet!"
+fit_content = true
+scroll_active = false

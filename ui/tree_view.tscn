@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bnig4rl7minwx"]
+
+[ext_resource type="Script" uid="uid://bby38ot2e3557" path="res://ui/TreeViewControl.cs" id="1_vpv83"]
+
+[node name="TreeView" type="Control" unique_id=69398314]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BG" type="ColorRect" parent="." unique_id=1068848868]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.11699999, 0.1287, 0.13, 1)
+
+[node name="Control" type="Control" parent="." unique_id=2137176674 node_paths=PackedStringArray("_movedObject", "_scaledObject")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_vpv83")
+_movedObject = NodePath("Move")
+_scaledObject = NodePath("Move/Scale")
+
+[node name="Move" type="Control" parent="Control" unique_id=1075329655]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Scale" type="Control" parent="Control/Move" unique_id=384011948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/Move/Scale" unique_id=484596959]
+layout_mode = 0
+offset_left = 974.0
+offset_top = 473.0
+offset_right = 1078.0
+offset_bottom = 577.0
