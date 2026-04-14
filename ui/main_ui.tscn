@@ -342,6 +342,7 @@ mouse_filter = 0
 alignment = 2
 
 [node name="Button2" type="Button" parent="MarginContainer/Screen/RightPanel/Controls/Control2" unique_id=1385584207]
+visible = false
 material = SubResource("ShaderMaterial_fa42e")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ck7gc")
@@ -350,6 +351,7 @@ text = "EVOLVE"
 flat = true
 
 [node name="TalentPoints" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=2038926091]
+visible = false
 layout_mode = 2
 alignment = 2
 

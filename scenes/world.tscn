@@ -8,9 +8,7 @@
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scenes/buildings/ResourceStation.tscn" id="5_71j4m"]
 [ext_resource type="Shader" uid="uid://cxqkpexcwluut" path="res://shaders/planet/planet_rendering.gdshader" id="7_o8fc1"]
-[ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/PawnMiner.tscn" id="8_xo05s"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
-[ext_resource type="PackedScene" uid="uid://tjqf5g3prke0" path="res://scripts/entity/pawn/PawnHauler.tscn" id="9_dss4m"]
 [ext_resource type="Script" uid="uid://dijt32b8nu8bu" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
 [ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://bfar2tc8s1dv6" path="res://ui/main_ui.tscn" id="11_e3hyu"]
@@ -39,16 +37,15 @@ PlanetShader = ExtResource("7_o8fc1")
 
 [node name="Pawns" type="Node2D" parent="." unique_id=1446453432]
 script = ExtResource("4_qfnet")
-PawnScenes = [ExtResource("8_xo05s"), ExtResource("9_dss4m")]
 
 [node name="Stations" type="Node2D" parent="." unique_id=1058458184]
 
 [node name="ResourceStation" parent="Stations" unique_id=1931811540 instance=ExtResource("5_71j4m")]
 position = Vector2(-47, -209)
-PolarPos = Vector2(8, -11)
 
 [node name="MinerStation" parent="Stations" unique_id=1421984110 instance=ExtResource("11_xo05s")]
 position = Vector2(366, -198)
+PolarPos = Vector2(0, 0)
 
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
 

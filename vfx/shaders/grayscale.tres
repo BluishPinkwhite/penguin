@@ -5,6 +5,10 @@ parameter_name = "EffectOn"
 default_value_enabled = true
 default_value = true
 
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_5o2od"]
+default_input_values = [0, 0.0, 1, 0.4]
+operator = 2
+
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_0op8q"]
 output_port_for_preview = 0
 expanded_output_ports = [0]
@@ -33,7 +37,7 @@ op_type = 4
 [resource]
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(1200, 140)
+nodes/fragment/0/position = Vector2(1640, 240)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_0op8q")
 nodes/fragment/2/position = Vector2(-780, 80)
 nodes/fragment/4/node = SubResource("VisualShaderNodeFloatOp_bg8e1")
@@ -47,7 +51,9 @@ nodes/fragment/7/position = Vector2(340, 80)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_cok8n")
 nodes/fragment/8/position = Vector2(540, 300)
 nodes/fragment/9/node = SubResource("VisualShaderNodeSwitch_cok8n")
-nodes/fragment/9/position = Vector2(880, 340)
+nodes/fragment/9/position = Vector2(1280, 340)
 nodes/fragment/10/node = SubResource("VisualShaderNodeBooleanParameter_0op8q")
 nodes/fragment/10/position = Vector2(200, 600)
-nodes/fragment/connections = PackedInt32Array(2, 1, 4, 0, 2, 2, 5, 0, 2, 3, 6, 0, 2, 4, 0, 1, 4, 0, 7, 0, 5, 0, 7, 1, 7, 0, 8, 0, 6, 0, 8, 1, 10, 0, 9, 0, 8, 0, 9, 1, 2, 0, 9, 2, 9, 0, 0, 0)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_5o2od")
+nodes/fragment/11/position = Vector2(860, 300)
+nodes/fragment/connections = PackedInt32Array(2, 1, 4, 0, 2, 2, 5, 0, 2, 3, 6, 0, 2, 4, 0, 1, 4, 0, 7, 0, 5, 0, 7, 1, 7, 0, 8, 0, 6, 0, 8, 1, 10, 0, 9, 0, 2, 0, 9, 2, 9, 0, 0, 0, 8, 0, 11, 0, 11, 0, 9, 1)
