@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.director.data;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.pawn;
 using Incremental.scripts.planet.data;
@@ -42,6 +43,7 @@ public partial class PlanetRenderer : Node2D
         _mat.SetShaderParameter("atlas_texture", AtlasTexture);
         _mat.SetShaderParameter("atlas_columns", AtlasColumns);
         _mat.SetShaderParameter("total_layers", _data.Layers.Count);
+        _mat.SetShaderParameter("max_layer_width", Consts.MaxLayerWidth);
 
         BuildFullMesh(maxTiles);
         RefreshDataTexture();
@@ -111,8 +113,8 @@ public partial class PlanetRenderer : Node2D
                     else p01 = pMid;
                 }
 
-                Vector2 dataUV = new Vector2((i + 0.5f) / maxTiles, (layer + 0.5f) / _data.Layers.Count);
-                AddTileToSurface(st, p00, p01, p10, p11, dataUV);
+                Vector2 dataUV = new Vector2((i + 0.5f) / tileCount, (layer + 0.5f) / _data.Layers.Count);
+                AddTileToSurface(st, tileCount, p00, p01, p10, p11, dataUV);
             }
         }
 
@@ -127,11 +129,19 @@ public partial class PlanetRenderer : Node2D
         AddChild(meshInstance);
     }
 
-    private void AddTileToSurface(SurfaceTool st, Vector2 p00, Vector2 p01, Vector2 p10, Vector2 p11, Vector2 dataUV)
+    private void AddTileToSurface(SurfaceTool st, int tileCount, Vector2 p00, Vector2 p01, Vector2 p10,
+        Vector2 p11, Vector2 dataUV)
     {
         void V(Vector2 pos, int type)
         {
-            st.SetColor(new Color(type / 255f, 0, 0));
+            // R: Corner Type (0-3)
+            // G: Tile Index (0 to MAX_DIM)
+            st.SetColor(new Color(
+                type / 255f,
+                tileCount / Consts.MaxLayerWidth,
+                0,
+                0
+            ));
             st.SetUV(dataUV);
             st.SetUV2(new Vector2(0, dataUV.Y));
             st.AddVertex(new Vector3(pos.X, pos.Y, 0));
@@ -153,17 +163,30 @@ public partial class PlanetRenderer : Node2D
 
     private void RefreshDataTexture()
     {
+        int maxTiles = _data.Layers[^1].Length;
+
         for (int layer = 0; layer < _data.Layers.Count; layer++)
         {
-            for (int tile = 0; tile < _data.Layers[layer].Length; tile++)
+            PlanetTile[] layerTiles = _data.Layers[layer];
+            int tileCount = layerTiles.Length;
+            // How many pixels wide is one tile in this layer?
+            int multiplier = maxTiles / tileCount;
+
+            for (int tile = 0; tile < tileCount; tile++)
             {
-                PlanetTile tileData = _data.Layers[layer][tile];
-                _dataImage.SetPixel(tile, layer,
-                    new Color(
-                        (int)tileData.Material / 255f,
-                        tileData.Regrowing ? 1f : Math.Max(0, tileData.Integrity / 2f),
-                        tileData.Light
-                    ));
+                PlanetTile tileData = layerTiles[tile];
+                Color pixelColor = new Color(
+                    (int)tileData.Material / 255f,
+                    tileData.Regrowing ? 1f : Math.Max(0, tileData.Integrity / 2f),
+                    tileData.Light
+                );
+
+                // "Stretch" the tile by filling all pixels in its block
+                for (int m = 0; m < multiplier; m++)
+                {
+                    int pixelX = (tile * multiplier) + m;
+                    _dataImage.SetPixel(pixelX, layer, pixelColor);
+                }
             }
         }
 
@@ -171,6 +194,7 @@ public partial class PlanetRenderer : Node2D
     }
 
     private double _lastUpdate = 0;
+
     public override void _PhysicsProcess(double delta)
     {
         _lastUpdate += delta;
@@ -204,7 +228,7 @@ public partial class PlanetRenderer : Node2D
 
 
         float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
-        
+
         if (_data._innerGrowth < 0 && newGrowth >= 0)
         {
             _data.RegrowLayers();
@@ -212,14 +236,14 @@ public partial class PlanetRenderer : Node2D
         }
 
         _data._innerGrowth = newGrowth;
-        
+
         // growth finished, regrow a layer
         if (_data._innerGrowth >= 1)
         {
             _data._innerGrowth = -Game.RandomAround(8, 2);
             isLightDirty = true;
             isDirty = true;
-            
+
             // reset Growing state on tiles
             foreach (PlanetTile[] layerData in _data.Layers)
             {
