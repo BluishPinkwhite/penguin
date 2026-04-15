@@ -50,19 +50,19 @@ script = ExtResource("1_rwgxs")
 AtlasTexture = ExtResource("2_4wyf3")
 PlanetShader = ExtResource("7_o8fc1")
 
-[node name="Pawns" type="Node2D" parent="." unique_id=1446453432]
-script = ExtResource("4_qfnet")
-PawnScenes = [ExtResource("8_xo05s"), ExtResource("9_dss4m")]
-
 [node name="Stations" type="Node2D" parent="." unique_id=1058458184]
 
 [node name="ResourceStation" parent="Stations" unique_id=1931811540 instance=ExtResource("5_71j4m")]
 position = Vector2(-47, -209)
-PolarPos = Vector2(0, 120)
+PolarPos = Vector2(0, -20)
 
 [node name="MinerStation" parent="Stations" unique_id=1421984110 instance=ExtResource("11_xo05s")]
 position = Vector2(366, -198)
-PolarPos = Vector2(20, 120)
+PolarPos = Vector2(20, -20)
+
+[node name="Pawns" type="Node2D" parent="." unique_id=1446453432]
+script = ExtResource("4_qfnet")
+PawnScenes = [ExtResource("8_xo05s"), ExtResource("9_dss4m")]
 
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
 

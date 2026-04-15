@@ -78,7 +78,7 @@ public static class PlanetDataLight
         for (int t = 0; t < _data.Layers[topLayer].Length; t++)
         {
             PlanetTile tile = _data.Layers[topLayer][t];
-            tile.Light = 1f;
+            tile.Light = PlanetTile.LightMax;
 
             queue.Enqueue((topLayer, t));
         }

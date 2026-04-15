@@ -20,9 +20,6 @@ public abstract partial class Pawn : SurfaceEntity
     protected float Cooldown = 0;
     protected int Counter = 0;
 
-    public Item InventoryID = Item.None;
-    public int InventoryCount = 0;
-
     protected const float PawnAngularWidth = 1.45f;
     protected const float WalkSpeed = 6.5f;
     protected const float FlySpeed = Gravity * 1.2f;
@@ -68,11 +65,8 @@ public abstract partial class Pawn : SurfaceEntity
     public override void _Ready()
     {
         ID = _nextID++;
-
-        PolarPos = new Vector2(
-            (int)(Game.RandomTo(Game.I._data.GetLayerSize(Game.I._data.Layers.Count)) / 8),
-            Game.I._data.Layers.Count + 2);
         Target = PolarPos;
+        SetCooldown(2);
 
         base._Ready();
     }
@@ -151,7 +145,7 @@ public abstract partial class Pawn : SurfaceEntity
         if (!Flying)
         {
             // horizontal movement
-            if (dx * dx > 0.05f || Mathf.FloorToInt(Target.X) != Mathf.FloorToInt(PolarPos.X + 0.45f))
+            if (dx * dx > 0.05f)
             {
                 if (!CheckCollision(newX, PolarPos.Y))
                     PolarPos.X = newX;
@@ -205,9 +199,9 @@ public abstract partial class Pawn : SurfaceEntity
         float dir = CircularDelta(PolarPos.X, Target.X, _currSize);
 
         if (dir > 0)
-            visual.FlipH = false;
+            visual.Scale = visual.Scale with { X = 1 };
         else if (dir < 0)
-            visual.FlipH = true;
+            visual.Scale = visual.Scale with { X = -1 };
         
         UpdateAnimationState();
 

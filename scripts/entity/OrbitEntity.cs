@@ -1,6 +1,5 @@
 ﻿using Godot;
 using Incremental.scripts.director;
-using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.entity;
 

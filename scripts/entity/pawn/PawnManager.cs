@@ -3,6 +3,7 @@ using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.entity.pawn.roles;
+using Incremental.scripts.entity.station;
 
 namespace Incremental.scripts.entity.pawn;
 
@@ -15,10 +16,6 @@ public partial class PawnManager : Node2D
     
     public override void _Ready()
     {
-        Inventory.Roles[Role.Unemployed] = new RoleData(0, 2, Item.Dirt);
-        Inventory.Roles[Role.Miner] = new RoleData(8, 1, Role.Unemployed);
-        Inventory.Roles[Role.Hauler] = new RoleData(5, 1, Role.Unemployed);
-        
         UpdatePawnCounts();
     }
 
@@ -45,6 +42,8 @@ public partial class PawnManager : Node2D
                     
                     Pawn p = PawnScenes[index].Instantiate<Pawn>();
                     p.Role = pair.Key;
+                    p.PolarPos = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
+                    p.Target = p.PolarPos;
                     AddChild(p);
                 }
 

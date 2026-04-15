@@ -129,6 +129,11 @@ public class PlanetData
         ) * radius;
     }
 
+    public float PolarDistanceSquared(Vector2 a, Vector2 b)
+    {
+        return PolarToWorld(a).DistanceSquaredTo(PolarToWorld(b));
+    }
+
     public int GetLayerSize(int layer)
     {
         layer = Math.Clamp(layer, 0, Layers.Count - 1);
@@ -140,7 +145,7 @@ public class PlanetData
         return (x % size + size) % size;
     }
 
-    public bool NextMiningTarget(int pawnID, Vector2 fromPolar, out Vector2 target, out PlanetTile bestTile)
+    public bool NextMiningTarget(Vector2 fromPolar, out Vector2 target, out PlanetTile bestTile)
     {
         int centerX = Mathf.FloorToInt(fromPolar.X);
         int centerY = Mathf.FloorToInt(fromPolar.Y);
@@ -167,7 +172,7 @@ public class PlanetData
 
                 for (int dx = -radius; dx <= radius; dx++)
                 {
-                    if (dx * dx + dy * dy * 10 > r2)
+                    if (dx * dx + dy * dy * 4 > r2)
                         continue;
 
                     int x = WrapX(centerX + dx, layerSize);
@@ -230,7 +235,7 @@ public class PlanetData
             
             for (int tile = 0; tile < layerSize; tile++)
             {
-                if (Game.RandomTo(Layers.Count + 5) < layer)
+                if (Mathf.Pow(Game.RandomTo(1f), 2) <= (float)layer / Layers.Count)
                     continue;
                 
                 PlanetTile tileData = Layers[layer][tile];

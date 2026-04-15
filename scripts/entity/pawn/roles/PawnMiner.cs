@@ -20,20 +20,6 @@ public partial class PawnMiner : Pawn
         visual.FrameChanged += OnFrameChanged;
     }
 
-    private void OnFrameChanged()
-    {
-        if (visual.Animation == "mine")
-        {
-            if (visual.Frame == 4)
-            {
-                //TODO: deal damage to the target tile
-                SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
-                SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
-                SFX.Play();
-            }
-        }
-    }
-
     protected override void DoBehaviour(float d)
     {
         float gravityY = PolarPos.Y - d * Gravity;
@@ -85,20 +71,48 @@ public partial class PawnMiner : Pawn
                 if (_targetTile.OwnerID == ID)
                     _targetTile.OwnerID = -1;
             }
-            else
+        }
+        else if (State == PawnState.DropOff)
+        {
+            State = PawnState.Idle;
+            SetCooldown(1);
+        }
+    }
+
+    private bool GetNewMiningTarget()
+    {
+        if (Game.I._data.NextMiningTarget(ResourceStation.I.Surface, out Vector2 target, out PlanetTile tile))
+        {
+            _targetCoords = new Vector2I(Mathf.FloorToInt(target.X), Mathf.FloorToInt(target.Y));
+            _targetTile = tile;
+            _targetTile.OwnerID = ID;
+            return true;
+        }
+
+        return false;
+    }
+    
+    
+    private void OnFrameChanged()
+    {
+        if (visual.Animation == "mine")
+        {
+            if (visual.Frame == 4)
             {
                 if (_targetTile != null && !_targetTile.IsEmpty())
                 {
-                    _targetTile.Integrity -= d * 0.25f / _targetTile.Material.BreakTime();
+                    _targetTile.Integrity -= 0.25f / _targetTile.Material.BreakTime();
+                    
+                    SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
+                    SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
+                    SFX.Play();
 
-                    if (_targetTile.Integrity < 0)
+                    if (_targetTile.Integrity <= 0)
                     {
                         Item item = _targetTile.Destroy();
 
-                        // TODO fix :(
-                        PlanetRenderer.isLightDirty = true;
-                        // Game.I._data.PropagateLight(Mathf.FloorToInt(gravityY),
-                            // Mathf.FloorToInt(PolarPos.X), PlanetTile.LightMax);
+                        Game.I._data.PropagateLight(_targetCoords.Y,
+                            _targetCoords.X, PlanetTile.LightMax);
 
                         if (item != Item.None)
                             Pickup.Instantiate(PolarPos, item);
@@ -121,24 +135,6 @@ public partial class PawnMiner : Pawn
                 }
             }
         }
-        else if (State == PawnState.DropOff)
-        {
-            State = PawnState.Idle;
-            SetCooldown(1);
-        }
-    }
-
-    private bool GetNewMiningTarget()
-    {
-        if (Game.I._data.NextMiningTarget(ID, ResourceStation.I.Surface, out Vector2 target, out PlanetTile tile))
-        {
-            _targetCoords = new Vector2I(Mathf.FloorToInt(target.X), Mathf.FloorToInt(target.Y));
-            _targetTile = tile;
-            _targetTile.OwnerID = ID;
-            return true;
-        }
-
-        return false;
     }
 
     protected override void UpdateAnimationState()

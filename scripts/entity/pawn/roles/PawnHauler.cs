@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using Incremental.scripts.director;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
@@ -9,18 +11,27 @@ namespace Incremental.scripts.entity.pawn.roles;
 
 public partial class PawnHauler : Pawn
 {
+    [Export] private Sprite2D PickupSprite;
+    
+    public Item InventoryID = Item.None;
+    public int InventoryCount;
+    
+    private Pickup _pickupTarget;
+    
+    
     protected override void DoBehaviour(float d)
     {
         float gravityY = PolarPos.Y - d * Gravity;
 
         if (State == PawnState.Idle)
         {
-            // wait till the pawn is on ground
+            // wait till the pawn is on the ground
             PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
             if (below != null && !below.IsEmpty())
             {
-                GetNewPickupTarget();
-                State = PawnState.Move;
+                _pickupTarget = GetNewPickupTarget();
+                if (_pickupTarget != null)
+                    State = PawnState.Move;
             }
             else
             {
@@ -54,24 +65,31 @@ public partial class PawnHauler : Pawn
         }
         else if (State == PawnState.Action)
         {
-            Pickup pickup = GetNewPickupTarget();
-            if (pickup != null && pickup.PolarPos.DistanceSquaredTo(PolarPos) < 0.2f)
+            if (IsInstanceValid(_pickupTarget)
+                && !_pickupTarget.IsQueuedForDeletion()
+                && _pickupTarget.PolarPos.DistanceSquaredTo(PolarPos) < 0.2f)
             {
-                InventoryID = pickup.Item;
+                InventoryID = _pickupTarget.Item;
                 InventoryCount += 1;
-                pickup.QueueFree();
+
+                PickupSprite.RegionRect = _pickupTarget.GetPickupCoords();
+                PickupSprite.Visible = true;
+                
+                _pickupTarget.QueueFree();
+                _pickupTarget = null;
                 
                 State = PawnState.ReturnH;
                 Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
             }
-            else if (pickup != null)
+            else if (IsInstanceValid(_pickupTarget))
             {
-                Target = pickup.PolarPos;
+                Target = _pickupTarget.PolarPos;
                 State = PawnState.Move;
             }
             else
             {
                 State = PawnState.Idle;
+                _pickupTarget = null;
             }
 
             SetCooldown(1);
@@ -88,6 +106,7 @@ public partial class PawnHauler : Pawn
 
                 InventoryID = Item.None;
                 InventoryCount = 0;
+                PickupSprite.Visible = false;
             }
             
             State = PawnState.Idle;
@@ -100,11 +119,14 @@ public partial class PawnHauler : Pawn
         Pickup closest = null;
         float minDist = Single.PositiveInfinity;
 
-        foreach (Node node in Game.I.Pickups.GetChildren())
+        IList<Node> children = Game.I.Pickups.GetChildren();
+
+        int count = Math.Min(8, Mathf.CeilToInt(children.Count / 10f));
+        foreach (Node node in Game.TakeRandom(children, count))
         {
             Pickup child = (Pickup)node;
 
-            float dist = child.PolarPos.DistanceSquaredTo(PolarPos);
+            float dist = Game.I._data.PolarDistanceSquared(child.PolarPos, PolarPos);
             if (dist < minDist)
             {
                 minDist = dist;

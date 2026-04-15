@@ -2,17 +2,31 @@
 
 [ext_resource type="SpriteFrames" uid="uid://cdaooprmg7vmm" path="res://sprites/penguins/collector/penguin_collector.tres" id="1_l7i84"]
 [ext_resource type="Script" uid="uid://bcdptxltbwmil" path="res://scripts/entity/pawn/roles/PawnHauler.cs" id="1_y7r3o"]
+[ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="3_lu33h"]
 
-[node name="PawnHauler" type="Node2D" unique_id=2130400945 node_paths=PackedStringArray("visual", "DebugText")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu33h"]
+atlas = ExtResource("3_lu33h")
+
+[node name="PawnHauler" type="Node2D" unique_id=2130400945 node_paths=PackedStringArray("PickupSprite", "visual", "DebugText")]
 z_index = 1000
 script = ExtResource("1_y7r3o")
-visual = NodePath("AnimatedSprite2D")
+PickupSprite = NodePath("PenguinAnimatedSprite/PickupSprite")
+visual = NodePath("PenguinAnimatedSprite")
 DebugText = NodePath("DebugText")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=704517480]
+[node name="PenguinAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=704517480]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("1_l7i84")
 animation = &"idle"
+
+[node name="PickupSprite" type="Sprite2D" parent="PenguinAnimatedSprite" unique_id=1276206104]
+visible = false
+show_behind_parent = true
+position = Vector2(3.0000005, 9.536743e-07)
+scale = Vector2(0.3125, 0.3125)
+texture = SubResource("AtlasTexture_lu33h")
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 32)
 
 [node name="DebugText" type="Label" parent="." unique_id=955237142]
 visible = false

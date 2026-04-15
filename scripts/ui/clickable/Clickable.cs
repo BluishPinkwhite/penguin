@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
@@ -48,7 +49,7 @@ public partial class Clickable : Node
                 {
                     roleData.BoughtAmount++;
                     Inventory.Items[roleData.CostMaterial] -= (int)roleData.NewCost;
-                    roleData.NewCost *= 1.2;
+                    roleData.NewCost = Math.Min(roleData.NewCost * 1.1f, roleData.NewCost + 4);
                 }
                 else
                 {

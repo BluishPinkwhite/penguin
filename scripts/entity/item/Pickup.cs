@@ -16,12 +16,17 @@ public partial class Pickup : SurfaceEntity
         pickup.PolarPos = PolarPos;
         pickup.Item = item;
 
-        pickup.Sprite.RegionRect = new Rect2(32 * ((int)pickup.Item % 8), 32 * (int)((int)pickup.Item / 4), 32, 32);
+        pickup.Sprite.RegionRect = pickup.GetPickupCoords();
         
         pickup.Sprite.Rotation = Game.RandomAround(0, Mathf.Pi * 0.3f);
         Game.I.Pickups.AddChild(pickup);
         
         return pickup;
+    }
+
+    public Rect2 GetPickupCoords()
+    {
+        return new Rect2(32 * ((int)Item % 8), 32 * (int)((int)Item / 4), 32, 32);
     }
 
     public override void _PhysicsProcess(double delta)
