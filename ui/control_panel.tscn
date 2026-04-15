@@ -33,6 +33,7 @@ region = Rect2(0, 0, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
 [node name="ControlPanel" type="PanelContainer" unique_id=895867581]
+process_mode = 3
 offset_left = -232.5
 offset_top = -111.0
 offset_right = 232.5

@@ -2,19 +2,20 @@
 
 [ext_resource type="Script" uid="uid://dcpnodrsh8xmn" path="res://scripts/entity/pawn/roles/PawnMiner.cs" id="1_tg51s"]
 [ext_resource type="SpriteFrames" uid="uid://bn7c1uhy56u7v" path="res://sprites/penguins/miner/penguin_miner.tres" id="2_34q5g"]
+[ext_resource type="AudioStream" uid="uid://k2m3kfexlmv7" path="res://sounds/sfx/miner/pickaxe_hit.wav" id="3_4vgw6"]
 
-[node name="PawnMiner" type="Node2D" unique_id=1689460540 node_paths=PackedStringArray("visual", "DebugText")]
+[node name="PawnMiner" type="Node2D" unique_id=1689460540 node_paths=PackedStringArray("SFX", "visual", "DebugText")]
 z_index = 1000
 scale = Vector2(1.00411, 1)
 script = ExtResource("1_tg51s")
-_spriteFrames = ExtResource("2_34q5g")
+SFX = NodePath("AudioStreamPlayer2D")
 visual = NodePath("AnimatedSprite2D")
 DebugText = NodePath("DebugText")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=93492618]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("2_34q5g")
-animation = &"fly"
+animation = &"mine"
 
 [node name="DebugText" type="Label" parent="." unique_id=740748936]
 visible = false
@@ -28,3 +29,8 @@ theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
 vertical_alignment = 2
 justification_flags = 128
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=727595595]
+stream = ExtResource("3_4vgw6")
+panning_strength = 1.2
+bus = &"SFX"

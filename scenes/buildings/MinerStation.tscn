@@ -15,6 +15,67 @@
 [ext_resource type="Script" uid="uid://dbtsjecr2ocm7" path="res://scripts/ui/ShowOnHover.cs" id="12_r02yb"]
 [ext_resource type="PackedScene" uid="uid://cosjgh12ks5fj" path="res://ui/mines_panel.tscn" id="13_4xn3r"]
 
+[sub_resource type="Animation" id="Animation_gv8dn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StationSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StationSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4xn3r"]
+resource_name = "wobble"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StationSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.3, 6.4, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -30), Vector2(0, -35), Vector2(0, -25), Vector2(0, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StationSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.9333334, 6.7, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.006981317007976921, 0.0, 0.0017453292519947264, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gv8dn"]
+_data = {
+&"RESET": SubResource("Animation_gv8dn"),
+&"wobble": SubResource("Animation_4xn3r")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s6h78"]
 shader = ExtResource("1_3n6w4")
 shader_parameter/SilhouetteColor = Color(0.41215247, 0.41215247, 0.41215247, 1)
@@ -232,75 +293,8 @@ animations = [{
 script = ExtResource("1_4xn3r")
 PolarPos = Vector2(25, -14)
 
-[node name="WindowsBG" type="Sprite2D" parent="." unique_id=1270814919]
-texture = ExtResource("1_s6h78")
-
-[node name="Collector" type="AnimatedSprite2D" parent="." unique_id=705424275]
-material = SubResource("ShaderMaterial_s6h78")
-position = Vector2(6, -6)
-rotation = 3.1415927
-scale = Vector2(0.99013346, -1.2700728)
-sprite_frames = SubResource("SpriteFrames_r02yb")
-animation = &"walk"
-autoplay = "walk"
-
-[node name="Miner" type="AnimatedSprite2D" parent="." unique_id=1976390937]
-material = SubResource("ShaderMaterial_s6h78")
-position = Vector2(-34, 11.999999)
-scale = Vector2(1.2238685, 1.3438675)
-sprite_frames = SubResource("SpriteFrames_8exy0")
-animation = &"mine"
-autoplay = "mine"
-
-[node name="MainSprite" type="Sprite2D" parent="." unique_id=902423842]
-texture = ExtResource("3_04r1m")
-
-[node name="BigMiddleFire" type="AnimatedSprite2D" parent="." unique_id=944163472]
-z_index = -1
-position = Vector2(-3, 69)
-rotation = -3.0848324
-scale = Vector2(0.7436903, 0.70316607)
-sprite_frames = ExtResource("7_q1gne")
-autoplay = "default"
-frame_progress = 0.63240105
-
-[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="." unique_id=1422513412]
-z_index = -1
-position = Vector2(-50.999992, 71.00001)
-rotation = -3.0077937
-scale = Vector2(0.75914913, 0.7179046)
-sprite_frames = ExtResource("8_8exy0")
-autoplay = "default"
-frame_progress = 0.09808198
-
-[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="." unique_id=957004589]
-z_index = -1
-position = Vector2(46, 71)
-rotation = 3.0137565
-scale = Vector2(0.712416, 0.712416)
-sprite_frames = ExtResource("8_8exy0")
-autoplay = "default"
-frame_progress = 0.9428698
-
-[node name="SmallLeftFire" type="AnimatedSprite2D" parent="." unique_id=474877720]
-z_index = -1
-position = Vector2(-86, 71)
-rotation = -2.7951531
-scale = Vector2(0.8041431, 0.8041431)
-sprite_frames = ExtResource("9_uh5uj")
-autoplay = "default"
-frame_progress = 0.12617896
-
-[node name="SmallRightFire" type="AnimatedSprite2D" parent="." unique_id=648727063]
-z_index = -1
-position = Vector2(82, 68.99999)
-rotation = 2.8008263
-scale = Vector2(0.7143937, 0.7143937)
-sprite_frames = ExtResource("9_uh5uj")
-autoplay = "default"
-frame_progress = 0.8978124
-
 [node name="PanelHoverHitbox" type="Control" parent="." unique_id=1821348728 node_paths=PackedStringArray("_objectToShow")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -322,3 +316,80 @@ offset_top = -208.0
 offset_right = 290.0
 offset_bottom = -83.0
 scale = Vector2(0.75, 0.75)
+
+[node name="StationSprite" type="Node2D" parent="." unique_id=503290803]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StationSprite" unique_id=833271557]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_gv8dn")
+autoplay = &"wobble"
+
+[node name="WindowsBG" type="Sprite2D" parent="StationSprite" unique_id=1270814919]
+position = Vector2(0, 30)
+texture = ExtResource("1_s6h78")
+
+[node name="Collector" type="AnimatedSprite2D" parent="StationSprite" unique_id=705424275]
+material = SubResource("ShaderMaterial_s6h78")
+position = Vector2(6, 24)
+rotation = -3.1415925
+scale = Vector2(0.99013346, -1.2700728)
+sprite_frames = SubResource("SpriteFrames_r02yb")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="Miner" type="AnimatedSprite2D" parent="StationSprite" unique_id=1976390937]
+material = SubResource("ShaderMaterial_s6h78")
+position = Vector2(-34, 42)
+scale = Vector2(1.2238685, 1.3438675)
+sprite_frames = SubResource("SpriteFrames_8exy0")
+animation = &"mine"
+autoplay = "mine"
+
+[node name="MainSprite" type="Sprite2D" parent="StationSprite" unique_id=902423842]
+position = Vector2(0, 30)
+texture = ExtResource("3_04r1m")
+
+[node name="BigMiddleFire" type="AnimatedSprite2D" parent="StationSprite" unique_id=944163472]
+z_index = -1
+position = Vector2(-3, 99)
+rotation = -3.0848324
+scale = Vector2(0.74369025, 0.703166)
+sprite_frames = ExtResource("7_q1gne")
+autoplay = "default"
+frame_progress = 0.63240105
+
+[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="StationSprite" unique_id=1422513412]
+z_index = -1
+position = Vector2(-50.999992, 101.00001)
+rotation = -3.0077937
+scale = Vector2(0.7591492, 0.7179046)
+sprite_frames = ExtResource("8_8exy0")
+autoplay = "default"
+frame_progress = 0.09808198
+
+[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="StationSprite" unique_id=957004589]
+z_index = -1
+position = Vector2(46, 101)
+rotation = 3.0137565
+scale = Vector2(0.71241605, 0.71241605)
+sprite_frames = ExtResource("8_8exy0")
+autoplay = "default"
+frame_progress = 0.9428698
+
+[node name="SmallLeftFire" type="AnimatedSprite2D" parent="StationSprite" unique_id=474877720]
+z_index = -1
+position = Vector2(-86, 101)
+rotation = -2.7951531
+scale = Vector2(0.8041431, 0.8041431)
+sprite_frames = ExtResource("9_uh5uj")
+autoplay = "default"
+frame_progress = 0.12617896
+
+[node name="SmallRightFire" type="AnimatedSprite2D" parent="StationSprite" unique_id=648727063]
+z_index = -1
+position = Vector2(82, 98.99999)
+rotation = 2.8008263
+scale = Vector2(0.7143936, 0.7143936)
+sprite_frames = ExtResource("9_uh5uj")
+autoplay = "default"
+frame_progress = 0.8978124

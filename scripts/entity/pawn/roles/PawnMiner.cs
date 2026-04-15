@@ -11,6 +11,28 @@ public partial class PawnMiner : Pawn
 {
     private PlanetTile _targetTile;
     private Vector2I _targetCoords;
+    
+    [Export] private AudioStreamPlayer2D SFX;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        visual.FrameChanged += OnFrameChanged;
+    }
+
+    private void OnFrameChanged()
+    {
+        if (visual.Animation == "mine")
+        {
+            if (visual.Frame == 4)
+            {
+                //TODO: deal damage to the target tile
+                SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
+                SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
+                SFX.Play();
+            }
+        }
+    }
 
     protected override void DoBehaviour(float d)
     {

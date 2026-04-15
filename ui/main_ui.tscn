@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b7f2avyutw0gh" path="res://ui/sprites/icons/penguin_icon.tres" id="6_enix5"]
 [ext_resource type="Texture2D" uid="uid://bruro3e5k25db" path="res://ui/sprites/icons/fast_forward.tres" id="6_fa42e"]
 [ext_resource type="Texture2D" uid="uid://6vrcyfk7ey8" path="res://ui/sprites/icons/pentastone_icon.tres" id="6_wknjk"]
+[ext_resource type="Script" uid="uid://cvhokpr8hjuha" path="res://scripts/ui/GameTimeControl.cs" id="7_bu6un"]
 [ext_resource type="Shader" uid="uid://cmkhs574rlf6c" path="res://shaders/ui/evolve_button.tres" id="7_fa42e"]
 [ext_resource type="FontFile" uid="uid://btawcf8lna83j" path="res://ui/fonts/TinyFontCraftpixPixel.otf" id="8_ck7gc"]
 [ext_resource type="Texture2D" uid="uid://cd66rbvyyljvm" path="res://ui/sprites/icons/penguin_miner_icon.tres" id="12_ov8o7"]
@@ -56,6 +57,7 @@ font = ExtResource("1_3lvfr")
 font_size = 45
 
 [node name="MainUI" type="Control" unique_id=976099585]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -307,10 +309,13 @@ layout_mode = 2
 mouse_filter = 2
 vertical = true
 
-[node name="Control" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=1345845499]
+[node name="Control" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Controls" unique_id=1345845499 node_paths=PackedStringArray("pauseButton", "resumeButton", "speedUpButton")]
 layout_mode = 2
-mouse_filter = 0
 alignment = 2
+script = ExtResource("7_bu6un")
+pauseButton = NodePath("Button1")
+resumeButton = NodePath("Button2")
+speedUpButton = NodePath("Button3")
 
 [node name="Button1" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1924142986]
 custom_minimum_size = Vector2(50, 50)

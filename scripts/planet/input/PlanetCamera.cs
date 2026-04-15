@@ -17,7 +17,6 @@ public partial class PlanetCamera : Camera2D
     [Export] public float MinZoom = 0.3f;
     [Export] public float MaxZoom = 3.0f;
 
-
     public override void _Ready()
     {
         Angle = 0;
@@ -28,7 +27,7 @@ public partial class PlanetCamera : Camera2D
     
     public override void _Process(double delta)
     {
-        float dt = (float)delta;
+        float dt = (float)(delta / Engine.TimeScale);
 
         if (Input.IsActionPressed("ui_left"))
             Angle -= dt * MoveSpeed * 0.002f;
@@ -64,6 +63,9 @@ public partial class PlanetCamera : Camera2D
 
         ZoomLevel = Mathf.Clamp(ZoomLevel, MinZoom, MaxZoom);
         Zoom = new Vector2(ZoomLevel, ZoomLevel);
+        
+        float sfxVolume = Mathf.Remap(ZoomLevel, MinZoom, MaxZoom, -80f, 0f);
+        sfxVolume = Mathf.Clamp(sfxVolume + 40f, -80f, 0f);
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), sfxVolume);
     }
-
 }

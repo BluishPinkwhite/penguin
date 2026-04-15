@@ -138,6 +138,7 @@ shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
 
 [node name="TreeView" type="Control" unique_id=69398314]
+process_mode = 3
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
