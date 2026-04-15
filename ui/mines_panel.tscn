@@ -70,7 +70,7 @@ script = ExtResource("3_qv1my")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
 _purchasableNameLabel = NodePath("PurchasableName")
-Param = 17
+_recipe = 3017
 
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable" unique_id=58081571]
 layout_mode = 2
@@ -111,7 +111,7 @@ script = ExtResource("3_qv1my")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
 _purchasableNameLabel = NodePath("PurchasableName")
-Param = 19
+_recipe = 3019
 
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable2" unique_id=1266405974]
 layout_mode = 2
@@ -144,7 +144,50 @@ layout_mode = 2
 texture = ExtResource("5_kd2gs")
 expand_mode = 2
 
+[node name="Purchasable3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1816368714 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_qv1my")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 3024
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=254482672]
+layout_mode = 2
+mouse_filter = 1
+text = "Hauler"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=268557169]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=884119481]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=73310214]
+layout_mode = 2
+mouse_filter = 1
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=1452011686]
+layout_mode = 2
+texture = ExtResource("5_kd2gs")
+expand_mode = 2
+
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseExit"]

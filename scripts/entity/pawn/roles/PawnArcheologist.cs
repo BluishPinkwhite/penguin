@@ -7,7 +7,7 @@ using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.entity.pawn.roles;
 
-public partial class PawnMiner : Pawn
+public partial class PawnArcheologist : Pawn
 {
     private PlanetTile _targetTile;
     private Vector2I _targetCoords;
@@ -101,10 +101,10 @@ public partial class PawnMiner : Pawn
             {
                 if (_targetTile != null && !_targetTile.IsEmpty())
                 {
-                    _targetTile.Integrity -= 0.25f / _targetTile.Material.BreakTime();
+                    _targetTile.Integrity -= 0.02f / _targetTile.Material.BreakTime();
                     
-                    SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
-                    SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
+                    SFX.PitchScale = (float)GD.RandRange(1.8f, 2.4f);
+                    SFX.VolumeDb = (float)GD.RandRange(-8f, -4f);
                     SFX.Play();
 
                     if (_targetTile.Integrity <= 0)
@@ -127,19 +127,10 @@ public partial class PawnMiner : Pawn
 
                         Counter++;
 
-                        if (Counter >= 5)
-                        {
-                            Counter = 0;
-                            State = PawnState.ReturnH;
-                            Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
-                            SetCooldown(1);
-                        }
-                        else
-                        {
-                            State = PawnState.Idle;
-                            SetCooldown(2.5f);
-                        }
+                        State = PawnState.ReturnH;
+                        Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
                     }
+                    SetCooldown(1);
                 }
             }
         }

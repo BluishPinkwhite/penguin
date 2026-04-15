@@ -8,13 +8,14 @@
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c7l2qohn2woy8" path="res://scenes/buildings/ResourceStation.tscn" id="5_71j4m"]
 [ext_resource type="Shader" uid="uid://cxqkpexcwluut" path="res://shaders/planet/planet_rendering.gdshader" id="7_o8fc1"]
-[ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/PawnMiner.tscn" id="8_xo05s"]
+[ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/scenes/PawnMiner.tscn" id="8_xo05s"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
-[ext_resource type="PackedScene" uid="uid://tjqf5g3prke0" path="res://scripts/entity/pawn/PawnHauler.tscn" id="9_dss4m"]
+[ext_resource type="PackedScene" uid="uid://tjqf5g3prke0" path="res://scripts/entity/pawn/scenes/PawnHauler.tscn" id="9_dss4m"]
 [ext_resource type="Script" uid="uid://dijt32b8nu8bu" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
 [ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://bfar2tc8s1dv6" path="res://ui/main_ui.tscn" id="11_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://cxb8oxcjcff" path="res://scenes/buildings/MinerStation.tscn" id="11_xo05s"]
+[ext_resource type="PackedScene" uid="uid://pl6bkeonsi7q" path="res://scripts/entity/pawn/scenes/PawnArcheologist.tscn" id="14_lakw3"]
 [ext_resource type="Script" uid="uid://cnnkbc70xw42v" path="res://scripts/audio/SoundtrackPlayer.cs" id="16_dss4m"]
 [ext_resource type="AudioStream" uid="uid://b14qedkevk421" path="res://sounds/soundtrack/A Foreign Planet - Looped.wav" id="17_7t5mc"]
 
@@ -62,7 +63,7 @@ PolarPos = Vector2(20, -20)
 
 [node name="Pawns" type="Node2D" parent="." unique_id=1446453432]
 script = ExtResource("4_qfnet")
-PawnScenes = [ExtResource("8_xo05s"), ExtResource("9_dss4m")]
+PawnScenes = [ExtResource("8_xo05s"), ExtResource("9_dss4m"), ExtResource("14_lakw3")]
 
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
 

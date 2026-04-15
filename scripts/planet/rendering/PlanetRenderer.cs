@@ -31,11 +31,7 @@ public partial class PlanetRenderer : Node2D
     {
         _data = data;
 
-        int maxTiles = 0;
-        foreach (var layer in _data.Layers)
-            maxTiles = Math.Max(maxTiles, layer.Length);
-
-        _dataImage = Image.CreateEmpty(maxTiles, _data.Layers.Count, false, Image.Format.Rgb8);
+        _dataImage = Image.CreateEmpty(_data.Layers[^1].Length, _data.Layers.Count, false, Image.Format.Rgb8);
         _dataTexture = ImageTexture.CreateFromImage(_dataImage);
 
         _mat = new ShaderMaterial { Shader = PlanetShader };
@@ -45,11 +41,11 @@ public partial class PlanetRenderer : Node2D
         _mat.SetShaderParameter("total_layers", _data.Layers.Count);
         _mat.SetShaderParameter("max_layer_width", Consts.MaxLayerWidth);
 
-        BuildFullMesh(maxTiles);
+        BuildFullMesh();
         RefreshDataTexture();
     }
 
-    private void BuildFullMesh(int maxTiles)
+    private void BuildFullMesh()
     {
         var st = new SurfaceTool();
         st.Begin(Mesh.PrimitiveType.Triangles);
@@ -218,11 +214,20 @@ public partial class PlanetRenderer : Node2D
             {
                 PlanetTile t = _data.Layers[layer][tile];
 
-                Item item = t.Destroy();
-                if (item != Item.None)
-                    Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), item);
+                RecipeID recipe = t.Destroy();
 
                 _data.PropagateLight(layer, tile, PlanetTile.LightMax);
+                        
+                if (recipe != RecipeID.None)
+                {
+                    foreach ((Item item, int amount) tuple in Inventory.TryGetRecipe(recipe))
+                    {
+                        for (int i = 0; i < tuple.amount; i++)
+                        {
+                            Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), tuple.item);
+                        }
+                    }
+                }
             }
         }
 

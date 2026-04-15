@@ -9,9 +9,9 @@ namespace Incremental.scripts.entity.pawn;
 
 public partial class PawnManager : Node2D
 {
-    private Dictionary<Role, int> _spawnedRoles = new();
+    private readonly Dictionary<Role, int> _spawnedRoles = new();
     
-    [Export] PackedScene[] PawnScenes = new PackedScene[2];
+    [Export] PackedScene[] PawnScenes = new PackedScene[3];
     
     
     public override void _Ready()
@@ -21,33 +21,41 @@ public partial class PawnManager : Node2D
 
     public void UpdatePawnCounts()
     {
-        foreach (KeyValuePair<Role, RoleData> pair in Inventory.Roles)
+        foreach (ItemData data in Inventory.Items.Values)
         {
-            _spawnedRoles.TryGetValue(pair.Key, out int i);
+            if (!data.item.IsRole())
+                continue;
 
-            if (i >= pair.Value.BoughtAmount)
+
+            Role role = data.item.AsRole();
+            _spawnedRoles.TryGetValue(role, out int i);
+
+            if (i >= data.Amount)
             {
-                _spawnedRoles[pair.Key] = pair.Value.BoughtAmount;
+                // clamp
+                _spawnedRoles[role] = data.Amount;
             }
             else
             {
-                for (; i < pair.Value.BoughtAmount; i++)
-                {
-                    int index = -1;
-                    if (pair.Key == Role.Miner) index = 0;
-                    else if (pair.Key == Role.Hauler) index = 1;
+                int index = -1;
+                if (role == Role.Miner) index = 0;
+                else if (role == Role.Hauler) index = 1;
+                else if (role == Role.Archeologist) index = 2;
 
-                    if (index == -1)
-                        break;
-                    
+                if (index == -1)
+                    continue;
+                
+                // spawn more
+                for (; i < data.Amount; i++)
+                {
                     Pawn p = PawnScenes[index].Instantiate<Pawn>();
-                    p.Role = pair.Key;
+                    p.Role = role;
                     p.PolarPos = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
                     p.Target = p.PolarPos;
                     AddChild(p);
                 }
 
-                _spawnedRoles[pair.Key] = pair.Value.BoughtAmount;
+                _spawnedRoles[role] = data.Amount;
             }
         }
     }

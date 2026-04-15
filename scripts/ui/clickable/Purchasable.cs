@@ -1,8 +1,7 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
-using Incremental.scripts.entity.pawn.roles;
+using Incremental.ui;
 
 namespace Incremental.scripts.ui.clickable;
 
@@ -12,31 +11,58 @@ public partial class Purchasable : Clickable
     [Export] private TextureRect _costIcon;
     [Export] private Label _purchasableNameLabel;
 
+    [Export] private RecipeID _recipe;
+
+
     public override void _Ready()
     {
         base._Ready();
+
+        Resources.I._purchasables.Add(this);
 
         UpdateVisuals();
     }
 
     public override void OnClick()
     {
+        TryPurchase();
         base.OnClick();
-
-        UpdateVisuals();
     }
 
-    private void UpdateVisuals()
+    private void TryPurchase()
     {
-        if (Inventory.Roles.TryGetValue((Role)Param, out RoleData roleData))
+        Inventory.ApplyRecipe(_recipe);
+    }
+
+    public void UpdateVisuals()
+    {
+        if (Inventory.Recipes.TryGetValue(_recipe, out ItemRecipe recipe))
         {
-            int index = roleData.CostMaterial.IsSpawnable() ? Math.Abs((int)roleData.CostMaterial) : Math.Abs((int)roleData.RoleCost);
-            ((AtlasTexture)_costIcon.Texture).Region = ((AtlasTexture)_costIcon.Texture).Region with
+            SetVisible(recipe.Unlocked);
+
+            // TODO extend for multiple items
+            if (recipe.Ingredients.Count > 0)
             {
-                Position = new Vector2(32 * (index % 8), 32 * (int)(index / 4))
-            };
-            _costLabel.Text = ((int)Math.Ceiling(roleData.NewCost)).ToString();
-            _purchasableNameLabel.Text = Param.ToString().Split("_")[^1];
+                if (recipe.Ingredients[0].Item.Renderable())
+                {
+                    ((AtlasTexture)_costIcon.Texture).Region = ((AtlasTexture)_costIcon.Texture).Region with
+                    {
+                        Position = new Vector2(32 * (recipe.Ingredients[0].Item.RenderIndex() % 8),
+                            32 * (int)(recipe.Ingredients[0].Item.RenderIndex() / 8))
+                    };
+                }
+
+                _costLabel.Text = (recipe.Ingredients[0].RenderCost).ToString();
+            }
+
+            if (recipe.Products.Count > 0)
+            {
+                _purchasableNameLabel.Text = recipe.Products[0].Item.ToString().Split("_")[^1];
+            }
+        }
+        else
+        {
+            GD.PrintErr($"Purchasable not found for recipe: {_recipe} ({_recipe.ToString()})");
         }
     }
 }

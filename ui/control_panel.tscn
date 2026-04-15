@@ -27,6 +27,21 @@ grow_end = -120.0
 font = ExtResource("3_wheia")
 font_size = 24
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfgl"]
+atlas = ExtResource("5_wheia")
+region = Rect2(96, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_veslf"]
+atlas = ExtResource("5_wheia")
+region = Rect2(96, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7y2t"]
+atlas = ExtResource("5_wheia")
+region = Rect2(96, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wheia"]
 atlas = ExtResource("5_wheia")
 region = Rect2(96, 0, 32, 32)
@@ -74,7 +89,7 @@ script = ExtResource("3_wqfgl")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
 _purchasableNameLabel = NodePath("PurchasableName")
-Param = 8
+_recipe = 1000
 
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable" unique_id=58081571]
 layout_mode = 2
@@ -104,8 +119,137 @@ vertical_alignment = 2
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable/HBoxContainer/ResourceCost" unique_id=910188610]
 layout_mode = 2
+texture = SubResource("AtlasTexture_wqfgl")
+expand_mode = 2
+
+[node name="Purchasable2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=66390510 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_wqfgl")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 1001
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable2" unique_id=1665010908]
+layout_mode = 2
+mouse_filter = 1
+text = "amogus"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable2" unique_id=1700743272]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable2/HBoxContainer" unique_id=1800832098]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable2/HBoxContainer/ResourceCost" unique_id=21580913]
+layout_mode = 2
+mouse_filter = 1
+text = "1000000"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable2/HBoxContainer/ResourceCost" unique_id=1309143627]
+layout_mode = 2
+texture = SubResource("AtlasTexture_veslf")
+expand_mode = 2
+
+[node name="Purchasable3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=504896131 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_wqfgl")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 1002
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=2090977076]
+layout_mode = 2
+mouse_filter = 1
+text = "amogus"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=1939411435]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=1594008238]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=1026451299]
+layout_mode = 2
+mouse_filter = 1
+text = "1000000"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=351294311]
+layout_mode = 2
+texture = SubResource("AtlasTexture_a7y2t")
+expand_mode = 2
+
+[node name="Purchasable4" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1299051084 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_wqfgl")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 1003
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable4" unique_id=1579576392]
+layout_mode = 2
+mouse_filter = 1
+text = "amogus"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable4" unique_id=1294913848]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable4/HBoxContainer" unique_id=1998925157]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable4/HBoxContainer/ResourceCost" unique_id=39237342]
+layout_mode = 2
+mouse_filter = 1
+text = "1000000"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable4/HBoxContainer/ResourceCost" unique_id=1428865789]
+layout_mode = 2
 texture = SubResource("AtlasTexture_wheia")
 expand_mode = 2
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseExit"]

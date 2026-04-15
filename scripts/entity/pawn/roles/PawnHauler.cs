@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
 using Incremental.scripts.director;
+using Incremental.scripts.director.data;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
+using Incremental.ui;
 
 namespace Incremental.scripts.entity.pawn.roles;
 
@@ -98,11 +99,12 @@ public partial class PawnHauler : Pawn
         {
             if (InventoryID != Item.None)
             {
-                if (!Inventory.Items.TryAdd(InventoryID, InventoryCount))
-                {
-                    Inventory.Items[InventoryID] += InventoryCount;
-                }
+                Inventory.Items[InventoryID].Amount += InventoryCount;
                 Resources.I.UpdateVisuals();
+
+                Inventory.Items[InventoryID].Obtained = true;
+                if (Inventory.Recipes.ContainsKey((RecipeID)InventoryID + 1000))
+                    Inventory.Recipes[(RecipeID)InventoryID + 1000].Unlocked = true;
 
                 InventoryID = Item.None;
                 InventoryCount = 0;

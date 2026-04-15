@@ -1,16 +1,19 @@
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Incremental.scripts.director;
-using Incremental.scripts.entity.pawn.roles;
+using Incremental.scripts.director.data;
+using Incremental.scripts.ui.clickable;
+
+namespace Incremental.ui;
 
 public partial class Resources : BoxContainer
 {
     public static Resources I;
-    
+
     private List<BoxContainer> _containers = new();
     private List<Label> _labels = new();
-    
+    public List<Purchasable> _purchasables = new();
+
     [Export] private BoxContainer _penguinContainer;
     private Label _penguinLabel;
 
@@ -22,7 +25,7 @@ public partial class Resources : BoxContainer
     public override void _Ready()
     {
         base._Ready();
-        
+
         foreach (Node child in GetChildren())
         {
             if (child is BoxContainer container)
@@ -40,22 +43,39 @@ public partial class Resources : BoxContainer
 
     public void UpdateVisuals()
     {
-        foreach (KeyValuePair<Item, int> pair in Inventory.Items)
+        foreach (ItemData data in Inventory.Items.Values)
         {
-            if ((int)pair.Key < _containers.Count)
+            int index = -1;
+            if (data.item == Item.Dirt)
+                index = 0;
+            else if (data.item == Item.Stone)
+                index = 1;
+            else if (data.item == Item.Basalt)
+                index = 2;
+            else if (data.item == Item.Magma)
+                index = 3;
+            else if (data.item == Item.Gem)
+                index = 4;
+            else if (data.item == Item.Component)
+                index = 5;
+            else continue;
+            
+            if (data.Obtained)
             {
-                if (pair.Value > 0)
-                {
-                    _containers[(int)pair.Key].Visible = true;
-                    _labels[(int)pair.Key].Text = pair.Value.ToString();
-                }
-                else
-                {
-                    _containers[(int)pair.Key].Visible = false;
-                }
+                _containers[index].Visible = true;
+                _labels[index].Text = data.Amount.ToString();
+            }
+            else
+            {
+                _containers[index].Visible = false;
             }
         }
 
-        _penguinLabel.Text = Inventory.Roles[Role.Unemployed].BoughtAmount.ToString();
+        foreach (Purchasable purchasable in _purchasables)
+        {
+            purchasable.UpdateVisuals();
+        }
+
+        _penguinLabel.Text = Inventory.Items[Item.Penguin].Amount.ToString();
     }
 }

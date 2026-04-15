@@ -45,6 +45,11 @@ atlas = ExtResource("3_sls23")
 region = Rect2(0, 32, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcfg7"]
+atlas = ExtResource("3_sls23")
+region = Rect2(32, 32, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
 [sub_resource type="LabelSettings" id="LabelSettings_bu6un"]
 font = ExtResource("1_3lvfr")
 font_size = 55
@@ -173,6 +178,21 @@ vertical_alignment = 1
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=412278767]
 layout_mode = 2
 texture = SubResource("AtlasTexture_wknjk")
+expand_mode = 3
+
+[node name="Resource6" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=316390061]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource6" unique_id=822782826]
+layout_mode = 2
+mouse_filter = 1
+text = "123456789"
+label_settings = SubResource("LabelSettings_x3h8h")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource6" unique_id=1085030441]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hcfg7")
 expand_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=945986638]
@@ -386,7 +406,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("3_x3h8h")
 Type = 4
-Param = 21
+Param = 2
 
 [node name="Station3" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Debug" unique_id=1356895264]
 custom_minimum_size = Vector2(60, 60)
@@ -396,7 +416,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("3_x3h8h")
 Type = 4
-Param = 20
+Param = 1
 
 [node name="Progressbars" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1965011789]
 layout_mode = 2

@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
-using Incremental.scripts.director.data;
 using Incremental.scripts.entity.pawn;
-using Incremental.scripts.entity.pawn.roles;
+using Incremental.ui;
 
 namespace Incremental.scripts.ui.clickable;
 
-public partial class Clickable : Node
+public partial class Clickable : Control
 {
     protected bool IsFocused;
 
@@ -42,26 +39,7 @@ public partial class Clickable : Node
     {
         if (Type == ClickType.BuyRole)
         {
-            if (Inventory.Roles.TryGetValue((Role)Param, out RoleData roleData))
-            {
-                if (roleData.CostMaterial.IsSpawnable() &&
-                    Inventory.Items.GetValueOrDefault(roleData.CostMaterial, 0) >= roleData.NewCost)
-                {
-                    roleData.BoughtAmount++;
-                    Inventory.Items[roleData.CostMaterial] -= (int)roleData.NewCost;
-                    roleData.NewCost = Math.Min(roleData.NewCost * 1.1f, roleData.NewCost + 4);
-                }
-                else
-                {
-                    if (roleData.NewCost <= Inventory.GetRoleCount(roleData.RoleCost))
-                    {
-                        Inventory.Roles[roleData.RoleCost].BoughtAmount -= (int)roleData.NewCost;
-                        roleData.BoughtAmount++;
-                    }
-                }
-
-                Game.I.Pawns.UpdatePawnCounts();
-            }
+            // do nothing - Purchasable handles this
         }
         else if (Type == ClickType.ChangeDebug)
         {

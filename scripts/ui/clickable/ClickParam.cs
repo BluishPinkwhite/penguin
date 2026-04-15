@@ -1,13 +1,8 @@
-﻿using Incremental.scripts.entity.pawn.roles;
-
-namespace Incremental.scripts.ui.clickable;
+﻿namespace Incremental.scripts.ui.clickable;
 
 public enum ClickParam
 {
-    BuyRole_Penguin = Role.Unemployed,
-    BuyRole_Miner = Role.Miner,
-    BuyRole_Hauler = Role.Hauler,
-    
+    None = 0,
     
     Debug_ShowTargets,
     Debug_ShowState,

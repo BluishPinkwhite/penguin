@@ -1,5 +1,5 @@
 ﻿using System;
-using Incremental.scripts.director;
+using Incremental.scripts.director.data;
 using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.planet.data;
@@ -22,24 +22,24 @@ public class PlanetTile
         set => _light = Math.Clamp(value, 0, LightMax);
     }
 
-    public Item Destroy()
+    public RecipeID Destroy()
     {
         PlanetRenderer.isDirty = true;
 
-        Item item = Material switch
+        RecipeID recipe = Material switch
         {
-            TileMaterial.Grass or TileMaterial.Dirt => Item.Dirt,
-            TileMaterial.Stone => Item.Stone,
-            TileMaterial.Basalt => Item.Basalt,
-            TileMaterial.Magma => Item.Magma,
-            _ => Item.None
+            TileMaterial.Grass or TileMaterial.Dirt => RecipeID.Mine_Dirt,
+            TileMaterial.Stone => RecipeID.Mine_Stone,
+            TileMaterial.Basalt => RecipeID.Mine_Basalt,
+            TileMaterial.Magma => RecipeID.Mine_Magma,
+            _ => RecipeID.None
         };
         
         Integrity = 0;
         Material = TileMaterial.Unknown;
         Light = 0;
 
-        return item;
+        return recipe;
     }
     
     public void Renew(TileMaterial material)
