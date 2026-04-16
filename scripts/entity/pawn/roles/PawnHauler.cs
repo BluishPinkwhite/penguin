@@ -13,33 +13,46 @@ namespace Incremental.scripts.entity.pawn.roles;
 public partial class PawnHauler : Pawn
 {
     [Export] private Sprite2D PickupSprite;
-    
+
     public Item InventoryID = Item.None;
     public int InventoryCount;
-    
+
     private Pickup _pickupTarget;
-    
-    
+
+
     protected override void DoBehaviour(float d)
     {
         float gravityY = PolarPos.Y - d * Gravity;
 
-        if (State == PawnState.Idle)
+        if (State is PawnState.Idle or PawnState.GiveUp)
         {
+            if (State == PawnState.GiveUp)
+            {
+                visual.Rotate(Game.RandomAround(0.28f, 0.1f));
+            }
+            
             // wait till the pawn is on the ground
             PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
             if (below != null && !below.IsEmpty())
             {
-                _pickupTarget = GetNewPickupTarget();
-                if (_pickupTarget != null)
-                    State = PawnState.Move;
+                if (State == PawnState.Idle)
+                {
+                    _pickupTarget = GetNewPickupTarget();
+                    if (_pickupTarget != null)
+                        State = PawnState.Move;
+                }
+                else
+                {
+                    BreakTile(below, Mathf.FloorToInt(PolarPos.X), Mathf.FloorToInt(gravityY));
+                    Retire();
+                }
             }
-            else
+            else if (State == PawnState.Idle)
             {
                 SetCooldown(2);
             }
         }
-        else if (State is PawnState.Move or PawnState.ReturnH)
+        else if (State is PawnState.Move or PawnState.ReturnH or PawnState.RetireH)
         {
             if (WalkToTarget(d))
             {
@@ -54,14 +67,27 @@ public partial class PawnHauler : Pawn
                     Target = ResourceStation.I.PolarPos;
                     SetCooldown(0.35f);
                 }
+                else if (State == PawnState.RetireH)
+                {
+                    State = PawnState.RetireV;
+                    SetCooldown(0.35f);
+                }
             }
         }
-        else if (State == PawnState.ReturnV)
+        else if (State is PawnState.ReturnV or PawnState.RetireV)
         {
             if (FlyToTarget(d))
             {
-                State = PawnState.DropOff;
-                SetCooldown(2.5f);
+                if (State == PawnState.ReturnV)
+                {
+                    State = PawnState.DropOff;
+                    SetCooldown(2.5f);
+                }
+                else
+                {
+                    State = PawnState.GiveUp;
+                    SetCooldown(0.25f);
+                }
             }
         }
         else if (State == PawnState.Action)
@@ -75,12 +101,14 @@ public partial class PawnHauler : Pawn
 
                 PickupSprite.RegionRect = _pickupTarget.GetPickupCoords();
                 PickupSprite.Visible = true;
-                
+
                 _pickupTarget.QueueFree();
                 _pickupTarget = null;
-                
-                State = PawnState.ReturnH;
+
                 Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
+                Counter++;
+
+                State = PawnState.ReturnH;
             }
             else if (IsInstanceValid(_pickupTarget))
             {
@@ -105,14 +133,30 @@ public partial class PawnHauler : Pawn
                 Inventory.Items[InventoryID].Obtained = true;
                 if (Inventory.Recipes.ContainsKey((RecipeID)InventoryID + 1000))
                     Inventory.Recipes[(RecipeID)InventoryID + 1000].Unlocked = true;
+                
+                if (InventoryID == Item.Gem)
+                    Inventory.UnlockRecipe(RecipeID.AssignRole_Archeologist);
 
                 InventoryID = Item.None;
                 InventoryCount = 0;
                 PickupSprite.Visible = false;
             }
             
-            State = PawnState.Idle;
-            SetCooldown(1);
+            if (Counter > Consts.Pawns[Role.Hauler].RetirementCycles)
+            {
+                State = PawnState.RetireH;
+                Pickup pickup = GetNewPickupTarget();
+                    
+                float x = pickup?.PolarPos.X ?? Game.RandomAround(PolarPos.X, 5);
+                float y = Game.RandomAround(ResourceStation.I.Surface.Y + 50, 5);
+
+                Target = new Vector2(x, y);
+            }
+            else
+            {
+                State = PawnState.Idle;
+                SetCooldown(1);
+            }
         }
     }
 
@@ -147,11 +191,11 @@ public partial class PawnHauler : Pawn
         {
             visual.Animation = "idle";
         }
-        else if (State is PawnState.Move or PawnState.ReturnH)
+        else if (State is PawnState.Move or PawnState.ReturnH or PawnState.RetireH or PawnState.GiveUp)
         {
             visual.Animation = Flying ? "fly" : "walk";
         }
-        else if (State == PawnState.ReturnV)
+        else if (State is PawnState.ReturnV or PawnState.RetireV)
         {
             visual.Animation = "fly";
         }

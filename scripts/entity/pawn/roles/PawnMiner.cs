@@ -24,18 +24,34 @@ public partial class PawnMiner : Pawn
     {
         float gravityY = PolarPos.Y - d * Gravity;
 
-        if (State == PawnState.Idle)
+        if (State is PawnState.Idle or PawnState.GiveUp)
         {
+            if (State == PawnState.GiveUp)
+            {
+                visual.Rotate(Game.RandomAround(0.28f, 0.1f));
+            }
+            
             // wait till the pawn is on ground
             PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
             if (below != null && !below.IsEmpty() && GetNewMiningTarget())
             {
-                Target = new Vector2(_targetCoords.X + 0.5f, _targetCoords.Y + 1.25f);
-                State = PawnState.Move;
-                SetCooldown(1);
+                if (State == PawnState.Idle)
+                {
+                    Target = new Vector2(_targetCoords.X + 0.5f, _targetCoords.Y + 1.25f);
+                    State = PawnState.Move;
+                    SetCooldown(1);
+                }
+                else
+                {
+                    if (_targetTile != null && _targetTile.OwnerID == ID)
+                        _targetTile.OwnerID = -1;
+                    
+                    BreakTile(below, Mathf.FloorToInt(PolarPos.X), Mathf.FloorToInt(gravityY));
+                    Retire();
+                }
             }
         }
-        else if (State is PawnState.Move or PawnState.ReturnH)
+        else if (State is PawnState.Move or PawnState.ReturnH or PawnState.RetireH)
         {
             if (WalkToTarget(d))
             {
@@ -50,32 +66,61 @@ public partial class PawnMiner : Pawn
                     Target = ResourceStation.I.PolarPos;
                     SetCooldown(0.35f);
                 }
+                else if (State == PawnState.RetireH)
+                {
+                    State = PawnState.RetireV;
+                    SetCooldown(0.35f);
+                }
             }
         }
-        else if (State == PawnState.ReturnV)
+        else if (State is PawnState.ReturnV or PawnState.RetireV)
         {
             if (FlyToTarget(d))
             {
-                State = PawnState.DropOff;
-                SetCooldown(2.5f);
+                if (State == PawnState.ReturnV)
+                {
+                    State = PawnState.DropOff;
+                    SetCooldown(2.5f);
+                }
+                else
+                {
+                    State = PawnState.GiveUp;
+                    SetCooldown(0.25f);
+                }
             }
         }
         else if (State == PawnState.Action)
         {
             // find a new tile when this tile was broken by someone else
             if (Mathf.FloorToInt(Target.X) != Mathf.FloorToInt(PolarPos.X) ||
-                Mathf.FloorToInt(Target.Y) != Mathf.FloorToInt(PolarPos.Y))
+                Mathf.FloorToInt(Target.Y) != Mathf.FloorToInt(PolarPos.Y) || _targetTile?.OwnerID != ID)
             {
                 State = PawnState.Idle;
 
-                if (_targetTile.OwnerID == ID)
+                if (_targetTile?.OwnerID == ID)
                     _targetTile.OwnerID = -1;
             }
         }
         else if (State == PawnState.DropOff)
         {
-            State = PawnState.Idle;
-            SetCooldown(1);
+            if (Counter > Consts.Pawns[Role.Miner].RetirementCycles)
+            {
+                State = PawnState.RetireH;
+                
+                bool hasTarget = _targetTile != null;
+                
+                float x = hasTarget ? Game.RandomAround(_targetCoords.X, 5) : Game.RandomAround(PolarPos.X, 5);
+                float y = Game.RandomAround(ResourceStation.I.Surface.Y + 50, 5);
+
+                Target = new Vector2(x, y);
+                
+                if (_targetTile != null && _targetTile.OwnerID == ID)
+                    _targetTile.OwnerID = -1;
+            }
+            else {
+                State = PawnState.Idle;
+                SetCooldown(1);
+            }
         }
     }
 
@@ -99,7 +144,7 @@ public partial class PawnMiner : Pawn
         {
             if (visual.Frame == 4)
             {
-                if (_targetTile != null && !_targetTile.IsEmpty())
+                if (_targetTile != null && !_targetTile.IsEmpty() && _targetTile.OwnerID == ID)
                 {
                     _targetTile.Integrity -= 0.25f / _targetTile.Material.BreakTime();
                     
@@ -109,27 +154,11 @@ public partial class PawnMiner : Pawn
 
                     if (_targetTile.Integrity <= 0)
                     {
-                        RecipeID recipe = _targetTile.Destroy();
-
-                        Game.I._data.PropagateLight(_targetCoords.Y,
-                            _targetCoords.X, PlanetTile.LightMax);
-                        
-                        if (recipe != RecipeID.None)
-                        {
-                            foreach ((Item item, int amount) tuple in Inventory.TryGetRecipe(recipe))
-                            {
-                                for (int i = 0; i < tuple.amount; i++)
-                                {
-                                    Pickup.Instantiate(PolarPos, tuple.item);
-                                }
-                            }
-                        }
-
+                        BreakTile(_targetTile, _targetCoords.X, _targetCoords.Y);
                         Counter++;
 
-                        if (Counter >= 5)
+                        if (Counter % 5 == 0)
                         {
-                            Counter = 0;
                             State = PawnState.ReturnH;
                             Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
                             SetCooldown(1);

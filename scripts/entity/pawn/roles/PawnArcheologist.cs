@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Collections.Generic;
+using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.entity.item;
@@ -91,8 +92,8 @@ public partial class PawnArcheologist : Pawn
 
         return false;
     }
-    
-    
+
+
     private void OnFrameChanged()
     {
         if (visual.Animation == "mine")
@@ -102,26 +103,21 @@ public partial class PawnArcheologist : Pawn
                 if (_targetTile != null && !_targetTile.IsEmpty())
                 {
                     _targetTile.Integrity -= 0.02f / _targetTile.Material.BreakTime();
-                    
+
                     SFX.PitchScale = (float)GD.RandRange(1.8f, 2.4f);
                     SFX.VolumeDb = (float)GD.RandRange(-8f, -4f);
                     SFX.Play();
 
                     if (_targetTile.Integrity <= 0)
                     {
-                        RecipeID recipe = _targetTile.Destroy();
+                        BreakTile(_targetTile, _targetCoords.X, _targetCoords.Y);
 
-                        Game.I._data.PropagateLight(_targetCoords.Y,
-                            _targetCoords.X, PlanetTile.LightMax);
-                        
-                        if (recipe != RecipeID.None)
+                        List<(Item item, int amount)> products = Inventory.TryGetRecipe(RecipeID.Gather_Component);
+                        foreach ((Item item, int amount) tuple in products)
                         {
-                            foreach ((Item item, int amount) tuple in Inventory.TryGetRecipe(recipe))
+                            for (int i = 0; i < tuple.amount; i++)
                             {
-                                for (int i = 0; i < tuple.amount; i++)
-                                {
-                                    Pickup.Instantiate(PolarPos, tuple.item);
-                                }
+                                Pickup.Instantiate(PolarPos, tuple.item);
                             }
                         }
 
@@ -130,6 +126,7 @@ public partial class PawnArcheologist : Pawn
                         State = PawnState.ReturnH;
                         Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
                     }
+
                     SetCooldown(1);
                 }
             }

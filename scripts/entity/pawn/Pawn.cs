@@ -1,7 +1,10 @@
 ﻿using Godot;
 using Incremental.scripts.debug;
 using Incremental.scripts.director;
+using Incremental.scripts.director.data;
+using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.pawn.roles;
+using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.entity.pawn;
 
@@ -206,6 +209,32 @@ public abstract partial class Pawn : SurfaceEntity
         UpdateAnimationState();
 
         visual.Play();
+    }
+
+    protected void Retire()
+    {
+        SetVisible(false);
+        Inventory.ApplyRecipe(RecipeID.Penguin_Retirement);
+        Game.I.Debug.RemoveLine(ID);
+        QueueFree();
+    }
+    
+    protected void BreakTile(PlanetTile planetTile, int tile, int layer)
+    {
+        RecipeID recipe = planetTile.Destroy();
+
+        Game.I._data.PropagateLight(layer, tile, PlanetTile.LightMax);
+                        
+        if (recipe != RecipeID.None)
+        {
+            foreach ((Item item, int amount) tuple in Inventory.TryGetRecipe(recipe))
+            {
+                for (int i = 0; i < tuple.amount; i++)
+                {
+                    Pickup.Instantiate(PolarPos, tuple.item);
+                }
+            }
+        }
     }
 
     protected abstract void DoBehaviour(float d);

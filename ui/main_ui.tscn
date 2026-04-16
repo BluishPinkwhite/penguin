@@ -419,6 +419,7 @@ Type = 4
 Param = 1
 
 [node name="Progressbars" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1965011789]
+visible = false
 layout_mode = 2
 size_flags_vertical = 10
 mouse_filter = 0

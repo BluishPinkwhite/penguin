@@ -26,7 +26,7 @@ public partial class Pickup : SurfaceEntity
 
     public Rect2 GetPickupCoords()
     {
-        return new Rect2(32 * (Item.RenderIndex() % 8), 32 * (int)((int)Item.RenderIndex() / 8), 32, 32);
+        return new Rect2(32 * (Item.RenderIndex() % 8), 32 * (int)(Item.RenderIndex() / 8), 32, 32);
     }
 
     public override void _PhysicsProcess(double delta)

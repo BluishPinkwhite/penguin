@@ -23,6 +23,12 @@ public partial class DebugDraw : Node2D
             DrawLine(line.start, line.end, line.color, 1.0f);
         }
     }
+    
+    public void RemoveLine(int ID)
+    {
+        _lines.Remove(ID);
+        QueueRedraw();
+    }
 
     private static Random _r = new(2); 
     public static Color GetColor(int id)

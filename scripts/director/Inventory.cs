@@ -42,6 +42,10 @@ public static class Inventory
         new ItemRecipe(RecipeID.Mine_Magma, [], [
             new ItemRecipe.Product(Item.Magma, 1), new ItemRecipe.Product(Item.Gem, 1, 0.0025)
         ], true);
+            
+        new ItemRecipe(RecipeID.Gather_Component, [], [
+            new ItemRecipe.Product(Item.Component, 1), new ItemRecipe.Product(Item.Gem, 1, 0.2)
+        ], true);
 
         new ItemRecipe(RecipeID.NewPenguinFor_Dirt,
             [new ItemRecipe.Ingredient(Item.Dirt, 1, 1.1, 0, 8)],

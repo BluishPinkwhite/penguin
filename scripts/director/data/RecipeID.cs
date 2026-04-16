@@ -9,6 +9,8 @@ public enum RecipeID
     Mine_Basalt = 3,
     Mine_Magma = 4,
     
+    Gather_Component = 10,
+    
     NewPenguinFor_Dirt = 1000 + Item.Dirt,
     NewPenguinFor_Stone = 1000 + Item.Stone,
     NewPenguinFor_Basalt = 1000 + Item.Basalt,

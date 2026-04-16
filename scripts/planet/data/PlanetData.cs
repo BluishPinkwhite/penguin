@@ -249,6 +249,7 @@ public class PlanetData
                     tileData.Integrity = below.Integrity;
                     tileData.Regrowing = true;
                     below.Integrity = 1f;
+                    below.OwnerID = -1;
                 }
             }
         }
