@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Incremental.ui;
+
 public partial class TreeViewControl : Control
 {
     [Export] public float ZoomSpeed = 0.1f;
@@ -10,11 +12,33 @@ public partial class TreeViewControl : Control
     [Export] private Control _scaledObject;
 
     private bool _dragging;
+    
+    private Rect2 _moveBounds;
 
     public override void _Ready()
     {
         base._Ready();
         Position = Vector2.Zero;
+
+        bool first = true;
+        foreach (Node node in _scaledObject.GetChildren())
+        {
+            if (node is ResearchNode research)
+            {
+                if (first)
+                {
+                    first = false;
+                    _moveBounds = new Rect2(research.Position, Vector2.Zero);
+                }
+                else
+                {
+                    _moveBounds = _moveBounds.Expand(research.Position);
+                    _moveBounds = _moveBounds.Expand(research.Position + research.Size);
+                }
+            }
+        }
+
+        LimitPosition();
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -37,6 +61,7 @@ public partial class TreeViewControl : Control
         if (@event is InputEventMouseMotion motion && _dragging)
         {
             _movedObject.Position += motion.Relative;
+            LimitPosition();
         }
     }
 
@@ -52,5 +77,39 @@ public partial class TreeViewControl : Control
 
         _movedObject.Position = (_movedObject.Position - mousePos) * scaleRatio + mousePos;
         _scaledObject.Scale = newScale;
+        
+        LimitPosition();
+    }
+
+    private void LimitPosition()
+    {
+        Vector2 scale = _scaledObject.Scale;
+        Vector2 view = Size; 
+    
+        float margin = 200.0f; 
+
+        float scaledLeft   = _moveBounds.Position.X * scale.X;
+        float scaledRight  = _moveBounds.End.X * scale.X;
+        float scaledTop    = _moveBounds.Position.Y * scale.Y;
+        float scaledBottom = _moveBounds.End.Y * scale.Y;
+
+        float minX = margin - scaledRight;
+        float maxX = view.X - margin - scaledLeft;
+        float minY = margin - scaledBottom;
+        float maxY = view.Y - margin - scaledTop;
+
+        Vector2 newPos = _movedObject.Position;
+
+        if (minX <= maxX)
+            newPos.X = Mathf.Clamp(newPos.X, minX, maxX);
+        else
+            newPos.X = (view.X / 2.0f) - (_moveBounds.GetCenter().X * scale.X);
+
+        if (minY <= maxY)
+            newPos.Y = Mathf.Clamp(newPos.Y, minY, maxY);
+        else
+            newPos.Y = (view.Y / 2.0f) - (_moveBounds.GetCenter().Y * scale.Y);
+
+        _movedObject.Position = newPos;
     }
 }

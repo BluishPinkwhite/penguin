@@ -41,6 +41,13 @@ public partial class Clickable : Control
         {
             // do nothing - Purchasable handles this
         }
+        else if (Type == ClickType.ToggleWindow)
+        {
+            if (Param == ClickParam.Window_Research)
+            {
+                Game.I.ResearchWindow.Visible = !Game.I.ResearchWindow.Visible;
+            }
+        }
         else if (Type == ClickType.ChangeDebug)
         {
             if (Param == ClickParam.Debug_ShowState)

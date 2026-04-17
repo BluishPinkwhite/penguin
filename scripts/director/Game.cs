@@ -18,6 +18,7 @@ public partial class Game : Node2D
     [Export] public Node2D Stations;
     [Export] public Node2D Pickups;
     [Export] public DebugDraw Debug;
+    [Export] public Control ResearchWindow;
 
     [Export] public PackedScene PickupScene;
 

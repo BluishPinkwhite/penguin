@@ -8,4 +8,5 @@ public enum ClickType
     GameSpeed,
     Evolve,
     ChangeDebug,
+    ToggleWindow,
 }

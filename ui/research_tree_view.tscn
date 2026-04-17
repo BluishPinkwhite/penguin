@@ -144,22 +144,16 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 840.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="BG" type="ColorRect" parent="." unique_id=1068848868]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1569.9999
-offset_top = -671.00006
-offset_right = -1569.9999
-offset_bottom = -671.00006
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.2540834, 2.2244232)
+offset_right = 1920.0
+offset_bottom = 1080.0
 mouse_filter = 2
 color = Color(0.11699999, 0.1287, 0.13, 1)
 

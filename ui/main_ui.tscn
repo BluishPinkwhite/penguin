@@ -61,6 +61,11 @@ shader = ExtResource("7_fa42e")
 font = ExtResource("1_3lvfr")
 font_size = 45
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcslr"]
+atlas = ExtResource("3_sls23")
+region = Rect2(32, 32, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
 [node name="MainUI" type="Control" unique_id=976099585]
 process_mode = 3
 layout_mode = 3
@@ -399,6 +404,7 @@ mouse_filter = 2
 alignment = 2
 
 [node name="Station2" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Debug" unique_id=153544767]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("6_wknjk")
@@ -409,6 +415,7 @@ Type = 4
 Param = 2
 
 [node name="Station3" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Debug" unique_id=1356895264]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("5_nq4ua")
@@ -417,6 +424,16 @@ stretch_mode = 0
 script = ExtResource("3_x3h8h")
 Type = 4
 Param = 1
+
+[node name="Station4" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Debug" unique_id=1510994171]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_lcslr")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_x3h8h")
+Type = 5
+Param = 3
 
 [node name="Progressbars" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1965011789]
 visible = false
@@ -485,3 +502,5 @@ show_percentage = false
 [connection signal="mouse_exited" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station2" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station2" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station3" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station4" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station4" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/Screen/RightPanel/Controls/Debug/Station4" to="MarginContainer/Screen/RightPanel/Controls/Debug/Station4" method="OnMouseExit"]

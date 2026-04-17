@@ -18,13 +18,15 @@
 [ext_resource type="PackedScene" uid="uid://pl6bkeonsi7q" path="res://scripts/entity/pawn/scenes/PawnArcheologist.tscn" id="14_lakw3"]
 [ext_resource type="Script" uid="uid://cnnkbc70xw42v" path="res://scripts/audio/SoundtrackPlayer.cs" id="16_dss4m"]
 [ext_resource type="AudioStream" uid="uid://b14qedkevk421" path="res://sounds/soundtrack/A Foreign Planet - Looped.wav" id="17_7t5mc"]
+[ext_resource type="PackedScene" uid="uid://b5wl5b8aqpryf" path="res://ui/research_tree_view.tscn" id="19_pm21f"]
 
-[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "Debug")]
+[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "Debug", "ResearchWindow")]
 script = ExtResource("1_i7141")
 Pawns = NodePath("Pawns")
 Stations = NodePath("Stations")
 Pickups = NodePath("Pickups")
 Debug = NodePath("Debug")
+ResearchWindow = NodePath("Front_UI/research_ui")
 PickupScene = ExtResource("3_4mrxx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=77520530 node_paths=PackedStringArray("world")]
@@ -87,7 +89,13 @@ follow_viewport_enabled = true
 [node name="Front_UI" type="CanvasLayer" parent="." unique_id=90452917]
 layer = 10
 
+[node name="research_ui" parent="Front_UI" unique_id=69398314 instance=ExtResource("19_pm21f")]
+visible = false
+offset_right = 0.0
+offset_bottom = 0.0
+
 [node name="main_ui" parent="Front_UI" unique_id=976099585 instance=ExtResource("11_e3hyu")]
+z_index = 1
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
