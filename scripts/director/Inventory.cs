@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.ui;
 
 namespace Incremental.scripts.director;
@@ -9,11 +10,13 @@ public static class Inventory
 {
     public static readonly Dictionary<Item, ItemData> Items = new();
     public static readonly Dictionary<RecipeID, ItemRecipe> Recipes = new();
+    public static readonly Dictionary<RecipeID, bool> Research = new();
 
     public static void Setup()
     {
         Items.Clear();
         Recipes.Clear();
+        Research.Clear();
 
         new ItemData(Item.None, 0);
         new ItemData(Item.Penguin, 8, true);
@@ -31,145 +34,85 @@ public static class Inventory
         new ItemRecipe(RecipeID.None, [], []);
 
         new ItemRecipe(RecipeID.Mine_Dirt, [], [
-            new ItemRecipe.Product(Item.Dirt, 1), new ItemRecipe.Product(Item.Gem, 1, 0.01)
+            new Product(Item.Dirt, 1), new Product(Item.Gem, 1, 0.01)
         ], true);
         new ItemRecipe(RecipeID.Mine_Stone, [], [
-            new ItemRecipe.Product(Item.Stone, 1), new ItemRecipe.Product(Item.Gem, 1, 0.05)
+            new Product(Item.Stone, 1), new Product(Item.Gem, 1, 0.05)
         ], true);
         new ItemRecipe(RecipeID.Mine_Basalt, [], [
-            new ItemRecipe.Product(Item.Basalt, 1), new ItemRecipe.Product(Item.Gem, 1, 0.15)
+            new Product(Item.Basalt, 1), new Product(Item.Gem, 1, 0.15)
         ], true);
         new ItemRecipe(RecipeID.Mine_Magma, [], [
-            new ItemRecipe.Product(Item.Magma, 1), new ItemRecipe.Product(Item.Gem, 1, 0.25)
+            new Product(Item.Magma, 1), new Product(Item.Gem, 1, 0.25)
         ], true);
             
         new ItemRecipe(RecipeID.Gather_Component, [], [
-            new ItemRecipe.Product(Item.Component, 1), new ItemRecipe.Product(Item.Gem, 1, 0.2)
+            new Product(Item.Component, 1), new Product(Item.Gem, 1, 0.2)
         ], true);
 
         new ItemRecipe(RecipeID.NewPenguinFor_Dirt,
-            [new ItemRecipe.Ingredient(Item.Dirt, 1, 1.1, 0, 8)],
-            [new ItemRecipe.Product(Item.Penguin, 1)], true);
+            [new Ingredient(Item.Dirt, 1, 1.1, 0, 8)],
+            [new Product(Item.Penguin, 1)], true);
         new ItemRecipe(RecipeID.NewPenguinFor_Stone,
-            [new ItemRecipe.Ingredient(Item.Stone, 2, 1.2, 0, 7)],
-            [new ItemRecipe.Product(Item.Penguin, 1)]);
+            [new Ingredient(Item.Stone, 2, 1.2, 0, 7)],
+            [new Product(Item.Penguin, 1)]);
         new ItemRecipe(RecipeID.NewPenguinFor_Basalt,
-            [new ItemRecipe.Ingredient(Item.Basalt, 4, 1.1, 0, 6)],
-            [new ItemRecipe.Product(Item.Penguin, 1)]);
+            [new Ingredient(Item.Basalt, 4, 1.1, 0, 6)],
+            [new Product(Item.Penguin, 1)]);
         new ItemRecipe(RecipeID.NewPenguinFor_Magma,
-            [new ItemRecipe.Ingredient(Item.Magma, 6, 1.1, 0, 5)],
-            [new ItemRecipe.Product(Item.Penguin, 1)]);
+            [new Ingredient(Item.Magma, 6, 1.1, 0, 5)],
+            [new Product(Item.Penguin, 1)]);
 
         new ItemRecipe(RecipeID.Penguin_Retirement, [],
-            [new ItemRecipe.Product(Item.Penguin, 1)], true);
+            [new Product(Item.Penguin, 1)], true);
 
         new ItemRecipe(RecipeID.AssignRole_Miner,
-            [new ItemRecipe.Ingredient(Item.Penguin, 1, 1, 0, 0)],
-            [new ItemRecipe.Product(Item.Miner, 1)], true);
+            [new Ingredient(Item.Penguin, 1)],
+            [new Product(Item.Miner, 1)], true);
         new ItemRecipe(RecipeID.AssignRole_Hauler,
-            [new ItemRecipe.Ingredient(Item.Penguin, 1, 1, 0, 0)],
-            [new ItemRecipe.Product(Item.Hauler, 1)], true);
+            [new Ingredient(Item.Penguin, 1)],
+            [new Product(Item.Hauler, 1)], true);
         new ItemRecipe(RecipeID.AssignRole_Archeologist,
             [
-                new ItemRecipe.Ingredient(Item.Penguin, 1, 1, 0, 0),
-                new ItemRecipe.Ingredient(Item.Gem, 1, 1, 0, 0)
+                new Ingredient(Item.Penguin, 1),
+                new Ingredient(Item.Gem, 1)
             ],
-            [new ItemRecipe.Product(Item.Archeologist, 1)]);
-    }
+            [new Product(Item.Archeologist, 1)]);
 
-
-    public static List<(Item item, int amount)> TryGetRecipe(RecipeID id)
-    {
-        List<(Item item, int amount)> list = new();
         
-        if (Recipes.TryGetValue(id, out ItemRecipe recipe))
-        {
-            bool can = true;
-
-            foreach (ItemRecipe.Ingredient ingredient in recipe.Ingredients)
-            {
-                if (Items[ingredient.Item].Amount < ingredient.RenderCost)
-                {
-                    can = false;
-                    break;
-                }
-            }
-
-            if (can)
-            {
-                // remove ingredients
-                foreach (ItemRecipe.Ingredient ingredient in recipe.Ingredients)
-                {
-                    Items[ingredient.Item].Amount -= ingredient.RenderCost;
-
-                    // increase price
-                    if (ingredient.MaxCostChange > 0)
-                    {
-                        double newCost = ingredient.Cost * ingredient.CostMult + ingredient.CostAdd;
-                        ingredient.Cost = Math.Min(newCost, ingredient.Cost + ingredient.MaxCostChange);
-                    }
-                }
-
-                // add products
-                foreach (ItemRecipe.Product product in recipe.Products)
-                {
-                    if (product.Chance >= 1 || Game.RandomTo(1) < product.Chance)
-                    {
-                        list.Add((product.Item, product.Amount));
-                    }
-                }
-                
-                Resources.I.UpdateVisuals();
-            }
-        }
-
-        return list;
+        new ResearchRecipe(RecipeID.Research_FirstResearch,
+            [new Ingredient(Item.Stone, 20)]);
+        new ResearchRecipe(RecipeID.Research_BiggerZoomLens,
+            [new Ingredient(Item.Gem, 5)]);
+        new ResearchRecipe(RecipeID.Research_FinerBrushes,
+            [new Ingredient(Item.Gem, 20)]);
+        new ResearchRecipe(RecipeID.Research_PrecisePickaxes,
+            [new Ingredient(Item.Component, 5), new Ingredient(Item.Stone, 100)]);
+        new ResearchRecipe(RecipeID.Research_BasaltUpgrade,
+            [new Ingredient(Item.Component, 25), new Ingredient(Item.Basalt, 100)]);
+        new ResearchRecipe(RecipeID.Research_MagmaReinforcement,
+            [new Ingredient(Item.Component, 50), new Ingredient(Item.Magma, 25)]);
+        new ResearchRecipe(RecipeID.Research_EnergyDrinks,
+            [new Ingredient(Item.Component, 15)]);
+        new ResearchRecipe(RecipeID.Research_AncientMiningTechnology,
+            [new Ingredient(Item.Component, 100)]);
+        new ResearchRecipe(RecipeID.Research_Running,
+            [new Ingredient(Item.Component, 3)]);
+        new ResearchRecipe(RecipeID.Research_JetpackShoes,
+            [new Ingredient(Item.Component, 10)]);
+        new ResearchRecipe(RecipeID.Research_ErgonomicHandles,
+            [new Ingredient(Item.Component, 10)]);
+        new ResearchRecipe(RecipeID.Research_FasterJetpackAscent,
+            [new Ingredient(Item.Component, 40)]);
+        new ResearchRecipe(RecipeID.Research_BiggerBaskets,
+            [new Ingredient(Item.Dirt, 1000), new Ingredient(Item.Component, 25)]);
+        new ResearchRecipe(RecipeID.Research_AncientCollectorKnowledge,
+            [new Ingredient(Item.Component, 100)]);
+        new ResearchRecipe(RecipeID.Research_OrbitalCoreExtractor,
+            [new Ingredient(Item.Component, 250), new Ingredient(Item.Gem, 50)]);
     }
+
     
-    public static void ApplyRecipe(RecipeID id)
-    {
-        if (Recipes.TryGetValue(id, out ItemRecipe recipe))
-        {
-            bool can = true;
-
-            foreach (ItemRecipe.Ingredient ingredient in recipe.Ingredients)
-            {
-                if (Items[ingredient.Item].Amount < ingredient.RenderCost)
-                {
-                    can = false;
-                    break;
-                }
-            }
-
-            if (can)
-            {
-                // remove ingredients
-                foreach (ItemRecipe.Ingredient ingredient in recipe.Ingredients)
-                {
-                    Items[ingredient.Item].Amount -= ingredient.RenderCost;
-
-                    // increase price
-                    if (ingredient.MaxCostChange > 0)
-                    {
-                        double newCost = ingredient.Cost * ingredient.CostMult + ingredient.CostAdd;
-                        ingredient.Cost = Math.Min(newCost, ingredient.Cost + ingredient.MaxCostChange);
-                    }
-                }
-
-                // add products
-                foreach (ItemRecipe.Product product in recipe.Products)
-                {
-                    if (product.Chance >= 1 || Game.RandomTo(1) < product.Chance)
-                    {
-                        Items[product.Item].Amount += product.Amount;
-                    }
-                }
-
-                Resources.I.UpdateVisuals();
-                Game.I.Pawns.UpdatePawnCounts();
-            }
-        }
-    }
 
     public static void UnlockRecipe(RecipeID id)
     {
@@ -179,5 +122,10 @@ public static class Inventory
 
             Resources.I.UpdateVisuals();
         }
+    }
+    
+    public static bool IsResearchUnlocked(RecipeID id)
+    {
+        return Research.ContainsKey(id) && Research[id];
     }
 }

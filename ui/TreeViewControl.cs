@@ -2,7 +2,7 @@ using Godot;
 
 namespace Incremental.ui;
 
-public partial class TreeViewControl : Control
+public partial class TreeViewControl : Control, IUpdatable
 {
     [Export] public float ZoomSpeed = 0.1f;
     [Export] public float MinZoom = 0.5f;
@@ -111,5 +111,16 @@ public partial class TreeViewControl : Control
             newPos.Y = (view.Y / 2.0f) - (_moveBounds.GetCenter().Y * scale.Y);
 
         _movedObject.Position = newPos;
+    }
+    
+    public void UpdateVisuals()
+    {
+        foreach (Node child in GetNode<Control>("Move/Scale").GetChildren())
+        {
+            if (child is ResearchNode research)
+            {
+                research.UpdateVisuals();
+            }
+        }
     }
 }

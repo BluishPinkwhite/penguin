@@ -146,18 +146,37 @@ public partial class PawnMiner : Pawn
             {
                 if (_targetTile != null && !_targetTile.IsEmpty() && _targetTile.OwnerID == ID)
                 {
-                    _targetTile.Integrity -= 0.25f / _targetTile.Material.BreakTime();
+                    float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.25f : 0.45f;
                     
-                    SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
-                    SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
-                    SFX.Play();
+                    if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
+                        _targetTile.Integrity = 0;
+                    
+                    _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+
+                    if (Inventory.IsResearchUnlocked(RecipeID.Research_PrecisePickaxes))
+                    {
+                        _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+                        
+                        SFX.PitchScale = (float)GD.RandRange(0.4f, 0.7f);
+                        SFX.VolumeDb = (float)GD.RandRange(-1f, 3f);
+                        SFX.Play();
+                    }
+                    else
+                    {
+                        SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
+                        SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
+                        SFX.Play();
+                    }
+                    
 
                     if (_targetTile.Integrity <= 0)
                     {
                         BreakTile(_targetTile, _targetCoords.X, _targetCoords.Y);
                         Counter++;
+                        
+                        int counterPeriod = Inventory.IsResearchUnlocked(RecipeID.Research_EnergyDrinks) ? 8 : 5;
 
-                        if (Counter % 5 == 0)
+                        if (Counter % counterPeriod == 0)
                         {
                             State = PawnState.ReturnH;
                             Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;

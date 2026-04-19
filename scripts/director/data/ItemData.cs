@@ -6,13 +6,15 @@ public class ItemData
     public int Amount = 0;
     public int RenderIndex;
     
-    public Item item;
+    protected Item _item;
     public ItemData(Item item, int renderIndex, bool obtained = false)
     {
-        this.item = item;
+        _item = item;
         RenderIndex = renderIndex;
         Obtained = obtained || Amount > 0;
 
         Inventory.Items[item] = this;
     }
+    
+    public Item Item => _item;
 }

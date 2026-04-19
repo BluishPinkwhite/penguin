@@ -23,11 +23,10 @@ public partial class PawnManager : Node2D
     {
         foreach (ItemData data in Inventory.Items.Values)
         {
-            if (!data.item.IsRole())
+            if (!data.Item.IsRole())
                 continue;
 
-
-            Role role = data.item.AsRole();
+            Role role = data.Item.AsRole();
             _spawnedRoles.TryGetValue(role, out int i);
 
             if (i >= data.Amount)

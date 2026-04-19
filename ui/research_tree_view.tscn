@@ -420,6 +420,7 @@ offset_right = 1026.0
 offset_bottom = 570.0
 texture = SubResource("CompressedTexture2D_pdd12")
 script = ExtResource("2_m7s40")
+Research = 3000
 connectors = [NodePath("../Connections/Connection"), NodePath("../Connections/Connection11"), NodePath("../Connections/Connection13")]
 requiredNodes = []
 icon = NodePath("Icon")
@@ -474,11 +475,11 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Start your Reasearcher journey here!"
+text = "Start your Reasearcher journey here! Archeologists now also collect extra gems."
 fit_content = true
 scroll_active = false
 
-[node name="CheaperPickaxes" type="TextureRect" parent="Control/Move/Scale" unique_id=1597208366 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
+[node name="PrecisePickaxes" type="TextureRect" parent="Control/Move/Scale" unique_id=1597208366 node_paths=PackedStringArray("connectors", "requiredNodes", "icon", "hint")]
 layout_mode = 0
 offset_left = 1184.0
 offset_top = 466.0
@@ -486,12 +487,13 @@ offset_right = 1288.0
 offset_bottom = 570.0
 texture = SubResource("CompressedTexture2D_a1o16")
 script = ExtResource("2_m7s40")
+Research = 3003
 connectors = [NodePath("../Connections/Connection5"), NodePath("../Connections/Connection4"), NodePath("../Connections/Connection2")]
 requiredNodes = [NodePath("../FirstResearch")]
 icon = NodePath("Icon")
 hint = NodePath("Hint")
 
-[node name="Icon" type="TextureRect" parent="Control/Move/Scale/CheaperPickaxes" unique_id=410881480]
+[node name="Icon" type="TextureRect" parent="Control/Move/Scale/PrecisePickaxes" unique_id=410881480]
 material = SubResource("ShaderMaterial_ys5lt")
 layout_mode = 0
 offset_left = 14.0
@@ -502,7 +504,7 @@ scale = Vector2(-1, 1)
 pivot_offset = Vector2(38, 38)
 texture = ExtResource("2_a1o16")
 
-[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/CheaperPickaxes" unique_id=1223170658]
+[node name="Hint" type="PanelContainer" parent="Control/Move/Scale/PrecisePickaxes" unique_id=1223170658]
 visible = false
 z_index = 1
 layout_mode = 0
@@ -513,7 +515,7 @@ offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/CheaperPickaxes/Hint" unique_id=144334283]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/PrecisePickaxes/Hint" unique_id=144334283]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = -5
@@ -521,29 +523,29 @@ theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = -5
 theme_override_constants/margin_bottom = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer" unique_id=997651200]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Move/Scale/PrecisePickaxes/Hint/MarginContainer" unique_id=997651200]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="StationName" type="Label" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer/VBoxContainer" unique_id=552208368]
+[node name="StationName" type="Label" parent="Control/Move/Scale/PrecisePickaxes/Hint/MarginContainer/VBoxContainer" unique_id=552208368]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Cheaper Pickaxes"
+text = "Precise Pickaxe Hits"
 label_settings = SubResource("LabelSettings_17rn7")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer/VBoxContainer" unique_id=954030565]
+[node name="HSeparator" type="HSeparator" parent="Control/Move/Scale/PrecisePickaxes/Hint/MarginContainer/VBoxContainer" unique_id=954030565]
 layout_mode = 2
 theme_override_constants/separation = 1
 theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/CheaperPickaxes/Hint/MarginContainer/VBoxContainer" unique_id=1372624331]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Move/Scale/PrecisePickaxes/Hint/MarginContainer/VBoxContainer" unique_id=1372624331]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "You found a way to make more pickaxes out of less material. "
+text = "Miners can now crit when mining!"
 fit_content = true
 scroll_active = false
 
@@ -555,8 +557,9 @@ offset_right = 1288.0
 offset_bottom = 330.0
 texture = SubResource("CompressedTexture2D_81uvb")
 script = ExtResource("2_m7s40")
+Research = 3006
 connectors = [NodePath("../Connections/Connection6")]
-requiredNodes = [NodePath("../CheaperPickaxes")]
+requiredNodes = [NodePath("../PrecisePickaxes")]
 icon = NodePath("Icon")
 hint = NodePath("Hint")
 
@@ -610,7 +613,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Miners found a way to kill themselves faster, but they have a bigger stamina, so it's all worth it right?"
+text = "Miners found a way to get to retirement faster, but they have a bigger stamina, so it's all worth it... right?"
 fit_content = true
 scroll_active = false
 
@@ -622,8 +625,9 @@ offset_right = 1288.0
 offset_bottom = 813.0
 texture = SubResource("CompressedTexture2D_4fr0h")
 script = ExtResource("2_m7s40")
+Research = 3004
 connectors = [NodePath("../Connections/Connection3")]
-requiredNodes = [NodePath("../CheaperPickaxes")]
+requiredNodes = [NodePath("../PrecisePickaxes")]
 icon = NodePath("Icon")
 hint = NodePath("Hint")
 
@@ -689,8 +693,9 @@ offset_right = 1544.0
 offset_bottom = 570.0
 texture = SubResource("CompressedTexture2D_cx2lp")
 script = ExtResource("2_m7s40")
+Research = 3014
 connectors = [NodePath("../Connections/Connection9"), NodePath("../Connections/Connection10")]
-requiredNodes = [NodePath("../CheaperPickaxes")]
+requiredNodes = [NodePath("../PrecisePickaxes")]
 icon = NodePath("Icon")
 hint = NodePath("Hint")
 
@@ -744,7 +749,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "A way to have a backpain in your thirties instead of twenties. Penguins live longer!"
+text = "A way to have a backpain in your thirties instead of twenties. Penguins need shorter breaks!"
 fit_content = true
 scroll_active = false
 
@@ -756,6 +761,7 @@ offset_right = 1544.0
 offset_bottom = 813.0
 texture = SubResource("CompressedTexture2D_cx2lp")
 script = ExtResource("2_m7s40")
+Research = 3005
 connectors = [NodePath("../Connections/Connection7"), NodePath("../Connections/Connection8")]
 requiredNodes = [NodePath("../BasaltUpgrade")]
 icon = NodePath("Icon")
@@ -811,7 +817,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "So hot! But also useful, the pickaxes now mine anything instantly."
+text = "So hot! But also useful,  pickaxes now mine materials instantly."
 fit_content = true
 scroll_active = false
 
@@ -823,6 +829,7 @@ offset_right = 765.0
 offset_bottom = 570.0
 texture = SubResource("CompressedTexture2D_xshwi")
 script = ExtResource("2_m7s40")
+Research = 3001
 connectors = [NodePath("../Connections/Connection12")]
 requiredNodes = [NodePath("../FirstResearch")]
 icon = NodePath("Icon")
@@ -890,6 +897,7 @@ offset_right = 765.0
 offset_bottom = 813.0
 texture = SubResource("CompressedTexture2D_j3bqm")
 script = ExtResource("2_m7s40")
+Research = 3002
 connectors = []
 requiredNodes = [NodePath("../BiggerZoomLens")]
 icon = NodePath("Icon")
@@ -957,6 +965,7 @@ offset_right = 1026.0
 offset_bottom = 330.0
 texture = SubResource("CompressedTexture2D_ys5lt")
 script = ExtResource("2_m7s40")
+Research = 3008
 connectors = [NodePath("../Connections/Connection16"), NodePath("../Connections/Connection14")]
 requiredNodes = [NodePath("../FirstResearch")]
 icon = NodePath("Icon")
@@ -1024,6 +1033,7 @@ offset_right = 765.0
 offset_bottom = 330.0
 texture = SubResource("CompressedTexture2D_6uy61")
 script = ExtResource("2_m7s40")
+Research = 3009
 connectors = [NodePath("../Connections/Connection15")]
 requiredNodes = [NodePath("../RunningShoes")]
 icon = NodePath("Icon")
@@ -1079,7 +1089,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "The collectors have jetpacks, why can't shoes have them as well?"
+text = "The collectors have jetpacks, why can't shoes have them as well? Penguins jump before flight!"
 fit_content = true
 scroll_active = false
 
@@ -1091,6 +1101,7 @@ offset_right = 1026.0
 offset_bottom = 88.0
 texture = SubResource("CompressedTexture2D_6uy61")
 script = ExtResource("2_m7s40")
+Research = 3011
 connectors = [NodePath("../Connections/Connection17"), NodePath("../Connections/Connection18")]
 requiredNodes = [NodePath("../RunningShoes")]
 icon = NodePath("Icon")
@@ -1158,6 +1169,7 @@ offset_right = 765.0
 offset_bottom = 88.0
 texture = SubResource("CompressedTexture2D_6uy61")
 script = ExtResource("2_m7s40")
+Research = 3010
 connectors = [NodePath("../Connections/Connection20"), NodePath("../Connections/Connection19")]
 requiredNodes = [NodePath("../JetpackShoes")]
 icon = NodePath("Icon")
@@ -1226,6 +1238,7 @@ offset_bottom = 330.0
 scale = Vector2(1.5282165, 1.5282165)
 texture = SubResource("CompressedTexture2D_raiuh")
 script = ExtResource("2_m7s40")
+Research = 3007
 connectors = [NodePath("../Connections/Connection22")]
 requiredNodes = [NodePath("../EnergyDrinks"), NodePath("../ErgonomicHandles"), NodePath("../MagmaReinforcement")]
 icon = NodePath("Icon")
@@ -1281,7 +1294,9 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever."
+text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever.
+
+TODO"
 fit_content = true
 scroll_active = false
 
@@ -1294,6 +1309,7 @@ offset_bottom = -139.0
 scale = Vector2(1.5282165, 1.5282165)
 texture = SubResource("CompressedTexture2D_raiuh")
 script = ExtResource("2_m7s40")
+Research = 3012
 connectors = [NodePath("../Connections/Connection21")]
 requiredNodes = [NodePath("../BiggerBaskets"), NodePath("../FasterJetpackAscent")]
 icon = NodePath("Icon")
@@ -1349,7 +1365,9 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time. You now hold the secrets. "
+text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time. You now hold the secrets. 
+
+TODO"
 fit_content = true
 scroll_active = false
 
@@ -1362,6 +1380,7 @@ offset_bottom = -176.0
 scale = Vector2(2.2341301, 2.2341301)
 texture = SubResource("CompressedTexture2D_raiuh")
 script = ExtResource("2_m7s40")
+Research = 3013
 connectors = []
 requiredNodes = [NodePath("../AncientMiningTechnology"), NodePath("../AncientCollectorKnowhow")]
 icon = NodePath("Icon")
@@ -1417,6 +1436,8 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Finally... We can have the core. So shiny. So beatiful. Time to destroy the planet!"
+text = "Finally... We can have the core. So shiny. So beatiful. Time to destroy the planet!
+
+TODO (now stops planet growth)"
 fit_content = true
 scroll_active = false

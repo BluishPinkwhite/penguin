@@ -2,6 +2,7 @@
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
@@ -12,7 +13,7 @@ public partial class PawnArcheologist : Pawn
 {
     private PlanetTile _targetTile;
     private Vector2I _targetCoords;
-    
+
     [Export] private AudioStreamPlayer2D SFX;
 
     public override void _Ready()
@@ -102,7 +103,12 @@ public partial class PawnArcheologist : Pawn
             {
                 if (_targetTile != null && !_targetTile.IsEmpty())
                 {
-                    _targetTile.Integrity -= 0.02f / _targetTile.Material.BreakTime();
+                    float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.02f : 0.045f;
+
+                    if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
+                        _targetTile.Integrity = 0;
+
+                    _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
 
                     SFX.PitchScale = (float)GD.RandRange(1.8f, 2.4f);
                     SFX.VolumeDb = (float)GD.RandRange(-8f, -4f);
@@ -112,22 +118,34 @@ public partial class PawnArcheologist : Pawn
                     {
                         BreakTile(_targetTile, _targetCoords.X, _targetCoords.Y);
 
-                        List<(Item item, int amount)> products = Inventory.TryGetRecipe(RecipeID.Gather_Component);
+                        List<(Item item, int amount)> products = ItemRecipe.TryGetOutput(RecipeID.Gather_Component);
                         foreach ((Item item, int amount) tuple in products)
                         {
-                            for (int i = 0; i < tuple.amount; i++)
+                            int amount = tuple.amount;
+
+                            if (Inventory.IsResearchUnlocked(RecipeID.Research_BiggerZoomLens))
+                                amount += 1;
+                            if (Inventory.IsResearchUnlocked(RecipeID.Research_FinerBrushes))
+                                amount *= 2;
+                            
+                            for (int i = 0; i < amount; i++)
                             {
                                 Pickup.Instantiate(PolarPos, tuple.item);
                             }
+                            
+                            if (!Inventory.IsResearchUnlocked(RecipeID.Research_FirstResearch))
+                                break; // disallow gem gathering without upgrade
                         }
 
                         Counter++;
 
                         State = PawnState.ReturnH;
-                        Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
+                        Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
                     }
-
-                    SetCooldown(1);
+                    else
+                    {
+                        SetCooldown(1);
+                    }
                 }
             }
         }

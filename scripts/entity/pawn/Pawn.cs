@@ -2,6 +2,7 @@
 using Incremental.scripts.debug;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.pawn.roles;
 using Incremental.scripts.planet.data;
@@ -24,8 +25,6 @@ public abstract partial class Pawn : SurfaceEntity
     protected int Counter = 0;
 
     protected const float PawnAngularWidth = 1.45f;
-    protected const float WalkSpeed = 6.5f;
-    protected const float FlySpeed = Gravity * 1.2f;
 
     private static int _nextID = 0;
 
@@ -129,6 +128,9 @@ public abstract partial class Pawn : SurfaceEntity
     public void SetCooldown(float value)
     {
         Cooldown = Game.RandomAround(value, value * 0.25f);
+
+        if (Inventory.IsResearchUnlocked(RecipeID.Research_ErgonomicHandles))
+            Cooldown *= 0.7f;
     }
 
     protected bool WalkToTarget(float d)
@@ -140,7 +142,12 @@ public abstract partial class Pawn : SurfaceEntity
 
         float dx = CircularDelta(PolarPos.X, targetX, _currSize);
 
-        float stepX = Mathf.Clamp(dx, -1f, 1f) * d * WalkSpeed;
+        float mult = Consts.Pawns[Role].WalkSpeed;
+        if (Inventory.IsResearchUnlocked(RecipeID.Research_Running))
+            mult *= 1.35f;
+        
+        float stepX = Mathf.Clamp(dx, -1f, 1f) * d * mult;
+        
         float newX = PolarPos.X + stepX;
 
 
@@ -153,7 +160,17 @@ public abstract partial class Pawn : SurfaceEntity
                 if (!CheckCollision(newX, PolarPos.Y))
                     PolarPos.X = newX;
                 else
+                {
                     Flying = true;
+
+                    if (Inventory.IsResearchUnlocked(RecipeID.Research_JetpackShoes))
+                    {
+                        float stepY = Consts.Pawns[Role].FlySpeed * 3 * Gravity * d;
+                        float newY = PolarPos.Y + stepY;
+                        
+                        PolarPos.Y = newY;
+                    }
+                }
             }
             else
                 reachedTarget = true;
@@ -161,7 +178,11 @@ public abstract partial class Pawn : SurfaceEntity
         else
         {
             // vertical movement
-            float stepY = FlySpeed * d;
+            mult = Consts.Pawns[Role].FlySpeed;
+            if (Inventory.IsResearchUnlocked(RecipeID.Research_FasterJetpackAscent))
+                mult *= 1.4f;
+            
+            float stepY = mult * Gravity * d;
             float newY = PolarPos.Y + stepY;
 
             if (!CheckCollision(PolarPos.X, newY))
@@ -185,7 +206,7 @@ public abstract partial class Pawn : SurfaceEntity
         if (dy * dy > 0.05f)
         {
             // vertical movement
-            float stepY = Mathf.Clamp(dy * 5, -1f, 1f) * d * FlySpeed;
+            float stepY = Mathf.Clamp(dy * 5, -1f, 1f) * d * Consts.Pawns[Role].FlySpeed * Gravity;
             float newY = PolarPos.Y + stepY;
 
             if (!CheckCollision(PolarPos.X, newY))
@@ -214,7 +235,7 @@ public abstract partial class Pawn : SurfaceEntity
     protected void Retire()
     {
         SetVisible(false);
-        Inventory.ApplyRecipe(RecipeID.Penguin_Retirement);
+        ItemRecipe.TryApplyRecipe(RecipeID.Penguin_Retirement);
         Game.I.Debug.RemoveLine(ID);
         QueueFree();
     }
@@ -227,7 +248,7 @@ public abstract partial class Pawn : SurfaceEntity
                         
         if (recipe != RecipeID.None)
         {
-            foreach ((Item item, int amount) tuple in Inventory.TryGetRecipe(recipe))
+            foreach ((Item item, int amount) tuple in ItemRecipe.TryGetOutput(recipe))
             {
                 for (int i = 0; i < tuple.amount; i++)
                 {

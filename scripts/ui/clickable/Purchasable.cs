@@ -1,11 +1,12 @@
 ﻿using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.ui;
 
 namespace Incremental.scripts.ui.clickable;
 
-public partial class Purchasable : Clickable
+public partial class Purchasable : Clickable, IUpdatable
 {
     [Export] private Label _costLabel;
     [Export] private TextureRect _costIcon;
@@ -31,7 +32,7 @@ public partial class Purchasable : Clickable
 
     private void TryPurchase()
     {
-        Inventory.ApplyRecipe(_recipe);
+        ItemRecipe.TryApplyRecipe(_recipe);
     }
 
     public void UpdateVisuals()

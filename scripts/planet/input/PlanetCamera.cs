@@ -41,7 +41,7 @@ public partial class PlanetCamera : Camera2D
         if (Input.IsActionPressed("ui_down"))
             Radius -= dt * 0.4f;
 
-        Radius = Mathf.Clamp(Radius, 0f, 1.2f);
+        Radius = Mathf.Clamp(Radius, 0f, 1.5f);
         Angle = Mathf.PosMod(Angle, Mathf.Tau);
 
         float planetRadius = Game.I._data.TileSize * 100f;
@@ -67,5 +67,23 @@ public partial class PlanetCamera : Camera2D
         float sfxVolume = Mathf.Remap(ZoomLevel, MinZoom, MaxZoom, -80f, 0f);
         sfxVolume = Mathf.Clamp(sfxVolume + 40f, -80f, 0f);
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), sfxVolume);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        
+        
+        if (@event is InputEventMouseButton mouseButton)
+        {
+            if (mouseButton.Pressed)
+            {
+                if (mouseButton.ButtonIndex == MouseButton.WheelUp)
+                    ZoomLevel += ZoomSpeed / 60f;
+
+                if (mouseButton.ButtonIndex == MouseButton.WheelDown)
+                    ZoomLevel -= ZoomSpeed / 60f;
+            }
+        }
     }
 }

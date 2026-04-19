@@ -9,9 +9,9 @@ public static class Consts
 
     public static readonly Dictionary<Role, PawnConfig> Pawns = new()
     {
-        { Role.Miner, new PawnConfig(50, 0.7f, 0.8f)},
-        { Role.Hauler, new PawnConfig(250, 1.25f, 1.5f)},
-        { Role.Archeologist, new PawnConfig(25, 0.5f, 0.5f)},
+        { Role.Miner, new PawnConfig(50, 3.5f, 1.2f)},
+        { Role.Hauler, new PawnConfig(250, 5.5f, 1.4f)},
+        { Role.Archeologist, new PawnConfig(25, 2f, 1.1f)},
     }; 
 
     public class PawnConfig

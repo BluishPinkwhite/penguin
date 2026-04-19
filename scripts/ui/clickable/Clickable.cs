@@ -46,6 +46,11 @@ public partial class Clickable : Control
             if (Param == ClickParam.Window_Research)
             {
                 Game.I.ResearchWindow.Visible = !Game.I.ResearchWindow.Visible;
+
+                if (Game.I.ResearchWindow.Visible)
+                {
+                    Game.I.ResearchWindow.GetNode<TreeViewControl>("Control").UpdateVisuals();
+                }
             }
         }
         else if (Type == ClickType.ChangeDebug)

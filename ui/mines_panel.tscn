@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bm5ggg7cogtxa" path="res://scripts/ui/clickable/Purchasable.cs" id="3_qv1my"]
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="4_44l33"]
 [ext_resource type="Texture2D" uid="uid://cpemlltcetml2" path="res://ui/sprites/icons/dirt_icon.tres" id="5_kd2gs"]
+[ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="6_cc5mb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_veslf"]
 texture = ExtResource("1_r5e60")
@@ -26,6 +27,11 @@ grow_end = -120.0
 [sub_resource type="LabelSettings" id="LabelSettings_0vl20"]
 font = ExtResource("4_44l33")
 font_size = 24
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv1my"]
+atlas = ExtResource("6_cc5mb")
+region = Rect2(0, 32, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
 
 [node name="MinesPanel" type="PanelContainer" unique_id=895867581]
 process_mode = 3
@@ -157,7 +163,7 @@ _recipe = 3024
 [node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=254482672]
 layout_mode = 2
 mouse_filter = 1
-text = "Hauler"
+text = "Archeologist"
 label_settings = SubResource("LabelSettings_0vl20")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -167,6 +173,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 alignment = 2
+
+[node name="ResourceCost2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=939764925]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost2" unique_id=888834560]
+layout_mode = 2
+mouse_filter = 1
+text = "1"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost2" unique_id=1958025908]
+layout_mode = 2
+texture = SubResource("AtlasTexture_qv1my")
+expand_mode = 2
 
 [node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=884119481]
 layout_mode = 2

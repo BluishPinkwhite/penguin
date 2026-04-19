@@ -18,6 +18,6 @@ public static class TileMaterialExtensions
 {
     public static float BreakTime(this TileMaterial m)
     {
-        return (float)Math.Pow(Math.Max(1, (int)m), 2f);
+        return (float)Math.Pow(Math.Max(1, (int)m), 1.5f);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.pawn;
 using Incremental.scripts.planet.data;
@@ -220,7 +221,7 @@ public partial class PlanetRenderer : Node2D
                         
                 if (recipe != RecipeID.None)
                 {
-                    foreach ((Item item, int amount) tuple in Inventory.TryGetRecipe(recipe))
+                    foreach ((Item item, int amount) tuple in ItemRecipe.TryGetOutput(recipe))
                     {
                         for (int i = 0; i < tuple.amount; i++)
                         {
@@ -232,50 +233,53 @@ public partial class PlanetRenderer : Node2D
         }
 
 
-        float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
-
-        if (_data._innerGrowth < 0 && newGrowth >= 0)
+        if (Inventory.IsResearchUnlocked(RecipeID.Research_OrbitalCoreExtractor))
         {
-            _data.RegrowLayers();
-            isDirty = true;
-        }
+            float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
 
-        _data._innerGrowth = newGrowth;
-
-        // growth finished, regrow a layer
-        if (_data._innerGrowth >= 1)
-        {
-            _data._innerGrowth = -Game.RandomAround(8, 2);
-            isLightDirty = true;
-            isDirty = true;
-
-            // reset Growing state on tiles
-            foreach (PlanetTile[] layerData in _data.Layers)
+            if (_data._innerGrowth < 0 && newGrowth >= 0)
             {
-                for (int tile = 0; tile < layerData.Length; tile++)
-                {
-                    PlanetTile tileData = layerData[tile];
-                    tileData.Regrowing = false;
-                }
+                _data.RegrowLayers();
+                isDirty = true;
             }
 
-            foreach (Node node in Game.I.Pawns.GetChildren())
-            {
-                if (node is Pawn pawn)
-                {
-                    PlanetTile tile = _data.GetTileAtPolarCoords(pawn.PolarPos.X, pawn.PolarPos.Y);
-                    if (tile != null && !tile.IsEmpty())
-                        pawn.PolarPos.Y += 1;
-                }
-            }
+            _data._innerGrowth = newGrowth;
 
-            foreach (Node node in Game.I.Pickups.GetChildren())
+            // growth finished, regrow a layer
+            if (_data._innerGrowth >= 1)
             {
-                if (node is Pickup pickup)
+                _data._innerGrowth = -Game.RandomAround(8, 2);
+                isLightDirty = true;
+                isDirty = true;
+
+                // reset Growing state on tiles
+                foreach (PlanetTile[] layerData in _data.Layers)
                 {
-                    PlanetTile tile = _data.GetTileAtPolarCoords(pickup.PolarPos.X, pickup.PolarPos.Y);
-                    if (tile != null && !tile.IsEmpty())
-                        pickup.PolarPos.Y += 1;
+                    for (int tile = 0; tile < layerData.Length; tile++)
+                    {
+                        PlanetTile tileData = layerData[tile];
+                        tileData.Regrowing = false;
+                    }
+                }
+
+                foreach (Node node in Game.I.Pawns.GetChildren())
+                {
+                    if (node is Pawn pawn)
+                    {
+                        PlanetTile tile = _data.GetTileAtPolarCoords(pawn.PolarPos.X, pawn.PolarPos.Y);
+                        if (tile != null && !tile.IsEmpty())
+                            pawn.PolarPos.Y += 1;
+                    }
+                }
+
+                foreach (Node node in Game.I.Pickups.GetChildren())
+                {
+                    if (node is Pickup pickup)
+                    {
+                        PlanetTile tile = _data.GetTileAtPolarCoords(pickup.PolarPos.X, pickup.PolarPos.Y);
+                        if (tile != null && !tile.IsEmpty())
+                            pickup.PolarPos.Y += 1;
+                    }
                 }
             }
         }

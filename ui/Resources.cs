@@ -6,7 +6,7 @@ using Incremental.scripts.ui.clickable;
 
 namespace Incremental.ui;
 
-public partial class Resources : BoxContainer
+public partial class Resources : BoxContainer, IUpdatable
 {
     public static Resources I;
 
@@ -46,17 +46,17 @@ public partial class Resources : BoxContainer
         foreach (ItemData data in Inventory.Items.Values)
         {
             int index = -1;
-            if (data.item == Item.Dirt)
+            if (data.Item == Item.Dirt)
                 index = 0;
-            else if (data.item == Item.Stone)
+            else if (data.Item == Item.Stone)
                 index = 1;
-            else if (data.item == Item.Basalt)
+            else if (data.Item == Item.Basalt)
                 index = 2;
-            else if (data.item == Item.Magma)
+            else if (data.Item == Item.Magma)
                 index = 3;
-            else if (data.item == Item.Gem)
+            else if (data.Item == Item.Gem)
                 index = 4;
-            else if (data.item == Item.Component)
+            else if (data.Item == Item.Component)
                 index = 5;
             else continue;
             

@@ -16,6 +16,7 @@ public partial class PawnHauler : Pawn
 
     public Item InventoryID = Item.None;
     public int InventoryCount;
+    public int InventorySize = 2;
 
     private Pickup _pickupTarget;
 
@@ -40,6 +41,8 @@ public partial class PawnHauler : Pawn
                     _pickupTarget = GetNewPickupTarget();
                     if (_pickupTarget != null)
                         State = PawnState.Move;
+                    else if (InventoryCount > 0)
+                        State = PawnState.ReturnH;
                 }
                 else
                 {
@@ -108,7 +111,8 @@ public partial class PawnHauler : Pawn
                 Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
                 Counter++;
 
-                State = PawnState.ReturnH;
+                State = InventoryCount < InventorySize ? 
+                    PawnState.ReturnH : PawnState.Idle;
             }
             else if (IsInstanceValid(_pickupTarget))
             {
@@ -171,6 +175,9 @@ public partial class PawnHauler : Pawn
         foreach (Node node in Game.TakeRandom(children, count))
         {
             Pickup child = (Pickup)node;
+
+            if (InventoryID != Item.None && child.Item != InventoryID)
+                continue;
 
             float dist = Game.I._data.PolarDistanceSquared(child.PolarPos, PolarPos);
             if (dist < minDist)
