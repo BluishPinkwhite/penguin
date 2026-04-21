@@ -137,9 +137,13 @@ public partial class PawnHauler : Pawn
                 Inventory.Items[InventoryID].Obtained = true;
                 if (Inventory.Recipes.ContainsKey((RecipeID)InventoryID + 1000))
                     Inventory.Recipes[(RecipeID)InventoryID + 1000].Unlocked = true;
-                
+
                 if (InventoryID == Item.Gem)
+                {
+                    if(Inventory.Items[Item.Research_Station].Amount == 0)
+                        Inventory.UnlockRecipe(RecipeID.Unlock_Research);
                     Inventory.UnlockRecipe(RecipeID.AssignRole_Archeologist);
+                }
 
                 InventoryID = Item.None;
                 InventoryCount = 0;

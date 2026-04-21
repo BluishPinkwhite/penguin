@@ -97,16 +97,13 @@ public partial class PawnArcheologist : Pawn
 
     private void OnFrameChanged()
     {
-        if (visual.Animation == "mine")
+        if (visual.Animation == "brush")
         {
-            if (visual.Frame == 4)
+            if (visual.Frame == 3)
             {
                 if (_targetTile != null && !_targetTile.IsEmpty())
                 {
-                    float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.02f : 0.045f;
-
-                    if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
-                        _targetTile.Integrity = 0;
+                    float damage = 0.02f;
 
                     _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
 
@@ -133,7 +130,7 @@ public partial class PawnArcheologist : Pawn
                                 Pickup.Instantiate(PolarPos, tuple.item);
                             }
                             
-                            if (!Inventory.IsResearchUnlocked(RecipeID.Research_FirstResearch))
+                            if (!Inventory.IsResearchUnlocked(RecipeID.Research_BiggerZoomLens))
                                 break; // disallow gem gathering without upgrade
                         }
 
@@ -141,9 +138,6 @@ public partial class PawnArcheologist : Pawn
 
                         State = PawnState.ReturnH;
                         Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
-                    }
-                    else
-                    {
                         SetCooldown(1);
                     }
                 }
@@ -167,7 +161,7 @@ public partial class PawnArcheologist : Pawn
         }
         else if (State == PawnState.Action)
         {
-            visual.Animation = "mine";
+            visual.Animation = "brush";
         }
     }
 }

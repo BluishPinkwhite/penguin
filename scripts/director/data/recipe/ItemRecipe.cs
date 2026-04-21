@@ -97,6 +97,10 @@ public class ItemRecipe
             }
 
             recipe.Apply();
+            if (recipe.ID == RecipeID.Unlock_Research)
+            {
+                recipe.Unlocked = false;
+            }
             return true;
         }
 

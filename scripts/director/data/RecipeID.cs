@@ -22,6 +22,8 @@ public enum RecipeID
     AssignRole_Hauler = 2000 + Item.Hauler,
     AssignRole_Archeologist = 2000 + Item.Archeologist,
     
+    Unlock_Research = 2500,
+    
     Research_FirstResearch = 3000,
     Research_BiggerZoomLens = 3001,
     Research_FinerBrushes = 3002,

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://pl6bkeonsi7q"]
 
 [ext_resource type="Script" uid="uid://bwimmslo8mox4" path="res://scripts/entity/pawn/roles/PawnArcheologist.cs" id="1_5n1lg"]
-[ext_resource type="SpriteFrames" uid="uid://bn7c1uhy56u7v" path="res://sprites/penguins/miner/penguin_miner.tres" id="1_543fn"]
 [ext_resource type="AudioStream" uid="uid://k2m3kfexlmv7" path="res://sounds/sfx/miner/pickaxe_hit.wav" id="2_5n1lg"]
+[ext_resource type="SpriteFrames" uid="uid://ig1w2rkc5lmd" path="res://sprites/penguins/archaeologist/penguin_archaeologist.tres" id="2_8dwh2"]
 
 [node name="PawnArcheologist" type="Node2D" unique_id=481542595 node_paths=PackedStringArray("SFX", "visual", "DebugText")]
 script = ExtResource("1_5n1lg")
@@ -11,11 +11,10 @@ visual = NodePath("AnimatedSprite2D")
 DebugText = NodePath("DebugText")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=191481899]
-position = Vector2(0, -6)
-scale = Vector2(0.5, 0.5)
-sprite_frames = ExtResource("1_543fn")
-animation = &"mine"
-speed_scale = 2.0
+position = Vector2(0, -12)
+sprite_frames = ExtResource("2_8dwh2")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="DebugText" type="Label" parent="." unique_id=373489234]
 visible = false

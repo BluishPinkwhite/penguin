@@ -18,6 +18,8 @@ public enum Item
     Magma = 3,
     Gem = 8,
     Component = 9,
+    
+    Research_Station = 2000,
 }
 
 

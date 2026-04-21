@@ -20,8 +20,8 @@ public static class Inventory
 
         new ItemData(Item.None, 0);
         new ItemData(Item.Penguin, 8, true);
-        new ItemData(Item.Miner, 8) { Amount = 8 };
-        new ItemData(Item.Hauler, 8) { Amount = 6 };
+        new ItemData(Item.Miner, 8) { Amount = 1 };
+        new ItemData(Item.Hauler, 8) { Amount = 1 };
         new ItemData(Item.Archeologist, 8);
 
         new ItemData(Item.Dirt, 0, true);
@@ -30,6 +30,8 @@ public static class Inventory
         new ItemData(Item.Magma, 3);
         new ItemData(Item.Gem, 4);
         new ItemData(Item.Component, 5);
+        
+        new ItemData(Item.Research_Station, 0);
 
         new ItemRecipe(RecipeID.None, [], []);
 
@@ -49,6 +51,8 @@ public static class Inventory
         new ItemRecipe(RecipeID.Gather_Component, [], [
             new Product(Item.Component, 1), new Product(Item.Gem, 1, 0.2)
         ], true);
+
+        new ItemRecipe(RecipeID.Unlock_Research, [new Ingredient(Item.Gem, 1)], [new Product(Item.Research_Station, 1)]);
 
         new ItemRecipe(RecipeID.NewPenguinFor_Dirt,
             [new Ingredient(Item.Dirt, 1, 1.1, 0, 8)],
@@ -81,35 +85,35 @@ public static class Inventory
 
         
         new ResearchRecipe(RecipeID.Research_FirstResearch,
-            [new Ingredient(Item.Stone, 20)]);
+            [new Ingredient(Item.Component, 1)]);
         new ResearchRecipe(RecipeID.Research_BiggerZoomLens,
-            [new Ingredient(Item.Gem, 5)]);
+            [new Ingredient(Item.Component, 50)]);
         new ResearchRecipe(RecipeID.Research_FinerBrushes,
-            [new Ingredient(Item.Gem, 20)]);
+            [new Ingredient(Item.Component, 130)]);
         new ResearchRecipe(RecipeID.Research_PrecisePickaxes,
-            [new Ingredient(Item.Component, 5), new Ingredient(Item.Stone, 100)]);
+            [new Ingredient(Item.Component, 70)]);
         new ResearchRecipe(RecipeID.Research_BasaltUpgrade,
-            [new Ingredient(Item.Component, 25), new Ingredient(Item.Basalt, 100)]);
+            [new Ingredient(Item.Component, 150)]);
         new ResearchRecipe(RecipeID.Research_MagmaReinforcement,
-            [new Ingredient(Item.Component, 50), new Ingredient(Item.Magma, 25)]);
+            [new Ingredient(Item.Component, 230)]);
         new ResearchRecipe(RecipeID.Research_EnergyDrinks,
-            [new Ingredient(Item.Component, 15)]);
+            [new Ingredient(Item.Component, 110)]);
         new ResearchRecipe(RecipeID.Research_AncientMiningTechnology,
-            [new Ingredient(Item.Component, 100)]);
+            [new Ingredient(Item.Component, 400)]);
         new ResearchRecipe(RecipeID.Research_Running,
-            [new Ingredient(Item.Component, 3)]);
-        new ResearchRecipe(RecipeID.Research_JetpackShoes,
-            [new Ingredient(Item.Component, 10)]);
-        new ResearchRecipe(RecipeID.Research_ErgonomicHandles,
-            [new Ingredient(Item.Component, 10)]);
-        new ResearchRecipe(RecipeID.Research_FasterJetpackAscent,
             [new Ingredient(Item.Component, 40)]);
+        new ResearchRecipe(RecipeID.Research_JetpackShoes,
+            [new Ingredient(Item.Component, 90)]);
+        new ResearchRecipe(RecipeID.Research_ErgonomicHandles,
+            [new Ingredient(Item.Component, 80)]);
+        new ResearchRecipe(RecipeID.Research_FasterJetpackAscent,
+            [new Ingredient(Item.Component, 150)]);
         new ResearchRecipe(RecipeID.Research_BiggerBaskets,
-            [new Ingredient(Item.Dirt, 1000), new Ingredient(Item.Component, 25)]);
+            [new Ingredient(Item.Component, 250)]);
         new ResearchRecipe(RecipeID.Research_AncientCollectorKnowledge,
-            [new Ingredient(Item.Component, 100)]);
+            [new Ingredient(Item.Component, 400)]);
         new ResearchRecipe(RecipeID.Research_OrbitalCoreExtractor,
-            [new Ingredient(Item.Component, 250), new Ingredient(Item.Gem, 50)]);
+            [new Ingredient(Item.Component, 1000)]);
     }
 
     

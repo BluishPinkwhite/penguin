@@ -245,6 +245,47 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_wheia")
 expand_mode = 2
 
+[node name="Purchasable5" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2117790588 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_wqfgl")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 2500
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable5" unique_id=2137323556]
+layout_mode = 2
+mouse_filter = 1
+text = "amogus"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable5" unique_id=350705081]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable5/HBoxContainer" unique_id=112703601]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable5/HBoxContainer/ResourceCost" unique_id=764396681]
+layout_mode = 2
+mouse_filter = 1
+text = "1000000"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable5/HBoxContainer/ResourceCost" unique_id=259970776]
+layout_mode = 2
+texture = SubResource("AtlasTexture_wheia")
+expand_mode = 2
+
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseEnter"]
@@ -253,3 +294,5 @@ expand_mode = 2
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable5" to="MarginContainer/VBoxContainer/Purchasable5" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable5" to="MarginContainer/VBoxContainer/Purchasable5" method="OnMouseExit"]

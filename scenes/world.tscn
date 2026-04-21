@@ -20,13 +20,12 @@
 [ext_resource type="AudioStream" uid="uid://b14qedkevk421" path="res://sounds/soundtrack/A Foreign Planet - Looped.wav" id="17_7t5mc"]
 [ext_resource type="PackedScene" uid="uid://b5wl5b8aqpryf" path="res://ui/research_tree_view.tscn" id="19_pm21f"]
 
-[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "Debug", "ResearchWindow")]
+[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "Debug")]
 script = ExtResource("1_i7141")
 Pawns = NodePath("Pawns")
 Stations = NodePath("Stations")
 Pickups = NodePath("Pickups")
 Debug = NodePath("Debug")
-ResearchWindow = NodePath("Front_UI/research_ui")
 PickupScene = ExtResource("3_4mrxx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=77520530 node_paths=PackedStringArray("world")]
