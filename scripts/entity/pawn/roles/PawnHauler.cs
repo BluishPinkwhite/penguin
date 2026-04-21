@@ -112,7 +112,7 @@ public partial class PawnHauler : Pawn
                 Counter++;
 
                 State = InventoryCount < InventorySize ? 
-                    PawnState.ReturnH : PawnState.Idle;
+                    PawnState.Idle : PawnState.ReturnH;
             }
             else if (IsInstanceValid(_pickupTarget))
             {

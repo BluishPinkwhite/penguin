@@ -165,7 +165,7 @@ public abstract partial class Pawn : SurfaceEntity
 
                     if (Inventory.IsResearchUnlocked(RecipeID.Research_JetpackShoes))
                     {
-                        float stepY = Consts.Pawns[Role].FlySpeed * 3 * Gravity * d;
+                        float stepY = Consts.Pawns[Role].FlySpeed * 1.5f * Gravity * d;
                         float newY = PolarPos.Y + stepY;
                         
                         PolarPos.Y = newY;

@@ -34,16 +34,16 @@ public static class Inventory
         new ItemRecipe(RecipeID.None, [], []);
 
         new ItemRecipe(RecipeID.Mine_Dirt, [], [
-            new Product(Item.Dirt, 1), new Product(Item.Gem, 1, 0.01)
+            new Product(Item.Dirt, 1), new Product(Item.Gem, 1, 0.001)
         ], true);
         new ItemRecipe(RecipeID.Mine_Stone, [], [
-            new Product(Item.Stone, 1), new Product(Item.Gem, 1, 0.05)
+            new Product(Item.Stone, 1), new Product(Item.Gem, 1, 0.005)
         ], true);
         new ItemRecipe(RecipeID.Mine_Basalt, [], [
-            new Product(Item.Basalt, 1), new Product(Item.Gem, 1, 0.15)
+            new Product(Item.Basalt, 1), new Product(Item.Gem, 1, 0.015)
         ], true);
         new ItemRecipe(RecipeID.Mine_Magma, [], [
-            new Product(Item.Magma, 1), new Product(Item.Gem, 1, 0.25)
+            new Product(Item.Magma, 1), new Product(Item.Gem, 1, 0.025)
         ], true);
             
         new ItemRecipe(RecipeID.Gather_Component, [], [

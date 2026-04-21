@@ -144,6 +144,7 @@ public partial class PawnMiner : Pawn
         {
             if (visual.Frame == 4)
             {
+                // TODO fix if target tile grows a tile on top
                 if (_targetTile != null && !_targetTile.IsEmpty() && _targetTile.OwnerID == ID)
                 {
                     float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.25f : 0.45f;
