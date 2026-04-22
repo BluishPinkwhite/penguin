@@ -121,11 +121,23 @@ public partial class PawnArcheologist : Pawn
                         foreach ((Item item, int amount) tuple in products)
                         {
                             int amount = tuple.amount;
+                            
+                            float chance = 0f;
 
                             if (Inventory.IsResearchUnlocked(RecipeID.Research_BiggerZoomLens))
-                                amount += 1;
+                                chance += 0.3f;
                             if (Inventory.IsResearchUnlocked(RecipeID.Research_FinerBrushes))
-                                amount *= 2;
+                                chance += Inventory.Items[Item.Finer_Brushes].Amount * 0.15f;
+
+                            if (GD.Randf() < chance)
+                            {
+                                amount++;
+                            }
+                            
+                            if(GD.Randf() < chance / 2f)
+                            {
+                                amount++;
+                            }
                             
                             for (int i = 0; i < amount; i++)
                             {

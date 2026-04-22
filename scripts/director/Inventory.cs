@@ -125,23 +125,23 @@ public static class Inventory
         new ResearchRecipe(RecipeID.Research_FirstResearch,
             [new Ingredient(Item.Component, 1)]);
         new ResearchRecipe(RecipeID.Research_BiggerZoomLens,
-            [new Ingredient(Item.Component, 20), new Ingredient(Item.Gem, 5)]);
+            [new Ingredient(Item.Component, 40), new Ingredient(Item.Gem, 5)]);
         new ResearchRecipe(RecipeID.Research_FinerBrushes,
-            [new Ingredient(Item.Component, 30)]); 
+            [new Ingredient(Item.Component, 100)]); 
         new ResearchRecipe(RecipeID.Research_PrecisePickaxes,
             [new Ingredient(Item.Component, 25)]); 
         new ResearchRecipe(RecipeID.Research_BasaltUpgrade,
-            [new Ingredient(Item.Component, 40), new Ingredient(Item.Basalt, 50)]);
+            [new Ingredient(Item.Component, 70), new Ingredient(Item.Basalt, 50)]);
         new ResearchRecipe(RecipeID.Research_MagmaReinforcement,
-            [new Ingredient(Item.Component, 80), new Ingredient(Item.Magma, 30)]);
+            [new Ingredient(Item.Component, 100), new Ingredient(Item.Magma, 30)]);
         new ResearchRecipe(RecipeID.Research_EnergyDrinks,
-            [new Ingredient(Item.Component, 30)]);
+            [new Ingredient(Item.Component, 40)]);
         new ResearchRecipe(RecipeID.Research_AncientMiningTechnology,
             [new Ingredient(Item.Component, 300)]);
         new ResearchRecipe(RecipeID.Research_Running,
             [new Ingredient(Item.Component, 30)]); 
         new ResearchRecipe(RecipeID.Research_JetpackShoes,
-            [new Ingredient(Item.Component, 40), new Ingredient(Item.Gem, 20)]);
+            [new Ingredient(Item.Component, 80), new Ingredient(Item.Gem, 20)]);
         new ResearchRecipe(RecipeID.Research_ErgonomicHandles,
             [new Ingredient(Item.Component, 120)]);
         new ResearchRecipe(RecipeID.Research_FasterJetpackAscent,
