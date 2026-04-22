@@ -6,7 +6,7 @@ namespace Incremental.scripts.planet.data;
 
 public class PlanetTile
 {
-    public const int LightReach = 8;
+    public const int LightReach = 6;
     public const float LightMax = 1f + 1f/LightReach;
     
     

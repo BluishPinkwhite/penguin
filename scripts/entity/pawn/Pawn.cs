@@ -184,9 +184,8 @@ public abstract partial class Pawn : SurfaceEntity
             
             float stepY = mult * Gravity * d;
             float newY = PolarPos.Y + stepY;
-
-            if (!CheckCollision(PolarPos.X, newY))
-                PolarPos.Y = newY;
+            
+            PolarPos.Y = newY;
 
             if (!CheckCollision(newX, PolarPos.Y))
             {

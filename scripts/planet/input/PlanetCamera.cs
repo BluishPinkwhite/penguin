@@ -10,13 +10,13 @@ public partial class PlanetCamera : Camera2D
     public float Angle; // radians
 
     [Export] private rendering.PlanetRenderer world;
-    
+
     [Export] public float MoveSpeed = 400f;
     [Export] public float ZoomLevel = 1.0f;
     [Export] public float ZoomSpeed = 1.5f;
     [Export] public float MinZoom = 0.3f;
     [Export] public float MaxZoom = 3.0f;
-    
+
     private bool _dragging;
     private Vector2 _lastMousePosition;
     private float _angleVelocity;
@@ -27,12 +27,15 @@ public partial class PlanetCamera : Camera2D
     {
         Angle = 0;
         Radius = 1;
-    
+
         MakeCurrent();
     }
-    
+
     public override void _Process(double delta)
     {
+        if (Game.I.ResearchWindow.Visible)
+            return;
+
         float dt = (float)(delta / Engine.TimeScale);
 
         if (Input.IsActionPressed("ui_left"))
@@ -52,10 +55,10 @@ public partial class PlanetCamera : Camera2D
             Vector2 currentMousePosition = GetViewport().GetMousePosition();
             Vector2 d = currentMousePosition - _lastMousePosition;
             _lastMousePosition = currentMousePosition;
-            
+
             float dragAngle = -d.X / 720f / 3f / ZoomLevel;
             float dragRadius = d.Y / 720f / 3f / ZoomLevel;
-            
+
             Angle += dragAngle;
             Radius += dragRadius;
 
@@ -69,15 +72,15 @@ public partial class PlanetCamera : Camera2D
         {
             Angle += _angleVelocity * dt;
             Radius += _radiusVelocity * dt;
-            
+
             _angleVelocity = Mathf.Clamp(Mathf.Lerp(_angleVelocity, 0, MomentumFriction * dt), -10f, 10f);
             _radiusVelocity = Mathf.Clamp(Mathf.Lerp(_radiusVelocity, 0, MomentumFriction * dt), -10f, 10f);
         }
-        
+
         Radius = Mathf.Clamp(Radius, 0f, 1.5f);
         Angle = Mathf.PosMod(Angle, Mathf.Tau);
 
-        
+
         float planetRadius = Game.I._data.TileSize * 100f;
         float r = Radius * planetRadius;
 
@@ -88,7 +91,7 @@ public partial class PlanetCamera : Camera2D
 
         Position = world.Position + offset;
         Rotation = Angle + Mathf.Pi / 2f;
-        
+
         if (Input.IsActionPressed("zoom_in"))
             ZoomLevel += ZoomSpeed * dt;
 
@@ -97,19 +100,20 @@ public partial class PlanetCamera : Camera2D
 
         ZoomLevel = Mathf.Clamp(ZoomLevel, MinZoom, MaxZoom);
         Zoom = new Vector2(ZoomLevel, ZoomLevel);
-        
+
         float sfxVolume = Mathf.Remap(ZoomLevel, MinZoom, MaxZoom, -80f, 0f);
         sfxVolume = Mathf.Clamp(sfxVolume + 40f, -80f, 0f);
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), sfxVolume);
-
-
     }
 
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
-        
-        
+
+        if (Game.I.ResearchWindow.Visible)
+            return;
+
+
         if (@event is InputEventMouseButton mouseButton)
         {
             if (mouseButton.Pressed)
@@ -119,7 +123,7 @@ public partial class PlanetCamera : Camera2D
 
                 if (mouseButton.ButtonIndex == MouseButton.WheelDown)
                     ZoomLevel -= ZoomSpeed / 60f;
-                
+
                 if (mouseButton.ButtonIndex == MouseButton.Left)
                 {
                     _dragging = true;

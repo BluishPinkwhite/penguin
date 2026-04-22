@@ -24,7 +24,7 @@ public partial class PawnHauler : Pawn
     protected override void DoBehaviour(float d)
     {
         InventorySize = 2 + Inventory.Items[Item.Bigger_Baskets].Amount;
-        
+
         float gravityY = PolarPos.Y - d * Gravity;
 
         if (State is PawnState.Idle or PawnState.GiveUp)
@@ -33,7 +33,7 @@ public partial class PawnHauler : Pawn
             {
                 visual.Rotate(Game.RandomAround(0.28f, 0.1f));
             }
-            
+
             // wait till the pawn is on the ground
             PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
             if (below != null && !below.IsEmpty())
@@ -44,7 +44,11 @@ public partial class PawnHauler : Pawn
                     if (_pickupTarget != null)
                         State = PawnState.Move;
                     else if (InventoryCount > 0)
+                    {
+                        _pickupTarget = null;
+                        Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
                         State = PawnState.ReturnH;
+                    }
                 }
                 else
                 {
@@ -113,8 +117,7 @@ public partial class PawnHauler : Pawn
                 Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);
                 Counter++;
 
-                State = InventoryCount < InventorySize ? 
-                    PawnState.Idle : PawnState.ReturnH;
+                State = InventoryCount < InventorySize ? PawnState.Idle : PawnState.ReturnH;
             }
             else if (IsInstanceValid(_pickupTarget))
             {
@@ -142,12 +145,14 @@ public partial class PawnHauler : Pawn
 
                 if (InventoryID == Item.Gem)
                 {
-                    if(Inventory.Items[Item.Research_Station].Amount == 0)
+                    if (Inventory.Items[Item.Research_Station].Amount == 0)
                         Inventory.UnlockRecipe(RecipeID.Unlock_Research);
                     Inventory.UnlockRecipe(RecipeID.AssignRole_Archeologist);
                 }
 
-                if (InventoryID == Item.Stone && Inventory.Items[Item.Tougher_Pickaxes].Amount < 4)
+                if (InventoryID == Item.Stone
+                    && Inventory.Items[Item.Tougher_Pickaxes].Amount < 4
+                    && Inventory.IsResearchUnlocked(RecipeID.Unlock_Research))
                 {
                     Inventory.UnlockRecipe(RecipeID.Tougher_Pickaxes);
                 }
@@ -156,12 +161,12 @@ public partial class PawnHauler : Pawn
                 InventoryCount = 0;
                 PickupSprite.Visible = false;
             }
-            
+
             if (Counter > Consts.Pawns[Role.Hauler].RetirementCycles)
             {
                 State = PawnState.RetireH;
                 Pickup pickup = GetNewPickupTarget();
-                    
+
                 float x = pickup?.PolarPos.X ?? Game.RandomAround(PolarPos.X, 5);
                 float y = Game.RandomAround(ResourceStation.I.Surface.Y + 50, 5);
 
@@ -182,7 +187,7 @@ public partial class PawnHauler : Pawn
 
         IList<Node> children = Game.I.Pickups.GetChildren();
 
-        int count = Math.Min(8, Mathf.CeilToInt(children.Count / 10f));
+        int count = Math.Min(16, Mathf.CeilToInt(children.Count / 10f));
         foreach (Node node in Game.TakeRandom(children, count))
         {
             Pickup child = (Pickup)node;

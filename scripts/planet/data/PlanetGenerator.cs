@@ -2,7 +2,7 @@
 
 namespace Incremental.scripts.planet.data;
 
-public class PlanetGenerator
+public static class PlanetGenerator
 {
     private static Random r = new();
     private static readonly float[] percentages = [1f, 0.99f, 0.86f, 0.54f, 0.24f, 0.12f, 0.03f, 0];

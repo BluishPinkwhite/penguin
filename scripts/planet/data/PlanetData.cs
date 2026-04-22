@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.rendering;
 
 namespace Incremental.scripts.planet.data;
@@ -18,6 +19,10 @@ public class PlanetData
     public readonly int BaseTileCount;
     public readonly float TileSize;
     public readonly float GrowthFactor;
+    
+    private List<(int x, int y, float dist)> _miningQueue = new();
+    private int _miningQueueIndex = 0;
+    
 
     public PlanetData(
         int layerCount,
@@ -52,6 +57,23 @@ public class PlanetData
         }
     }
 
+    public void FillMiningQueue()
+    {
+        _miningQueue.Clear();
+        
+        for (int y = 0; y < Layers.Count; y++)
+        {
+            int tileCount = Layers[y].Length;
+            for (int x = 0; x < tileCount; x++)
+            {
+                _miningQueue.Add((x, y, 
+                    PolarToWorld(new Vector2(x, y)).DistanceSquaredTo(PolarToWorld(ResourceStation.I.PolarPos))));
+            }
+        }
+        
+        _miningQueue.Sort((a, b) => a.dist.CompareTo(b.dist));
+        _miningQueueIndex = 0;
+    }
 
     public bool LocalPositionToPolarCoords(Vector2 localPos, out int layer, out int tile)
     {
@@ -145,71 +167,53 @@ public class PlanetData
         return (x % size + size) % size;
     }
 
-    public bool NextMiningTarget(Vector2 fromPolar, out Vector2 target, out PlanetTile bestTile)
+    public bool NextMiningTarget(Vector2 fromPos, out Vector2 target, out PlanetTile bestTile)
     {
-        int centerX = Mathf.FloorToInt(fromPolar.X);
-        int centerY = Mathf.FloorToInt(fromPolar.Y);
-
-        int maxRadius = Game.I._data.Layers.Count;
-
+        if (_miningQueue.Count == 0)
+            FillMiningQueue();
+        
         bestTile = null;
-        int bestX = 0;
-        int bestY = 0;
+        (int x, int y, float dist) best = (0,0,0);
 
-        for (int radius = 0; radius < maxRadius; radius++)
+        int i = _miningQueueIndex;
+        int a = 0;
+        while (a < 10)
         {
-            bool foundAny = false;
-            int r2 = radius * radius;
+            if (i >= _miningQueue.Count)
+                break;
 
-            for (int dy = -radius; dy <= radius; dy++)
+            (int x, int y, float dist) next = _miningQueue[i];
+            i++;
+            
+            PlanetTile tile = Layers[next.y][next.x];
+            
+            // tile is not available -> skip
+            if (tile.OwnerID != -1 || tile.IsEmpty())
+                continue;
+            
+            // tile is reachable from above
+            PlanetTile above = Game.I._data.GetTileAtPolarCoords(next.x, next.y + 1);
+            if (above != null && !above.IsEmpty())
+                continue;
+            
+            float dist = PolarDistanceSquared(new Vector2(next.x, next.y), fromPos);
+            float minDist = PolarDistanceSquared(new Vector2(best.x, best.y), fromPos);
+
+            if (bestTile == null || dist < minDist)
             {
-                int y = centerY + dy;
-                if (y < 0 || y >= Game.I._data.Layers.Count)
-                    continue;
-
-                PlanetTile[] layer = Game.I._data.Layers[y];
-                int layerSize = layer.Length;
-
-                for (int dx = -radius; dx <= radius; dx++)
-                {
-                    if (dx * dx + dy * dy * 4 > r2)
-                        continue;
-
-                    int x = WrapX(centerX + dx, layerSize);
-
-                    PlanetTile tile = layer[x];
-
-                    // tile is not available -> skip
-                    if (tile.OwnerID != -1 ||
-                        tile.IsEmpty())
-                        continue;
-
-                    // tile is reachable from above
-                    PlanetTile above = Game.I._data.GetTileAtPolarCoords(x, y + 1);
-                    if (above != null && !above.IsEmpty())
-                        continue;
-
-                    bestTile = tile;
-                    bestX = x;
-                    bestY = y;
-
-                    foundAny = true;
-                    break;
-                }
-
-                if (foundAny)
-                    break;
+                best = next;
+                bestTile = tile;
             }
-
-            if (foundAny)
-            {
-                target = new Vector2(bestX, bestY);
-                return true;
-            }
+            a++;
+        }
+        
+        if (bestTile != null)
+        {
+            target = new Vector2(best.x, best.y);
+            return true;
         }
 
         target = Vector2.Zero;
-        bestTile = null;
         return false;
     }
 
@@ -255,5 +259,17 @@ public class PlanetData
         }
 
         PlanetRenderer.isLightDirty = true;
+        
+        _miningQueueIndex = 0;
+        while (_miningQueueIndex < _miningQueue.Count)
+        {
+            (int x, int y, float dist) next = _miningQueue[_miningQueueIndex];
+            PlanetTile tile = Layers[next.y][next.x];
+            
+            // tile is not available -> skip
+            if (tile.OwnerID != -1 || tile.IsEmpty())
+                _miningQueueIndex++;
+            else break;
+        }
     }
 }

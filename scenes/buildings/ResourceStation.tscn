@@ -132,13 +132,6 @@ sprite_frames = ExtResource("5_e57vn")
 autoplay = "default"
 frame_progress = 0.8978124
 
-[node name="ControlPanel" parent="." unique_id=895867581 instance=ExtResource("7_s6ffd")]
-offset_left = -174.0
-offset_top = -279.0
-offset_right = 291.0
-offset_bottom = -58.0
-scale = Vector2(0.75, 0.75)
-
 [node name="PanelHoverHitbox" type="Control" parent="." unique_id=2062287156 node_paths=PackedStringArray("_objectToShow")]
 process_mode = 3
 layout_mode = 3
@@ -147,12 +140,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -181.0
-offset_top = -286.0
-offset_right = 176.0
-offset_bottom = 49.0
+offset_left = -169.0
+offset_top = -394.0
+offset_right = 188.0
+offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.0063565, 1.4085014)
 mouse_filter = 2
 script = ExtResource("7_vvxl7")
 _objectToShow = NodePath("../ControlPanel")
+
+[node name="ControlPanel" parent="." unique_id=895867581 instance=ExtResource("7_s6ffd")]
+offset_left = -224.0
+offset_top = -267.0
+offset_right = 226.0
+offset_bottom = -164.0

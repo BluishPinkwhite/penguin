@@ -25,12 +25,32 @@ void vertex() {
 	// smooth lighting:
 	float tileCount = round(COLOR.g * max_layer_width);
 	vec2 tile_step = vec2(1.0 / tileCount, 1.0 / total_layers);
-
-	float l00 = texture(data_texture, UV).b;
-	float l10 = texture(data_texture, vec2(fract(UV.x + tile_step.x), UV.y)).b;
-	float l01 = texture(data_texture, vec2(UV.x, clamp(UV.y + tile_step.y, 0.0, 1.0))).b;
-	float l11 = texture(data_texture, vec2(fract(UV.x + tile_step.x), clamp(UV.y + tile_step.y, 0.0, 1.0))).b;
-	v_corner_lights = vec4(l01, l11, l00, l10);
+	
+	// 0 1 2
+	// 7 8 3
+	// 6 5 4
+	
+	float left = fract(UV.x - tile_step.x);
+	float right = fract(UV.x + tile_step.x);
+	float up = clamp(UV.y - tile_step.y, 0.0, 1.0);
+	float down = clamp(UV.y + tile_step.y, 0.0, 1.0);
+	
+	float l0 = texture(data_texture, vec2(left, up)).b;
+	float l1 = texture(data_texture, vec2(UV.x, up)).b;
+	float l2 = texture(data_texture, vec2(right, up)).b;
+	float l3 = texture(data_texture, vec2(right, UV.y)).b;
+	float l4 = texture(data_texture, vec2(right, down)).b;
+	float l5 = texture(data_texture, vec2(UV.x, down)).b;
+	float l6 = texture(data_texture, vec2(left, down)).b;
+	float l7 = texture(data_texture, vec2(left, UV.y)).b;
+	float l8 = texture(data_texture, UV).b;
+	
+	v_corner_lights = vec4(
+		(l0 + l1 + l8 + l7) / 4.0, 
+		(l2 + l1 + l8 + l3) / 4.0, 
+		(l4 + l5 + l8 + l3) / 4.0, 
+		(l6 + l5 + l8 + l7) / 4.0 
+	);
 	
 	// shrink:
 	if (v_integrity > 1.0) {
@@ -48,8 +68,8 @@ void fragment() {
 	// if destroyed, do not render
 	if (v_integrity <= 0.0) discard;
 
-	float light_bottom = mix(v_corner_lights.x, v_corner_lights.y, v_local_uv.x);
-	float light_top = mix(v_corner_lights.z, v_corner_lights.w, v_local_uv.x);
+	float light_top = mix(v_corner_lights.x, v_corner_lights.y, v_local_uv.x);
+	float light_bottom = mix(v_corner_lights.w, v_corner_lights.z, v_local_uv.x);
 	float smooth_light = mix(light_bottom, light_top, v_local_uv.y);
 
 	// get atlas texture:

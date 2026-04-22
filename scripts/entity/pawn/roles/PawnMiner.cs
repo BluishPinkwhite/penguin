@@ -126,7 +126,7 @@ public partial class PawnMiner : Pawn
 
     private bool GetNewMiningTarget()
     {
-        if (Game.I._data.NextMiningTarget(ResourceStation.I.Surface, out Vector2 target, out PlanetTile tile))
+        if (Game.I._data.NextMiningTarget(PolarPos, out Vector2 target, out PlanetTile tile))
         {
             _targetCoords = new Vector2I(Mathf.FloorToInt(target.X), Mathf.FloorToInt(target.Y));
             _targetTile = tile;

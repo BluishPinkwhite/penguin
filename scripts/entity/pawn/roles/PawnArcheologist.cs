@@ -4,7 +4,6 @@ using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.entity.item;
-using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
 
 namespace Incremental.scripts.entity.pawn.roles;
@@ -83,7 +82,7 @@ public partial class PawnArcheologist : Pawn
 
     private bool GetNewMiningTarget()
     {
-        if (Game.I._data.NextMiningTarget(ResourceStation.I.Surface, out Vector2 target, out PlanetTile tile))
+        if (Game.I._data.NextMiningTarget(PolarPos, out Vector2 target, out PlanetTile tile))
         {
             _targetCoords = new Vector2I(Mathf.FloorToInt(target.X), Mathf.FloorToInt(target.Y));
             _targetTile = tile;

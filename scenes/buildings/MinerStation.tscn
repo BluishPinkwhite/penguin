@@ -45,6 +45,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_4xn3r"]
 resource_name = "wobble"
 length = 10.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -311,11 +312,10 @@ script = ExtResource("12_r02yb")
 _objectToShow = NodePath("../MinesPanel")
 
 [node name="MinesPanel" parent="." unique_id=895867581 instance=ExtResource("13_4xn3r")]
-offset_left = -175.0
-offset_top = -208.0
-offset_right = 290.0
-offset_bottom = -83.0
-scale = Vector2(0.75, 0.75)
+offset_left = -226.0
+offset_top = -178.0
+offset_right = 224.0
+offset_bottom = -107.0
 
 [node name="StationSprite" type="Node2D" parent="." unique_id=503290803]
 

@@ -301,21 +301,23 @@ mouse_filter = 2
 
 [node name="Top" type="HBoxContainer" parent="MarginContainer/Screen/Center" unique_id=1530933110]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="PenguinContainer" type="HBoxContainer" parent="MarginContainer/Screen/Center/Top" unique_id=818428979]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1899853566]
 layout_mode = 2
-mouse_filter = 1
 text = "21"
 label_settings = SubResource("LabelSettings_bu6un")
 vertical_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1398037898]
 layout_mode = 2
+mouse_filter = 0
 texture = ExtResource("6_enix5")
 expand_mode = 3
 
