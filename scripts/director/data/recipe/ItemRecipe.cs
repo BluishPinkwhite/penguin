@@ -106,7 +106,7 @@ public class ItemRecipe
                 recipe.Unlocked = false;
             }
 
-            if (recipe.ID == RecipeID.Finer_Brushes)
+            if (recipe.ID == RecipeID.Research_FinerBrushes)
             {
                 if(Inventory.Items[Item.Finer_Brushes].Amount <= 2)
                     Inventory.UnlockRecipe(RecipeID.Finer_Brushes);
@@ -114,7 +114,7 @@ public class ItemRecipe
                     recipe.Unlocked = false;
             }
             
-            if (recipe.ID == RecipeID.Precise_Pickaxes)
+            if (recipe.ID == RecipeID.Research_PrecisePickaxes)
             {
                 if(Inventory.Items[Item.Higher_Crit_Chance].Amount <= 2)
                     Inventory.UnlockRecipe(RecipeID.Precise_Pickaxes);
@@ -122,7 +122,7 @@ public class ItemRecipe
                     recipe.Unlocked = false;
             }
             
-            if (recipe.ID == RecipeID.Faster_Running)
+            if (recipe.ID == RecipeID.Research_Running)
             {
                 if(Inventory.Items[Item.Faster_Running].Amount <= 4)
                     Inventory.UnlockRecipe(RecipeID.Faster_Running);
@@ -130,7 +130,7 @@ public class ItemRecipe
                     recipe.Unlocked = false;
             }
             
-            if (recipe.ID == RecipeID.Better_Jetpacks)
+            if (recipe.ID == RecipeID.Research_FasterJetpackAscent)
             {
                 if(Inventory.Items[Item.Better_Jetpacks].Amount <= 2)
                     Inventory.UnlockRecipe(RecipeID.Better_Jetpacks);
@@ -138,7 +138,7 @@ public class ItemRecipe
                     recipe.Unlocked = false;
             }
             
-            if (recipe.ID == RecipeID.Bigger_Baskets)
+            if (recipe.ID == RecipeID.Research_BiggerBaskets)
             {
                 if(Inventory.Items[Item.Bigger_Baskets].Amount <= 3)
                     Inventory.UnlockRecipe(RecipeID.Bigger_Baskets);
@@ -146,9 +146,9 @@ public class ItemRecipe
                     recipe.Unlocked = false;
             }
             
-            if (recipe.ID == RecipeID.Orbital_Core_Extractor)
+            if (recipe.ID == RecipeID.Research_OrbitalCoreExtractor)
             {
-                // TODO: END THE GAME
+                Inventory.UnlockRecipe(RecipeID.Orbital_Core_Extractor);
             }
             
             return true;

@@ -36,7 +36,8 @@ public partial class Resources : BoxContainer, IUpdatable
             }
         }
 
-        _penguinLabel = _penguinContainer.GetNode<Label>("Count");
+        if( _penguinContainer != null)
+            _penguinLabel = _penguinContainer.GetNode<Label>("Count");
 
         UpdateVisuals();
     }
@@ -76,6 +77,9 @@ public partial class Resources : BoxContainer, IUpdatable
             purchasable.UpdateVisuals();
         }
 
-        _penguinLabel.Text = Inventory.Items[Item.Penguin].Amount.ToString();
+        if( _penguinLabel != null)
+            _penguinLabel.Text = Inventory.Items[Item.Penguin].Amount.ToString();
+        
+        ResourcesCopyCuzMeStoopid.I.UpdateVisuals();
     }
 }

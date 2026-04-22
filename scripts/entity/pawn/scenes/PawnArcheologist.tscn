@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://pl6bkeonsi7q"]
 
 [ext_resource type="Script" uid="uid://bwimmslo8mox4" path="res://scripts/entity/pawn/roles/PawnArcheologist.cs" id="1_5n1lg"]
-[ext_resource type="AudioStream" uid="uid://k2m3kfexlmv7" path="res://sounds/sfx/miner/pickaxe_hit.wav" id="2_5n1lg"]
 [ext_resource type="SpriteFrames" uid="uid://ig1w2rkc5lmd" path="res://sprites/penguins/archaeologist/penguin_archaeologist.tres" id="2_8dwh2"]
+[ext_resource type="AudioStream" uid="uid://o2pfjmpn7tn" path="res://sounds/sfx/archaeologist/archaeologist_brush.wav" id="3_5n1lg"]
 
 [node name="PawnArcheologist" type="Node2D" unique_id=481542595 node_paths=PackedStringArray("SFX", "visual", "DebugText")]
 script = ExtResource("1_5n1lg")
@@ -30,6 +30,6 @@ vertical_alignment = 2
 justification_flags = 128
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=746470454]
-stream = ExtResource("2_5n1lg")
+stream = ExtResource("3_5n1lg")
 panning_strength = 1.2
 bus = &"SFX"

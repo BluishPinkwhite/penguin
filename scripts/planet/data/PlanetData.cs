@@ -20,6 +20,8 @@ public class PlanetData
     public readonly float TileSize;
     public readonly float GrowthFactor;
     
+    public MiningShape CurrentMiningShape = MiningShape.TallerThanWider;
+    
     private List<(int x, int y, float dist)> _miningQueue = new();
     private int _miningQueueIndex = 0;
     
@@ -60,17 +62,39 @@ public class PlanetData
     public void FillMiningQueue()
     {
         _miningQueue.Clear();
-        
+
+        Vector2 stationPolar = ResourceStation.I.PolarPos;
+        float rs = stationPolar.Y * TileSize;
+        float thetaS = stationPolar.X * Mathf.Tau / GetLayerSize(Mathf.FloorToInt(stationPolar.Y));
+
+        float k = CurrentMiningShape switch
+        {
+            MiningShape.Original => 1.0f,
+            MiningShape.Taller => 1.5f,
+            MiningShape.TallerThanWider => 3.0f,
+            _ => 1.0f
+        };
+        float kSqInv = 1.0f / (k * k);
+
         for (int y = 0; y < Layers.Count; y++)
         {
             int tileCount = Layers[y].Length;
+            float rt = y * TileSize;
+            float angleStep = Mathf.Tau / tileCount;
+
             for (int x = 0; x < tileCount; x++)
             {
-                _miningQueue.Add((x, y, 
-                    PolarToWorld(new Vector2(x, y)).DistanceSquaredTo(PolarToWorld(ResourceStation.I.PolarPos))));
+                float thetaT = x * angleStep;
+                float dTheta = thetaT - thetaS;
+
+                float dr = rt - rs;
+                // Weighted distance squared using Law of Cosines for the tangential part.
+                float distSq = dr * dr * kSqInv + 2.0f * rs * rt * (1.0f - Mathf.Cos(dTheta));
+
+                _miningQueue.Add((x, y, distSq));
             }
         }
-        
+
         _miningQueue.Sort((a, b) => a.dist.CompareTo(b.dist));
         _miningQueueIndex = 0;
     }
@@ -129,7 +153,7 @@ public class PlanetData
         float angleStep = Mathf.Tau / GetLayerSize(l);
         float angle = tile * angleStep;
 
-        float radius = layer * Game.I._data.TileSize;
+        float radius = layer * TileSize;
 
         return new Vector2(
             Mathf.Cos(angle),
@@ -143,7 +167,7 @@ public class PlanetData
         float angleStep = Mathf.Tau / GetLayerSize(l);
         float angle = polar.X * angleStep;
 
-        float radius = polar.Y * Game.I._data.TileSize;
+        float radius = polar.Y * TileSize;
 
         return new Vector2(
             Mathf.Cos(angle),

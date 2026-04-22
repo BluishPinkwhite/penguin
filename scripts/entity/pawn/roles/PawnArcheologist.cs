@@ -124,9 +124,12 @@ public partial class PawnArcheologist : Pawn
                             float chance = 0f;
 
                             if (Inventory.IsResearchUnlocked(RecipeID.Research_BiggerZoomLens))
-                                chance += 0.3f;
+                                chance += 0.15f;
                             if (Inventory.IsResearchUnlocked(RecipeID.Research_FinerBrushes))
-                                chance += Inventory.Items[Item.Finer_Brushes].Amount * 0.15f;
+                                chance += Inventory.Items[Item.Finer_Brushes].Amount * 0.1f;
+
+                            if (tuple.item == Item.Gem)
+                                chance /= 3;
 
                             if (GD.Randf() < chance)
                             {
