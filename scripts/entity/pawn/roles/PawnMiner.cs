@@ -37,7 +37,12 @@ public partial class PawnMiner : Pawn
             {
                 if (State == PawnState.Idle)
                 {
-                    Target = new Vector2(_targetCoords.X + 0.5f, _targetCoords.Y + 1.25f);
+                    // TODO fix targetting between layer sizes
+                    if (Game.I._data.GetLayerSize(Mathf.FloorToInt(_targetCoords.Y)) != Game.I._data.GetLayerSize(Mathf.FloorToInt(_targetCoords.Y + 1)))
+                        Target = new Vector2((_targetCoords.X + 0.5f) / 2, _targetCoords.Y + 1.25f);
+                    else
+                        Target = new Vector2(_targetCoords.X + 0.5f, _targetCoords.Y + 1.25f);
+                    
                     State = PawnState.Move;
                     SetCooldown(1);
                 }

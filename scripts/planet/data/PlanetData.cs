@@ -69,9 +69,9 @@ public class PlanetData
 
         float k = CurrentMiningShape switch
         {
-            MiningShape.Original => 1.0f,
-            MiningShape.Taller => 1.5f,
-            MiningShape.TallerThanWider => 3.0f,
+            MiningShape.Original => 0.4f,
+            MiningShape.Taller => 0.9f,
+            MiningShape.TallerThanWider => 1.3f,
             _ => 1.0f
         };
         float kSqInv = 1.0f / (k * k);
@@ -88,7 +88,6 @@ public class PlanetData
                 float dTheta = thetaT - thetaS;
 
                 float dr = rt - rs;
-                // Weighted distance squared using Law of Cosines for the tangential part.
                 float distSq = dr * dr * kSqInv + 2.0f * rs * rt * (1.0f - Mathf.Cos(dTheta));
 
                 _miningQueue.Add((x, y, distSq));
@@ -199,7 +198,8 @@ public class PlanetData
         bestTile = null;
         (int x, int y, float dist) best = (0,0,0);
 
-        int i = _miningQueueIndex;
+        // TODO fix for multiple mining shapes
+        int i = 0;//_miningQueueIndex;
         int a = 0;
         while (a < 10)
         {
@@ -223,7 +223,7 @@ public class PlanetData
             float dist = PolarDistanceSquared(new Vector2(next.x, next.y), fromPos);
             float minDist = PolarDistanceSquared(new Vector2(best.x, best.y), fromPos);
 
-            if (bestTile == null || dist < minDist)
+            if (bestTile == null || dist + next.dist < minDist + best.dist)
             {
                 best = next;
                 bestTile = tile;

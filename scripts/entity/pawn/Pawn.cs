@@ -155,7 +155,7 @@ public abstract partial class Pawn : SurfaceEntity
         if (!Flying)
         {
             // horizontal movement
-            if (dx * dx > 0.05f)
+            if (dx * dx > 0.005f)
             {
                 if (!CheckCollision(newX, PolarPos.Y))
                     PolarPos.X = newX;
@@ -212,8 +212,7 @@ public abstract partial class Pawn : SurfaceEntity
             float stepY = mult * Mathf.Clamp(dy * 5, -1f, 1f) * d * Gravity;
             float newY = PolarPos.Y + stepY;
 
-            if (!CheckCollision(PolarPos.X, newY))
-                PolarPos.Y = newY;
+            PolarPos.Y = newY;
 
             return false;
         }

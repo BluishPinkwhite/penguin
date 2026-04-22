@@ -85,6 +85,9 @@ public class ItemRecipe
         if (!GetRecipe(id, out ItemRecipe recipe))
             return false;
 
+        if (!recipe.Unlocked)
+            return false;
+
         if (recipe.HasIngredients())
         {
             // remove ingredients

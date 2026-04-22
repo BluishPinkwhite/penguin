@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://b7sesrpjfame4"]
 
 [ext_resource type="Script" uid="uid://dkhg6nvfw3ov4" path="res://scripts/entity/station/ResearchStation.cs" id="1_36edw"]
-[ext_resource type="Texture2D" uid="uid://cku3dagkeb0g" path="res://sprites/world/penguin.png" id="2_36edw"]
 [ext_resource type="SpriteFrames" uid="uid://ds0fhuqvkgk4i" path="res://vfx/fire/fire_big.tres" id="3_boqsx"]
+[ext_resource type="SpriteFrames" uid="uid://7navssde5qqx" path="res://sprites/buildings/research_station/research_station.tres" id="4_36edw"]
 [ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="4_fhky6"]
+[ext_resource type="Shader" uid="uid://ch15lqvlg64db" path="res://shaders/buildings/research_station.tres" id="4_ucjlh"]
 [ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="5_0qx7f"]
 [ext_resource type="PackedScene" uid="uid://c67e5ny5r213k" path="res://ui/research_panel.tscn" id="6_36edw"]
 [ext_resource type="Script" uid="uid://dbtsjecr2ocm7" path="res://scripts/ui/ShowOnHover.cs" id="7_ibrjw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boqsx"]
+shader = ExtResource("4_ucjlh")
 
 [sub_resource type="Animation" id="Animation_cg0n2"]
 length = 0.001
@@ -73,69 +77,11 @@ _data = {
 [node name="ResearchStation" type="Node2D" unique_id=696397047]
 script = ExtResource("1_36edw")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=502918650]
-z_index = 100
-position = Vector2(0, -30)
-texture = ExtResource("2_36edw")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1917947304]
-libraries/ = SubResource("AnimationLibrary_ay15d")
-autoplay = &"wobble"
-
-[node name="BigMiddleFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=958788161]
-z_index = -1
-position = Vector2(-4.851668, 87.15555)
-rotation = -3.1202724
-scale = Vector2(1.3619399, 1.2877268)
-sprite_frames = ExtResource("3_boqsx")
-autoplay = "default"
-frame_progress = 0.22222282
-
-[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=1738867591]
-visible = false
-z_index = -1
-position = Vector2(-66.24817, 80.91109)
-rotation = -3.0077937
-scale = Vector2(0.9620002, 0.9620002)
-sprite_frames = ExtResource("4_fhky6")
-autoplay = "default"
-frame_progress = 0.09808198
-
-[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=235531102]
-visible = false
-z_index = -1
-position = Vector2(61.754295, 80.3032)
-rotation = 3.0137565
-scale = Vector2(0.9620001, 0.9620001)
-sprite_frames = ExtResource("4_fhky6")
-autoplay = "default"
-frame_progress = 0.9428698
-
-[node name="SmallLeftFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=667854944]
-visible = false
-z_index = -1
-position = Vector2(-112.90846, 77.10464)
-rotation = -2.7951531
-scale = Vector2(0.93700004, 0.93700004)
-sprite_frames = ExtResource("5_0qx7f")
-autoplay = "default"
-frame_progress = 0.12617896
-
-[node name="SmallRightFire" type="AnimatedSprite2D" parent="Sprite2D" unique_id=1492194339]
-visible = false
-z_index = -1
-position = Vector2(109.09358, 76.78471)
-rotation = 2.8008263
-scale = Vector2(0.93700004, 0.93700004)
-sprite_frames = ExtResource("5_0qx7f")
-autoplay = "default"
-frame_progress = 0.8978124
-
 [node name="ResearchPanel" parent="." unique_id=860121696 instance=ExtResource("6_36edw")]
-offset_left = -174.0
-offset_top = -256.0
-offset_right = 291.0
-offset_bottom = -124.20239
+offset_left = -173.0
+offset_top = -293.0
+offset_right = 292.0
+offset_bottom = -161.2024
 scale = Vector2(0.75, 0.75)
 
 [node name="PanelHoverHitbox" type="Control" parent="." unique_id=1181369070 node_paths=PackedStringArray("_objectToShow")]
@@ -146,12 +92,68 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -179.0
-offset_top = -254.0
-offset_right = 178.0
-offset_bottom = 81.0
+offset_left = -178.0
+offset_top = -291.0
+offset_right = 179.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_ibrjw")
 _objectToShow = NodePath("../ResearchPanel")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1801702172]
+material = SubResource("ShaderMaterial_boqsx")
+position = Vector2(0, -30)
+scale = Vector2(1.3203125, 1.3203125)
+sprite_frames = ExtResource("4_36edw")
+frame_progress = 0.49681377
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=1917947304]
+libraries/ = SubResource("AnimationLibrary_ay15d")
+autoplay = &"wobble"
+
+[node name="BigMiddleFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=958788161]
+z_index = -1
+position = Vector2(-3.6746361, 75.10007)
+rotation = -3.1202724
+scale = Vector2(1.0315285, 0.9753197)
+sprite_frames = ExtResource("3_boqsx")
+autoplay = "default"
+frame_progress = 0.22222282
+
+[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1738867591]
+z_index = -1
+position = Vector2(-50.17613, 70.37053)
+rotation = -3.0077937
+scale = Vector2(0.7286155, 0.7286155)
+sprite_frames = ExtResource("4_fhky6")
+autoplay = "default"
+frame_progress = 0.09808198
+
+[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=235531102]
+z_index = -1
+position = Vector2(46.772484, 69.91012)
+rotation = 3.0137565
+scale = Vector2(0.7286154, 0.7286154)
+sprite_frames = ExtResource("4_fhky6")
+autoplay = "default"
+frame_progress = 0.9428698
+
+[node name="SmallLeftFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=667854944]
+z_index = -1
+position = Vector2(-85.51647, 67.48754)
+rotation = -2.7951531
+scale = Vector2(0.7096805, 0.7096805)
+sprite_frames = ExtResource("5_0qx7f")
+autoplay = "default"
+frame_progress = 0.12617896
+
+[node name="SmallRightFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1492194339]
+z_index = -1
+position = Vector2(82.62709, 67.24523)
+rotation = 2.8008263
+scale = Vector2(0.7096805, 0.7096805)
+sprite_frames = ExtResource("5_0qx7f")
+autoplay = "default"
+frame_progress = 0.8978124

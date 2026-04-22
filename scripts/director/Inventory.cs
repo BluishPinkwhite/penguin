@@ -21,8 +21,8 @@ public static class Inventory
 
         new ItemData(Item.None, 0);
         new ItemData(Item.Penguin, 8, true);
-        new ItemData(Item.Miner, 8) { Amount = 1 };
-        new ItemData(Item.Hauler, 8) { Amount = 1 };
+        new ItemData(Item.Miner, 8) { Amount = 50 };
+        new ItemData(Item.Hauler, 8) { Amount = 50 };
         new ItemData(Item.Archeologist, 8);
 
         new ItemData(Item.Dirt, 0, true);

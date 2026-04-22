@@ -39,6 +39,11 @@ public partial class Clickable : Control
         {
             OnClick();
         }
+        else if (@event.IsActionReleased("press_secondary"))
+        {
+            for(int i = 0; i < 5; i++)
+                OnClick();
+        }
     }
 
 
