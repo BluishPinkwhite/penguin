@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿ using System.Linq;
+ using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
@@ -58,7 +59,7 @@ public partial class Purchasable : Clickable, IUpdatable
 
             if (recipe.Products.Count > 0)
             {
-                _purchasableNameLabel.Text = recipe.Products[0].Item.ToString().Split("_")[^1];
+                _purchasableNameLabel.Text = recipe.Products[0].Item.ToString().Replace("_", " ");
             }
         }
         else

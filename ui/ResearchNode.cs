@@ -60,7 +60,7 @@ public partial class ResearchNode : Control, IUpdatable
     {
         if (IsPurchased) return;
         
-        icon.Visible = IsReachable();
+        iconMaterial.SetShaderParameter("Brightness", IsReachable() ? 0.75f : 0.1f);
     }
 
     public void PurchaseUpgrade()
@@ -85,6 +85,7 @@ public partial class ResearchNode : Control, IUpdatable
                 && research.IsReachable())
             {
                 research.icon.Visible = true;
+                research.UpdateVisuals();
             }
         }
 

@@ -144,7 +144,7 @@ public abstract partial class Pawn : SurfaceEntity
 
         float mult = Consts.Pawns[Role].WalkSpeed;
         if (Inventory.IsResearchUnlocked(RecipeID.Research_Running))
-            mult *= 1.35f;
+            mult += Inventory.Items[Item.Faster_Running].Amount * 0.25f;
         
         float stepX = Mathf.Clamp(dx, -1f, 1f) * d * mult;
         
@@ -180,7 +180,7 @@ public abstract partial class Pawn : SurfaceEntity
             // vertical movement
             mult = Consts.Pawns[Role].FlySpeed;
             if (Inventory.IsResearchUnlocked(RecipeID.Research_FasterJetpackAscent))
-                mult *= 1.4f;
+                mult += Inventory.Items[Item.Better_Jetpacks].Amount * 0.2f;
             
             float stepY = mult * Gravity * d;
             float newY = PolarPos.Y + stepY;
@@ -205,8 +205,12 @@ public abstract partial class Pawn : SurfaceEntity
         float dy = Target.Y - PolarPos.Y;
         if (dy * dy > 0.05f)
         {
+            float mult = Consts.Pawns[Role].FlySpeed;
+            if (Inventory.IsResearchUnlocked(RecipeID.Research_FasterJetpackAscent))
+                mult += Inventory.Items[Item.Better_Jetpacks].Amount * 0.2f;
+            
             // vertical movement
-            float stepY = Mathf.Clamp(dy * 5, -1f, 1f) * d * Consts.Pawns[Role].FlySpeed * Gravity;
+            float stepY = mult * Mathf.Clamp(dy * 5, -1f, 1f) * d * Gravity;
             float newY = PolarPos.Y + stepY;
 
             if (!CheckCollision(PolarPos.X, newY))

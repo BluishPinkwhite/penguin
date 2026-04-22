@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="3_wheia"]
 [ext_resource type="Script" uid="uid://bm5ggg7cogtxa" path="res://scripts/ui/clickable/Purchasable.cs" id="3_wqfgl"]
 [ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="5_wheia"]
+[ext_resource type="Texture2D" uid="uid://6vrcyfk7ey8" path="res://ui/sprites/icons/pentastone_icon.tres" id="6_wqfgl"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_veslf"]
 texture = ExtResource("1_t8mf3")
@@ -47,11 +48,16 @@ atlas = ExtResource("5_wheia")
 region = Rect2(96, 0, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
+[sub_resource type="LabelSettings" id="LabelSettings_wheia"]
+font = ExtResource("2_3b57c")
+font_size = 24
+
 [node name="ControlPanel" type="PanelContainer" unique_id=895867581]
 process_mode = 3
 offset_left = -232.5
 offset_top = -111.0
 offset_right = 232.5
+offset_bottom = 110.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_veslf")
 
@@ -85,6 +91,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_wqfgl")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -126,6 +133,7 @@ expand_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_wqfgl")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -167,6 +175,7 @@ expand_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_wqfgl")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -208,6 +217,7 @@ expand_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_wqfgl")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -249,6 +259,7 @@ expand_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_wqfgl")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -286,6 +297,65 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_wheia")
 expand_mode = 2
 
+[node name="Purchasable6" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1454489828 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("3_wqfgl")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 4006
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable6" unique_id=860894093]
+layout_mode = 2
+mouse_filter = 1
+text = "Orbital Core Extractor"
+label_settings = SubResource("LabelSettings_wheia")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable6" unique_id=377380089]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer" unique_id=996510134]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer/ResourceCost" unique_id=683057646]
+layout_mode = 2
+mouse_filter = 1
+text = "500"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer/ResourceCost" unique_id=2052600391]
+layout_mode = 2
+texture = SubResource("AtlasTexture_wheia")
+expand_mode = 2
+
+[node name="ResourceCost2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer" unique_id=1122879439]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer/ResourceCost2" unique_id=1538806927]
+layout_mode = 2
+mouse_filter = 1
+text = "500"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer/ResourceCost2" unique_id=128392690]
+layout_mode = 2
+texture = ExtResource("6_wqfgl")
+expand_mode = 2
+
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseEnter"]
@@ -296,3 +366,5 @@ expand_mode = 2
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable5" to="MarginContainer/VBoxContainer/Purchasable5" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable5" to="MarginContainer/VBoxContainer/Purchasable5" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable6" to="MarginContainer/VBoxContainer/Purchasable6" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable6" to="MarginContainer/VBoxContainer/Purchasable6" method="OnMouseExit"]

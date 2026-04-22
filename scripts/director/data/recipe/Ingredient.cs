@@ -32,5 +32,10 @@ public class Ingredient
             double newCost = Cost * CostMult + CostAdd;
             Cost = Math.Min(newCost, Cost + MaxCostChange);
         }
+        else if (MaxCostChange < 0)
+        {
+            double newCost = Cost * CostMult + CostAdd;
+            Cost = newCost;
+        }
     }
 }

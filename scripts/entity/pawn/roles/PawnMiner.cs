@@ -147,7 +147,9 @@ public partial class PawnMiner : Pawn
                 // TODO fix if target tile grows a tile on top
                 if (_targetTile != null && !_targetTile.IsEmpty() && _targetTile.OwnerID == ID)
                 {
-                    float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.25f : 0.45f;
+                    float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.5f : 0.25f;
+                    
+                    damage += Inventory.Items[Item.Tougher_Pickaxes].Amount * 0.2f;
                     
                     if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
                         _targetTile.Integrity = 0;
@@ -156,7 +158,11 @@ public partial class PawnMiner : Pawn
 
                     if (Inventory.IsResearchUnlocked(RecipeID.Research_PrecisePickaxes))
                     {
-                        _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+                        float chance = 0.15f;
+                        chance += Inventory.Items[Item.Higher_Crit_Chance].Amount * 0.1f;
+                        
+                        if (GD.Randf() < chance)
+                            _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
                         
                         SFX.PitchScale = (float)GD.RandRange(0.4f, 0.7f);
                         SFX.VolumeDb = (float)GD.RandRange(-1f, 3f);

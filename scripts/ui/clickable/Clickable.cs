@@ -13,6 +13,13 @@ public partial class Clickable : Control
     [Export] protected ClickParam Param;
 
 
+    public override void _Ready()
+    {
+        base._Ready();
+        MouseEntered += OnMouseEnter;
+        MouseExited += OnMouseExit;
+    }
+
     public void OnMouseEnter()
     {
         IsFocused = true;

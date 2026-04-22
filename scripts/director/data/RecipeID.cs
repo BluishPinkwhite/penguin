@@ -39,4 +39,12 @@ public enum RecipeID
     Research_AncientCollectorKnowledge = 3012,
     Research_OrbitalCoreExtractor = 3013,
     Research_ErgonomicHandles = 3014,
+    
+    Tougher_Pickaxes = 4000,
+    Finer_Brushes = 4001,
+    Precise_Pickaxes = 4002,
+    Faster_Running = 4003,
+    Better_Jetpacks = 4004,
+    Bigger_Baskets = 4005,
+    Orbital_Core_Extractor = 4006,
 }

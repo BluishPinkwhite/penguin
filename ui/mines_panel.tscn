@@ -28,9 +28,34 @@ grow_end = -120.0
 font = ExtResource("4_44l33")
 font_size = 24
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc5mb"]
+atlas = ExtResource("6_cc5mb")
+region = Rect2(0, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qv1my"]
 atlas = ExtResource("6_cc5mb")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44l33"]
+atlas = ExtResource("6_cc5mb")
+region = Rect2(0, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd2gs"]
+atlas = ExtResource("6_cc5mb")
+region = Rect2(0, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_covr1"]
+atlas = ExtResource("6_cc5mb")
+region = Rect2(0, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mh05"]
+atlas = ExtResource("6_cc5mb")
+region = Rect2(0, 0, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
 [node name="MinesPanel" type="PanelContainer" unique_id=895867581]
@@ -72,6 +97,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_qv1my")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -113,6 +139,7 @@ expand_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_qv1my")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
@@ -150,52 +177,36 @@ layout_mode = 2
 texture = ExtResource("5_kd2gs")
 expand_mode = 2
 
-[node name="Purchasable3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1816368714 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+[node name="Purchasable3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1058663216 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("3_qv1my")
 _costLabel = NodePath("HBoxContainer/ResourceCost/Price")
 _costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
 _purchasableNameLabel = NodePath("PurchasableName")
-_recipe = 3024
+_recipe = 4000
 
-[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=254482672]
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=1583591265]
 layout_mode = 2
 mouse_filter = 1
-text = "Archeologist"
+text = "Tougher Pickaxes"
 label_settings = SubResource("LabelSettings_0vl20")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=268557169]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3" unique_id=2080442912]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 alignment = 2
 
-[node name="ResourceCost2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=939764925]
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=1089010890]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost2" unique_id=888834560]
-layout_mode = 2
-mouse_filter = 1
-text = "1"
-label_settings = SubResource("LabelSettings_0vl20")
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost2" unique_id=1958025908]
-layout_mode = 2
-texture = SubResource("AtlasTexture_qv1my")
-expand_mode = 2
-
-[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer" unique_id=884119481]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=73310214]
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=468454828]
 layout_mode = 2
 mouse_filter = 1
 text = "7"
@@ -203,9 +214,219 @@ label_settings = SubResource("LabelSettings_0vl20")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=1452011686]
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable3/HBoxContainer/ResourceCost" unique_id=1900130425]
 layout_mode = 2
-texture = ExtResource("5_kd2gs")
+texture = SubResource("AtlasTexture_cc5mb")
+expand_mode = 2
+
+[node name="Purchasable4" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=225625292 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("3_qv1my")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 4001
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable4" unique_id=1093392913]
+layout_mode = 2
+mouse_filter = 1
+text = "Finer Brushes"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable4" unique_id=742674925]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable4/HBoxContainer" unique_id=1456000376]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable4/HBoxContainer/ResourceCost" unique_id=1985410213]
+layout_mode = 2
+mouse_filter = 1
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable4/HBoxContainer/ResourceCost" unique_id=712699016]
+layout_mode = 2
+texture = SubResource("AtlasTexture_qv1my")
+expand_mode = 2
+
+[node name="Purchasable5" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=238656032 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("3_qv1my")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 4002
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable5" unique_id=1526376109]
+layout_mode = 2
+mouse_filter = 1
+text = "Precise Pickaxes"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable5" unique_id=824966367]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable5/HBoxContainer" unique_id=697881517]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable5/HBoxContainer/ResourceCost" unique_id=605053416]
+layout_mode = 2
+mouse_filter = 1
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable5/HBoxContainer/ResourceCost" unique_id=2144914340]
+layout_mode = 2
+texture = SubResource("AtlasTexture_44l33")
+expand_mode = 2
+
+[node name="Purchasable6" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1490694652 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("3_qv1my")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 4003
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable6" unique_id=880745401]
+layout_mode = 2
+mouse_filter = 1
+text = "Faster Running"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable6" unique_id=1335403295]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer" unique_id=534457042]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer/ResourceCost" unique_id=1765202512]
+layout_mode = 2
+mouse_filter = 1
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable6/HBoxContainer/ResourceCost" unique_id=706815536]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kd2gs")
+expand_mode = 2
+
+[node name="Purchasable7" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=528636971 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("3_qv1my")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 4004
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable7" unique_id=444793290]
+layout_mode = 2
+mouse_filter = 1
+text = "Better Jetpacks"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable7" unique_id=1530892121]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable7/HBoxContainer" unique_id=1417760241]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable7/HBoxContainer/ResourceCost" unique_id=778213071]
+layout_mode = 2
+mouse_filter = 1
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable7/HBoxContainer/ResourceCost" unique_id=1902733580]
+layout_mode = 2
+texture = SubResource("AtlasTexture_covr1")
+expand_mode = 2
+
+[node name="Purchasable8" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1295092385 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("3_qv1my")
+_costLabel = NodePath("HBoxContainer/ResourceCost/Price")
+_costIcon = NodePath("HBoxContainer/ResourceCost/Icon")
+_purchasableNameLabel = NodePath("PurchasableName")
+_recipe = 4005
+
+[node name="PurchasableName" type="Label" parent="MarginContainer/VBoxContainer/Purchasable8" unique_id=1328362344]
+layout_mode = 2
+mouse_filter = 1
+text = "Bigger Baskets"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable8" unique_id=1713921610]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="ResourceCost" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Purchasable8/HBoxContainer" unique_id=369054858]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/Purchasable8/HBoxContainer/ResourceCost" unique_id=369614936]
+layout_mode = 2
+mouse_filter = 1
+text = "7"
+label_settings = SubResource("LabelSettings_0vl20")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Purchasable8/HBoxContainer/ResourceCost" unique_id=309882984]
+layout_mode = 2
+texture = SubResource("AtlasTexture_6mh05")
 expand_mode = 2
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable" to="MarginContainer/VBoxContainer/Purchasable" method="OnMouseEnter"]
@@ -214,3 +435,13 @@ expand_mode = 2
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable2" to="MarginContainer/VBoxContainer/Purchasable2" method="OnMouseExit"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable3" to="MarginContainer/VBoxContainer/Purchasable3" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable4" to="MarginContainer/VBoxContainer/Purchasable4" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable5" to="MarginContainer/VBoxContainer/Purchasable5" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable5" to="MarginContainer/VBoxContainer/Purchasable5" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable6" to="MarginContainer/VBoxContainer/Purchasable6" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable6" to="MarginContainer/VBoxContainer/Purchasable6" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable7" to="MarginContainer/VBoxContainer/Purchasable7" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable7" to="MarginContainer/VBoxContainer/Purchasable7" method="OnMouseExit"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Purchasable8" to="MarginContainer/VBoxContainer/Purchasable8" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Purchasable8" to="MarginContainer/VBoxContainer/Purchasable8" method="OnMouseExit"]

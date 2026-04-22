@@ -23,6 +23,8 @@ public partial class PawnHauler : Pawn
 
     protected override void DoBehaviour(float d)
     {
+        InventorySize = 2 + Inventory.Items[Item.Bigger_Baskets].Amount;
+        
         float gravityY = PolarPos.Y - d * Gravity;
 
         if (State is PawnState.Idle or PawnState.GiveUp)
@@ -143,6 +145,11 @@ public partial class PawnHauler : Pawn
                     if(Inventory.Items[Item.Research_Station].Amount == 0)
                         Inventory.UnlockRecipe(RecipeID.Unlock_Research);
                     Inventory.UnlockRecipe(RecipeID.AssignRole_Archeologist);
+                }
+
+                if (InventoryID == Item.Stone && Inventory.Items[Item.Tougher_Pickaxes].Amount < 4)
+                {
+                    Inventory.UnlockRecipe(RecipeID.Tougher_Pickaxes);
                 }
 
                 InventoryID = Item.None;

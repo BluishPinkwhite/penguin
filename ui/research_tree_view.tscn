@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://btovnvu2ea4hi" path="res://ui/sprites/icons/abilities/Ability_icons10_98.png" id="10_m7s40"]
 [ext_resource type="Texture2D" uid="uid://l2nwr8lnd554" path="res://ui/sprites/icons/abilities/Ability_icons10_53.png" id="12_6uy61"]
 [ext_resource type="Texture2D" uid="uid://bj0skna3div1l" path="res://ui/sprites/icons/abilities/Ability_icons10_41.png" id="13_b74hl"]
+[ext_resource type="Texture2D" uid="uid://caiaorypo8c0a" path="res://ui/sprites/icons/close.tres" id="18_rhdrg"]
+[ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/clickable/Clickable.cs" id="19_t51r8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pdd12"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -24,6 +26,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7s40"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v381h"]
 load_path = "res://.godot/imported/Ability_icons10_04.png-176d14828b973724a2d2db007cd4a605.ctex"
@@ -54,6 +57,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ys5lt"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_81uvb"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -61,6 +65,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6uy61"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4fr0h"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -68,6 +73,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edv2f"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cx2lp"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -75,10 +81,12 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rhdrg"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t51r8"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xshwi"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -86,6 +94,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wn7la"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6urkx"]
 load_path = "res://.godot/imported/Ability_icons10_52.png-f8b5326d15f6f220c75affb65fe028c3.ctex"
@@ -96,6 +105,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xs7tc"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b74hl"]
 load_path = "res://.godot/imported/Ability_icons10_56.png-e0c2e2161030c0987a1e05caa2d0f594.ctex"
@@ -106,6 +116,7 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r4eh2"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6uy61"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -113,14 +124,17 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ks66b"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ibn25"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_17rn7"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_raiuh"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -128,14 +142,17 @@ load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1517j"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drvih"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k27qg"]
 shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
+shader_parameter/Brightness = 1.0
 
 [node name="TreeView" type="Control" unique_id=69398314]
 process_mode = 3
@@ -144,16 +161,19 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 840.0
-offset_bottom = 360.0
+offset_right = -7.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
 [node name="BG" type="ColorRect" parent="." unique_id=1068848868]
 layout_mode = 1
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.11699999, 0.1287, 0.13, 1)
 
@@ -1441,3 +1461,20 @@ text = "Finally... We can have the core. So shiny. So beatiful. Time to destroy 
 TODO (now stops planet growth)"
 fit_content = true
 scroll_active = false
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=136366336]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -95.0
+offset_top = -2.5
+offset_right = 3.5
+offset_bottom = 96.0
+grow_horizontal = 0
+texture_normal = ExtResource("18_rhdrg")
+stretch_mode = 0
+script = ExtResource("19_t51r8")
+Type = 5
+Param = 3

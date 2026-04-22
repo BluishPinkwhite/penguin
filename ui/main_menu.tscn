@@ -126,6 +126,7 @@ alignment = 1
 [node name="Play" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=217157422]
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 text = "Play"
 label_settings = SubResource("LabelSettings_wk0pr")
 horizontal_alignment = 1
@@ -184,6 +185,7 @@ frame_progress = 0.8978124
 [node name="AboutUs" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1112922023]
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 text = "About us"
 label_settings = SubResource("LabelSettings_rmr83")
 horizontal_alignment = 1
@@ -191,6 +193,7 @@ horizontal_alignment = 1
 [node name="Quit" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1575158165]
 layout_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 2
 text = "Quit"
 label_settings = SubResource("LabelSettings_8uxxo")
 horizontal_alignment = 1

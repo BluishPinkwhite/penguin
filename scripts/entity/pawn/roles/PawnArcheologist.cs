@@ -49,7 +49,7 @@ public partial class PawnArcheologist : Pawn
                 else if (State == PawnState.ReturnH)
                 {
                     State = PawnState.ReturnV;
-                    Target = ResourceStation.I.PolarPos;
+                    Target = ResearchStation.I.PolarPos;
                     SetCooldown(0.35f);
                 }
             }
@@ -103,7 +103,9 @@ public partial class PawnArcheologist : Pawn
             {
                 if (_targetTile != null && !_targetTile.IsEmpty())
                 {
-                    float damage = 0.02f;
+                    float damage = 0.1f;
+                    
+                    damage += Inventory.Items[Item.Finer_Brushes].Amount * 0.1f;
 
                     _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
 
@@ -137,7 +139,7 @@ public partial class PawnArcheologist : Pawn
                         Counter++;
 
                         State = PawnState.ReturnH;
-                        Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
+                        Target = ResearchStation.I.PolarPos;
                         SetCooldown(1);
                     }
                 }

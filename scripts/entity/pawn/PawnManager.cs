@@ -49,7 +49,14 @@ public partial class PawnManager : Node2D
                 {
                     Pawn p = PawnScenes[index].Instantiate<Pawn>();
                     p.Role = role;
-                    p.PolarPos = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
+                    if (role == Role.Archeologist)
+                    {
+                        p.PolarPos = ResearchStation.I.PolarPos;
+                    }
+                    else
+                    {
+                        p.PolarPos = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
+                    }
                     p.Target = p.PolarPos;
                     AddChild(p);
                 }

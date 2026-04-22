@@ -20,6 +20,14 @@ public enum Item
     Component = 9,
     
     Research_Station = 2000,
+    
+    Tougher_Pickaxes = 3000,
+    Finer_Brushes = 3001,
+    Higher_Crit_Chance = 3002,
+    Faster_Running = 3003,
+    Better_Jetpacks = 3004,
+    Bigger_Baskets = 3005,
+    Orbital_Core_Extractor = 3006,
 }
 
 

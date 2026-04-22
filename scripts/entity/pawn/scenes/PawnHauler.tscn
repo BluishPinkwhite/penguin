@@ -15,7 +15,7 @@ visual = NodePath("PenguinAnimatedSprite")
 DebugText = NodePath("DebugText")
 
 [node name="PenguinAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=704517480]
-position = Vector2(0, -12)
+position = Vector2(0, -11)
 sprite_frames = ExtResource("1_l7i84")
 animation = &"idle"
 
