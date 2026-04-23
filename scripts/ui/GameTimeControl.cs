@@ -6,12 +6,14 @@ public partial class GameTimeControl : Control
 	[Export] private TextureButton pauseButton;
 	[Export] private TextureButton resumeButton;
 	[Export] private TextureButton speedUpButton;
+	[Export] private TextureButton reallySpeedUpButton;
 	
 	public override void _Ready()
 	{
 		pauseButton.Pressed += OnPauseButtonPressed;
 		resumeButton.Pressed += OnResumeButtonPressed;
 		speedUpButton.Pressed += OnSpeedUpButtonPressed;
+		reallySpeedUpButton.Pressed += OnReallySpeedUpButtonPressed;
 	}
 
 	private void OnPauseButtonPressed()
@@ -29,5 +31,11 @@ public partial class GameTimeControl : Control
 	{
 		GetTree().Paused = false;
 		Engine.TimeScale = 2;
+	}
+	
+	private void OnReallySpeedUpButtonPressed()
+	{
+		GetTree().Paused = false;
+		Engine.TimeScale = 8;
 	}
 }

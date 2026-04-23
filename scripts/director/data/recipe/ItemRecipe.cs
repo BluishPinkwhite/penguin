@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Godot;
 using Incremental.ui;
 
 namespace Incremental.scripts.director.data.recipe;
@@ -85,7 +86,7 @@ public class ItemRecipe
         if (!GetRecipe(id, out ItemRecipe recipe))
             return false;
 
-        if (!recipe.Unlocked)
+        if (recipe.Unlocked)
             return false;
 
         if (recipe.HasIngredients())

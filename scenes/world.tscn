@@ -67,6 +67,7 @@ position = Vector2(366, -198)
 PolarPos = Vector2(20, -20)
 
 [node name="ResearchStation" parent="Stations" unique_id=696397047 instance=ExtResource("11_7iits")]
+visible = false
 position = Vector2(784, -52)
 PolarPos = Vector2(40, -20)
 

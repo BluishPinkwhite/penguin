@@ -3,19 +3,20 @@ using System;
 
 public partial class MakeTransparent : ColorRect
 {
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Modulate = new Color(Modulate.R, Modulate.G, Modulate.B, 1);
 		T();
 	}
 
-	private void T()
+	private async void T()
 	{
+		await ToSignal(GetTree().CreateTimer(1f), "timeout");
 		Modulate = new Color(Modulate.R, Modulate.G, Modulate.B, 0);
 		
 		Tween tween = CreateTween();
 			
-		tween.TweenProperty(this, "modulate:a", 0.0f, 0.5f);
+		tween.TweenProperty(this, "modulate:a", 0.0f, 1f);
 
 		tween.Finished += QueueFree;
 	}

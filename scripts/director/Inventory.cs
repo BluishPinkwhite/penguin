@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Godot;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.planet.data;
@@ -30,7 +31,7 @@ public static class Inventory
         new ItemData(Item.Basalt, 2);
         new ItemData(Item.Magma, 3);
         new ItemData(Item.Gem, 4);
-        new ItemData(Item.Component, 5){Amount = 250};
+        new ItemData(Item.Component, 5);
 
         new ItemData(Item.Research_Station, 0);
         new ItemData(Item.Tougher_Pickaxes, 0);
@@ -156,7 +157,7 @@ public static class Inventory
             [new Ingredient(Item.Component, 1000)]);
         
         
-        SaveFileManager.Load();
+        // SaveFileManager.Load();
     }
 
 
@@ -174,6 +175,8 @@ public static class Inventory
             }
 
             recipe.Unlocked = true;
+            
+            GD.Print("Unlocked recipe: " + id + "");
             
         }
         Resources.I.UpdateVisuals();

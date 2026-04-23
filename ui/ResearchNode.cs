@@ -68,6 +68,8 @@ public partial class ResearchNode : Control, IUpdatable
         if (IsPurchased) return;
 
         if (!IsPurchasable()) return;
+        
+        if(!ItemRecipe.TryApplyRecipe(Research)) return;
 
         foreach (ColorRect connector in connectors)
         {
@@ -89,7 +91,7 @@ public partial class ResearchNode : Control, IUpdatable
             }
         }
 
-        ItemRecipe.TryApplyRecipe(Research);
+        
     }
 
     public void OnMouseEnter()
