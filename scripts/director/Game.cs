@@ -5,6 +5,7 @@ using Godot;
 using Incremental.scripts.debug;
 using Incremental.scripts.entity.pawn;
 using Incremental.scripts.planet.data;
+using Incremental.scripts.saving;
 
 namespace Incremental.scripts.director;
 
@@ -27,6 +28,20 @@ public partial class Game : Node2D
     {
         I = this;
         Inventory.Setup();
+    }
+
+    public override void _Ready()
+    {
+        GetTree().SetAutoAcceptQuit(false);
+    }
+
+    public override void _Notification(int what)
+    {
+        if (what == NotificationWMCloseRequest || what == NotificationApplicationPaused)
+        {
+            SaveFileManager.Save();
+            GetTree().Quit();
+        }
     }
 
     public override void _PhysicsProcess(double delta)

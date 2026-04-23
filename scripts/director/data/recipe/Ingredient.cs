@@ -5,12 +5,12 @@ namespace Incremental.scripts.director.data.recipe;
 
 public class Ingredient
 {
-    public Item Item;
+    public readonly Item Item;
     public double Cost;
 
-    public double CostMult;
-    public double CostAdd;
-    public double MaxCostChange;
+    public readonly double CostMult;
+    public readonly double CostAdd;
+    public readonly double MaxCostChange;
 
     public Ingredient(Item item, double cost, double costMult = 1, double costAdd = 0, double maxCostChange = 0)
     {

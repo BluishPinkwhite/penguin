@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.planet.data;
+using Incremental.scripts.saving;
 using Incremental.ui;
 
 namespace Incremental.scripts.director;
@@ -154,6 +154,9 @@ public static class Inventory
             [new Ingredient(Item.Component, 300)]);
         new ResearchRecipe(RecipeID.Research_OrbitalCoreExtractor,
             [new Ingredient(Item.Component, 1000)]);
+        
+        
+        SaveFileManager.Load();
     }
 
 

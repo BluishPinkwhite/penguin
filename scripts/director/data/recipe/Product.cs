@@ -2,9 +2,9 @@
 
 public class Product
 {
-    public Item Item;
-    public int Amount;
-    public double Chance;
+    public readonly Item Item;
+    public readonly int Amount;
+    public readonly double Chance;
 
     public Product(Item item, int amount, double chance = 1)
     {

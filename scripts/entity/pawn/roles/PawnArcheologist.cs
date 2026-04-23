@@ -121,7 +121,8 @@ public partial class PawnArcheologist : Pawn
                         {
                             int amount = tuple.amount;
                             
-                            float chance = 0f;
+                            // increase chance with depth
+                            float chance = 0.25f * (1 - (float)_targetCoords.Y / Game.I._data.Layers.Count);
 
                             if (Inventory.IsResearchUnlocked(RecipeID.Research_BiggerZoomLens))
                                 chance += 0.15f;

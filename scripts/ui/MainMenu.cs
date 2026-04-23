@@ -1,6 +1,7 @@
 using Godot;
-using System;
-using Incremental.scripts.director;
+using Incremental.scripts.saving;
+
+namespace Incremental.scripts.ui;
 
 public partial class MainMenu : Control
 {
@@ -10,7 +11,8 @@ public partial class MainMenu : Control
     private enum MainMenuHoverState
     {
         None,
-        Play,
+        Continue,
+        NewGame,
         Credits,
         Quit
     }
@@ -32,7 +34,12 @@ public partial class MainMenu : Control
 
         switch (_hoverState)
         {
-            case MainMenuHoverState.Play:
+            case MainMenuHoverState.Continue:
+                SaveFileManager.TryLoad = true;
+                Play();
+                break;
+            case MainMenuHoverState.NewGame:
+                SaveFileManager.TryLoad = false;
                 Play();
                 break;
             case MainMenuHoverState.Credits:
@@ -61,10 +68,20 @@ public partial class MainMenu : Control
 
     public void OnPlayHover()
     {
-        _hoverState = MainMenuHoverState.Play;
+        _hoverState = MainMenuHoverState.Continue;
     }
 
     public void OnPlayUnhover()
+    {
+        _hoverState = MainMenuHoverState.None;
+    }
+
+    public void OnNewGameHover()
+    {
+        _hoverState = MainMenuHoverState.NewGame;
+    }
+
+    public void OnNewGameUnhover()
     {
         _hoverState = MainMenuHoverState.None;
     }

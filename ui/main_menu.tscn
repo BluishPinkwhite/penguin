@@ -26,12 +26,12 @@ shader_parameter/NebulasScale = 2.0
 font = ExtResource("1_t7e0r")
 font_size = 87
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pkcb"]
+shader = ExtResource("3_p8ri8")
+
 [sub_resource type="LabelSettings" id="LabelSettings_wk0pr"]
 font = ExtResource("1_t7e0r")
 font_size = 50
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pkcb"]
-shader = ExtResource("3_p8ri8")
 
 [sub_resource type="LabelSettings" id="LabelSettings_rmr83"]
 font = ExtResource("1_t7e0r")
@@ -124,21 +124,13 @@ mouse_filter = 2
 theme_override_constants/separation = 9
 alignment = 1
 
-[node name="Play" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=217157422]
-layout_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 2
-text = "Play"
-label_settings = SubResource("LabelSettings_wk0pr")
-horizontal_alignment = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play" unique_id=1219923099]
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1994259353]
 z_index = 1
 material = SubResource("ShaderMaterial_3pkcb")
-position = Vector2(75, -185)
+position = Vector2(120, -116)
 texture = ExtResource("4_ubpvv")
 
-[node name="BigMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=702573556]
+[node name="BigMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Sprite2D" unique_id=2027334920]
 z_index = -1
 position = Vector2(-4.851668, 87.15555)
 rotation = -3.1202724
@@ -147,7 +139,7 @@ sprite_frames = ExtResource("5_arv2f")
 autoplay = "default"
 frame_progress = 0.63240105
 
-[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=814487248]
+[node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Sprite2D" unique_id=934335338]
 z_index = -1
 position = Vector2(-66.24817, 80.91109)
 rotation = -3.0077937
@@ -156,7 +148,7 @@ sprite_frames = ExtResource("6_5klac")
 autoplay = "default"
 frame_progress = 0.09808198
 
-[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=1980728487]
+[node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Sprite2D" unique_id=1460000462]
 z_index = -1
 position = Vector2(61.754295, 80.3032)
 rotation = 3.0137565
@@ -165,7 +157,7 @@ sprite_frames = ExtResource("6_5klac")
 autoplay = "default"
 frame_progress = 0.9428698
 
-[node name="SmallLeftFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=148346303]
+[node name="SmallLeftFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Sprite2D" unique_id=1953111703]
 z_index = -1
 position = Vector2(-112.90846, 77.10464)
 rotation = -2.7951531
@@ -174,7 +166,7 @@ sprite_frames = ExtResource("7_lsdqh")
 autoplay = "default"
 frame_progress = 0.12617896
 
-[node name="SmallRightFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Play/Sprite2D" unique_id=865768785]
+[node name="SmallRightFire" type="AnimatedSprite2D" parent="MarginContainer/MarginContainer/VBoxContainer/Sprite2D" unique_id=1757037832]
 z_index = -1
 position = Vector2(109.09358, 76.78471)
 rotation = 2.8008263
@@ -182,6 +174,22 @@ scale = Vector2(0.93700004, 0.93700004)
 sprite_frames = ExtResource("7_lsdqh")
 autoplay = "default"
 frame_progress = 0.8978124
+
+[node name="Continue" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=217157422]
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+text = "Continue"
+label_settings = SubResource("LabelSettings_wk0pr")
+horizontal_alignment = 1
+
+[node name="NewGame" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=836892119]
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+text = "New Game"
+label_settings = SubResource("LabelSettings_wk0pr")
+horizontal_alignment = 1
 
 [node name="AboutUs" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1112922023]
 layout_mode = 2
@@ -292,6 +300,7 @@ texture_normal = ExtResource("11_lsdqh")
 stretch_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1553298359]
+visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 15
@@ -302,8 +311,10 @@ grow_vertical = 2
 color = Color(0.061200004, 0.08088, 0.09, 1)
 script = ExtResource("13_bgtsx")
 
-[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="OnPlayHover"]
-[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="OnPlayUnhover"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="OnPlayHover"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="OnPlayUnhover"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/NewGame" to="." method="OnNewGameHover"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/NewGame" to="." method="OnNewGameUnhover"]
 [connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/AboutUs" to="." method="OnCreditsHover"]
 [connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/AboutUs" to="." method="OnCreditsUnhover"]
 [connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="OnQuitHover"]
