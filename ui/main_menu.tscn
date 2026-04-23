@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dsrr6qc3nxa85" path="res://ui/sprites/control_panel.png" id="9_arv2f"]
 [ext_resource type="FontFile" uid="uid://brg4x0tukwqfy" path="res://ui/fonts/PixelifySans-Bold.ttf" id="10_5klac"]
 [ext_resource type="Texture2D" uid="uid://caiaorypo8c0a" path="res://ui/sprites/icons/close.tres" id="11_lsdqh"]
+[ext_resource type="Script" uid="uid://446pistp57o6" path="res://ui/MakeTransparent.cs" id="13_bgtsx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wk0pr"]
 shader = ExtResource("1_0dkrt")
@@ -289,6 +290,17 @@ offset_bottom = 40.0
 grow_horizontal = 0
 texture_normal = ExtResource("11_lsdqh")
 stretch_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1553298359]
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.061200004, 0.08088, 0.09, 1)
+script = ExtResource("13_bgtsx")
 
 [connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="OnPlayHover"]
 [connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="OnPlayUnhover"]

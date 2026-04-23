@@ -153,6 +153,11 @@ public class ItemRecipe
             {
                 Inventory.UnlockRecipe(RecipeID.Orbital_Core_Extractor);
             }
+
+            if (recipe.ID == RecipeID.Orbital_Core_Extractor)
+            {
+                Game.I.EndGame();
+            }
             
             return true;
         }

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bexh7jq0ql643" path="res://scripts/director/Game.cs" id="1_i7141"]
 [ext_resource type="Script" uid="uid://c7rxwkjnow620" path="res://scripts/planet/rendering/PlanetRenderer.cs" id="1_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://dso76ki24pqcs" path="res://sprites/world/tile_atlas.png" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://5vamn1xjqwy3" path="res://ui/end_screen.tscn" id="2_7iits"]
 [ext_resource type="PackedScene" uid="uid://exc2cb10mo6g" path="res://scripts/entity/item/Pickup.tscn" id="3_4mrxx"]
 [ext_resource type="Script" uid="uid://xufscukk4foy" path="res://scripts/planet/input/PlanetCamera.cs" id="3_4wyf3"]
 [ext_resource type="Script" uid="uid://bpyeowmmv64n0" path="res://scripts/entity/pawn/PawnManager.cs" id="4_qfnet"]
@@ -28,6 +29,7 @@ Stations = NodePath("Stations")
 Pickups = NodePath("Pickups")
 Debug = NodePath("Debug")
 ResearchWindow = NodePath("Front_UI/research_ui")
+EndScene = ExtResource("2_7iits")
 PickupScene = ExtResource("3_4mrxx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=77520530 node_paths=PackedStringArray("world")]
@@ -65,7 +67,6 @@ position = Vector2(366, -198)
 PolarPos = Vector2(20, -20)
 
 [node name="ResearchStation" parent="Stations" unique_id=696397047 instance=ExtResource("11_7iits")]
-visible = false
 position = Vector2(784, -52)
 PolarPos = Vector2(40, -20)
 

@@ -107,7 +107,7 @@ material = SubResource("ShaderMaterial_boqsx")
 position = Vector2(0, -30)
 scale = Vector2(1.3203125, 1.3203125)
 sprite_frames = ExtResource("4_36edw")
-frame_progress = 0.49681377
+frame_progress = 0.55402195
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=1917947304]
 libraries/ = SubResource("AnimationLibrary_ay15d")
@@ -120,7 +120,7 @@ rotation = -3.1202724
 scale = Vector2(1.0315285, 0.9753197)
 sprite_frames = ExtResource("3_boqsx")
 autoplay = "default"
-frame_progress = 0.22222282
+frame_progress = 0.7742307
 
 [node name="MediumLeftMiddleFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1738867591]
 z_index = -1
@@ -129,7 +129,7 @@ rotation = -3.0077937
 scale = Vector2(0.7286155, 0.7286155)
 sprite_frames = ExtResource("4_fhky6")
 autoplay = "default"
-frame_progress = 0.09808198
+frame_progress = 0.016540246
 
 [node name="MediumRightMiddleFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=235531102]
 z_index = -1
@@ -138,7 +138,7 @@ rotation = 3.0137565
 scale = Vector2(0.7286154, 0.7286154)
 sprite_frames = ExtResource("4_fhky6")
 autoplay = "default"
-frame_progress = 0.9428698
+frame_progress = 0.70617765
 
 [node name="SmallLeftFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=667854944]
 z_index = -1
@@ -147,7 +147,7 @@ rotation = -2.7951531
 scale = Vector2(0.7096805, 0.7096805)
 sprite_frames = ExtResource("5_0qx7f")
 autoplay = "default"
-frame_progress = 0.12617896
+frame_progress = 0.90735626
 
 [node name="SmallRightFire" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1492194339]
 z_index = -1
@@ -156,4 +156,4 @@ rotation = 2.8008263
 scale = Vector2(0.7096805, 0.7096805)
 sprite_frames = ExtResource("5_0qx7f")
 autoplay = "default"
-frame_progress = 0.8978124
+frame_progress = 0.975703

@@ -13,8 +13,9 @@ DebugText = NodePath("DebugText")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=191481899]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("2_8dwh2")
-animation = &"idle"
+animation = &"brush"
 autoplay = "idle"
+frame_progress = 0.56336474
 
 [node name="DebugText" type="Label" parent="." unique_id=373489234]
 visible = false

@@ -19,6 +19,7 @@ public partial class Game : Node2D
     [Export] public Node2D Pickups;
     [Export] public DebugDraw Debug;
     [Export] public Control ResearchWindow;
+    [Export] public PackedScene EndScene;
 
     [Export] public PackedScene PickupScene;
 
@@ -33,6 +34,16 @@ public partial class Game : Node2D
         foreach (Node child in Debug.GetChildren())
         {
             child.QueueFree();
+        }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        // ON Escape, end
+        if (@event.IsActionPressed("ui_cancel"))
+        {
+            GetTree().Quit();
         }
     }
 
@@ -60,5 +71,10 @@ public partial class Game : Node2D
             (list[i], list[j]) = (list[j], list[i]);
             yield return list[i];
         }
+    }
+
+    public void EndGame()
+    {
+        GetTree().ChangeSceneToPacked(EndScene);   
     }
 }
