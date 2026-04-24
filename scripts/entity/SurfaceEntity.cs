@@ -57,7 +57,7 @@ public partial class SurfaceEntity : OrbitEntity
     }
 
 
-    public void ApplyGravity(float d)
+    public bool ApplyGravity(float d)
     {
         float gravityY = PolarPos.Y - d * Gravity;
         
@@ -69,7 +69,9 @@ public partial class SurfaceEntity : OrbitEntity
         if (!CheckCollision(newX, gravityY))
         {
             PolarPos.Y = gravityY;
+            return true;
         }
+        return false;
     }
     
     protected void DoLayerChecks()

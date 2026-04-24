@@ -19,7 +19,7 @@ public partial class OrbitEntity : Node2D
         ApplyPolarTransform();
     }
 
-    protected void ApplyPolarTransform()
+    public void ApplyPolarTransform()
     {
         // apply and display
         Position = Game.I._data.PolarToWorld(PolarPos.X, PolarPos.Y);

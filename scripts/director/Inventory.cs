@@ -126,7 +126,7 @@ public static class Inventory
 
 
         new ResearchRecipe(RecipeID.Research_FirstResearch,
-            [new Ingredient(Item.Component, 1)]);
+            [new Ingredient(Item.Component, 1)], true);
         new ResearchRecipe(RecipeID.Research_BiggerZoomLens,
             [new Ingredient(Item.Component, 40), new Ingredient(Item.Gem, 5)]);
         new ResearchRecipe(RecipeID.Research_FinerBrushes,
@@ -157,13 +157,13 @@ public static class Inventory
             [new Ingredient(Item.Component, 1000)]);
         
         
-        // SaveFileManager.Load();
+        SaveFileManager.Load();
     }
 
 
     public static void UnlockRecipe(RecipeID id)
     {
-        if (Recipes.TryGetValue(id, out ItemRecipe recipe))
+        if (Recipes.TryGetValue(id, out ItemRecipe recipe) && !recipe.Unlocked)
         {
             if (!recipe.Unlocked && id == RecipeID.NewPenguinFor_Stone)
             {

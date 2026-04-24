@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
@@ -151,8 +152,7 @@ public partial class PawnHauler : Pawn
                 }
 
                 if (InventoryID == Item.Stone
-                    && Inventory.Items[Item.Tougher_Pickaxes].Amount < 4
-                    && Inventory.IsResearchUnlocked(RecipeID.Unlock_Research))
+                    && Inventory.Items[Item.Tougher_Pickaxes].Amount < 4)
                 {
                     Inventory.UnlockRecipe(RecipeID.Tougher_Pickaxes);
                 }

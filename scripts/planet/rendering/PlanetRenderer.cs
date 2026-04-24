@@ -268,7 +268,10 @@ public partial class PlanetRenderer : Node2D
                     {
                         PlanetTile tile = _data.GetTileAtPolarCoords(pawn.PolarPos.X, pawn.PolarPos.Y);
                         if (tile != null && !tile.IsEmpty())
+                        {
                             pawn.PolarPos.Y += 1;
+                            pawn.ApplyPolarTransform();
+                        }
                     }
                 }
 
@@ -278,7 +281,10 @@ public partial class PlanetRenderer : Node2D
                     {
                         PlanetTile tile = _data.GetTileAtPolarCoords(pickup.PolarPos.X, pickup.PolarPos.Y);
                         if (tile != null && !tile.IsEmpty())
+                        {
                             pickup.PolarPos.Y += 1;
+                            pickup.ApplyPolarTransform();
+                        }
                     }
                 }
             }

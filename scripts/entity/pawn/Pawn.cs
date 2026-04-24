@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using Incremental.scripts.debug;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
@@ -79,6 +80,8 @@ public abstract partial class Pawn : SurfaceEntity
 
         // debug
         DebugText.Text = Cooldown > 0 ? $"<{Cooldown:F1}>" : $"[{State}]";
+        
+        Vector2 prevPos = PolarPos;
 
         if ((int)State > 0)
             ApplyGravity(d);
@@ -104,12 +107,15 @@ public abstract partial class Pawn : SurfaceEntity
             
             DoBehaviour(d);
         }
+        
+        bool sameX = Mathf.Abs(prevPos.X - PolarPos.X) < 0.0001f;
+        bool sameY = Mathf.Abs(prevPos.Y - PolarPos.Y) < 0.0001f;
 
-        Game.I.Debug.SetLine(ID, Position, Game.I._data.PolarToWorld(Target),
-            DebugDraw.GetColor((int)Role));
-
-        DoLayerChecks();
-        ApplyPolarTransform();
+        if (!sameY)
+            DoLayerChecks();
+        
+        if (!sameX || !sameY)
+            ApplyPolarTransform();
 
         if (_animationDirty)
         {

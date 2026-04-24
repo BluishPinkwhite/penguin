@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
+using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
 
@@ -22,6 +24,8 @@ public partial class ResearchNode : Control, IUpdatable
     private bool _isHovering;
     public bool IsPurchased;
 
+    private bool isShaderReady;
+
     public override void _Ready()
     {
         base._Ready();
@@ -36,6 +40,7 @@ public partial class ResearchNode : Control, IUpdatable
         }
 
         iconMaterial = (ShaderMaterial)icon.GetMaterial();
+        isShaderReady = true;
         iconMaterial.SetShaderParameter("EffectOn", true);
 
         float mult = hint.Scale.X / Scale.X;
@@ -49,27 +54,31 @@ public partial class ResearchNode : Control, IUpdatable
             {
                 ingredients += ingredient.RenderText + "\n  ";
             }
-            GetNode<RichTextLabel>("Hint/MarginContainer/VBoxContainer/RichTextLabel").Text 
+
+            GetNode<RichTextLabel>("Hint/MarginContainer/VBoxContainer/RichTextLabel").Text
                 += ingredients;
         }
+        
+        if (Inventory.IsResearchUnlocked(Research))
+            PurchaseUpgrade(false);
 
         UpdateVisuals();
     }
 
     public void UpdateVisuals()
     {
-        if (IsPurchased) return;
-        
+        if (IsPurchased || !isShaderReady) return;
+
         iconMaterial.SetShaderParameter("Brightness", IsReachable() ? 0.75f : 0.1f);
     }
 
-    public void PurchaseUpgrade()
+    public void PurchaseUpgrade(bool takeFromInventory = true)
     {
+        GD.Print(IsPurchased);
         if (IsPurchased) return;
-
-        if (!IsPurchasable()) return;
-        
-        if(!ItemRecipe.TryApplyRecipe(Research)) return;
+        GD.Print(IsPurchasable());
+        if (takeFromInventory && !IsPurchasable()) return;
+        if (!ItemRecipe.TryApplyRecipe(Research, takeFromInventory)) return;
 
         foreach (ColorRect connector in connectors)
         {
@@ -86,12 +95,14 @@ public partial class ResearchNode : Control, IUpdatable
                 && research.requiredNodes.Contains(this)
                 && research.IsReachable())
             {
+                
+                if (!ItemRecipe.GetRecipe(research.Research, out ItemRecipe recipe))
+                    continue;
+                recipe.Unlocked = true;
                 research.icon.Visible = true;
                 research.UpdateVisuals();
             }
         }
-
-        
     }
 
     public void OnMouseEnter()
@@ -120,7 +131,7 @@ public partial class ResearchNode : Control, IUpdatable
 
         return false;
     }
-    
+
     private bool IsReachable()
     {
         bool canPurchase = true;

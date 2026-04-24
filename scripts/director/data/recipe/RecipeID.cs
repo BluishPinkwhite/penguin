@@ -1,4 +1,4 @@
-﻿namespace Incremental.scripts.director.data;
+﻿namespace Incremental.scripts.director.data.recipe;
 
 public enum RecipeID
 {

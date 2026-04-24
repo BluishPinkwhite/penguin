@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Incremental.scripts.director.data.recipe;
 using Incremental.ui;
 
-namespace Incremental.scripts.director.data;
+namespace Incremental.scripts.director.data.recipe;
 
 public class ResearchRecipe : ItemRecipe
 {

@@ -31,8 +31,10 @@ public partial class Pickup : SurfaceEntity
 
     public override void _PhysicsProcess(double delta)
     {
-        ApplyGravity((float)delta);
-        DoLayerChecks();
-        ApplyPolarTransform();
+        if (ApplyGravity((float)delta))
+        {
+            DoLayerChecks();
+            ApplyPolarTransform();
+        }
     }
 }

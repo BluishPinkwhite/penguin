@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
+using Incremental.scripts.director.data.recipe;
 using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
