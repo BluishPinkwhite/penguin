@@ -192,7 +192,6 @@ margin = Rect2(-4, -4, -8, -8)
 
 [node name="TreeView" type="Control" unique_id=69398314]
 process_mode = 3
-clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -499,6 +498,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/FirstResearch/Hint" unique_id=1937932927]
@@ -568,6 +568,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/PrecisePickaxes/Hint" unique_id=144334283]
@@ -636,6 +637,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/EnergyDrinks/Hint" unique_id=1256196283]
@@ -704,6 +706,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/BasaltUpgrade/Hint" unique_id=2124295649]
@@ -772,6 +775,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/ErgonomicHandles/Hint" unique_id=295241920]
@@ -840,6 +844,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/MagmaReinforcement/Hint" unique_id=1090276424]
@@ -908,6 +913,7 @@ offset_top = -260.0
 offset_right = 201.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/BiggerZoomLens/Hint" unique_id=1690786912]
@@ -976,6 +982,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/FinerBrushes/Hint" unique_id=542004858]
@@ -1044,6 +1051,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/RunningShoes/Hint" unique_id=1695576861]
@@ -1112,6 +1120,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/JetpackShoes/Hint" unique_id=1482326938]
@@ -1180,6 +1189,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/BiggerBaskets/Hint" unique_id=962235253]
@@ -1248,6 +1258,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/FasterJetpackAscent/Hint" unique_id=290665173]
@@ -1317,6 +1328,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/AncientMiningTechnology/Hint" unique_id=1932019295]
@@ -1349,9 +1361,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever.
-
-TODO"
+text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever."
 fit_content = true
 scroll_active = false
 
@@ -1388,6 +1398,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/AncientCollectorKnowhow/Hint" unique_id=1238229466]
@@ -1420,9 +1431,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time. You now hold the secrets. 
-
-TODO"
+text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time. You now hold the secrets. "
 fit_content = true
 scroll_active = false
 
@@ -1459,6 +1468,7 @@ offset_top = -260.0
 offset_right = 203.0
 offset_bottom = -114.0
 scale = Vector2(1.4174368, 1.4174368)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ibn25")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Move/Scale/OrbitalCoreExtractor/Hint" unique_id=1680560157]
