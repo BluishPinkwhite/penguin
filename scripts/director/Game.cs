@@ -58,6 +58,7 @@ public partial class Game : Node2D
         // ON Escape, end
         if (@event.IsActionPressed("ui_cancel"))
         {
+            SaveFileManager.Save();
             GetTree().Quit();
         }
     }

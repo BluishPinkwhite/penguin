@@ -104,6 +104,7 @@ theme_override_constants/separation = 1
 theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
 
 [node name="Purchasable" type="HBoxContainer" parent="VBoxContainer" unique_id=159668708 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -146,6 +147,7 @@ texture = SubResource("AtlasTexture_wqfgl")
 expand_mode = 2
 
 [node name="Purchasable2" type="HBoxContainer" parent="VBoxContainer" unique_id=66390510 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -188,6 +190,7 @@ texture = SubResource("AtlasTexture_veslf")
 expand_mode = 2
 
 [node name="Purchasable3" type="HBoxContainer" parent="VBoxContainer" unique_id=504896131 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -230,6 +233,7 @@ texture = SubResource("AtlasTexture_a7y2t")
 expand_mode = 2
 
 [node name="Purchasable4" type="HBoxContainer" parent="VBoxContainer" unique_id=1299051084 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -272,6 +276,7 @@ texture = SubResource("AtlasTexture_wheia")
 expand_mode = 2
 
 [node name="Purchasable5" type="HBoxContainer" parent="VBoxContainer" unique_id=2117790588 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -314,6 +319,7 @@ texture = SubResource("AtlasTexture_0vl20")
 expand_mode = 2
 
 [node name="Purchasable6" type="HBoxContainer" parent="VBoxContainer" unique_id=1454489828 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0

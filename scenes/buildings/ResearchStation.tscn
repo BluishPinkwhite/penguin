@@ -107,7 +107,8 @@ material = SubResource("ShaderMaterial_boqsx")
 position = Vector2(0, -30)
 scale = Vector2(1.3203125, 1.3203125)
 sprite_frames = ExtResource("4_36edw")
-frame_progress = 0.55402195
+autoplay = "default"
+frame_progress = 0.8812946
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=1917947304]
 libraries/ = SubResource("AnimationLibrary_ay15d")

@@ -140,9 +140,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -169.0
+offset_left = -183.0
 offset_top = -394.0
-offset_right = 188.0
+offset_right = 173.73242
 offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -152,7 +152,7 @@ script = ExtResource("7_vvxl7")
 _objectToShow = NodePath("../ControlPanel")
 
 [node name="ControlPanel" parent="." unique_id=895867581 instance=ExtResource("7_s6ffd")]
-offset_left = -224.0
-offset_top = -267.0
-offset_right = 226.0
-offset_bottom = -164.0
+offset_left = -226.0
+offset_top = -192.0
+offset_right = 224.0
+offset_bottom = -120.0
