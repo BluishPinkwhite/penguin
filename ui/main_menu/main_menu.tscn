@@ -144,7 +144,6 @@ offset_left = 274.0
 offset_top = -2.0
 offset_right = 518.0
 offset_bottom = 51.0
-mouse_filter = 0
 mouse_default_cursor_shape = 2
 text = "[1h 20m]"
 label_settings = SubResource("LabelSettings_kaxbk")

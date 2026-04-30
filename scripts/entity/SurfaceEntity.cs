@@ -75,13 +75,16 @@ public partial class SurfaceEntity : OrbitEntity
     {
         int prevLayer = Mathf.FloorToInt(PrevPolarPos.Y);
         int layer = Mathf.FloorToInt(PolarPos.Y);
+
+        PrevPolarPos = new Vector2(PolarPos.X, PolarPos.Y);
+        
+        if (prevLayer == layer)
+            return;
         
         int prevSize = Game.I._data.GetLayerSize(prevLayer);
         _currSize = Game.I._data.GetLayerSize(layer);
 
-        if (layer != prevLayer)
-            PolarPos.X = PolarPos.X * _currSize / prevSize; 
-        
+        PolarPos.X = PolarPos.X * _currSize / prevSize; 
         PolarPos.X = Mathf.PosMod(PolarPos.X, _currSize);
 
         if (PolarPos.Y < 0f)

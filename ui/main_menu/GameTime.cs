@@ -14,7 +14,7 @@ public partial class GameTime : Label
         int seconds = (int) (time % 60);
         
         if (hours > 0)
-            Text = $"[{hours}h {minutes}m {seconds}s]]";
+            Text = $"[{hours}h {minutes}m {seconds}s]";
         else
             Text = $"[{minutes}m {seconds}s]";
     }

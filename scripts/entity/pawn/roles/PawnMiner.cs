@@ -160,7 +160,10 @@ public partial class PawnMiner : Pawn
         damage += Inventory.Items[Item.Tougher_Pickaxes].Amount * 0.2f;
                     
         if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
+        {
+            Game.I.Pawns.RecordDamage(Role, _targetTile.Integrity);
             _targetTile.Integrity = 0;
+        }
 
         damage /= _targetTile.Material.BreakTime();
         _targetTile.Integrity -= damage;

@@ -53,7 +53,7 @@ public abstract partial class Pawn : SurfaceEntity
     public bool Flying
     {
         get => _flying;
-        set
+        private set
         {
             _flying = value;
             _animationDirty = true;
@@ -82,7 +82,10 @@ public abstract partial class Pawn : SurfaceEntity
         Vector2 prevPos = PolarPos;
 
         if ((int)State > 0)
+        {
             ApplyGravity(d);
+            DoLayerChecks();
+        }
 
         // behaviour
         if (Cooldown > 0)
@@ -109,8 +112,7 @@ public abstract partial class Pawn : SurfaceEntity
         bool sameX = Mathf.Abs(prevPos.X - PolarPos.X) < 0.0001f;
         bool sameY = Mathf.Abs(prevPos.Y - PolarPos.Y) < 0.0001f;
 
-        if (!sameY)
-            DoLayerChecks();
+        DoLayerChecks();
         
         if (!sameX || !sameY)
             ApplyPolarTransform();
@@ -153,11 +155,13 @@ public abstract partial class Pawn : SurfaceEntity
         float stepX = Mathf.Clamp(dx, -1f, 1f) * d * mult;
         float newX = PolarPos.X + stepX;
 
+        DebugText.Text = $"{Flying} {onGround}";
+
         bool reachedTarget = false;
         if (!Flying)
         {
             // horizontal movement
-            if (dx * dx > 0.0001f)
+            if (dx * dx > 0.001f)
             {
                 if (!CheckCollision(newX, PolarPos.Y))
                     PolarPos.X = newX;
