@@ -52,6 +52,7 @@ public partial class PawnHauler : Pawn
                 else
                 {
                     PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
+                    Game.I.Pawns.RecordDamage(Role.Unemployed, below.Integrity);
                     BreakTile(below);
                     Retire();
                 }

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ywlcku8dba6i"]
 
 [ext_resource type="Texture2D" uid="uid://s3avpn2ssbg5" path="res://ui/sprites/LogoFullNewTransparent.png" id="1_xkpy5"]
-[ext_resource type="Script" uid="uid://ci6uff6yp5otc" path="res://ui/LogoScene.cs" id="2_e03of"]
+[ext_resource type="Script" uid="uid://ci6uff6yp5otc" path="res://ui/main_menu/LogoScene.cs" id="2_e03of"]
 
 [node name="LogoScene" type="Control" unique_id=402287999 node_paths=PackedStringArray("Logo")]
 layout_mode = 3

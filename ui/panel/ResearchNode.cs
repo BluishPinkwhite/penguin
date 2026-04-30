@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using Incremental.scripts.director;
-using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
+using Incremental.ui.util;
 
-namespace Incremental.ui;
+namespace Incremental.ui.panel;
 
 public partial class ResearchNode : Control, IUpdatable
 {

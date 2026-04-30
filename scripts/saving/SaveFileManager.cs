@@ -81,6 +81,8 @@ public static class SaveFileManager
             save.StoreLine(line);
         }
 
+        save.StoreLine("# Game data:");
+        save.StoreLine($"d game_time:{Game.I.GameTime}");
         
         save.StoreLine("##### <3 #####");
         save.Flush();
@@ -123,8 +125,16 @@ public static class SaveFileManager
 
             string[] data = parts[1].Split("=");
 
+            if (type == "d")
+            {
+                double value = double.Parse(data[0]);
 
-            if (type == "ei")
+                if (key == "game_time")
+                {
+                    Game.I.GameTime = value;
+                }
+            }
+            else if (type == "ei")
             {
                 int id = int.Parse(data[0]);
                 int amount = int.Parse(data[1]);
@@ -179,5 +189,28 @@ public static class SaveFileManager
 
         save.Close();
         GD.Print("Save loaded!");
+    }
+
+    public static double LoadGameTime()
+    {
+        using FileAccess save = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        
+        if (FileAccess.GetOpenError() != Error.Ok) return 0;
+
+
+        while (save.GetPosition() < save.GetLength())
+        {
+            string line = save.GetLine();
+
+            if (line.StartsWith("#") || line.Length == 0)
+                continue;
+
+            if (line.StartsWith("d game_time:"))
+            {
+                return double.Parse(line.Split(":", 2)[1]);
+            }
+        }
+
+        return 0;
     }
 }

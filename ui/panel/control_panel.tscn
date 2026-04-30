@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="3_wheia"]
 [ext_resource type="Script" uid="uid://bm5ggg7cogtxa" path="res://scripts/ui/clickable/Purchasable.cs" id="3_wqfgl"]
 [ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="5_wheia"]
+[ext_resource type="Script" uid="uid://cgjbceadehlh2" path="res://ui/util/SeparatorControl.cs" id="6_wqfgl"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_veslf"]
 texture = ExtResource("1_t8mf3")
@@ -104,7 +105,6 @@ theme_override_constants/separation = 1
 theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
 
 [node name="Purchasable" type="HBoxContainer" parent="VBoxContainer" unique_id=159668708 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 0
@@ -317,6 +317,12 @@ vertical_alignment = 2
 layout_mode = 2
 texture = SubResource("AtlasTexture_0vl20")
 expand_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1870080068]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
+script = ExtResource("6_wqfgl")
 
 [node name="Purchasable6" type="HBoxContainer" parent="VBoxContainer" unique_id=1454489828 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
 visible = false

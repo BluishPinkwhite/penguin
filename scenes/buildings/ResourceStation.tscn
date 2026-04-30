@@ -6,7 +6,7 @@
 [ext_resource type="SpriteFrames" uid="uid://ds0fhuqvkgk4i" path="res://vfx/fire/fire_big.tres" id="3_xswn1"]
 [ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="4_3pkcb"]
 [ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="5_e57vn"]
-[ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/control_panel.tscn" id="7_s6ffd"]
+[ext_resource type="PackedScene" uid="uid://djifvqiljykif" path="res://ui/panel/control_panel.tscn" id="7_s6ffd"]
 [ext_resource type="Script" uid="uid://dbtsjecr2ocm7" path="res://scripts/ui/ShowOnHover.cs" id="7_vvxl7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3pkcb"]

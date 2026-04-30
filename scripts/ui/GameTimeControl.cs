@@ -1,4 +1,5 @@
 using Godot;
+using Incremental.ui.util;
 
 namespace Incremental.scripts.ui;
 
@@ -23,11 +24,14 @@ public partial class GameTimeControl : Control
         _defaultTimeScale = Engine.TimeScale;
         _defaultPhysicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
         _defaultMaxPhysicsStepsPerFrame = Engine.MaxPhysicsStepsPerFrame;
+        
+        UpdateState(1);
     }
 
     private void OnPauseButtonPressed()
     {
         GetTree().Paused = true;
+        UpdateState(0);
     }
 
     private void OnResumeButtonPressed()
@@ -45,13 +49,23 @@ public partial class GameTimeControl : Control
     private void OnReallySpeedUpButtonPressed()
     {
         GetTree().Paused = false;
-        SetSpeed(8);
+        SetSpeed(10);
     }
 
-    private void SetSpeed(float mult)
+    private void SetSpeed(int mult)
     {
         Engine.TimeScale = _defaultTimeScale * mult;
         Engine.PhysicsTicksPerSecond = (int)(_defaultPhysicsTicksPerSecond * mult);
         Engine.MaxPhysicsStepsPerFrame = (int)(_defaultMaxPhysicsStepsPerFrame * mult);
+        
+        UpdateState(mult);
+    }
+
+    private void UpdateState(int speed)
+    {
+        pauseButton.Modulate = speed == 0 ? UIConsts.active : UIConsts.inactive;
+        resumeButton.Modulate = speed == 1 ? UIConsts.active : UIConsts.inactive;
+        speedUpButton.Modulate = speed == 2 ? UIConsts.active : UIConsts.inactive;
+        reallySpeedUpButton.Modulate = speed > 2 ? UIConsts.active : UIConsts.inactive;
     }
 }

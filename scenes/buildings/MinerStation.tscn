@@ -13,7 +13,7 @@
 [ext_resource type="SpriteFrames" uid="uid://c5og0l4awm0js" path="res://vfx/fire/fire_medium.tres" id="8_8exy0"]
 [ext_resource type="SpriteFrames" uid="uid://cdyiiwmvanmh4" path="res://vfx/fire/fire_small.tres" id="9_uh5uj"]
 [ext_resource type="Script" uid="uid://dbtsjecr2ocm7" path="res://scripts/ui/ShowOnHover.cs" id="12_r02yb"]
-[ext_resource type="PackedScene" uid="uid://cosjgh12ks5fj" path="res://ui/mines_panel.tscn" id="13_4xn3r"]
+[ext_resource type="PackedScene" uid="uid://cosjgh12ks5fj" path="res://ui/panel/mines_panel.tscn" id="13_4xn3r"]
 
 [sub_resource type="Animation" id="Animation_gv8dn"]
 length = 0.001

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5wl5b8aqpryf"]
 
-[ext_resource type="Script" uid="uid://bby38ot2e3557" path="res://ui/TreeViewControl.cs" id="1_wgwaf"]
-[ext_resource type="Script" uid="uid://gtkfc7syka1a" path="res://ui/ResearchNode.cs" id="2_m7s40"]
+[ext_resource type="Script" uid="uid://bby38ot2e3557" path="res://ui/panel/TreeViewControl.cs" id="1_wgwaf"]
+[ext_resource type="Script" uid="uid://gtkfc7syka1a" path="res://ui/panel/ResearchNode.cs" id="2_m7s40"]
 [ext_resource type="Shader" uid="uid://fdf1v6vmnhqr" path="res://vfx/shaders/grayscale.tres" id="2_ys5lt"]
 [ext_resource type="Texture2D" uid="uid://cviplanx0kksd" path="res://ui/sprites/icons/abilities/Ability_icons10_59.png" id="3_4fr0h"]
 [ext_resource type="Texture2D" uid="uid://0qubwa4v07t1" path="res://ui/sprites/icons/abilities/Ability_icons10_79.png" id="3_a78bd"]

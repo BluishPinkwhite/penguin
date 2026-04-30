@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="4_44l33"]
 [ext_resource type="Texture2D" uid="uid://cpemlltcetml2" path="res://ui/sprites/icons/dirt_icon.tres" id="5_kd2gs"]
 [ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="6_cc5mb"]
+[ext_resource type="Script" uid="uid://cgjbceadehlh2" path="res://ui/util/SeparatorControl.cs" id="6_qv1my"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_veslf"]
 texture = ExtResource("1_r5e60")
@@ -181,6 +182,13 @@ vertical_alignment = 2
 layout_mode = 2
 texture = ExtResource("5_kd2gs")
 expand_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1506046873]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
+script = ExtResource("6_qv1my")
 
 [node name="Purchasable3" type="HBoxContainer" parent="VBoxContainer" unique_id=1058663216 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
 visible = false

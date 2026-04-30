@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://qvvt0hpp2q01" path="res://scripts/ui/MainMenu.cs" id="1_ubpvv"]
 [ext_resource type="PackedScene" uid="uid://b5pa0ti7nnsm0" path="res://scenes/world.tscn" id="2_jiymt"]
 [ext_resource type="Texture2D" uid="uid://c1lmtjd5cd6wf" path="res://ui/sprites/Logo_Transparent.png" id="4_arv2f"]
+[ext_resource type="FontFile" uid="uid://dqixynw101lgu" path="res://ui/fonts/PixelifySans-Medium.ttf" id="6_5klac"]
+[ext_resource type="Script" uid="uid://dcvhj40k5qk7o" path="res://ui/util/Hoverable.cs" id="6_bgtsx"]
+[ext_resource type="Script" uid="uid://b078i7k3t4ftu" path="res://ui/main_menu/GameTime.cs" id="7_lsdqh"]
 [ext_resource type="Texture2D" uid="uid://dsrr6qc3nxa85" path="res://ui/sprites/control_panel.png" id="9_arv2f"]
 [ext_resource type="FontFile" uid="uid://brg4x0tukwqfy" path="res://ui/fonts/PixelifySans-Bold.ttf" id="10_5klac"]
 [ext_resource type="Texture2D" uid="uid://caiaorypo8c0a" path="res://ui/sprites/icons/close.tres" id="11_lsdqh"]
@@ -19,6 +22,16 @@ shader_parameter/NebulaChunksScale = 7.7
 shader_parameter/NebulasScale = 2.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_wk0pr"]
+font = ExtResource("1_t7e0r")
+font_size = 50
+font_color = Color(0.90588236, 0.90588236, 0.90588236, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kaxbk"]
+font = ExtResource("6_5klac")
+font_size = 20
+font_color = Color(0.90588236, 0.90588236, 0.90588236, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nobx"]
 font = ExtResource("1_t7e0r")
 font_size = 50
 font_color = Color(0.90588236, 0.90588236, 0.90588236, 1)
@@ -122,14 +135,30 @@ mouse_default_cursor_shape = 2
 text = "Continue"
 label_settings = SubResource("LabelSettings_wk0pr")
 horizontal_alignment = 1
+script = ExtResource("6_bgtsx")
+OnlySelf = true
+
+[node name="GameTime" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/Continue" unique_id=104720411]
+layout_mode = 0
+offset_left = 274.0
+offset_top = -2.0
+offset_right = 518.0
+offset_bottom = 51.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+text = "[1h 20m]"
+label_settings = SubResource("LabelSettings_kaxbk")
+vertical_alignment = 1
+script = ExtResource("7_lsdqh")
 
 [node name="NewGame" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=836892119]
 layout_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 text = "New Game"
-label_settings = SubResource("LabelSettings_wk0pr")
+label_settings = SubResource("LabelSettings_0nobx")
 horizontal_alignment = 1
+script = ExtResource("6_bgtsx")
 
 [node name="AboutUs" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1112922023]
 layout_mode = 2
@@ -138,6 +167,7 @@ mouse_default_cursor_shape = 2
 text = "About us"
 label_settings = SubResource("LabelSettings_rmr83")
 horizontal_alignment = 1
+script = ExtResource("6_bgtsx")
 
 [node name="Quit" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1575158165]
 layout_mode = 2
@@ -146,6 +176,7 @@ mouse_default_cursor_shape = 2
 text = "Quit"
 label_settings = SubResource("LabelSettings_8uxxo")
 horizontal_alignment = 1
+script = ExtResource("6_bgtsx")
 
 [node name="Credits" type="Control" parent="." unique_id=218278676]
 visible = false

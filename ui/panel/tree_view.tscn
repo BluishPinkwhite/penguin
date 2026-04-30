@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnig4rl7minwx"]
 
-[ext_resource type="Script" uid="uid://bby38ot2e3557" path="res://ui/TreeViewControl.cs" id="1_vpv83"]
+[ext_resource type="Script" uid="uid://bby38ot2e3557" path="res://ui/panel/TreeViewControl.cs" id="1_vpv83"]
 
 [node name="TreeView" type="Control" unique_id=69398314]
 process_mode = 3

@@ -42,6 +42,7 @@ op_type = 4
 [resource]
 mode = 1
 flags/light_only = false
+preview_params/EffectOn = "true"
 nodes/fragment/0/position = Vector2(1640, 240)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_0op8q")
 nodes/fragment/2/position = Vector2(-780, 80)

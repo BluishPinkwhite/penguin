@@ -23,8 +23,10 @@ public partial class PawnArcheologist : PawnMiner
         
         float damage = 0.1f;
         damage += Inventory.Items[Item.Finer_Brushes].Amount * 0.1f;
-
-        _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+        damage /= _targetTile.Material.BreakTime();
+        
+        _targetTile.Integrity -= damage;
+        Game.I.Pawns.RecordDamage(Role, damage);
 
         SFX.PitchScale = (float)GD.RandRange(1.8f, 2.4f);
         SFX.VolumeDb = (float)GD.RandRange(-8f, -4f);

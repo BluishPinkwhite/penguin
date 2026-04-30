@@ -1,9 +1,9 @@
-﻿ using System.Linq;
- using Godot;
+﻿using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
 using Incremental.ui;
+using Incremental.ui.util;
 
 namespace Incremental.scripts.ui.clickable;
 
@@ -23,6 +23,18 @@ public partial class Purchasable : Clickable, IUpdatable
         Resources.I._purchasables.Add(this);
 
         UpdateVisuals();
+    }
+
+    protected override void OnMouseEnter()
+    {
+        base.OnMouseEnter();
+        _purchasableNameLabel.SelfModulate = UIConsts.highlighted;
+    }
+
+    protected override void OnMouseExit()
+    {
+        base.OnMouseExit();
+        _purchasableNameLabel.SelfModulate = UIConsts.active;
     }
 
     public override void OnClick()

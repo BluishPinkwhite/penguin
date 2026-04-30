@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.entity.pawn;
+using Incremental.scripts.entity.pawn.roles;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.rendering;
 
@@ -314,6 +315,8 @@ public class PlanetData
                     tileData.Regrowing = true;
                     below.Integrity = 1f;
                     below.ClearOwners();
+                    
+                    Game.I.Pawns.RecordDamage(Role.None, tileData.Material.BreakTime());
                 }
             }
         }

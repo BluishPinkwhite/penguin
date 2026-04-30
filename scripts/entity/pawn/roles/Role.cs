@@ -2,6 +2,7 @@
 
 public enum Role
 {
+    None = -1,
     Unemployed = 8, // [0,1]
     Miner = 17,     // [1,2]
     Driller = 18,   // [2,2]

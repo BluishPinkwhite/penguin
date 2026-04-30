@@ -1,6 +1,7 @@
 using Godot;
+using Incremental.ui.util;
 
-namespace Incremental.ui;
+namespace Incremental.ui.panel;
 
 public partial class TreeViewControl : Control, IUpdatable
 {
@@ -23,7 +24,7 @@ public partial class TreeViewControl : Control, IUpdatable
         bool first = true;
         foreach (Node node in _scaledObject.GetChildren())
         {
-            if (node is ResearchNode research)
+            if (node is panel.ResearchNode research)
             {
                 if (first)
                 {
@@ -117,7 +118,7 @@ public partial class TreeViewControl : Control, IUpdatable
     {
         foreach (Node child in GetNode<Control>("Move/Scale").GetChildren())
         {
-            if (child is ResearchNode research)
+            if (child is panel.ResearchNode research)
             {
                 research.UpdateVisuals();
             }

@@ -53,6 +53,6 @@ public partial class LogoScene : Control
 
 	private void LoadMainMenu()
 	{
-		GetTree().ChangeSceneToFile("res://ui/main_menu.tscn");
+		GetTree().ChangeSceneToFile("res://ui/main_menu/main_menu.tscn");
 	}
 }

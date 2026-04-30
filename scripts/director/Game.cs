@@ -22,6 +22,9 @@ public partial class Game : Node2D
 
     [Export] public PackedScene PickupScene;
 
+    public double GameTime = 0;
+    private int _prevGameTime = 0;
+
     public Game()
     {
         I = this;
@@ -76,6 +79,17 @@ public partial class Game : Node2D
             int j = _r.Next(i, list.Count);
             (list[i], list[j]) = (list[j], list[i]);
             yield return list[i];
+        }
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        GameTime += delta;
+
+        if ((int)GameTime != _prevGameTime)
+        {
+            _prevGameTime = (int)GameTime;
+            Pawns.ShiftDamageList();
         }
     }
 

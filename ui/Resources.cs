@@ -3,6 +3,7 @@ using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.ui.clickable;
+using Incremental.ui.util;
 
 namespace Incremental.ui;
 

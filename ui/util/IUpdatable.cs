@@ -1,4 +1,4 @@
-﻿namespace Incremental.ui;
+﻿namespace Incremental.ui.util;
 
 public interface IUpdatable
 {

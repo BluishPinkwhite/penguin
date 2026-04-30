@@ -55,6 +55,7 @@ public partial class PawnMiner : Pawn
                         _targetTile.RemoveOwner(this);
                     
                     PlanetTile below = Game.I._data.GetTileBelow(polarX, polarY, out _);
+                    Game.I.Pawns.RecordDamage(Role.Unemployed, below.Integrity);
                     BreakTile(below);
                     Retire();
                 }
@@ -160,8 +161,10 @@ public partial class PawnMiner : Pawn
                     
         if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
             _targetTile.Integrity = 0;
-                    
-        _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+
+        damage /= _targetTile.Material.BreakTime();
+        _targetTile.Integrity -= damage;
+        Game.I.Pawns.RecordDamage(Role, damage);
 
         if (Inventory.IsResearchUnlocked(RecipeID.Research_PrecisePickaxes))
         {
@@ -169,7 +172,10 @@ public partial class PawnMiner : Pawn
             chance += Inventory.Items[Item.Higher_Crit_Chance].Amount * 0.1f;
                         
             if (GD.Randf() < chance)
-                _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+            {
+                _targetTile.Integrity -= damage;
+                Game.I.Pawns.RecordDamage(Role, damage);
+            }
                         
             SFX.PitchScale = (float)GD.RandRange(0.4f, 0.7f);
             SFX.VolumeDb = (float)GD.RandRange(-1f, 3f);

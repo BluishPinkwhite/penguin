@@ -2,6 +2,7 @@ using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.entity.pawn;
 using Incremental.ui;
+using TreeViewControl = Incremental.ui.panel.TreeViewControl;
 
 namespace Incremental.scripts.ui.clickable;
 
@@ -20,12 +21,12 @@ public partial class Clickable : Control
         MouseExited += OnMouseExit;
     }
 
-    public void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         IsFocused = true;
     }
 
-    public void OnMouseExit()
+    protected virtual void OnMouseExit()
     {
         IsFocused = false;
     }

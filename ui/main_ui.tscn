@@ -15,16 +15,17 @@
 [ext_resource type="Shader" uid="uid://cmkhs574rlf6c" path="res://shaders/ui/evolve_button.tres" id="7_fa42e"]
 [ext_resource type="FontFile" uid="uid://btawcf8lna83j" path="res://ui/fonts/TinyFontCraftpixPixel.otf" id="8_ck7gc"]
 [ext_resource type="Texture2D" uid="uid://buoxe4kaxamht" path="res://ui/sprites/icons/fast_fast_forward.png" id="11_sls23"]
-[ext_resource type="Texture2D" uid="uid://cd66rbvyyljvm" path="res://ui/sprites/icons/penguin_miner_icon.tres" id="12_ov8o7"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_x3h8h"]
-font = ExtResource("1_3lvfr")
-font_size = 43
+[ext_resource type="Script" uid="uid://3gypvwieotcn" path="res://ui/DamageBar.cs" id="16_nq4ua"]
+[ext_resource type="Texture2D" uid="uid://cu7jsgkjvswx3" path="res://ui/sprites/icons/skills/Skill-icons_15.png" id="16_sls23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sls23"]
 atlas = ExtResource("3_sls23")
 region = Rect2(0, 0, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x3h8h"]
+font = ExtResource("1_3lvfr")
+font_size = 43
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov8o7"]
 atlas = ExtResource("3_sls23")
@@ -66,6 +67,24 @@ font_size = 45
 atlas = ExtResource("3_sls23")
 region = Rect2(32, 32, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndxoc"]
+atlas = ExtResource("3_sls23")
+region = Rect2(96, 0, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxqvw"]
+atlas = ExtResource("3_sls23")
+region = Rect2(32, 64, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb2wn"]
+atlas = ExtResource("3_sls23")
+region = Rect2(96, 64, 32, 32)
+margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4acjg"]
+atlas = ExtResource("16_sls23")
 
 [node name="MainUI" type="Control" unique_id=976099585]
 process_mode = 3
@@ -118,6 +137,11 @@ _penguinContainer = NodePath("../../Center/Top/PenguinContainer")
 [node name="Resource" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1640567247]
 layout_mode = 2
 
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource" unique_id=1592210552]
+layout_mode = 2
+texture = SubResource("AtlasTexture_sls23")
+expand_mode = 3
+
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource" unique_id=2062921153]
 layout_mode = 2
 mouse_filter = 1
@@ -125,13 +149,13 @@ text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource" unique_id=1592210552]
-layout_mode = 2
-texture = SubResource("AtlasTexture_sls23")
-expand_mode = 3
-
 [node name="Resource2" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=665437718]
 layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource2" unique_id=846470103]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ov8o7")
+expand_mode = 3
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource2" unique_id=1518395488]
 layout_mode = 2
@@ -140,13 +164,13 @@ text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource2" unique_id=846470103]
-layout_mode = 2
-texture = SubResource("AtlasTexture_ov8o7")
-expand_mode = 3
-
 [node name="Resource3" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1322838277]
 layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource3" unique_id=357961187]
+layout_mode = 2
+texture = SubResource("AtlasTexture_bu6un")
+expand_mode = 3
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource3" unique_id=983312223]
 layout_mode = 2
@@ -155,13 +179,13 @@ text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource3" unique_id=357961187]
-layout_mode = 2
-texture = SubResource("AtlasTexture_bu6un")
-expand_mode = 3
-
 [node name="Resource4" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=625754657]
 layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource4" unique_id=561841831]
+layout_mode = 2
+texture = SubResource("AtlasTexture_nq4ua")
+expand_mode = 3
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource4" unique_id=674152111]
 layout_mode = 2
@@ -170,13 +194,13 @@ text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource4" unique_id=561841831]
-layout_mode = 2
-texture = SubResource("AtlasTexture_nq4ua")
-expand_mode = 3
-
 [node name="Resource5" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1054443705]
 layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=412278767]
+layout_mode = 2
+texture = SubResource("AtlasTexture_wknjk")
+expand_mode = 3
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=1581822585]
 layout_mode = 2
@@ -185,13 +209,13 @@ text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=412278767]
-layout_mode = 2
-texture = SubResource("AtlasTexture_wknjk")
-expand_mode = 3
-
 [node name="Resource6" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=316390061]
 layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource6" unique_id=1085030441]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hcfg7")
+expand_mode = 3
 
 [node name="Count" type="Label" parent="MarginContainer/Screen/LeftPanel/Resources/Resource6" unique_id=822782826]
 layout_mode = 2
@@ -199,11 +223,6 @@ mouse_filter = 1
 text = "123456789"
 label_settings = SubResource("LabelSettings_x3h8h")
 vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource6" unique_id=1085030441]
-layout_mode = 2
-texture = SubResource("AtlasTexture_hcfg7")
-expand_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=945986638]
 visible = false
@@ -314,17 +333,17 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Count" type="Label" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1899853566]
-layout_mode = 2
-text = "21"
-label_settings = SubResource("LabelSettings_bu6un")
-vertical_alignment = 1
-
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1398037898]
 layout_mode = 2
 mouse_filter = 0
 texture = ExtResource("6_enix5")
 expand_mode = 3
+
+[node name="Count" type="Label" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1899853566]
+layout_mode = 2
+text = "21"
+label_settings = SubResource("LabelSettings_bu6un")
+vertical_alignment = 1
 
 [node name="Bottom" type="HBoxContainer" parent="MarginContainer/Screen/Center" unique_id=1486804377]
 layout_mode = 2
@@ -346,12 +365,12 @@ vertical = true
 layout_mode = 2
 alignment = 2
 script = ExtResource("7_bu6un")
-pauseButton = NodePath("Button1")
-resumeButton = NodePath("Button2")
-speedUpButton = NodePath("Button3")
-reallySpeedUpButton = NodePath("Button4")
+pauseButton = NodePath("ButtonPause")
+resumeButton = NodePath("ButtonRegularSpeed")
+speedUpButton = NodePath("ButtonFastSpeed")
+reallySpeedUpButton = NodePath("ButtonFastestSpeed")
 
-[node name="Button1" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1924142986]
+[node name="ButtonPause" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1924142986]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 mouse_filter = 1
@@ -359,7 +378,7 @@ texture_normal = ExtResource("4_186kx")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Button2" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1671549234]
+[node name="ButtonRegularSpeed" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1671549234]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 mouse_filter = 1
@@ -367,7 +386,7 @@ texture_normal = ExtResource("5_ti1yg")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Button3" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1823455807]
+[node name="ButtonFastSpeed" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1823455807]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 mouse_filter = 1
@@ -375,7 +394,7 @@ texture_normal = ExtResource("6_fa42e")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Button4" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1636634343]
+[node name="ButtonFastestSpeed" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1636634343]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 mouse_filter = 1
@@ -453,40 +472,47 @@ Type = 5
 Param = 3
 
 [node name="Progressbars" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1965011789]
-visible = false
 layout_mode = 2
 size_flags_vertical = 10
 mouse_filter = 0
 vertical = true
 
-[node name="ProgressBar" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1042924003]
+[node name="Regrow" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1042924003]
+visible = false
 layout_mode = 2
+script = ExtResource("16_nq4ua")
+_role = -1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar" unique_id=663307465]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/Regrow" unique_id=663307465]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("12_ov8o7")
+texture = SubResource("AtlasTexture_ndxoc")
 expand_mode = 2
 
-[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar" unique_id=1181083474]
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Regrow" unique_id=1181083474]
+modulate = Color(1, 0.1764706, 0, 1)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 value = 70.0
+fill_mode = 1
 show_percentage = false
 
-[node name="ProgressBar2" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=724249383]
+[node name="Miner" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=724249383]
+visible = false
 layout_mode = 2
+script = ExtResource("16_nq4ua")
+_role = 17
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar2" unique_id=1903947550]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/Miner" unique_id=1903947550]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("2_hlo7n")
+texture = SubResource("AtlasTexture_pxqvw")
 expand_mode = 2
 
-[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar2" unique_id=1335250230]
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Miner" unique_id=1335250230]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -495,16 +521,40 @@ mouse_filter = 1
 value = 55.0
 show_percentage = false
 
-[node name="ProgressBar3" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1737147658]
+[node name="Archeologist" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1737147658]
+visible = false
 layout_mode = 2
+script = ExtResource("16_nq4ua")
+_role = 24
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar3" unique_id=1881964877]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/Archeologist" unique_id=1881964877]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("2_hlo7n")
+texture = SubResource("AtlasTexture_qb2wn")
 expand_mode = 2
 
-[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/ProgressBar3" unique_id=59906565]
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Archeologist" unique_id=59906565]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+value = 20.0
+show_percentage = false
+
+[node name="Retirement" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1424788784]
+visible = false
+layout_mode = 2
+script = ExtResource("16_nq4ua")
+_role = 8
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Screen/RightPanel/Progressbars/Retirement" unique_id=1883698000]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_4acjg")
+expand_mode = 2
+
+[node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Retirement" unique_id=1233780151]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
