@@ -74,9 +74,7 @@ public partial class ResearchNode : Control, IUpdatable
 
     public void PurchaseUpgrade(bool takeFromInventory = true)
     {
-        GD.Print(IsPurchased);
         if (IsPurchased) return;
-        GD.Print(IsPurchasable());
         if (takeFromInventory && !IsPurchasable()) return;
         if (!ItemRecipe.TryApplyRecipe(Research, takeFromInventory)) return;
 

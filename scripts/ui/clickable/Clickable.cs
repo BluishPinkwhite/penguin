@@ -75,10 +75,6 @@ public partial class Clickable : Control
                         pawn.DebugText.Visible = !pawn.DebugText.Visible;
                 }
             }
-            else if (Param == ClickParam.Debug_ShowTargets)
-            {
-                Game.I.Debug.Visible = !Game.I.Debug.Visible;
-            }
         }
         else
         {

@@ -1,6 +1,4 @@
-﻿using System;
-using Godot;
-using Incremental.scripts.debug;
+﻿using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
@@ -153,15 +151,13 @@ public abstract partial class Pawn : SurfaceEntity
             mult += Inventory.Items[Item.Faster_Running].Amount * 0.25f;
         
         float stepX = Mathf.Clamp(dx, -1f, 1f) * d * mult;
-        
         float newX = PolarPos.X + stepX;
-
 
         bool reachedTarget = false;
         if (!Flying)
         {
             // horizontal movement
-            if (dx * dx > 0.005f)
+            if (dx * dx > 0.0001f)
             {
                 if (!CheckCollision(newX, PolarPos.Y))
                     PolarPos.X = newX;
@@ -228,11 +224,16 @@ public abstract partial class Pawn : SurfaceEntity
 
     public void LoadAnimationState()
     {
-        float dir = CircularDelta(PolarPos.X, Target.X, _currSize);
+        int targetLayer = Mathf.FloorToInt(Target.Y);
+        int targetSize = Game.I._data.GetLayerSize(targetLayer);
+        float targetX = Target.X * _currSize / targetSize;
+        targetX = Mathf.PosMod(targetX, _currSize);
 
-        if (dir > 0)
+        float dx = CircularDelta(PolarPos.X, targetX, _currSize);
+
+        if (dx > 0)
             visual.Scale = visual.Scale with { X = 1 };
-        else if (dir < 0)
+        else if (dx < 0)
             visual.Scale = visual.Scale with { X = -1 };
         
         UpdateAnimationState();
@@ -244,15 +245,14 @@ public abstract partial class Pawn : SurfaceEntity
     {
         SetVisible(false);
         ItemRecipe.TryApplyRecipe(RecipeID.Penguin_Retirement);
-        Game.I.Debug.RemoveLine(ID);
         QueueFree();
     }
     
-    protected void BreakTile(PlanetTile planetTile, int tile, int layer)
+    protected void BreakTile(PlanetTile planetTile)
     {
         RecipeID recipe = planetTile.Destroy();
 
-        Game.I._data.PropagateLight(layer, tile, PlanetTile.LightMax);
+        Game.I._data.PropagateLight(planetTile.PolarY, planetTile.PolarX, PlanetTile.LightMax);
                         
         if (recipe != RecipeID.None)
         {

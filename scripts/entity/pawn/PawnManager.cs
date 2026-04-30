@@ -51,7 +51,7 @@ public partial class PawnManager : Node2D
                     p.Role = role;
                     if (role == Role.Archeologist)
                     {
-                        p.PolarPos = ResearchStation.I.PolarPos;
+                        p.PolarPos = station.ResearchStation.I.PolarPos;
                     }
                     else
                     {

@@ -10,9 +10,9 @@ public partial class Resources : BoxContainer, IUpdatable
 {
     public static Resources I;
 
-    private List<BoxContainer> _containers = new();
-    private List<Label> _labels = new();
-    public List<Purchasable> _purchasables = new();
+    private readonly List<BoxContainer> _containers = new();
+    private readonly List<Label> _labels = new();
+    public readonly List<Purchasable> _purchasables = new();
 
     [Export] private BoxContainer _penguinContainer;
     private Label _penguinLabel;
@@ -79,7 +79,5 @@ public partial class Resources : BoxContainer, IUpdatable
 
         if( _penguinLabel != null)
             _penguinLabel.Text = Inventory.Items[Item.Penguin].Amount.ToString();
-        
-        ResourcesCopyCuzMeStoopid.I.UpdateVisuals();
     }
 }

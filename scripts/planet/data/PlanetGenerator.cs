@@ -17,7 +17,7 @@ public static class PlanetGenerator
 
         for (int i = 0; i < tileCount; i++)
         {
-            tiles[i] = new PlanetTile
+            tiles[i] = new PlanetTile(i, layer)
             {
                 Material = LayerMaterial(layerPercent, layerSpan),
                 Integrity = 1f,

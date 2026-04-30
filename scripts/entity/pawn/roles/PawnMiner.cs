@@ -10,10 +10,9 @@ namespace Incremental.scripts.entity.pawn.roles;
 
 public partial class PawnMiner : Pawn
 {
-    private PlanetTile _targetTile;
-    private Vector2I _targetCoords;
+    protected PlanetTile _targetTile;
     
-    [Export] private AudioStreamPlayer2D SFX;
+    [Export] protected AudioStreamPlayer2D SFX;
 
     public override void _Ready()
     {
@@ -23,7 +22,8 @@ public partial class PawnMiner : Pawn
 
     protected override void DoBehaviour(float d)
     {
-        float gravityY = PolarPos.Y - d * Gravity;
+        int polarX = Mathf.FloorToInt(PolarPos.X);
+        int polarY = Mathf.FloorToInt(PolarPos.Y);
 
         if (State is PawnState.Idle or PawnState.GiveUp)
         {
@@ -31,28 +31,31 @@ public partial class PawnMiner : Pawn
             {
                 visual.Rotate(Game.RandomAround(0.28f, 0.1f));
             }
+
+            // mined tile was broken by someone else, find a new one
+            if (_targetTile != null && (_targetTile.IsEmpty() || !_targetTile.IsOwnedBy(this)))
+                _targetTile = null;
             
-            // wait till the pawn is on ground
-            PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
-            if (below != null && !below.IsEmpty() && GetNewMiningTarget())
+            // find a new tile to mine when on ground
+            if (onGround && _targetTile == null && GetNewMiningTarget() && _targetTile != null)
             {
                 if (State == PawnState.Idle)
                 {
-                    // TODO fix targetting between layer sizes
-                    if (Game.I._data.GetLayerSize(Mathf.FloorToInt(_targetCoords.Y)) != Game.I._data.GetLayerSize(Mathf.FloorToInt(_targetCoords.Y + 1)))
-                        Target = new Vector2((_targetCoords.X + 0.5f) / 2, _targetCoords.Y + 1.25f);
-                    else
-                        Target = new Vector2(_targetCoords.X + 0.5f, _targetCoords.Y + 1.25f);
+                    Game.I._data.GetTileAbove(_targetTile.PolarX, _targetTile.PolarY, out bool isSplit);
+                    Target = new Vector2((isSplit ? (int)(_targetTile.PolarX * 2) : _targetTile.PolarX) + 0.5f, 
+                        _targetTile.PolarY + 0.75f);
                     
                     State = PawnState.Move;
                     SetCooldown(1);
                 }
                 else
                 {
-                    if (_targetTile != null && _targetTile.OwnerID == ID)
-                        _targetTile.OwnerID = -1;
+                    // break by impact
+                    if (_targetTile != null && _targetTile.IsOwnedBy(this))
+                        _targetTile.RemoveOwner(this);
                     
-                    BreakTile(below, Mathf.FloorToInt(PolarPos.X), Mathf.FloorToInt(gravityY));
+                    PlanetTile below = Game.I._data.GetTileBelow(polarX, polarY, out _);
+                    BreakTile(below);
                     Retire();
                 }
             }
@@ -97,31 +100,35 @@ public partial class PawnMiner : Pawn
         }
         else if (State == PawnState.Action)
         {
-            // find a new tile when this tile was broken by someone else
-            if (Mathf.FloorToInt(Target.X) != Mathf.FloorToInt(PolarPos.X) ||
-                Mathf.FloorToInt(Target.Y) != Mathf.FloorToInt(PolarPos.Y) || _targetTile?.OwnerID != ID)
+            if (_targetTile == null)
             {
                 State = PawnState.Idle;
-
-                if (_targetTile?.OwnerID == ID)
-                    _targetTile.OwnerID = -1;
+                SetCooldown(1);
+            }
+            
+            // find a new tile when this tile was broken by someone else
+            else if (_targetTile != null && !_targetTile.IsOwnedBy(this))
+            {
+                State = PawnState.Idle;
+                _targetTile = null;
+                SetCooldown(2);
             }
         }
         else if (State == PawnState.DropOff)
         {
-            if (Counter > Consts.Pawns[Role.Miner].RetirementCycles)
+            if (Counter > Consts.Pawns[Role].RetirementCycles)
             {
                 State = PawnState.RetireH;
                 
                 bool hasTarget = _targetTile != null;
                 
-                float x = hasTarget ? Game.RandomAround(_targetCoords.X, 5) : Game.RandomAround(PolarPos.X, 5);
+                float x = hasTarget ? Game.RandomAround(_targetTile.PolarX, 5) : Game.RandomAround(PolarPos.X, 5);
                 float y = Game.RandomAround(ResourceStation.I.Surface.Y + 50, 5);
 
                 Target = new Vector2(x, y);
                 
-                if (_targetTile != null && _targetTile.OwnerID == ID)
-                    _targetTile.OwnerID = -1;
+                if (_targetTile != null && _targetTile.IsOwnedBy(this))
+                    _targetTile.RemoveOwner(this);
             }
             else {
                 State = PawnState.Idle;
@@ -132,11 +139,10 @@ public partial class PawnMiner : Pawn
 
     private bool GetNewMiningTarget()
     {
-        if (Game.I._data.NextMiningTarget(PolarPos, out Vector2 target, out PlanetTile tile))
+        if (Game.I._data.NextMiningTarget(this, out PlanetTile tile))
         {
-            _targetCoords = new Vector2I(Mathf.FloorToInt(target.X), Mathf.FloorToInt(target.Y));
             _targetTile = tile;
-            _targetTile.OwnerID = ID;
+            _targetTile.AddOwner(this);
             return true;
         }
 
@@ -146,62 +152,54 @@ public partial class PawnMiner : Pawn
     
     private void OnFrameChanged()
     {
-        if (visual.Animation == "mine")
+        if (visual.Animation != "mine" || visual.Frame != 4) return;
+        if (_targetTile == null || _targetTile.IsEmpty() || !_targetTile.IsOwnedBy(this)) return;
+
+        float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.5f : 0.25f;
+        damage += Inventory.Items[Item.Tougher_Pickaxes].Amount * 0.2f;
+                    
+        if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
+            _targetTile.Integrity = 0;
+                    
+        _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+
+        if (Inventory.IsResearchUnlocked(RecipeID.Research_PrecisePickaxes))
         {
-            if (visual.Frame == 4)
+            float chance = 0.15f;
+            chance += Inventory.Items[Item.Higher_Crit_Chance].Amount * 0.1f;
+                        
+            if (GD.Randf() < chance)
+                _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
+                        
+            SFX.PitchScale = (float)GD.RandRange(0.4f, 0.7f);
+            SFX.VolumeDb = (float)GD.RandRange(-1f, 3f);
+            SFX.Play();
+        }
+        else
+        {
+            SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
+            SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
+            SFX.Play();
+        }
+                    
+
+        if (_targetTile.Integrity <= 0)
+        {
+            BreakTile(_targetTile);
+            Counter++;
+                        
+            int counterPeriod = Inventory.IsResearchUnlocked(RecipeID.Research_EnergyDrinks) ? 8 : 5;
+
+            if (Counter % counterPeriod == 0)
             {
-                // TODO fix if target tile grows a tile on top
-                if (_targetTile != null && !_targetTile.IsEmpty() && _targetTile.OwnerID == ID)
-                {
-                    float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.5f : 0.25f;
-                    
-                    damage += Inventory.Items[Item.Tougher_Pickaxes].Amount * 0.2f;
-                    
-                    if (Inventory.IsResearchUnlocked(RecipeID.Research_MagmaReinforcement))
-                        _targetTile.Integrity = 0;
-                    
-                    _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
-
-                    if (Inventory.IsResearchUnlocked(RecipeID.Research_PrecisePickaxes))
-                    {
-                        float chance = 0.15f;
-                        chance += Inventory.Items[Item.Higher_Crit_Chance].Amount * 0.1f;
-                        
-                        if (GD.Randf() < chance)
-                            _targetTile.Integrity -= damage / _targetTile.Material.BreakTime();
-                        
-                        SFX.PitchScale = (float)GD.RandRange(0.4f, 0.7f);
-                        SFX.VolumeDb = (float)GD.RandRange(-1f, 3f);
-                        SFX.Play();
-                    }
-                    else
-                    {
-                        SFX.PitchScale = (float)GD.RandRange(0.8f, 1.1f);
-                        SFX.VolumeDb = (float)GD.RandRange(-5f, 1f);
-                        SFX.Play();
-                    }
-                    
-
-                    if (_targetTile.Integrity <= 0)
-                    {
-                        BreakTile(_targetTile, _targetCoords.X, _targetCoords.Y);
-                        Counter++;
-                        
-                        int counterPeriod = Inventory.IsResearchUnlocked(RecipeID.Research_EnergyDrinks) ? 8 : 5;
-
-                        if (Counter % counterPeriod == 0)
-                        {
-                            State = PawnState.ReturnH;
-                            Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
-                            SetCooldown(1);
-                        }
-                        else
-                        {
-                            State = PawnState.Idle;
-                            SetCooldown(2.5f);
-                        }
-                    }
-                }
+                State = PawnState.ReturnH;
+                Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
+                SetCooldown(1);
+            }
+            else
+            {
+                State = PawnState.Idle;
+                SetCooldown(2.5f);
             }
         }
     }

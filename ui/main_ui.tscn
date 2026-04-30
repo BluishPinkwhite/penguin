@@ -69,6 +69,8 @@ margin = Rect2(-4, -4, -8, -8)
 
 [node name="MainUI" type="Control" unique_id=976099585]
 process_mode = 3
+z_index = 500
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -105,6 +107,8 @@ size_flags_stretch_ratio = 0.4
 mouse_filter = 2
 
 [node name="Resources" type="BoxContainer" parent="MarginContainer/Screen/LeftPanel" unique_id=700070652 node_paths=PackedStringArray("_penguinContainer")]
+z_index = 1100
+z_as_relative = false
 layout_mode = 2
 mouse_filter = 0
 vertical = true

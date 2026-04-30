@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 using Incremental.scripts.director;
+using Incremental.scripts.entity.pawn;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.rendering;
 
@@ -19,12 +20,12 @@ public class PlanetData
     public readonly int BaseTileCount;
     public readonly float TileSize;
     public readonly float GrowthFactor;
-    
+
     public MiningShape CurrentMiningShape = MiningShape.TallerThanWider;
-    
+
     private List<(int x, int y, float dist)> _miningQueue = new();
     private int _miningQueueIndex = 0;
-    
+
 
     public PlanetData(
         int layerCount,
@@ -146,6 +147,45 @@ public class PlanetData
         return Layers[layer][tile];
     }
 
+
+    public PlanetTile GetTileBelow(int tile, int layer, out bool isSplit)
+    {
+        int layerSize = GetLayerSize(layer);
+        int belowSize = GetLayerSize(layer - 1);
+        isSplit = layerSize != belowSize;
+
+        layer -= 1;
+
+        if (layer >= Layers.Count || layer < 0)
+            return null;
+
+        tile = Mathf.PosMod(tile, Layers[layer].Length);
+
+        if (isSplit)
+            return Layers[layer][tile / 2];
+
+        return Layers[layer][tile];
+    }
+
+    public PlanetTile GetTileAbove(float tile, int layer, out bool isSplit, bool chooseLeft = true)
+    {
+        int layerSize = GetLayerSize(layer);
+        int aboveSize = GetLayerSize(layer + 1);
+        isSplit = layerSize != aboveSize;
+
+        layer += 1;
+
+        if (layer >= Layers.Count || layer < 0)
+            return null;
+
+        tile = Mathf.PosMod(tile, Layers[layer].Length);
+
+        if (isSplit)
+            return Layers[layer][(int)(tile * 2 + (chooseLeft ? 0 : 1))];
+
+        return Layers[layer][(int)tile];
+    }
+
     public Vector2 PolarToWorld(float tile, float layer)
     {
         int l = Mathf.FloorToInt(layer);
@@ -185,21 +225,16 @@ public class PlanetData
         return Layers[layer].Length;
     }
 
-    private int WrapX(int x, int size)
-    {
-        return (x % size + size) % size;
-    }
-
-    public bool NextMiningTarget(Vector2 fromPos, out Vector2 target, out PlanetTile bestTile)
+    public bool NextMiningTarget(Pawn pawn, out PlanetTile bestTile)
     {
         if (_miningQueue.Count == 0)
             FillMiningQueue();
-        
+
         bestTile = null;
-        (int x, int y, float dist) best = (0,0,0);
+        (int x, int y, float dist) best = (0, 0, 0);
 
         // TODO fix for multiple mining shapes
-        int i = 0;//_miningQueueIndex;
+        int i = _miningQueueIndex;
         int a = 0;
         while (a < 10)
         {
@@ -208,37 +243,38 @@ public class PlanetData
 
             (int x, int y, float dist) next = _miningQueue[i];
             i++;
-            
+
             PlanetTile tile = Layers[next.y][next.x];
-            
+
             // tile is not available -> skip
-            if (tile.OwnerID != -1 || tile.IsEmpty())
+            if (tile.IsEmpty() || !tile.CanBeOwnedBy(pawn))
                 continue;
-            
+
             // tile is reachable from above
-            PlanetTile above = Game.I._data.GetTileAtPolarCoords(next.x, next.y + 1);
+            PlanetTile above = Game.I._data.GetTileAbove(next.x, next.y, out bool isSplit);
             if (above != null && !above.IsEmpty())
                 continue;
             
-            float dist = PolarDistanceSquared(new Vector2(next.x, next.y), fromPos);
-            float minDist = PolarDistanceSquared(new Vector2(best.x, best.y), fromPos);
+            if (isSplit)
+            {
+                above = Game.I._data.GetTileAbove(next.x, next.y, out _, false);
+                if (above != null && !above.IsEmpty())
+                    continue;
+            }
+
+            float dist = PolarDistanceSquared(new Vector2(next.x, next.y), pawn.PolarPos);
+            float minDist = PolarDistanceSquared(new Vector2(best.x, best.y), pawn.PolarPos);
 
             if (bestTile == null || dist + next.dist < minDist + best.dist)
             {
                 best = next;
                 bestTile = tile;
             }
+
             a++;
         }
-        
-        if (bestTile != null)
-        {
-            target = new Vector2(best.x, best.y);
-            return true;
-        }
 
-        target = Vector2.Zero;
-        return false;
+        return bestTile != null;
     }
 
     public void RegrowLayers()
@@ -247,11 +283,11 @@ public class PlanetData
         for (int tile = 0; tile < Layers[0].Length; tile++)
         {
             PlanetTile tileData = Layers[0][tile];
-            
+
             tileData.Integrity = 1f;
             tileData.Material = TileMaterial.Core;
         }
-        
+
         // renew blocks
         float layerSpan = PlanetGenerator.LayerSpan(Layers.Count);
         for (int layer = Layers.Count - 1; layer > 0; layer--)
@@ -260,14 +296,14 @@ public class PlanetData
             int layerSize = Layers[layer].Length;
             bool splitLayer = Layers[layer].Length == Layers[belowLayer].Length;
             float layerPercent = (float)layer / Layers.Count;
-            
+
             for (int tile = 0; tile < layerSize; tile++)
             {
                 if (Mathf.Pow(Game.RandomTo(1f), 2) <= (float)layer / Layers.Count)
                     continue;
-                
+
                 PlanetTile tileData = Layers[layer][tile];
-                PlanetTile below = splitLayer 
+                PlanetTile below = splitLayer
                     ? Layers[belowLayer][tile]
                     : Layers[belowLayer][tile / 2];
 
@@ -277,21 +313,21 @@ public class PlanetData
                     tileData.Integrity = below.Integrity;
                     tileData.Regrowing = true;
                     below.Integrity = 1f;
-                    below.OwnerID = -1;
+                    below.ClearOwners();
                 }
             }
         }
 
         PlanetRenderer.isLightDirty = true;
-        
+
         _miningQueueIndex = 0;
         while (_miningQueueIndex < _miningQueue.Count)
         {
             (int x, int y, float dist) next = _miningQueue[_miningQueueIndex];
             PlanetTile tile = Layers[next.y][next.x];
-            
+
             // tile is not available -> skip
-            if (tile.OwnerID != -1 || tile.IsEmpty())
+            if (tile.IsEmpty() || tile.IsOwned())
                 _miningQueueIndex++;
             else break;
         }

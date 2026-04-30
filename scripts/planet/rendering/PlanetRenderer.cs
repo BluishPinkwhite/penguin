@@ -201,39 +201,8 @@ public partial class PlanetRenderer : Node2D
             _lastUpdate = 0;
             isDirty = true;
         }
-    }
-
-    public override void _Process(double delta)
-    {
-        // if (Input.IsActionPressed("press"))
-        // {
-        //     Vector2 local = ToLocal(GetGlobalMousePosition());
-        //     float dist = local.Length() - _data._innerGrowth;
-        //     Vector2 virtualPos = local.Normalized() * dist;
-        //
-        //     if (_data.LocalPositionToPolarCoords(virtualPos, out int layer, out int tile))
-        //     {
-        //         PlanetTile t = _data.Layers[layer][tile];
-        //
-        //         RecipeID recipe = t.Destroy();
-        //
-        //         _data.PropagateLight(layer, tile, PlanetTile.LightMax);
-        //                 
-        //         if (recipe != RecipeID.None)
-        //         {
-        //             foreach ((Item item, int amount) tuple in ItemRecipe.TryGetOutput(recipe))
-        //             {
-        //                 for (int i = 0; i < tuple.amount; i++)
-        //                 {
-        //                     Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), tuple.item);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-
-        if (!Inventory.IsResearchUnlocked(RecipeID.Research_OrbitalCoreExtractor))
+        
+        if (!GetTree().Paused && !Inventory.IsResearchUnlocked(RecipeID.Research_OrbitalCoreExtractor))
         {
             float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
 
@@ -289,6 +258,67 @@ public partial class PlanetRenderer : Node2D
                 }
             }
         }
+    }
+
+    public override void _Process(double delta)
+    {
+        // if (Input.IsActionPressed("press"))
+        // {
+        //     Vector2 local = ToLocal(GetGlobalMousePosition());
+        //     float dist = local.Length() - _data._innerGrowth;
+        //     Vector2 virtualPos = local.Normalized() * dist;
+        //
+        //     if (_data.LocalPositionToPolarCoords(virtualPos, out int layer, out int tile))
+        //     {
+        //         PlanetTile t = _data.Layers[layer][tile];
+        //
+        //         RecipeID recipe = t.Destroy();
+        //
+        //         _data.PropagateLight(layer, tile, PlanetTile.LightMax);
+        //                 
+        //         if (recipe != RecipeID.None)
+        //         {
+        //             foreach ((Item item, int amount) tuple in ItemRecipe.TryGetOutput(recipe))
+        //             {
+        //                 for (int i = 0; i < tuple.amount; i++)
+        //                 {
+        //                     Pickup.Instantiate(new Vector2(tile + 0.5f, layer + 0.5f), tuple.item);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // Vector2 local = ToLocal(GetGlobalMousePosition());
+        // if (_data.LocalPositionToPolarCoords(local, out int y, out int x))
+        // {
+        //     PlanetTile t = _data.Layers[y][x];
+        //
+        //     for (int i = -2; i <= 2; i++)
+        //     for (int j = -2; j <= 2; j++)
+        //     {
+        //         PlanetTile tile = _data.GetTileAtPolarCoords(x + i, y + j);
+        //         if (tile != null)
+        //             tile.Material = TileMaterial.Stone;
+        //     }
+        //     
+        //     t.Material = TileMaterial.Core;
+        //
+        //     int layerSize = _data.GetLayerSize(y);
+        //     int belowSize = _data.GetLayerSize(y - 1);
+        //
+        //     if (layerSize > belowSize)
+        //     {
+        //         PlanetTile below = _data.GetTileAtPolarCoords((x/2), y - 1);
+        //         below.Material = TileMaterial.Magma;   
+        //     }
+        //     else
+        //     {
+        //         PlanetTile below = _data.GetTileAtPolarCoords(x, y - 1);
+        //         below.Material = TileMaterial.Magma;
+        //     }
+        // }
+        
 
         if (isLightDirty)
         {

@@ -1,7 +1,7 @@
-using Godot;
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
-using Incremental.scripts.entity;
+
+namespace Incremental.scripts.entity.station;
 
 public partial class ResearchStation : OrbitEntity
 {

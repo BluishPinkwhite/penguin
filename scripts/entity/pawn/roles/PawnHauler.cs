@@ -35,9 +35,7 @@ public partial class PawnHauler : Pawn
                 visual.Rotate(Game.RandomAround(0.28f, 0.1f));
             }
 
-            // wait till the pawn is on the ground
-            PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
-            if (below != null && !below.IsEmpty())
+            if (onGround)
             {
                 if (State == PawnState.Idle)
                 {
@@ -53,7 +51,8 @@ public partial class PawnHauler : Pawn
                 }
                 else
                 {
-                    BreakTile(below, Mathf.FloorToInt(PolarPos.X), Mathf.FloorToInt(gravityY));
+                    PlanetTile below = Game.I._data.GetTileAtPolarCoords(PolarPos.X, gravityY);
+                    BreakTile(below);
                     Retire();
                 }
             }
@@ -108,11 +107,14 @@ public partial class PawnHauler : Pawn
             {
                 InventoryID = _pickupTarget.Item;
                 InventoryCount += 1;
+                _pickupTarget.Amount--;
 
-                PickupSprite.RegionRect = _pickupTarget.GetPickupCoords();
+                PickupSprite.RegionRect = _pickupTarget.GetAtlasCoords();
                 PickupSprite.Visible = true;
 
-                _pickupTarget.QueueFree();
+                if (_pickupTarget.Amount <= 0)
+                    _pickupTarget.QueueFree();
+                
                 _pickupTarget = null;
 
                 Target = new Vector2(ResourceStation.I.Surface.X, ResourceStation.I.Surface.Y);

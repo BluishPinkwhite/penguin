@@ -19,8 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://bj0skna3div1l" path="res://ui/sprites/icons/abilities/Ability_icons10_41.png" id="13_b74hl"]
 [ext_resource type="Texture2D" uid="uid://caiaorypo8c0a" path="res://ui/sprites/icons/close.tres" id="18_rhdrg"]
 [ext_resource type="Script" uid="uid://dcwpbpb37ryl7" path="res://scripts/ui/clickable/Clickable.cs" id="19_t51r8"]
-[ext_resource type="Script" uid="uid://d0ct4u0ft86ib" path="res://scripts/ui/ResourcesCopyCuzMeStoopid.cs" id="20_xs7tc"]
-[ext_resource type="Texture2D" uid="uid://c7ay7ait71ndl" path="res://ui/sprites/icons/game_icons_map.png" id="21_r4eh2"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pdd12"]
 load_path = "res://.godot/imported/Frame_14.png-5c3e333b0862d3425cfb376481eb20bf.ctex"
@@ -156,42 +154,10 @@ shader = ExtResource("2_ys5lt")
 shader_parameter/EffectOn = true
 shader_parameter/Brightness = 1.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_ks66b"]
-font = ExtResource("6_xs7tc")
-font_size = 43
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ibn25"]
-atlas = ExtResource("21_r4eh2")
-region = Rect2(0, 0, 32, 32)
-margin = Rect2(-4, -4, -8, -8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_17rn7"]
-atlas = ExtResource("21_r4eh2")
-region = Rect2(32, 0, 32, 32)
-margin = Rect2(-4, -4, -8, -8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1517j"]
-atlas = ExtResource("21_r4eh2")
-region = Rect2(64, 0, 32, 32)
-margin = Rect2(-4, -4, -8, -8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_drvih"]
-atlas = ExtResource("21_r4eh2")
-region = Rect2(96, 0, 32, 32)
-margin = Rect2(-4, -4, -8, -8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k27qg"]
-atlas = ExtResource("21_r4eh2")
-region = Rect2(0, 32, 32, 32)
-margin = Rect2(-4, -4, -8, -8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pakcv"]
-atlas = ExtResource("21_r4eh2")
-region = Rect2(32, 32, 32, 32)
-margin = Rect2(-4, -4, -8, -8)
-
 [node name="TreeView" type="Control" unique_id=69398314]
 process_mode = 3
+z_index = 1000
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1523,105 +1489,3 @@ stretch_mode = 0
 script = ExtResource("19_t51r8")
 Type = 5
 Param = 3
-
-[node name="Resources" type="BoxContainer" parent="." unique_id=94819047 node_paths=PackedStringArray("_containers", "_labels")]
-layout_mode = 1
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 296.0
-offset_bottom = 358.0
-mouse_filter = 0
-vertical = true
-script = ExtResource("20_xs7tc")
-_containers = [NodePath("Resource"), NodePath("Resource2"), NodePath("Resource3"), NodePath("Resource4"), NodePath("Resource5"), NodePath("Resource6")]
-_labels = [NodePath("Resource/Count"), NodePath("Resource2/Count"), NodePath("Resource3/Count"), NodePath("Resource4/Count"), NodePath("Resource5/Count"), NodePath("Resource6/Count")]
-
-[node name="Resource" type="HBoxContainer" parent="Resources" unique_id=1945873170]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="Resources/Resource" unique_id=1454698295]
-layout_mode = 2
-mouse_filter = 1
-text = "123456789"
-label_settings = SubResource("LabelSettings_ks66b")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Resources/Resource" unique_id=678631426]
-layout_mode = 2
-texture = SubResource("AtlasTexture_ibn25")
-expand_mode = 3
-
-[node name="Resource2" type="HBoxContainer" parent="Resources" unique_id=2089966794]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="Resources/Resource2" unique_id=943101865]
-layout_mode = 2
-mouse_filter = 1
-text = "123456789"
-label_settings = SubResource("LabelSettings_ks66b")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Resources/Resource2" unique_id=44832668]
-layout_mode = 2
-texture = SubResource("AtlasTexture_17rn7")
-expand_mode = 3
-
-[node name="Resource3" type="HBoxContainer" parent="Resources" unique_id=661895547]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="Resources/Resource3" unique_id=1735965987]
-layout_mode = 2
-mouse_filter = 1
-text = "123456789"
-label_settings = SubResource("LabelSettings_ks66b")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Resources/Resource3" unique_id=70570545]
-layout_mode = 2
-texture = SubResource("AtlasTexture_1517j")
-expand_mode = 3
-
-[node name="Resource4" type="HBoxContainer" parent="Resources" unique_id=1421635481]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="Resources/Resource4" unique_id=322721841]
-layout_mode = 2
-mouse_filter = 1
-text = "123456789"
-label_settings = SubResource("LabelSettings_ks66b")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Resources/Resource4" unique_id=1880881156]
-layout_mode = 2
-texture = SubResource("AtlasTexture_drvih")
-expand_mode = 3
-
-[node name="Resource5" type="HBoxContainer" parent="Resources" unique_id=43168119]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="Resources/Resource5" unique_id=48400940]
-layout_mode = 2
-mouse_filter = 1
-text = "123456789"
-label_settings = SubResource("LabelSettings_ks66b")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Resources/Resource5" unique_id=2075575198]
-layout_mode = 2
-texture = SubResource("AtlasTexture_k27qg")
-expand_mode = 3
-
-[node name="Resource6" type="HBoxContainer" parent="Resources" unique_id=882117604]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="Resources/Resource6" unique_id=826679166]
-layout_mode = 2
-mouse_filter = 1
-text = "123456789"
-label_settings = SubResource("LabelSettings_ks66b")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Resources/Resource6" unique_id=2026290769]
-layout_mode = 2
-texture = SubResource("AtlasTexture_pakcv")
-expand_mode = 3

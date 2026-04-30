@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://b1c6jdhlshvfr" path="res://scripts/entity/pawn/scenes/PawnMiner.tscn" id="8_xo05s"]
 [ext_resource type="PackedScene" uid="uid://nl8p58xqichp" path="res://ui/background_ui.tscn" id="9_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://tjqf5g3prke0" path="res://scripts/entity/pawn/scenes/PawnHauler.tscn" id="9_dss4m"]
-[ext_resource type="Script" uid="uid://dijt32b8nu8bu" path="res://scripts/debug/DebugDraw.cs" id="9_jhx03"]
 [ext_resource type="PackedScene" uid="uid://bttyyv7bg42bp" path="res://ui/post_processing.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://b7sesrpjfame4" path="res://scenes/buildings/ResearchStation.tscn" id="11_7iits"]
 [ext_resource type="PackedScene" uid="uid://bfar2tc8s1dv6" path="res://ui/main_ui.tscn" id="11_e3hyu"]
@@ -22,12 +21,11 @@
 [ext_resource type="AudioStream" uid="uid://b14qedkevk421" path="res://sounds/soundtrack/A Foreign Planet - Looped.wav" id="17_7t5mc"]
 [ext_resource type="PackedScene" uid="uid://b5wl5b8aqpryf" path="res://ui/research_tree_view.tscn" id="19_pm21f"]
 
-[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "Debug", "ResearchWindow")]
+[node name="Root" type="Node2D" unique_id=885228900 node_paths=PackedStringArray("Pawns", "Stations", "Pickups", "ResearchWindow")]
 script = ExtResource("1_i7141")
 Pawns = NodePath("Pawns")
 Stations = NodePath("Stations")
 Pickups = NodePath("Pickups")
-Debug = NodePath("Debug")
 ResearchWindow = NodePath("Front_UI/research_ui")
 EndScene = ExtResource("2_7iits")
 PickupScene = ExtResource("3_4mrxx")
@@ -76,10 +74,6 @@ script = ExtResource("4_qfnet")
 PawnScenes = [ExtResource("8_xo05s"), ExtResource("9_dss4m"), ExtResource("14_lakw3")]
 
 [node name="Pickups" type="Node2D" parent="." unique_id=2083270918]
-
-[node name="Debug" type="Node2D" parent="." unique_id=183909691]
-visible = false
-script = ExtResource("9_jhx03")
 
 [node name="Background_UI" type="CanvasLayer" parent="." unique_id=85413882]
 layer = -100

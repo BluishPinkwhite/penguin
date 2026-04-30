@@ -9,6 +9,8 @@ public partial class SurfaceEntity : OrbitEntity
     public int _currSize;
 
     public const float Gravity = 10f;
+    
+    protected bool onGround = false;
 
 
     public override void _PhysicsProcess(double delta)
@@ -26,14 +28,6 @@ public partial class SurfaceEntity : OrbitEntity
             diff -= size;
 
         return diff;
-    }
-
-    public float ScaleTileBetweenLayers(float tile, int fromLayer, int toLayer)
-    {
-        int fromSize = Game.I._data.GetLayerSize(fromLayer);
-        int toSize = Game.I._data.GetLayerSize(toLayer);
-
-        return tile * toSize / (float)fromSize;
     }
 
     public bool IsAir(int tile, int layer)
@@ -69,8 +63,11 @@ public partial class SurfaceEntity : OrbitEntity
         if (!CheckCollision(newX, gravityY))
         {
             PolarPos.Y = gravityY;
+            onGround = false;
             return true;
         }
+
+        onGround = true;
         return false;
     }
     
@@ -91,11 +88,6 @@ public partial class SurfaceEntity : OrbitEntity
             PolarPos.Y = 0f;
     }
 
-    public PlanetTile GetTileBelow(float gravityY)
-    {
-        return Game.I._data.GetTileAtPolarCoords(Mathf.FloorToInt(PolarPos.X), Mathf.FloorToInt(gravityY));
-    }
-    
     protected float GetHalfWidthTiles(int layer)
     {
         int size = Game.I._data.GetLayerSize(layer);

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Incremental.scripts.debug;
 using Incremental.scripts.entity.pawn;
 using Incremental.scripts.planet.data;
 using Incremental.scripts.saving;
@@ -18,7 +17,6 @@ public partial class Game : Node2D
     [Export] public PawnManager Pawns;
     [Export] public Node2D Stations;
     [Export] public Node2D Pickups;
-    [Export] public DebugDraw Debug;
     [Export] public Control ResearchWindow;
     [Export] public PackedScene EndScene;
 
@@ -41,14 +39,6 @@ public partial class Game : Node2D
         {
             SaveFileManager.Save();
             GetTree().Quit();
-        }
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        foreach (Node child in Debug.GetChildren())
-        {
-            child.QueueFree();
         }
     }
 

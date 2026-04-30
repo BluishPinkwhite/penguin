@@ -9,7 +9,7 @@ public partial class PlanetCamera : Camera2D
     public float Radius; // 0-1 of planet size
     public float Angle; // radians
 
-    [Export] private rendering.PlanetRenderer world;
+    [Export] private PlanetRenderer world;
 
     [Export] public float MoveSpeed = 400f;
     [Export] public float ZoomLevel = 1.0f;
