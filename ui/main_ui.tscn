@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://buoxe4kaxamht" path="res://ui/sprites/icons/fast_fast_forward.png" id="11_sls23"]
 [ext_resource type="Script" uid="uid://3gypvwieotcn" path="res://ui/DamageBar.cs" id="16_nq4ua"]
 [ext_resource type="Texture2D" uid="uid://cu7jsgkjvswx3" path="res://ui/sprites/icons/skills/Skill-icons_15.png" id="16_sls23"]
+[ext_resource type="Texture2D" uid="uid://kjqig7eaeo77" path="res://ui/sprites/poggers_bar_box.png" id="18_hcfg7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sls23"]
 atlas = ExtResource("3_sls23")
@@ -70,13 +71,37 @@ margin = Rect2(-4, -4, -8, -8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ndxoc"]
 atlas = ExtResource("3_sls23")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(0, 96, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lcslr"]
+texture = ExtResource("18_hcfg7")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(1, 1, 1, 0.43137255)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndxoc"]
+texture = ExtResource("18_hcfg7")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(1, 0.45999998, 0.45999998, 0.8156863)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxqvw"]
 atlas = ExtResource("3_sls23")
 region = Rect2(32, 64, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wknjk"]
+texture = ExtResource("18_hcfg7")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(0.68, 0.98933333, 1, 0.6745098)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb2wn"]
 atlas = ExtResource("3_sls23")
@@ -353,7 +378,7 @@ alignment = 1
 [node name="RightPanel" type="VBoxContainer" parent="MarginContainer/Screen" unique_id=778479501]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
+size_flags_stretch_ratio = 0.3
 mouse_filter = 2
 
 [node name="Controls" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1777677593]
@@ -490,12 +515,13 @@ texture = SubResource("AtlasTexture_ndxoc")
 expand_mode = 2
 
 [node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Regrow" unique_id=1181083474]
-modulate = Color(1, 0.1764706, 0, 1)
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
+theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
+theme_override_styles/fill = SubResource("StyleBoxTexture_ndxoc")
 value = 70.0
 fill_mode = 1
 show_percentage = false
@@ -513,11 +539,13 @@ texture = SubResource("AtlasTexture_pxqvw")
 expand_mode = 2
 
 [node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Miner" unique_id=1335250230]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
+theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
+theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
 value = 55.0
 show_percentage = false
 
@@ -534,11 +562,13 @@ texture = SubResource("AtlasTexture_qb2wn")
 expand_mode = 2
 
 [node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Archeologist" unique_id=59906565]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
+theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
+theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
 value = 20.0
 show_percentage = false
 
@@ -555,11 +585,13 @@ texture = SubResource("AtlasTexture_4acjg")
 expand_mode = 2
 
 [node name="Bar" type="ProgressBar" parent="MarginContainer/Screen/RightPanel/Progressbars/Retirement" unique_id=1233780151]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
+theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
+theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
 value = 20.0
 show_percentage = false
 

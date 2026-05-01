@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Penguin Inc."
-config/version="0.1.2A"
+config/version="0.1.3A"
 run/main_scene="uid://ywlcku8dba6i"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0.12156863, 0.12156863, 0.12156863, 1)
