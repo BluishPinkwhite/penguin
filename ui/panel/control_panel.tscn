@@ -53,6 +53,11 @@ atlas = ExtResource("5_wheia")
 region = Rect2(96, 0, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4gw7c"]
+color = Color(0.75, 0.75, 0.75, 0.5764706)
+grow_begin = -140.0
+grow_end = -140.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_wheia"]
 font = ExtResource("2_3b57c")
 font_size = 24
@@ -321,7 +326,7 @@ expand_mode = 2
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1870080068]
 layout_mode = 2
 theme_override_constants/separation = 1
-theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
+theme_override_styles/separator = SubResource("StyleBoxLine_4gw7c")
 script = ExtResource("6_wqfgl")
 
 [node name="Purchasable6" type="HBoxContainer" parent="VBoxContainer" unique_id=1454489828 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]

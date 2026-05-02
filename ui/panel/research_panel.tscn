@@ -24,12 +24,17 @@ font_size = 29
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_3b57c"]
 color = Color(0.74978, 0.74978, 0.7497799, 0.827451)
-grow_begin = -120.0
-grow_end = -120.0
+grow_begin = -110.0
+grow_end = -110.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_2q4hi"]
 font = ExtResource("4_q3l83")
 font_size = 24
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lp1iv"]
+color = Color(0.75, 0.75, 0.75, 0.54901963)
+grow_begin = -140.0
+grow_end = -140.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_0vl20"]
 font = ExtResource("4_2q4hi")
@@ -96,7 +101,7 @@ vertical_alignment = 2
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 1
-theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
+theme_override_styles/separator = SubResource("StyleBoxLine_lp1iv")
 script = ExtResource("5_2q4hi")
 
 [node name="Purchasable3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1816368714 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
