@@ -156,6 +156,13 @@ public partial class PawnMiner : Pawn
         if (visual.Animation != "mine" || visual.Frame != 4) return;
         if (_targetTile == null || _targetTile.IsEmpty() || !_targetTile.IsOwnedBy(this)) return;
 
+        if (_targetTile.Material == TileMaterial.Core)
+        {
+            _targetTile = null;
+            State = PawnState.Idle;
+            return;
+        }
+
         float damage = Inventory.IsResearchUnlocked(RecipeID.Research_BasaltUpgrade) ? 0.5f : 0.25f;
         damage += Inventory.Items[Item.Tougher_Pickaxes].Amount * 0.2f;
                     

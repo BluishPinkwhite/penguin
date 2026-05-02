@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://qvvt0hpp2q01" path="res://scripts/ui/MainMenu.cs" id="1_ubpvv"]
 [ext_resource type="PackedScene" uid="uid://b5pa0ti7nnsm0" path="res://scenes/world.tscn" id="2_jiymt"]
 [ext_resource type="Texture2D" uid="uid://c1lmtjd5cd6wf" path="res://ui/sprites/Logo_Transparent.png" id="4_arv2f"]
+[ext_resource type="FontFile" uid="uid://cn2pwucrvy4dk" path="res://ui/fonts/PixelifySans-Regular.ttf" id="4_tf5ef"]
 [ext_resource type="FontFile" uid="uid://dqixynw101lgu" path="res://ui/fonts/PixelifySans-Medium.ttf" id="6_5klac"]
 [ext_resource type="Script" uid="uid://dcvhj40k5qk7o" path="res://ui/util/Hoverable.cs" id="6_bgtsx"]
 [ext_resource type="Script" uid="uid://b078i7k3t4ftu" path="res://ui/main_menu/GameTime.cs" id="7_lsdqh"]
@@ -20,6 +21,11 @@ shader_parameter/StarScale = 250.0
 shader_parameter/StarsPower = 30.0
 shader_parameter/NebulaChunksScale = 7.7
 shader_parameter/NebulasScale = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_qao3l"]
+font = ExtResource("4_tf5ef")
+font_size = 18
+font_color = Color(0.62233794, 0.622338, 0.62233794, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wk0pr"]
 font = ExtResource("1_t7e0r")
@@ -92,6 +98,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Controls" type="Label" parent="." unique_id=298592348]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 564.0
+offset_right = 225.0
+offset_bottom = 691.0
+mouse_filter = 0
+text = "Drag/WASD to pan
+Scroll/QE to zoom
+LMB to buy 1
+RMB to buy 5
+Esc to quit - autosaves"
+label_settings = SubResource("LabelSettings_qao3l")
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1950599339]
 layout_mode = 1

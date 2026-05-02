@@ -76,32 +76,31 @@ margin = Rect2(-4, -4, -8, -8)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lcslr"]
 texture = ExtResource("18_hcfg7")
-texture_margin_left = 6.0
-texture_margin_top = 6.0
-texture_margin_right = 6.0
-texture_margin_bottom = 6.0
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
 modulate_color = Color(1, 1, 1, 0.43137255)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndxoc"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wknjk"]
 texture = ExtResource("18_hcfg7")
-texture_margin_left = 6.0
+texture_margin_left = 3.0
 texture_margin_top = 6.0
-texture_margin_right = 6.0
+texture_margin_right = 3.0
 texture_margin_bottom = 6.0
-modulate_color = Color(1, 0.45999998, 0.45999998, 0.8156863)
+modulate_color = Color(1, 0.3254902, 0.3137255, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxqvw"]
 atlas = ExtResource("3_sls23")
 region = Rect2(32, 64, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wknjk"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ndxoc"]
 texture = ExtResource("18_hcfg7")
-texture_margin_left = 6.0
+texture_margin_left = 3.0
 texture_margin_top = 6.0
-texture_margin_right = 6.0
+texture_margin_right = 3.0
 texture_margin_bottom = 6.0
-modulate_color = Color(0.68, 0.98933333, 1, 0.6745098)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb2wn"]
 atlas = ExtResource("3_sls23")
@@ -161,6 +160,7 @@ _penguinContainer = NodePath("../../Center/Top/PenguinContainer")
 
 [node name="Resource" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1640567247]
 layout_mode = 2
+tooltip_text = "Available Dirt"
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource" unique_id=1592210552]
 layout_mode = 2
@@ -176,6 +176,7 @@ vertical_alignment = 1
 
 [node name="Resource2" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=665437718]
 layout_mode = 2
+tooltip_text = "Available Stone"
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource2" unique_id=846470103]
 layout_mode = 2
@@ -191,6 +192,7 @@ vertical_alignment = 1
 
 [node name="Resource3" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1322838277]
 layout_mode = 2
+tooltip_text = "Available Basalt"
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource3" unique_id=357961187]
 layout_mode = 2
@@ -206,6 +208,7 @@ vertical_alignment = 1
 
 [node name="Resource4" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=625754657]
 layout_mode = 2
+tooltip_text = "Available Magma"
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource4" unique_id=561841831]
 layout_mode = 2
@@ -221,6 +224,7 @@ vertical_alignment = 1
 
 [node name="Resource5" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=1054443705]
 layout_mode = 2
+tooltip_text = "Available Gems"
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource5" unique_id=412278767]
 layout_mode = 2
@@ -236,6 +240,7 @@ vertical_alignment = 1
 
 [node name="Resource6" type="HBoxContainer" parent="MarginContainer/Screen/LeftPanel/Resources" unique_id=316390061]
 layout_mode = 2
+tooltip_text = "Available Research Components"
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/LeftPanel/Resources/Resource6" unique_id=1085030441]
 layout_mode = 2
@@ -356,11 +361,11 @@ alignment = 1
 [node name="PenguinContainer" type="HBoxContainer" parent="MarginContainer/Screen/Center/Top" unique_id=818428979]
 unique_name_in_owner = true
 layout_mode = 2
-mouse_filter = 2
+tooltip_text = "Available penguins to employ"
+mouse_filter = 0
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Screen/Center/Top/PenguinContainer" unique_id=1398037898]
 layout_mode = 2
-mouse_filter = 0
 texture = ExtResource("6_enix5")
 expand_mode = 3
 
@@ -398,6 +403,7 @@ reallySpeedUpButton = NodePath("ButtonFastestSpeed")
 [node name="ButtonPause" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1924142986]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Pause the game"
 mouse_filter = 1
 texture_normal = ExtResource("4_186kx")
 ignore_texture_size = true
@@ -406,6 +412,7 @@ stretch_mode = 0
 [node name="ButtonRegularSpeed" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1671549234]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Regular game speed"
 mouse_filter = 1
 texture_normal = ExtResource("5_ti1yg")
 ignore_texture_size = true
@@ -414,6 +421,7 @@ stretch_mode = 0
 [node name="ButtonFastSpeed" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1823455807]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Double game speed"
 mouse_filter = 1
 texture_normal = ExtResource("6_fa42e")
 ignore_texture_size = true
@@ -422,6 +430,7 @@ stretch_mode = 0
 [node name="ButtonFastestSpeed" type="TextureButton" parent="MarginContainer/Screen/RightPanel/Controls/Control" unique_id=1636634343]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Ultra game speed"
 mouse_filter = 1
 texture_normal = ExtResource("11_sls23")
 ignore_texture_size = true
@@ -505,6 +514,7 @@ vertical = true
 [node name="Regrow" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1042924003]
 visible = false
 layout_mode = 2
+tooltip_text = "Planet regrowing"
 script = ExtResource("16_nq4ua")
 _role = -1
 
@@ -521,14 +531,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
-theme_override_styles/fill = SubResource("StyleBoxTexture_ndxoc")
-value = 70.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
+step = 0.25
+value = 10.0
 fill_mode = 1
 show_percentage = false
 
 [node name="Miner" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=724249383]
 visible = false
 layout_mode = 2
+tooltip_text = "Miner penguin total damage"
 script = ExtResource("16_nq4ua")
 _role = 17
 
@@ -545,13 +557,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
-theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
-value = 55.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_ndxoc")
+step = 0.25
+value = 0.28
 show_percentage = false
 
 [node name="Archeologist" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1737147658]
 visible = false
 layout_mode = 2
+tooltip_text = "Archeologist damage"
 script = ExtResource("16_nq4ua")
 _role = 24
 
@@ -568,13 +582,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
-theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
-value = 20.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_ndxoc")
+step = 0.25
+value = 0.25
 show_percentage = false
 
 [node name="Retirement" type="HBoxContainer" parent="MarginContainer/Screen/RightPanel/Progressbars" unique_id=1424788784]
 visible = false
 layout_mode = 2
+tooltip_text = "Penguins crashing down before retirement"
 script = ExtResource("16_nq4ua")
 _role = 8
 
@@ -591,7 +607,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/background = SubResource("StyleBoxTexture_lcslr")
-theme_override_styles/fill = SubResource("StyleBoxTexture_wknjk")
+theme_override_styles/fill = SubResource("StyleBoxTexture_ndxoc")
+step = 0.25
 value = 20.0
 show_percentage = false
 

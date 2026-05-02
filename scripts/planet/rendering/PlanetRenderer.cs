@@ -202,17 +202,24 @@ public partial class PlanetRenderer : Node2D
             isDirty = true;
         }
         
-        if (!GetTree().Paused && !Inventory.IsResearchUnlocked(RecipeID.Research_OrbitalCoreExtractor))
+        if (!GetTree().Paused)
         {
-            float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
+            bool push = false;
 
-            if (_data._innerGrowth < 0 && newGrowth >= 0)
+            if (!Inventory.IsResearchUnlocked(RecipeID.Research_OrbitalCoreExtractor))
             {
-                _data.RegrowLayers();
-                isDirty = true;
-            }
+                float newGrowth = _data._innerGrowth + PlanetData.GrowthSpeed * (float)delta;
 
-            _data._innerGrowth = newGrowth;
+                if (_data._innerGrowth < 0 && newGrowth >= 0)
+                {
+                    _data.RegrowLayers();
+                    isDirty = true;
+                }
+
+                _data._innerGrowth = newGrowth;
+            }
+            else
+                push = true;
 
             // growth finished, regrow a layer
             if (_data._innerGrowth >= 1)
@@ -231,6 +238,11 @@ public partial class PlanetRenderer : Node2D
                     }
                 }
 
+                push = true;
+            }
+
+            if (push)
+            {
                 foreach (Node node in Game.I.Pawns.GetChildren())
                 {
                     if (node is Pawn pawn)

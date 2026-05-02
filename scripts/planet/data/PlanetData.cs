@@ -251,6 +251,9 @@ public class PlanetData
             if (tile.IsEmpty() || !tile.CanBeOwnedBy(pawn))
                 continue;
 
+            if (tile.Material == TileMaterial.Core)
+                continue;
+
             // tile is reachable from above
             PlanetTile above = Game.I._data.GetTileAbove(next.x, next.y, out bool isSplit);
             if (above != null && !above.IsEmpty())

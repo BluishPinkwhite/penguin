@@ -21,6 +21,13 @@ public partial class PawnArcheologist : PawnMiner
         if (visual.Animation != "brush" || visual.Frame != 3) return;
         if (_targetTile == null || _targetTile.IsEmpty()) return;
         
+        if (_targetTile.Material == TileMaterial.Core)
+        {
+            _targetTile = null;
+            State = PawnState.Idle;
+            return;
+        }
+        
         float damage = 0.1f;
         damage += Inventory.Items[Item.Finer_Brushes].Amount * 0.1f;
         damage /= _targetTile.Material.BreakTime();

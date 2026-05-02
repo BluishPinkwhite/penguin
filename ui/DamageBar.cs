@@ -32,7 +32,11 @@ public partial class DamageBar : HBoxContainer
         if (value > 0)
         {
             Visible = true;
-            _bar.SetValue(value);
+
+            if (value >= 99.5f)
+                _bar.SetValue(100);
+            else
+                _bar.SetValue(Math.Max(1, value - 1));
         }
         else
         {
