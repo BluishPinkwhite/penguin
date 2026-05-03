@@ -176,8 +176,8 @@ public static class Inventory
 
             recipe.Unlocked = true;
             
-            GD.Print("Unlocked recipe: " + id + "");
-            
+            GD.Print("Unlocked recipe: " + id.ReadableName());
+            MessageLog.QueueMessage("Unlocked recipe: " + id.ReadableName());
         }
         Resources.I.UpdateVisuals();
     }

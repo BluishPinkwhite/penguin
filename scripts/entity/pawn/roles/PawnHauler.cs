@@ -74,7 +74,7 @@ public partial class PawnHauler : Pawn
                 else if (State == PawnState.ReturnH)
                 {
                     State = PawnState.ReturnV;
-                    Target = ResourceStation.I.PolarPos;
+                    Target = ResourceStation.I.PolarTouchPos();
                     SetCooldown(0.35f);
                 }
                 else if (State == PawnState.RetireH)

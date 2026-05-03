@@ -19,7 +19,8 @@ public static class SaveFileManager
         using FileAccess save = FileAccess.Open(path, FileAccess.ModeFlags.Write);
 
         save.StoreLine("# Penguin Inc.");
-        save.StoreLine("# Save format version: 0.1");
+        save.StoreLine("# Save format version: 0.1.1");
+        save.StoreLine("# Game version: " + ProjectSettings.GetSetting("application/config/version"));
         save.StoreLine("#");
 
         save.StoreLine("# Inventory:");
@@ -162,7 +163,7 @@ public static class SaveFileManager
                 if (key == "item")
                 {
                     Inventory.Items[(Item)id].Amount = amount;
-                    Inventory.Items[(Item)id].Obtained = obtained;
+                    Inventory.Items[(Item)id]._obtained = obtained;
                 }
             }
             else if (type == "is")

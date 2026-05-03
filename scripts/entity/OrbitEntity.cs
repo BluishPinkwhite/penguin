@@ -3,7 +3,7 @@ using Incremental.scripts.director;
 
 namespace Incremental.scripts.entity;
 
-public partial class OrbitEntity : Node2D
+public abstract partial class OrbitEntity : Node2D
 {
     [Export] public Vector2 PolarPos; // X = tile, Y = layer
     public Vector2 PrevPolarPos;

@@ -1,17 +1,34 @@
-﻿namespace Incremental.scripts.director.data;
+﻿using Incremental.ui;
+
+namespace Incremental.scripts.director.data;
 
 public class ItemData
 {
-    public bool Obtained;
+    public bool _obtained;
     public int Amount = 0;
     public int RenderIndex;
     
     protected Item _item;
+
+    public bool Obtained
+    {
+        get => _obtained;
+        set
+        {
+            if (value && !_obtained)
+            {
+                MessageLog.QueueMessage("Obtained new item: " + _item.ToString().Replace("_", " "));
+            }
+            
+            _obtained = value;
+        }
+    }
+    
     public ItemData(Item item, int renderIndex, bool obtained = false)
     {
         _item = item;
         RenderIndex = renderIndex;
-        Obtained = obtained || Amount > 0;
+        _obtained = obtained || Amount > 0;
 
         Inventory.Items[item] = this;
     }

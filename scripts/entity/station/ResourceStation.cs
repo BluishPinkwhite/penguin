@@ -3,7 +3,7 @@ using Incremental.scripts.director;
 
 namespace Incremental.scripts.entity.station;
 
-public partial class ResourceStation: OrbitEntity
+public partial class ResourceStation: Station
 {
     public static ResourceStation I;
     public ResourceStation() { I = this; }

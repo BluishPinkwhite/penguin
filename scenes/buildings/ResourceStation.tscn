@@ -74,8 +74,9 @@ _data = {
 &"wobble": SubResource("Animation_288sv")
 }
 
-[node name="ResourceStation" type="Node2D" unique_id=2113379846]
+[node name="ResourceStation" type="Node2D" unique_id=2113379846 node_paths=PackedStringArray("TouchPoint")]
 script = ExtResource("1_y13y2")
+TouchPoint = NodePath("Sprite2D/TouchPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2027982587]
 z_index = 100
@@ -131,6 +132,10 @@ scale = Vector2(0.93700004, 0.93700004)
 sprite_frames = ExtResource("5_e57vn")
 autoplay = "default"
 frame_progress = 0.8978124
+
+[node name="TouchPoint" type="Node2D" parent="Sprite2D" unique_id=1655756790]
+position = Vector2(0.99999994, 39.000004)
+scale = Vector2(0.75739646, 0.75739646)
 
 [node name="PanelHoverHitbox" type="Control" parent="." unique_id=2062287156 node_paths=PackedStringArray("_objectToShow")]
 process_mode = 3

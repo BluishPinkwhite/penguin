@@ -48,3 +48,22 @@ public enum RecipeID
     Bigger_Baskets = 4005,
     Orbital_Core_Extractor = 4006,
 }
+
+public static class RecipeIDExtensions
+{
+    public static string ReadableName(this RecipeID r)
+    {
+        string s = "";
+
+        foreach (char c in r.ToString())  
+        {
+            if (char.IsAsciiLetterLower(c))
+                s += c;
+            else if (char.IsAsciiLetterUpper(c))
+                s += " " + c;
+            else if (c == '_')
+                s += ' ';
+        }
+        return s;
+    }
+}

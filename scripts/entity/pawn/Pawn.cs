@@ -75,9 +75,6 @@ public abstract partial class Pawn : SurfaceEntity
     public override void _PhysicsProcess(double delta)
     {
         float d = (float)delta;
-
-        // debug
-        DebugText.Text = Cooldown > 0 ? $"<{Cooldown:F1}>" : $"[{State}]";
         
         Vector2 prevPos = PolarPos;
 
@@ -85,6 +82,11 @@ public abstract partial class Pawn : SurfaceEntity
         {
             ApplyGravity(d);
             DoLayerChecks();
+            Visible = true;
+        }
+        else
+        {
+            Visible = false;
         }
 
         // behaviour
@@ -154,8 +156,6 @@ public abstract partial class Pawn : SurfaceEntity
         
         float stepX = Mathf.Clamp(dx, -1f, 1f) * d * mult;
         float newX = PolarPos.X + stepX;
-
-        DebugText.Text = $"{Flying} {onGround}";
 
         bool reachedTarget = false;
         if (!Flying)

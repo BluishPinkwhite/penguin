@@ -18,7 +18,12 @@ public partial class MainMenu : Control
     }
 
     private MainMenuHoverState _hoverState = MainMenuHoverState.None;
-    
+
+    public override void _Ready()
+    {
+        GetNode<Label>("%Version").Text = $"Version: {ProjectSettings.GetSetting("application/config/version")}";
+    }
+
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);

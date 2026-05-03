@@ -22,11 +22,6 @@ shader_parameter/StarsPower = 30.0
 shader_parameter/NebulaChunksScale = 7.7
 shader_parameter/NebulasScale = 2.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_qao3l"]
-font = ExtResource("4_tf5ef")
-font_size = 18
-font_color = Color(0.62233794, 0.622338, 0.62233794, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_wk0pr"]
 font = ExtResource("1_t7e0r")
 font_size = 50
@@ -76,6 +71,11 @@ font_size = 17
 [sub_resource type="LabelSettings" id="LabelSettings_jiymt"]
 font = ExtResource("10_5klac")
 
+[sub_resource type="LabelSettings" id="LabelSettings_qao3l"]
+font = ExtResource("4_tf5ef")
+font_size = 18
+font_color = Color(0.62233794, 0.622338, 0.62233794, 1)
+
 [node name="MainMenu_UI" type="Control" unique_id=2130477982 node_paths=PackedStringArray("CreditsUI")]
 layout_mode = 3
 anchors_preset = 15
@@ -98,21 +98,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="Controls" type="Label" parent="." unique_id=298592348]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 564.0
-offset_right = 225.0
-offset_bottom = 691.0
-mouse_filter = 0
-text = "Drag/WASD to pan
-Scroll/QE to zoom
-LMB to buy 1
-RMB to buy 5
-Esc to quit - autosaves"
-label_settings = SubResource("LabelSettings_qao3l")
-vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1950599339]
 layout_mode = 1
@@ -301,6 +286,46 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12156863, 0.12156863, 0.12156863, 1)
 script = ExtResource("13_bgtsx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2053514470]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 10.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.98, 0.98)
+mouse_filter = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=53592974]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Controls" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=298592348]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Drag/WASD to pan
+Scroll/QE to zoom
+LMB to buy 1
+RMB to buy 5
+Esc to quit - autosaves"
+label_settings = SubResource("LabelSettings_qao3l")
+vertical_alignment = 1
+
+[node name="Version" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1626202233]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+text = "Version: unknown"
+label_settings = SubResource("LabelSettings_qao3l")
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="OnPlayHover"]
 [connection signal="mouse_exited" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="OnPlayUnhover"]

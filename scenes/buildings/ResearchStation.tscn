@@ -74,8 +74,9 @@ _data = {
 &"wobble": SubResource("Animation_288sv")
 }
 
-[node name="ResearchStation" type="Node2D" unique_id=696397047]
+[node name="ResearchStation" type="Node2D" unique_id=696397047 node_paths=PackedStringArray("TouchPoint")]
 script = ExtResource("1_36edw")
+TouchPoint = NodePath("AnimatedSprite2D/TouchPoint")
 
 [node name="ResearchPanel" parent="." unique_id=860121696 instance=ExtResource("6_36edw")]
 offset_left = -173.0
@@ -158,3 +159,7 @@ scale = Vector2(0.7096805, 0.7096805)
 sprite_frames = ExtResource("5_0qx7f")
 autoplay = "default"
 frame_progress = 0.975703
+
+[node name="TouchPoint" type="Node2D" parent="AnimatedSprite2D" unique_id=459312019]
+position = Vector2(0, 32.568047)
+scale = Vector2(0.75739646, 0.75739646)

@@ -2,7 +2,6 @@
 using Incremental.scripts.director;
 using Incremental.scripts.director.data;
 using Incremental.scripts.director.data.recipe;
-using Incremental.scripts.entity.item;
 using Incremental.scripts.entity.station;
 using Incremental.scripts.planet.data;
 
@@ -209,7 +208,7 @@ public partial class PawnMiner : Pawn
             if (Counter % counterPeriod == 0)
             {
                 State = PawnState.ReturnH;
-                Target = ResourceStation.I.GetParent().GetChild<OrbitEntity>(1).PolarPos;
+                Target = MinerStation.I.PolarTouchPos();
                 SetCooldown(1);
             }
             else
