@@ -1327,7 +1327,9 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever."
+text = "Your knowledge about all of these techniques just uncovered one of the biggest mysteries in mining ever.
+
+A step closer to the ultimate technology..."
 fit_content = true
 scroll_active = false
 
@@ -1397,7 +1399,9 @@ theme_override_styles/separator = SubResource("StyleBoxLine_1517j")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
-text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time. You now hold the secrets. "
+text = "Collectors pass down their knowledge on how to collect better. But one generation was too lazy and the knowledge was lost to time.
+
+A step closer to the ultimate technology..."
 fit_content = true
 scroll_active = false
 
@@ -1469,7 +1473,7 @@ theme_override_fonts/normal_font = ExtResource("6_xs7tc")
 theme_override_font_sizes/normal_font_size = 19
 text = "Finally... We can have the core. So shiny. So beatiful. Time to destroy the planet!
 
-TODO (now stops planet growth)"
+Unlocks blueprints for the Core extractor!"
 fit_content = true
 scroll_active = false
 

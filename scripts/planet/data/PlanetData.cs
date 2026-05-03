@@ -234,10 +234,9 @@ public class PlanetData
         bestTile = null;
         (int x, int y, float dist) best = (0, 0, 0);
 
-        // TODO fix for multiple mining shapes
         int i = _miningQueueIndex;
         int a = 0;
-        while (a < 10)
+        while (a < 3)
         {
             if (i >= _miningQueue.Count)
                 break;

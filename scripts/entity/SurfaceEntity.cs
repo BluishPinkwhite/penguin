@@ -71,7 +71,7 @@ public partial class SurfaceEntity : OrbitEntity
         return false;
     }
     
-    protected void DoLayerChecks()
+    public void DoLayerChecks()
     {
         int prevLayer = Mathf.FloorToInt(PrevPolarPos.Y);
         int layer = Mathf.FloorToInt(PolarPos.Y);

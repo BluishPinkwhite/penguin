@@ -132,6 +132,7 @@ public partial class PawnHauler : Pawn
             {
                 State = PawnState.Idle;
                 _pickupTarget = null;
+                Counter++;
             }
 
             SetCooldown(1);
@@ -190,10 +191,17 @@ public partial class PawnHauler : Pawn
 
         IList<Node> children = Game.I.Pickups.GetChildren();
 
-        int count = Math.Min(16, Mathf.CeilToInt(children.Count / 10f));
-        foreach (Node node in Game.TakeRandom(children, count))
+        int count = Math.Min(8, Mathf.CeilToInt(children.Count / 10f));
+        int offset = (int)Game.RandomTo(children.Count) + 1;
+        int i = 0;
+        int a = 0;
+
+        while (a++ < count)
         {
-            Pickup child = (Pickup)node;
+            i += offset;
+            i %= children.Count;
+            
+            Pickup child = (Pickup)children[i];
 
             if (InventoryID != Item.None && child.Item != InventoryID)
                 continue;
