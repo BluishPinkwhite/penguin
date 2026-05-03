@@ -22,12 +22,17 @@ font_size = 29
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_3b57c"]
 color = Color(0.74978, 0.74978, 0.7497799, 0.827451)
-grow_begin = -120.0
-grow_end = -120.0
+grow_begin = -110.0
+grow_end = -110.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_0vl20"]
 font = ExtResource("4_44l33")
 font_size = 24
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_bwk02"]
+color = Color(0.75, 0.75, 0.75, 0.59607846)
+grow_begin = -140.0
+grow_end = -140.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cc5mb"]
 atlas = ExtResource("6_cc5mb")
@@ -187,7 +192,7 @@ expand_mode = 2
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_3b57c")
+theme_override_styles/separator = SubResource("StyleBoxLine_bwk02")
 script = ExtResource("6_qv1my")
 
 [node name="Purchasable3" type="HBoxContainer" parent="VBoxContainer" unique_id=1058663216 node_paths=PackedStringArray("_costLabel", "_costIcon", "_purchasableNameLabel")]
