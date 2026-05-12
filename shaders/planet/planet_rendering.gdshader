@@ -10,6 +10,7 @@ uniform float total_layers = 1024.0;
 varying float v_integrity;
 varying flat int v_mat_index;
 varying vec2 v_local_uv;
+varying vec2 v_global_vertex;
 varying vec4 v_corner_lights;
 
 void vertex() {
@@ -62,6 +63,8 @@ void vertex() {
 		
 		VERTEX += outward_dir * signs.y;
 	}
+
+	v_global_vertex = normalize(VERTEX);
 }
 
 void fragment() {
@@ -71,6 +74,11 @@ void fragment() {
 	float light_top = mix(v_corner_lights.x, v_corner_lights.y, v_local_uv.x);
 	float light_bottom = mix(v_corner_lights.w, v_corner_lights.z, v_local_uv.x);
 	float smooth_light = mix(light_bottom, light_top, v_local_uv.y);
+	
+// 	vec2 sun_dir = vec2(cos(TIME * 0.5), sin(TIME * 0.5));
+// 	vec2 pixel_dir = v_global_vertex;
+// 	float sun_intensity = smoothstep(-0.05, 0.05, dot(pixel_dir, sun_dir) * 0.05);
+// 	smooth_light = smooth_light * min(1.0, sun_intensity + 0.45);
 
 	// get atlas texture:
 	float s = 1.0 / float(atlas_columns);

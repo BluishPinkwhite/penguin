@@ -13,7 +13,7 @@ public partial class Purchasable : Clickable, IUpdatable
     [Export] private TextureRect _costIcon;
     [Export] private Label _purchasableNameLabel;
 
-    [Export] private RecipeID _recipe;
+    [Export] internal RecipeID _recipe;
 
 
     public override void _Ready()
@@ -69,9 +69,18 @@ public partial class Purchasable : Clickable, IUpdatable
                 _costLabel.Text = (recipe.Ingredients[0].RenderCost).ToString();
             }
 
+            
+            // TODO bleh ew
             if (recipe.Products.Count > 0)
             {
                 _purchasableNameLabel.Text = recipe.Products[0].Item.ToString().Replace("_", " ");
+
+                if (_recipe == RecipeID.AssignRole_Miner)
+                    _purchasableNameLabel.Text += $" ({Inventory.Items[Item.Miner].Amount})";
+                else if (_recipe == RecipeID.AssignRole_Archeologist)
+                    _purchasableNameLabel.Text += $" ({Inventory.Items[Item.Archeologist].Amount})";
+                else if (_recipe == RecipeID.AssignRole_Hauler)
+                    _purchasableNameLabel.Text += $" ({Inventory.Items[Item.Hauler].Amount})";
             }
         }
         else
