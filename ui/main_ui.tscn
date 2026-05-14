@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b7f2avyutw0gh" path="res://ui/sprites/icons/penguin_icon.tres" id="6_enix5"]
 [ext_resource type="Texture2D" uid="uid://bruro3e5k25db" path="res://ui/sprites/icons/fast_forward.tres" id="6_fa42e"]
 [ext_resource type="Script" uid="uid://dci1imvpwapa8" path="res://ui/MessageLog.cs" id="6_hcfg7"]
+[ext_resource type="Texture2D" uid="uid://dsrr6qc3nxa85" path="res://ui/sprites/control_panel.png" id="6_lcslr"]
 [ext_resource type="Texture2D" uid="uid://6vrcyfk7ey8" path="res://ui/sprites/icons/pentastone_icon.tres" id="6_wknjk"]
 [ext_resource type="Script" uid="uid://cvhokpr8hjuha" path="res://scripts/ui/GameTimeControl.cs" id="7_bu6un"]
 [ext_resource type="Shader" uid="uid://cmkhs574rlf6c" path="res://shaders/ui/evolve_button.tres" id="7_fa42e"]
@@ -54,9 +55,17 @@ atlas = ExtResource("3_sls23")
 region = Rect2(32, 32, 32, 32)
 margin = Rect2(-4, -4, -8, -8)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxqvw"]
+texture = ExtResource("6_lcslr")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(1, 1, 1, 0.6784314)
+
 [sub_resource type="LabelSettings" id="LabelSettings_hcfg7"]
 font = ExtResource("1_3lvfr")
-font_size = 18
+font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_bu6un"]
 font = ExtResource("1_3lvfr")
@@ -354,8 +363,10 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="MessageLog" type="Label" parent="MarginContainer/Screen/LeftPanel" unique_id=313094428]
+visible = false
 layout_mode = 2
 size_flags_vertical = 10
+theme_override_styles/normal = SubResource("StyleBoxTexture_pxqvw")
 text = "aadwawd
 wadawd
 wadawda
@@ -404,7 +415,7 @@ alignment = 1
 [node name="RightPanel" type="VBoxContainer" parent="MarginContainer/Screen" unique_id=778479501]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.38
 mouse_filter = 2
 
 [node name="Controls" type="BoxContainer" parent="MarginContainer/Screen/RightPanel" unique_id=1777677593]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bh1t5hphr17yc"
+path="res://.godot/imported/Oh Shiny - Looped.wav-630aa88807cea21564016a1635c2e883.sample"
+
+[deps]
+
+source_file="res://sounds/soundtrack/Oh Shiny - Looped.wav"
+dest_files=["res://.godot/imported/Oh Shiny - Looped.wav-630aa88807cea21564016a1635c2e883.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

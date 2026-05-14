@@ -27,9 +27,14 @@ public partial class MessageLog : Label
     {
         if (_messages.Count > 0)
         {
+            Visible = true;
             if (_messages.RemoveAll(m => 
                     m.time < Time.GetUnixTimeFromSystem() - 12) > 0)
                 _dirty = true;
+        }
+        else
+        {
+            Visible = false;
         }
         
         if (!_dirty)
@@ -37,13 +42,17 @@ public partial class MessageLog : Label
         
         if (_messages.Count > 0)
         {
+            Visible = true;
             if (_messages.Count > MaxLines)
                 I.Text = string.Join("\n", _messages.GetRange(0, MaxLines).Select(m => m.message));
             else
                 I.Text = string.Join("\n", _messages.Select(m => m.message));
         }
-        else 
+        else
+        {
             I.Text = "";
+            Visible = false;
+        }
 
         _dirty = false;
     }
